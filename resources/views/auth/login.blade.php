@@ -4,8 +4,8 @@
             <a href="/">
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500 mx-auto" />
             </a>
-            <p class='fw-bold pt-3'>Пожалуйста, авторизуйтесь</p>
         </x-slot>
+        <p class='fw-bold cursor-default pb-3'>{{__('auth.title')}}</p>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />

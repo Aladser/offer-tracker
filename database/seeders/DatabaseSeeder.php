@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\UserRole;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // роли
+        $roles = ['advertiser', 'webmaster'];
+        foreach ($roles as $role) {
+            UserRole::create(['name' => $role]);
+        }
     }
 }
