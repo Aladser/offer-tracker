@@ -11,7 +11,7 @@ class UserSeed extends Seeder
     {
         $maxId = User::all()->max('id')+ 1;
         User::create([
-            'name' => "user$maxId",
+            'name' => "User$maxId",
             'email' => "user$maxId@mail.ru",
             'password' => 12345678,
             'role_id' => 1,

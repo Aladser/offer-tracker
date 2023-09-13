@@ -13,22 +13,19 @@ use Database\Seeders\UserSeed;
 
 class DBTest extends TestCase
 {
-    //use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function test_addUser()
+    public function test_getUsers()
     {
-        DB::table('users')->truncate();
-        //$this->seed(UserRoleSeed::class);
+        system('clear');
+
         for ($i=0; $i<10; $i++) {
             $this->seed(UserSeed::class);
         }
-
-        foreach (User::all()->toArray() as $el) {
-            echo "{$el['name']} {$el['email']}\n";
+        $users = User::all();
+        foreach ($users as $user) {
+            echo "{$user->role->name} {$user->name}, email: {$user->email}\n";
         }
+
+        $this->assertDatabaseCount('users', 10);
+        User::truncate();
     }
 }
