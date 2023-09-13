@@ -15,14 +15,15 @@ class DBTest extends TestCase
 {
     public function test_getUsers()
     {
-        system('clear');
+        //system('clear');
+        //$this->seed(UserRoleSeed::class);
 
         for ($i=0; $i<10; $i++) {
             $this->seed(UserSeed::class);
         }
         $users = User::all();
         foreach ($users as $user) {
-            echo "{$user->role->name} {$user->name}, email: {$user->email}\n";
+            echo "имя: {$user->name}, роль: {$user->role->name}, email: {$user->email}\n";
         }
 
         $this->assertDatabaseCount('users', 10);
