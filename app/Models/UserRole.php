@@ -11,6 +11,11 @@ class UserRole extends Model
 
     public $timestamps = false;
 
+    public function getRoles()
+    {
+        return UserRole::where('name', '!=', 'администратор')->orderBy('id', 'ASC')->get()->toArray();
+    }
+
     public function users()
     {
         return $this->hasMany(User::class, 'role_id', 'id');

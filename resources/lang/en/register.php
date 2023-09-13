@@ -7,4 +7,5 @@ return [
     'confirm' => 'Confirm Password',
     'already_registered' => 'Already registered?',
     'register' => 'Register',
+    'role' => 'Role',
 ];

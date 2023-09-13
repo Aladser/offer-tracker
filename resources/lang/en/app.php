@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'dashboard' => 'Dashboard',
+    'profile' => 'Dashboard',
     'login' => 'Log in',
     'register' => 'Register',
+    'logout' => 'Log out',
 ];
