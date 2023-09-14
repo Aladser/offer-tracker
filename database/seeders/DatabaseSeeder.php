@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         UserRole::create(['name' => 'рекламодатель']);
         UserRole::create(['name' => 'веб-мастер']);
 
-        // админ
+        // создание пользователя Админ
         // пароль AAAAaaaa1111
         User::create([
             'name' => "Admin",
