@@ -8,6 +8,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\UserRole;
+use App\Models\OfferTheme;
+use App\Models\Offer;
 use Database\Seeders\UserRoleSeed;
 use Database\Seeders\UserSeed;
 
