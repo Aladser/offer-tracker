@@ -19,5 +19,14 @@ class DatabaseSeeder extends Seeder
         UserRole::create(['name' => 'администратор']);
         UserRole::create(['name' => 'рекламодатель']);
         UserRole::create(['name' => 'веб-мастер']);
+
+        // админ
+        // пароль AAAAaaaa1111
+        User::create([
+            'name' => "Admin",
+            'email' => "aladser@mail.ru",
+            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
+            'role_id' => 1,
+        ]);
     }
 }
