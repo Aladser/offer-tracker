@@ -43,6 +43,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /** роль пользователя */
     public function role()
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
