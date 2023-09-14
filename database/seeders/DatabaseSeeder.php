@@ -5,14 +5,10 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\UserRole;
+use App\Models\OfferTheme;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
         // роли
@@ -28,5 +24,10 @@ class DatabaseSeeder extends Seeder
             'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
             'role_id' => 1,
         ]);
+
+        // темы офферов
+        OfferTheme::create(['name' => 'спорт']);
+        OfferTheme::create(['name' => 'образование']);
+        OfferTheme::create(['name' => 'красота']);
     }
 }
