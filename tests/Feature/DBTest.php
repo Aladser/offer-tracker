@@ -21,34 +21,31 @@ class DBTest extends TestCase
     {
         system('clear');
         echo "testAddData\n";
-
         $this->seed();
 
-        echo "Роли пользователей: ";
-        foreach (UserRole::all()->toArray() as $role) {
-            echo "{$role['name']}, ";
-        }
-        echo "\nПользователи: ";
-        foreach (User::all()->toArray() as $user) {
-            echo "->{$user['name']} {$user['email']} {$user['role_id']}<- ";
-        }
-        echo "\nТемы офферов: ";
-        foreach (OfferTheme::all()->toArray() as $offerTheme) {
-            echo "{$offerTheme['name']}, ";
-        }
-        echo "\nОфферы: ";
-        foreach (Offer::all()->toArray() as $offer) {
-            echo "->{$offer['name']}, {$offer['theme_id']}, {$offer['URL']}<- ";
-        }
-        echo "\nСсылки рекламодателей: ";
-        foreach (AdvertiserProduct::all()->toArray() as $product) {
-            echo "->{$product['status']}, {$product['advertiser_id']}, {$product['offer_id']}, {$product['price']}, {$product['clicks']}<- ";
-        }
-        echo "\nКлики ссылок: ";
-        foreach (LinkClick::all()->toArray() as $click) {
-            echo "->{$click['advertiser_product_id']} {$click['created_at']}<- ";
+        echo "Пользователи:\n";
+        foreach (User::all() as $user) {
+            echo "  имя:{$user->name} почта:{$user->email} роль:{$user->role->name}\n";
         }
 
-        $this->assertDatabaseCount('users', 1);
+        echo "\nОфферы:\n";
+        foreach (Offer::all() as $offer) {
+            echo "  имя:{$offer->name}, тема:{$offer->theme->name}, URL:{$offer->URL}\n";
+        }
+
+        echo "\nТовары рекламодателей:\n";
+        foreach (AdvertiserProduct::all() as $product) {
+            $status = $product->status === 1 ? 'вкл' : 'выкл';
+            echo "  статус:$status, продавец:{$product->advertiser->name}, оффер:{$product->offer->name}, цена:{$product->price}, число кликов:{$product->clicks}\n";
+        }
+
+        echo "\nКлики ссылок:\n";
+        foreach (LinkClick::all() as $click) {
+            $product = $click->product->offer->name;
+            $author = $click->product->advertiser->name;
+            echo "  товар:$product создан $author {$click->created_at}\n";
+        }
+
+        $this->assertDatabaseCount('users', 3);
     }
 }

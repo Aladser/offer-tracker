@@ -11,6 +11,6 @@ class OfferThemeSeed extends Seeder
     {
         OfferTheme::create(['name' => 'спорт']);
         OfferTheme::create(['name' => 'образование']);
-        OfferTheme::create(['name' => 'красота']);
+        OfferTheme::create(['name' => 'природа']);
     }
 }

@@ -15,4 +15,10 @@ class Offer extends Model
     {
         return $this->belongsTo(OfferTheme::class, 'theme_id', 'id');
     }
+
+    /** оффер в товарах рекламодателей */
+    public function products()
+    {
+        return $this->hasMany(AdvertiserProduct::class, 'offer_id', 'id');
+    }
 }

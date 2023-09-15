@@ -10,7 +10,7 @@ class LinkClick extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public function advertiser()
+    public function product()
     {
         return $this->belongsTo(AdvertiserProduct::class, 'advertiser_product_id', 'id');
     }

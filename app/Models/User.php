@@ -40,4 +40,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
+
+    /** продукты рекламодателя*/
+    public function products()
+    {
+        return $this->hasMany(AdvertiserProduct::class, 'advertiser_id', 'id');
+    }
 }

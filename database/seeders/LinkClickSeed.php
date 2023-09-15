@@ -10,5 +10,9 @@ class LinkClickSeed extends Seeder
     public function run()
     {
         LinkClick::create(['advertiser_product_id' => 1]);
+        LinkClick::create(['advertiser_product_id' => 1]);
+        LinkClick::create(['advertiser_product_id' => 2]);
+        LinkClick::create(['advertiser_product_id' => 2]);
+        LinkClick::create(['advertiser_product_id' => 3]);
     }
 }
