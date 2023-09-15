@@ -12,7 +12,7 @@ class CreateLinkClicks extends Migration
             $table->id();
             $table->bigInteger('adertiser_product_id')->unsigned();
             $table->foreign('adertiser_product_id')->references('id')->on('users');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

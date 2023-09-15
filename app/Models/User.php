@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    public $timestamps = false; // без времени создания
 
     /**
      * The attributes that are mass assignable.
@@ -33,8 +34,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
-    public $timestamps = false; // без времени создания
 
     /** роль пользователя */
     public function role()

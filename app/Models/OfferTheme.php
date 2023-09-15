@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class OfferTheme extends Model
 {
     use HasFactory;
-
     public $timestamps = false;
 }
