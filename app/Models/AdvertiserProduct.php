@@ -9,4 +9,14 @@ class AdvertiserProduct extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function advertiser()
+    {
+        return $this->belongsTo(User::class, 'advertiser_id', 'id');
+    }
+
+    public function offer()
+    {
+        return $this->belongsTo(Offer::class, 'offer_id', 'id');
+    }
 }

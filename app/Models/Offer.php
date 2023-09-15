@@ -11,7 +11,7 @@ class Offer extends Model
     public $timestamps = false;
 
     /** тема оффера */
-    public function role()
+    public function theme()
     {
         return $this->belongsTo(OfferTheme::class, 'theme_id', 'id');
     }

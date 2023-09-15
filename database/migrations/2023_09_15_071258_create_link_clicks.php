@@ -11,7 +11,7 @@ class CreateLinkClicks extends Migration
         Schema::create('link_clicks', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('advertiser_product_id')->unsigned();
-            $table->foreign('advertiser_product_id')->references('id')->on('users');
+            $table->foreign('advertiser_product_id')->references('id')->on('advertiser_products');
             $table->timestamp('created_at')->useCurrent();
         });
     }
