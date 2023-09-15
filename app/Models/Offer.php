@@ -13,6 +13,6 @@ class Offer extends Model
     /** тема оффера */
     public function role()
     {
-        return $this->belongsTo(OfferTheme::class, 'theme', 'id');
+        return $this->belongsTo(OfferTheme::class, 'theme_id', 'id');
     }
 }

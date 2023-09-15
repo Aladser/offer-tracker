@@ -12,6 +12,6 @@ class OfferTheme extends Model
 
     public function offers()
     {
-        return $this->hasMany(Offer::class, 'theme', 'id');
+        return $this->hasMany(Offer::class, 'theme_id', 'id');
     }
 }
