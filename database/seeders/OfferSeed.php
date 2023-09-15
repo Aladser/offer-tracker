@@ -9,7 +9,7 @@ class OfferSeed extends Seeder
 {
     public function run()
     {
-        Offer::create(['name'=>'Товар 1', 'theme'=>1, 'URL'=>'url1']);
+        Offer::create(['name'=>'Товар 1', 'theme_id'=>1, 'URL'=>'url1']);
         Offer::where('name', 'Товар 1')->update(['description' => 'Место для описания']);
     }
 }

@@ -14,6 +14,6 @@ class AdvertiserProductSeed extends Seeder
      */
     public function run()
     {
-        AdvertiserProduct::create(['status'=>1, 'adertiser_id'=>1, 'offer_id'=>1, 'price'=>100, 'clickes' => 5]);
+        AdvertiserProduct::create(['status'=>1, 'advertiser_id'=>1, 'offer_id'=>1, 'price'=>100, 'clicks' => 5]);
     }
 }

@@ -9,4 +9,9 @@ class OfferTheme extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class, 'theme', 'id');
+    }
 }

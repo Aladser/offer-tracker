@@ -9,4 +9,10 @@ class Offer extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
+    /** тема оффера */
+    public function role()
+    {
+        return $this->belongsTo(OfferTheme::class, 'theme', 'id');
+    }
 }

@@ -11,27 +11,44 @@ use App\Models\UserRole;
 use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\AdvertiserProduct;
-use Database\Seeders\UserRoleSeed;
-use Database\Seeders\UserSeed;
+use App\Models\LinkClick;
 
 class DBTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testAddUsers()
+    public function testAddData()
     {
         system('clear');
-        echo "testAddUsers\n";
+        echo "testAddData\n";
 
-        $this->seed(UserRoleSeed::class);
-        for ($i=0; $i<10; $i++) {
-            $this->seed(UserSeed::class);
+        $this->seed();
+
+        echo "Роли пользователей: ";
+        foreach (UserRole::all()->toArray() as $role) {
+            echo "{$role['name']}, ";
+        }
+        echo "\nПользователи: ";
+        foreach (User::all()->toArray() as $user) {
+            echo "->{$user['name']} {$user['email']} {$user['role_id']}<- ";
+        }
+        echo "\nТемы офферов: ";
+        foreach (OfferTheme::all()->toArray() as $offerTheme) {
+            echo "{$offerTheme['name']}, ";
+        }
+        echo "\nОфферы: ";
+        foreach (Offer::all()->toArray() as $offer) {
+            echo "->{$offer['name']}, {$offer['theme_id']}, {$offer['URL']}<- ";
+        }
+        echo "\nСсылки рекламодателей: ";
+        foreach (AdvertiserProduct::all()->toArray() as $product) {
+            echo "->{$product['status']}, {$product['advertiser_id']}, {$product['offer_id']}, {$product['price']}, {$product['clicks']}<- ";
+        }
+        echo "\nКлики ссылок: ";
+        foreach (LinkClick::all()->toArray() as $click) {
+            echo "->{$click['advertiser_product_id']} {$click['created_at']}<- ";
         }
 
-        foreach ( User::all() as $user) {
-            echo "имя: {$user->name}, роль: {$user->role->name}, email: {$user->email}\n";
-        }
-
-        $this->assertDatabaseCount('users', 10);
+        $this->assertDatabaseCount('users', 1);
     }
 }
