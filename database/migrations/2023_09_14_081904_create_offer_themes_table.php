@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOfferThemesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('offer_themes', function (Blueprint $table) {
@@ -19,11 +14,6 @@ class CreateOfferThemesTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('offer_themes');

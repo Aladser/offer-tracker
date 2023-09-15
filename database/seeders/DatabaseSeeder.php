@@ -6,28 +6,29 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Models\OfferTheme;
+use Database\Seeders\UserRoleSeed;
+use Database\Seeders\UserSeed;
+use Database\Seeders\OfferThemeSeed;
+use Database\Seeders\OfferSeed;
+use Database\Seeders\AdvertiserProductSeed;
+use Database\Seeders\LinkClickSeed;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        // роли
-        UserRole::create(['name' => 'администратор']);
-        UserRole::create(['name' => 'рекламодатель']);
-        UserRole::create(['name' => 'веб-мастер']);
+        $userRoleSeed = new UserRoleSeed();
+        $userSeed = new UserSeed();
+        $offerThemeSeed = new OfferThemeSeed();
+        $offerSeed = new OfferSeed();
+        $advertiserProductSeed = new AdvertiserProductSeed();
+        $linkClickSeed = new LinkClickSeed();
 
-        // создание пользователя Админ
-        // пароль AAAAaaaa1111
-        User::create([
-            'name' => "Admin",
-            'email' => "aladser@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 1,
-        ]);
-
-        // темы офферов
-        OfferTheme::create(['name' => 'спорт']);
-        OfferTheme::create(['name' => 'образование']);
-        OfferTheme::create(['name' => 'красота']);
+        $userRoleSeed->run();
+        $userSeed->run();
+        $offerThemeSeed->run();
+        $offerSeed->run();
+        $advertiserProductSeed->run();
+        $linkClickSeed->run();
     }
 }

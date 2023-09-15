@@ -10,25 +10,28 @@ use App\Models\User;
 use App\Models\UserRole;
 use App\Models\OfferTheme;
 use App\Models\Offer;
+use App\Models\AdvertiserProduct;
 use Database\Seeders\UserRoleSeed;
 use Database\Seeders\UserSeed;
 
 class DBTest extends TestCase
 {
-    public function test_getUsers()
-    {
-        //system('clear');
-        //$this->seed(UserRoleSeed::class);
+    use RefreshDatabase;
 
+    public function testAddUsers()
+    {
+        system('clear');
+        echo "testAddUsers\n";
+
+        $this->seed(UserRoleSeed::class);
         for ($i=0; $i<10; $i++) {
             $this->seed(UserSeed::class);
         }
-        $users = User::all();
-        foreach ($users as $user) {
+
+        foreach ( User::all() as $user) {
             echo "имя: {$user->name}, роль: {$user->role->name}, email: {$user->email}\n";
         }
 
         $this->assertDatabaseCount('users', 10);
-        User::truncate();
     }
 }

@@ -7,11 +7,6 @@ use App\Models\UserRole;
 
 class UserRoleSeed extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         UserRole::create(['name' => 'администратор']);

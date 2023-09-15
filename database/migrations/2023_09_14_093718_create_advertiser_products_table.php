@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAdvertiserProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('advertiser_products', function (Blueprint $table) {
@@ -18,21 +13,16 @@ class CreateAdvertiserProductsTable extends Migration
             $table->boolean('status')->default(false);
             
             $table->bigInteger('adertiser_id')->unsigned();
-            $table->foreign('adertiser_id')->references('id')->on('users');
+            $table->foreign('adertiser_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->bigInteger('offer_id')->unsigned();
-            $table->foreign('offer_id')->references('id')->on('offers');
+            $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
 
             $table->integer('price')->unsigned();
             $table->integer('clickes')->unsigned()->default(0);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('advertiser_products');
