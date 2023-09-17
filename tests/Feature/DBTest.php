@@ -7,8 +7,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\UserRole;
-use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\AdvertiserProduct;
 use App\Models\LinkClick;
@@ -30,7 +28,7 @@ class DBTest extends TestCase
 
         echo "\nОфферы:\n";
         foreach (Offer::all() as $offer) {
-            echo "  имя:{$offer->name}, тема:{$offer->theme->name}, URL:{$offer->URL}\n";
+            echo "  имя:{$offer->name}, тема:{$offer->theme->name}, описание:{$offer->description}, URL:{$offer->URL}\n";
         }
 
         echo "\nТовары рекламодателей:\n";
