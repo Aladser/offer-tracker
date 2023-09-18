@@ -10,17 +10,17 @@ class DashboardController extends Controller
     {
         $url = null;
         switch ($request->user()->role->name) {
-            case 'админ':
-                $url = '/pages/admin';
+            case 'администратор':
+                $url = 'pages/admin';
                 break;
             case 'веб-мастер':
-                $url = '/pages/webmaster';
+                $url = 'pages/webmaster';
                 break;
             case 'рекламодатель':
-                $url = '/pages/advetiser';
+                $url = 'pages/advertiser';
                 break;
             default:
-                dd('ошибка роли пользователя');
+                dd('ошибка роли пользователя: ' . $request->user()->role->name);
         }
         
         return view($url, ['user' => $request->user()] );
