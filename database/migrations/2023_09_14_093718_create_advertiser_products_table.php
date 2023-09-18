@@ -19,7 +19,6 @@ class CreateAdvertiserProductsTable extends Migration
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
 
             $table->integer('price')->unsigned();
-            $table->integer('clicks')->unsigned()->default(0);
         });
     }
 

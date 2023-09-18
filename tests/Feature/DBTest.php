@@ -34,16 +34,10 @@ class DBTest extends TestCase
         echo "\nТовары рекламодателей:\n";
         foreach (AdvertiserProduct::all() as $product) {
             $status = $product->status === 1 ? 'вкл' : 'выкл';
-            echo "  статус:$status, продавец:{$product->advertiser->name}, оффер:{$product->offer->name}, цена:{$product->price}, число кликов:{$product->clicks}\n";
+            echo "  статус:$status, продавец:{$product->advertiser->name}, оффер:{$product->offer->name}";
+            echo ", цена:{$product->price}";
+            echo ", клики:{$product->links->count()}\n";
         }
-
-        echo "\nКлики ссылок:\n";
-        foreach (LinkClick::all() as $click) {
-            $product = $click->product->offer->name;
-            $author = $click->product->advertiser->name;
-            echo "  товар:$product создан $author {$click->created_at}\n";
-        }
-
         $this->assertDatabaseCount('users', 3);
     }
 }

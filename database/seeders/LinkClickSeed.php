@@ -12,7 +12,9 @@ class LinkClickSeed extends Seeder
         LinkClick::create(['advertiser_product_id' => 1]);
         LinkClick::create(['advertiser_product_id' => 1]);
         LinkClick::create(['advertiser_product_id' => 2]);
+        LinkClick::create(['advertiser_product_id' => 1]);
+        LinkClick::create(['advertiser_product_id' => 1]);
         LinkClick::create(['advertiser_product_id' => 2]);
-        LinkClick::create(['advertiser_product_id' => 3]);
+        LinkClick::create(['advertiser_product_id' => 3]);  
     }
 }

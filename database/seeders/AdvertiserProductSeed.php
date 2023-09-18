@@ -14,8 +14,8 @@ class AdvertiserProductSeed extends Seeder
      */
     public function run()
     {
-        AdvertiserProduct::create(['advertiser_id'=>1, 'offer_id'=>1, 'price'=>rand(100, 300), 'clicks' => rand(1, 10)]);
-        AdvertiserProduct::create(['status'=> 1, 'advertiser_id'=>1, 'offer_id'=>2, 'price'=>rand(100, 300), 'clicks' => rand(1, 10)]);
-        AdvertiserProduct::create(['advertiser_id'=>2, 'offer_id'=>3, 'price'=>rand(100, 300), 'clicks' => rand(1, 10)]);
+        AdvertiserProduct::create(['advertiser_id'=>1, 'offer_id'=>1, 'price'=>rand(100, 300)]);
+        AdvertiserProduct::create(['status'=> 1, 'advertiser_id'=>1, 'offer_id'=>2, 'price'=>rand(100, 300)]);
+        AdvertiserProduct::create(['advertiser_id'=>2, 'offer_id'=>3, 'price'=>rand(100, 300)]);
     }
 }
