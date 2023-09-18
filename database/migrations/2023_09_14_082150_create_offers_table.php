@@ -12,9 +12,10 @@ class CreateOffersTable extends Migration
             $table->id();
             $table->string('name')->nullable(false)->unique();
             $table->string('description')->nullable();
+            $table->string('URL')->nullable(false)->unique();
+
             $table->bigInteger('theme_id')->unsigned();
             $table->foreign('theme_id')->references('id')->on('offer_themes');
-            $table->string('URL')->nullable(false)->unique();
         });
     }
 

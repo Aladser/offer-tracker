@@ -8,8 +8,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Offer;
-use App\Models\OfferClick;
 use App\Models\AdvertiserProduct;
+use App\Models\OfferSubscription;
 
 class DBTest extends TestCase
 {
@@ -40,7 +40,7 @@ class DBTest extends TestCase
         }
 
         echo "\nКлики офферов\n";
-        foreach (OfferClick::all() as $click) {
+        foreach (OfferSubscription::all() as $click) {
             echo "{$click->follower->name} подписался {$click->created_at} на {$click->product->offer->name}\n";
         }
 
