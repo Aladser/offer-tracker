@@ -39,7 +39,7 @@ class DBTest extends TestCase
             echo ", клики:{$product->links->count()}\n";
         }
 
-        echo "офферы\n";
+        echo "\nКлики офферов\n";
         foreach (OfferClick::all() as $click) {
             echo "{$click->follower->name} подписался {$click->created_at} на {$click->product->offer->name}\n";
         }
