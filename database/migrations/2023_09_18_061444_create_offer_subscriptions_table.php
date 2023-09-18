@@ -14,10 +14,10 @@ class CreateOfferSubscriptionsTable extends Migration
             $table->timestamp('created_at')->useCurrent();
 
             $table->bigInteger('follower_id')->unsigned();
-            $table->foreign('follower_id')->references('id')->on('users');
+            $table->foreign('follower_id')->references('id')->on('users')->cascadeOnDelete();
 
             $table->bigInteger('advertiser_product_id')->unsigned();
-            $table->foreign('advertiser_product_id')->references('id')->on('advertiser_products');
+            $table->foreign('advertiser_product_id')->references('id')->on('advertiser_products')->cascadeOnDelete();
         });
     }
 

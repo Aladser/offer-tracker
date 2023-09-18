@@ -22,7 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'role_id',
     ];
 
     /**
@@ -45,8 +45,8 @@ class User extends Authenticatable
         return $this->hasMany(AdvertiserProduct::class, 'advertiser_id', 'id');
     }
 
-    public function offer_clicks()
+    public function offer_subscriptions()
     {
-        return $this->hasMany(OfferClick::class, 'follower_id', 'id');
+        return $this->hasMany(OfferSubscription::class, 'follower_id', 'id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserRoleSeed;
 use Database\Seeders\UserSeed;
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
+        DB::update('ALTER TABLE user_roles AUTO_INCREMENT = 1');
         $userRoleSeed = new UserRoleSeed();
         $userSeed = new UserSeed();
         $offerThemeSeed = new OfferThemeSeed();

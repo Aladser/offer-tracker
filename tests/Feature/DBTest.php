@@ -2,10 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\UserRole;
 use App\Models\User;
 use App\Models\Offer;
 use App\Models\AdvertiserProduct;
@@ -18,17 +19,15 @@ class DBTest extends TestCase
     public function testAddData()
     {
         system('clear');
-        echo "testAddData\n";
         $this->seed();
+        $this->assertDatabaseCount('users', 3);
+    }
 
+    public function testGetData()
+    {
         echo "Пользователи:\n";
         foreach (User::all() as $user) {
             echo "  имя:{$user->name} почта:{$user->email} роль:{$user->role->name}\n";
-        }
-
-        echo "\nОфферы:\n";
-        foreach (Offer::all() as $offer) {
-            echo "  имя:{$offer->name}, тема:{$offer->theme->name}, описание:{$offer->description}, URL:{$offer->URL}\n";
         }
 
         echo "\nТовары рекламодателей:\n";
@@ -41,9 +40,29 @@ class DBTest extends TestCase
 
         echo "\nКлики офферов\n";
         foreach (OfferSubscription::all() as $click) {
-            echo "{$click->follower->name} подписался {$click->created_at} на {$click->product->offer->name}\n";
+            echo "  {$click->follower->name} подписался {$click->created_at} на {$click->product->offer->name}\n";
         }
-
         $this->assertDatabaseCount('users', 3);
     }
+
+    public function testGetOffers()
+    {
+        echo "\nСписок офферов ".User::find(1)->name."\n";
+        foreach (User::find(1)->advertiser_products->all() as $product) {
+            $status = $product->status ? 'вкл' : 'выкл'; 
+            echo "  $status {$product->price} {$product->offer->name}\n";
+        }
+        $this->assertDatabaseCount('advertiser_products', 7);
+    }
+
+    public function testGetFollowers()
+    {
+        echo "\nПодписчики = " . AdvertiserProduct::find(1)->links->count() . ". ";
+
+        foreach (AdvertiserProduct::find(1)->links as $follower) {
+            echo "{$follower->follower->name}, ";
+        }
+        $this->assertDatabaseCount('advertiser_products', 7);
+    }
 }
+

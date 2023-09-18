@@ -11,6 +11,10 @@ class UserRole extends Model
 
     public $timestamps = false;
 
+    protected $fillable = [
+        'name',
+    ];
+
     public function getRoles()
     {
         return UserRole::where('name', '!=', 'администратор')->orderBy('id', 'ASC')->get()->toArray();
