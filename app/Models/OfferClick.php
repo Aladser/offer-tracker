@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LinkClick extends Model
+class OfferClick extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -13,5 +13,10 @@ class LinkClick extends Model
     public function product()
     {
         return $this->belongsTo(AdvertiserProduct::class, 'advertiser_product_id', 'id');
+    }
+
+    public function follower()
+    {
+        return $this->belongsTo(User::class, 'follower_id', 'id');
     }
 }

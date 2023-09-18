@@ -35,15 +35,18 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /** роль пользователя */
     public function role()
     {
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    /** продукты рекламодателя*/
-    public function products()
+    public function advertiser_products()
     {
         return $this->hasMany(AdvertiserProduct::class, 'advertiser_id', 'id');
+    }
+
+    public function offer_clicks()
+    {
+        return $this->hasMany(OfferClick::class, 'follower_id', 'id');
     }
 }

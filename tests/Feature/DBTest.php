@@ -8,8 +8,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Offer;
+use App\Models\OfferClick;
 use App\Models\AdvertiserProduct;
-use App\Models\LinkClick;
 
 class DBTest extends TestCase
 {
@@ -38,6 +38,12 @@ class DBTest extends TestCase
             echo ", цена:{$product->price}";
             echo ", клики:{$product->links->count()}\n";
         }
+
+        echo "офферы\n";
+        foreach (OfferClick::all() as $click) {
+            echo "{$click->follower->name} подписался {$click->created_at} на {$click->product->offer->name}\n";
+        }
+
         $this->assertDatabaseCount('users', 3);
     }
 }

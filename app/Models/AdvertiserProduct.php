@@ -22,6 +22,6 @@ class AdvertiserProduct extends Model
 
     public function links()
     {
-        return $this->hasMany(LinkClick::class, 'advertiser_product_id', 'id');
+        return $this->hasMany(OfferClick::class, 'advertiser_product_id', 'id');
     }
 }
