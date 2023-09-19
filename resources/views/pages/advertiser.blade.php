@@ -6,13 +6,13 @@
 
         <article class='pt-4'>
             <h3 class='h3 fw-bolder m-0 text-center pb-2'>Добавление нового оффера</h3>
-            <form action='/' method='post' id='offer-new' class='text-center'>
+            <form action='/' method='post' id='form-add-new-product' class='text-center'>
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Имя:</label><br>
                 <input type="text" name="name" class='w-50 mb-2 border' id="offer-new__name"><br>
                 <label for="offer-new__price" class='fw-bolder w-50 text-start ps-2'>Цена:</label><br>
                 <input type="number" name="price" class='w-50 mb-2 border' id="offer-new__price"><br>
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>URL:</label><br>
-                <input type="url" name="" class='w-50 mb-2 border' id="offer-new__url"><br>
+                <input type="url" name="url" class='w-50 mb-2 border' id="offer-new__url"><br>
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Тема:</label><br>
                 <select name="theme" class='w-50 mb-2 border' id="offer-new__theme">
                     @foreach ($themes as $theme)
@@ -56,6 +56,6 @@
                 </div>
         </article>
     </section>
-    <script src="/js/Offer.js"></script>
+    <script src="/js/ProductCtl.js"></script>
     <script src="/js/advertiserPage.js"></script>
 </x-app-layout>
