@@ -15,9 +15,9 @@
                 <input type="url" name="" class='w-50 mb-2 border' id="offer-new__url"><br>
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Тема:</label><br>
                 <select name="theme" class='w-50 mb-2 border' id="offer-new__theme">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    @foreach ($themes as $theme)
+                    <option value="{{$theme}}">{{$theme}}</option>
+                    @endforeach
                 </select><br>
                 <input type="submit" class='btn btn-outline-dark' value='Добавить'>
             </form>

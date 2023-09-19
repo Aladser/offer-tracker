@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\UserRole;
 use App\Models\User;
+use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\AdvertiserProduct;
 use App\Models\OfferSubscription;
@@ -58,6 +59,15 @@ class DBTest extends TestCase
             echo "{$product->follower->name}, ";
         }
         $this->assertDatabaseCount('advertiser_products', 7);
+    }
+
+    public function testGetOfferThemes()
+    {
+        echo "\n";
+        foreach (OfferTheme::all()->toArray() as $theme) {
+            echo $theme['name'] . ", ";
+        }
+        $this->assertDatabaseHas('offer_themes', ['name' => 'природа', 'name' => 'образование', 'name' => 'спорт']);
     }
 }
 

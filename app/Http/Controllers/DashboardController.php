@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OfferTheme;
 
 class DashboardController extends Controller
 {
@@ -23,6 +24,10 @@ class DashboardController extends Controller
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);
         }
         
-        return view($url, ['user' => $request->user()] );
+        $themes = [];
+        foreach (OfferTheme::all()->toArray() as $theme) {
+            $themes[] = $theme['name'];
+        }
+        return view($url, ['user' => $request->user(), 'themes' => $themes] );
     }
 }
