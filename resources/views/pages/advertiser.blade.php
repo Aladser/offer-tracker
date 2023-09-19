@@ -56,4 +56,6 @@
                 </div>
         </article>
     </section>
+    <script src="/js/Offer.js"></script>
+    <script src="/js/advertiserPage.js"></script>
 </x-app-layout>
