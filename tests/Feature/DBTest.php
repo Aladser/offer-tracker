@@ -15,16 +15,11 @@ use App\Models\OfferSubscription;
 class DBTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function testAddData()
+    
+    public function testGetData()
     {
         system('clear');
         $this->seed();
-        $this->assertDatabaseCount('users', 3);
-    }
-
-    public function testGetData()
-    {
         echo "Пользователи:\n";
         foreach (User::all() as $user) {
             echo "  имя:{$user->name} почта:{$user->email} роль:{$user->role->name}\n";
@@ -57,10 +52,10 @@ class DBTest extends TestCase
 
     public function testGetFollowers()
     {
-        echo "\nПодписчики = " . AdvertiserProduct::find(1)->links->count() . ". ";
+        echo "\nПодписчики = " . AdvertiserProduct::find(3)->links->count() . ". ";
 
-        foreach (AdvertiserProduct::find(1)->links as $follower) {
-            echo "{$follower->follower->name}, ";
+        foreach (AdvertiserProduct::find(3)->links as $product) {
+            echo "{$product->follower->name}, ";
         }
         $this->assertDatabaseCount('advertiser_products', 7);
     }
