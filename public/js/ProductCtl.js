@@ -1,7 +1,8 @@
 /** Коллекция машин*/
 class ProductCtl {
-    constructor() {
-
+    constructor(form) {
+        this.form = form;
+        this.form.onsubmit = this.add;
     }
     
     add(form) {

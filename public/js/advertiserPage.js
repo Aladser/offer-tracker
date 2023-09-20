@@ -1,6 +1,4 @@
-const productCtl = new ProductCtl();
-const addProductForm = document.querySelector('#form-add-new-product');
+/** форма создания оффера */
+let addProductForm = document.querySelector('#form-add-new-product');
 
-window.addEventListener('DOMContentLoaded', () => {
-    addProductForm.onsubmit = productCtl.add;
-});
+const productCtl = new ProductCtl(addProductForm);
