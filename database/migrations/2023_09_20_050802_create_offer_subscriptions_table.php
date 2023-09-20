@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateOfferSubscriptionsTable extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
         Schema::create('offer_subscriptions', function (Blueprint $table) {
@@ -16,11 +21,16 @@ class CreateOfferSubscriptionsTable extends Migration
             $table->bigInteger('follower_id')->unsigned();
             $table->foreign('follower_id')->references('id')->on('users')->cascadeOnDelete();
 
-            $table->bigInteger('advertiser_product_id')->unsigned();
-            $table->foreign('advertiser_product_id')->references('id')->on('advertiser_products')->cascadeOnDelete();
+            $table->bigInteger('offer_id')->unsigned();
+            $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
         Schema::dropIfExists('offer_subscriptions');

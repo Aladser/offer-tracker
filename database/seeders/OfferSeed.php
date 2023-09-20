@@ -9,11 +9,49 @@ class OfferSeed extends Seeder
 {
     public function run()
     {
-        Offer::create(['name'=>'Товар 1', 'theme_id'=>1, 'URL'=>'url1']);
-        Offer::where('name', 'Товар 1')->update(['description' => 'что-то про спорт']);
-        Offer::create(['name'=>'Товар 2', 'theme_id'=>2, 'URL'=>'url2']);
-        Offer::where('name', 'Товар 2')->update(['description' => 'что-то про образование']);
-        Offer::create(['name'=>'Товар 3', 'theme_id'=>3, 'URL'=>'url3']);
-        Offer::where('name', 'Товар 3')->update(['description' => 'что-то про природу']);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/1',
+            'name'=>'Товар 1',
+            'theme_id'=>1,
+            'advertiser_id' => 1,
+            'price' => random_int(100, 200)
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/2',
+            'name'=>'Товар 2',
+            'theme_id'=>2,
+            'advertiser_id' => 1,
+            'price' => random_int(100, 200),
+            'status' => 1
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/3',
+            'name'=>'Товар 3',
+            'theme_id'=>3,
+            'advertiser_id' => 1,
+            'price' => random_int(100, 200)
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/4', 
+            'name'=>'Товар 4', 'theme_id'=>1, 
+            'advertiser_id' => 2, 
+            'price' => random_int(100, 200), 
+            'status' => 1
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/5', 
+            'name'=>'Товар 5', 
+            'theme_id'=>2, 
+            'advertiser_id' => 2, 
+            'price' => random_int(100, 200)
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/6', 
+            'name'=>'Товар 6', 
+            'theme_id'=>2, 
+            'advertiser_id' => 3, 
+            'price' => random_int(100, 200), 
+            'status' => 1
+        ]);
     }
 }

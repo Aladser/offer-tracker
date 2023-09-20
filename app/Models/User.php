@@ -40,9 +40,9 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    public function advertiser_products()
+    public function offers()
     {
-        return $this->hasMany(AdvertiserProduct::class, 'advertiser_id', 'id');
+        return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
 
     public function offer_subscriptions()

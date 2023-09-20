@@ -12,7 +12,7 @@ class OfferSubscription extends Model
 
     public function product()
     {
-        return $this->belongsTo(AdvertiserProduct::class, 'advertiser_product_id', 'id');
+        return $this->belongsTo(Offer::class, 'offer_id', 'id');
     }
 
     public function follower()

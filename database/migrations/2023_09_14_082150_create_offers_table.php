@@ -10,12 +10,17 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false)->unique();
-            $table->string('description')->nullable();
-            $table->string('URL')->nullable(false)->unique();
+            $table->string('url')->nullable(false)->unique();
+            $table->string('name')->unique()->default(null);
+
+            $table->boolean('status')->default(false);
+            $table->integer('price')->unsigned()->default(0);
 
             $table->bigInteger('theme_id')->unsigned();
             $table->foreign('theme_id')->references('id')->on('offer_themes')->cascadeOnDelete();
+
+            $table->bigInteger('advertiser_id')->unsigned();
+            $table->foreign('advertiser_id')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

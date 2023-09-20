@@ -1,67 +1,55 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\AdvertiserProduct;
+use App\Models\Offer;
+use App\Models\OfferSubscription;
+use App\Models\OfferTheme;
 
-class AdvertiserProductController extends Controller
+class OfferController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
+    /** Показать форму создания нового ресурса.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return 'create';
     }
 
-    /**
-     * Store a newly created resource in storage.
+    /** Сохраните вновь созданный ресурс в хранилище.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        return Offer::add($request->all());
     }
 
-    /**
-     * Display the specified resource.
+    /** Отобразить указанный ресурс.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return 'show';
     }
 
-    /**
-     * Show the form for editing the specified resource.
+    /** Показать форму редактирования указанного ресурса.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        return 'edit';
     }
 
-    /**
-     * Update the specified resource in storage.
+    /** Обновите указанный ресурс в хранилище.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -69,17 +57,16 @@ class AdvertiserProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return 'update';
     }
 
-    /**
-     * Remove the specified resource from storage.
+    /** Удалить указанный ресурс из хранилища.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        return 'destroy';
     }
 }
