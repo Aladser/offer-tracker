@@ -33,29 +33,24 @@ class Offer extends Model
     public static function add($data)
     {
         // поиск товара
-        $isOffer = !is_null(Offer::where('name', $data['name'])->first());
+        $isOffer = !is_null(Offer::where('url', $data['url'])->first());
         if ($isOffer) {
             return ['result' => 0, 'error' => 'оффер уже существует'];
         } else {
-            $isURL = !is_null(Offer::where('URL', $data['url'])->first());
-            if ($isURL) {
-                return ['result' => 0, 'error' => 'URL занят'];
-            } else {
-                $offer = new Offer();
-                $offer->name = $data['name'];
-                $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-                $offer->URL = $data['url'];
-                $isAdded = $offer->save();
-                return [
-                    'result' => $isAdded,
-                    'row' => [
-                        'id' => $offer->id,
-                        'name' => $offer->name,
-                        'theme' => $offer->theme->name,
-                        'URL' => $offer->URL
-                        ]
-                ];
-            }
+            $offer = new Offer();
+            $offer->name = $data['name'];
+            $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
+            $offer->URL = $data['url'];
+            $isAdded = $offer->save();
+            return [
+                'result' => $isAdded,
+                'row' => [
+                    'id' => $offer->id,
+                    'name' => $offer->name,
+                    'theme' => $offer->theme->name,
+                    'URL' => $offer->URL
+                    ]
+            ];
         }
     }
 }

@@ -11,7 +11,7 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('url')->nullable(false)->unique();
-            $table->string('name')->unique()->default(null);
+            $table->string('name')->unique();
 
             $table->boolean('status')->default(false);
             $table->integer('price')->unsigned()->default(0);
@@ -26,6 +26,6 @@ class CreateOffersTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('url');
     }
 }

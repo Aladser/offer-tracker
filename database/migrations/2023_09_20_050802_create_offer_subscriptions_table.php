@@ -23,6 +23,8 @@ class CreateOfferSubscriptionsTable extends Migration
 
             $table->bigInteger('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
+
+            $table->index(['follower_id', 'offer_id']);
         });
     }
 

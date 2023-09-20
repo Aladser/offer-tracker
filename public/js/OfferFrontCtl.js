@@ -14,7 +14,7 @@ class OfferFrontCtl {
             try {
                 let offer = JSON.parse(data);
                 console.clear();
-                console.log(offer);
+                alert(offer);
             } catch(err) {
                 console.clear();
                 console.log(data);

@@ -36,9 +36,9 @@
                                 <th scope="col">Подписчики</th>
                             </tr>
 
-                            @foreach ($user->advertiser_products->all() as $product)
+                            @foreach ($user->offers->all() as $product)
                                 <tr class='{{$product->id}}'>
-                                    <td class='fw-bolder'>{{$product->offer->name}}</td>
+                                    <td class='fw-bolder'>{{$product->name}}</td>
                                     <td>{{$product->price}} </td>
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>

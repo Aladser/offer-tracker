@@ -10,6 +10,10 @@ class OfferSubscription extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $fillable = [
+        'follower_id',
+    ];
+    
     public function product()
     {
         return $this->belongsTo(Offer::class, 'offer_id', 'id');

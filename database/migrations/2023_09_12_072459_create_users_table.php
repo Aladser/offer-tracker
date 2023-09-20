@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('password')->nullable(false);
             $table->rememberToken();
 
             $table->bigInteger('role_id')->unsigned();

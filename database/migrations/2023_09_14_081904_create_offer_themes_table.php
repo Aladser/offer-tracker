@@ -11,7 +11,7 @@ class CreateOfferThemesTable extends Migration
         Schema::create('offer_themes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false)->unique();
-            $table->string('description')->nullable();
+            $table->string('description')->nullable()->default(null);
         });
     }
 

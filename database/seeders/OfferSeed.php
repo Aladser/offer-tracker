@@ -53,5 +53,27 @@ class OfferSeed extends Seeder
             'price' => random_int(100, 200), 
             'status' => 1
         ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/7', 
+            'name'=>'Товар 7', 'theme_id'=>1, 
+            'advertiser_id' => 2, 
+            'price' => random_int(100, 200), 
+            'status' => 0
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/8', 
+            'name'=>'Товар 8', 'theme_id'=>1, 
+            'advertiser_id' => 2, 
+            'price' => random_int(100, 200), 
+            'status' => 1
+        ]);
+        Offer::create([
+            'url'=>'http://127.0.0.1:8000/9', 
+            'name'=>'Товар 9', 
+            'theme_id'=>1, 
+            'advertiser_id' => 2, 
+            'price' => random_int(100, 200), 
+            'status' => 0
+        ]);
     }
 }

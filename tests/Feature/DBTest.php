@@ -51,7 +51,7 @@ class DBTest extends TestCase
             $status = $offer->status ? 'вкл' : 'выкл'; 
             echo "url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
         }
-        $this->assertDatabaseCount('offers', 6);
+        $this->assertDatabaseCount('offers', 9);
     }
 
     public function testOfferClicks()
@@ -60,7 +60,7 @@ class DBTest extends TestCase
         foreach (OfferSubscription::all() as $click) {
             echo "  {$click->follower->name} подписался {$click->created_at} на {$click->product->name}\n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 6);
+        $this->assertDatabaseCount('offer_subscriptions', 9);
     }
 
     public function testFollowers()
@@ -69,7 +69,16 @@ class DBTest extends TestCase
         foreach (Offer::all() as $offer) {
             echo "{$offer->name}. Подписчиков:{$offer->links->count()}\n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 6);
+        $this->assertDatabaseCount('offer_subscriptions', 9);
+    }
+
+    public function testDoubleSubscriptions()
+    {
+        $subscription = new OfferSubscription();
+        $subscription->follower_id = 1;
+        $subscription->offer_id = 1;
+        $subscription->save();
+        $this->assertDatabaseHas('offer_subscriptions', ['follower_id' => 1, 'offer_id' => 1]);
     }
 }
 
