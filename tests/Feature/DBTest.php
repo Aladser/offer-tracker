@@ -26,6 +26,12 @@ class DBTest extends TestCase
             echo "  имя:{$user->name} почта:{$user->email} роль:{$user->role->name}\n";
         }
         $this->assertDatabaseCount('users', 3);
+        $this->assertDatabaseHas('user_roles', ['name' => 'рекламодатель', 'name' => 'веб-мастер', 'name' => 'администратор']);
+    }
+
+    public function testOfferThemes()
+    {
+        $this->assertDatabaseHas('offer_themes', ['name' => 'природа', 'name' => 'образование', 'name' => 'спорт']);
     }
 
     public function testOffers()
@@ -64,11 +70,6 @@ class DBTest extends TestCase
             echo "{$offer->name}. Подписчиков:{$offer->links->count()}\n";
         }
         $this->assertDatabaseCount('offer_subscriptions', 6);
-    }
-
-    public function testOfferThemes()
-    {
-        $this->assertDatabaseHas('offer_themes', ['name' => 'природа', 'name' => 'образование', 'name' => 'спорт']);
     }
 }
 
