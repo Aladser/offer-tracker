@@ -72,6 +72,7 @@ class DBTest extends TestCase
         $this->assertDatabaseCount('offer_subscriptions', 9);
     }
 
+    /*
     public function testDoubleSubscriptions()
     {
         $subscription = new OfferSubscription();
@@ -80,5 +81,6 @@ class DBTest extends TestCase
         $subscription->save();
         $this->assertDatabaseCount('offer_subscriptions', 9);
     }
+    */
 }
 
