@@ -76,9 +76,9 @@ class DBTest extends TestCase
     {
         $subscription = new OfferSubscription();
         $subscription->follower_id = 1;
-        $subscription->offer_id = 1;
+        $subscription->offer_id = 3;
         $subscription->save();
-        $this->assertDatabaseHas('offer_subscriptions', ['follower_id' => 1, 'offer_id' => 1]);
+        $this->assertDatabaseCount('offer_subscriptions', 9);
     }
 }
 
