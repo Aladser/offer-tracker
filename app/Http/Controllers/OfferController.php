@@ -26,6 +26,7 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
+        return $request->all();
         return Offer::add($request->all());
     }
 
