@@ -32,25 +32,34 @@ class Offer extends Model
 
     public static function add($data)
     {
-        // поиск товара
-        $isOffer = !is_null(Offer::where('url', $data['url'])->first());
-        if ($isOffer) {
-            return ['result' => 0, 'error' => 'оффер уже существует'];
+        // поиск имени
+        $isNameExisted = !is_null(Offer::where('name', $data['name'])->first());
+        if ($isNameExisted) {
+            return ['result' => 0, 'error' => 'Название оффера занято'];
         } else {
-            $offer = new Offer();
-            $offer->name = $data['name'];
-            $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-            $offer->URL = $data['url'];
-            $isAdded = $offer->save();
-            return [
-                'result' => $isAdded,
-                'row' => [
-                    'id' => $offer->id,
-                    'name' => $offer->name,
-                    'theme' => $offer->theme->name,
-                    'URL' => $offer->URL
-                    ]
-            ];
-        }
+            // поиск пользователя
+            $userId = User::where('name', $data['user'])->value('id');
+            if (is_null($userId)) {
+                return ['result' => 0, 'error' => "Ошибкa: пользователь {$data['user']} не существует"];
+            } else {
+                // добавление нового оффера
+                $offer = new Offer();
+                $offer->name = $data['name'];
+                $offer->URL = $data['url'];
+                $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
+                $offer->advertiser_id = $userId;
+                $isAdded = $offer->save();
+                return [
+                    'result' => $isAdded,
+                    'row' => [
+                        'id' => $offer->id,
+                        'name' => $offer->name,
+                        'URL' => $offer->URL,
+                        'theme' => $offer->theme->name,
+                        'user' => $offer->advertiser->name,
+                        ]
+                ];
+            }
+        } 
     }
 }

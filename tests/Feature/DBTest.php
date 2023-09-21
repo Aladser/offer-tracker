@@ -75,11 +75,11 @@ class DBTest extends TestCase
     /*
     public function testDoubleSubscriptions()
     {
+        $this->expectException(\Illuminate\Database\QueryException::class);
         $subscription = new OfferSubscription();
         $subscription->follower_id = 1;
         $subscription->offer_id = 3;
         $subscription->save();
-        $this->assertDatabaseCount('offer_subscriptions', 9);
     }
     */
 }

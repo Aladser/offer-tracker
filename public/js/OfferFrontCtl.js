@@ -1,10 +1,11 @@
 /** Коллекция машин*/
 class OfferFrontCtl {
-    constructor(URL, userName, form, csrfToken) {
+    constructor(URL, userName, form, errorPrg, csrfToken) {
         this.form = form;
         this.URL = URL;
         this.userName = userName;
         this.form.onsubmit = e => this.add(e);
+        this.errorPrg = errorPrg;
         this.csrfToken = csrfToken;
     }
     
@@ -17,11 +18,14 @@ class OfferFrontCtl {
         fetch(this.URL, {method:'post', headers: headers, body:formData}).then(response => response.text()).then(data => {
             try {
                 let offer = JSON.parse(data);
-                console.clear();
-                console.log(offer);
+                if (offer.result === 0) {
+                    this.errorPrg.textContent = offer.error;
+                } else {
+                    this.errorPrg.textContent = "OK";
+                }
             } catch(err) {
-                alert('ошибка добавления оффера');
                 console.log(data);
+                this.errorPrg.textContent = 'Ошибка БД';
             }
         })
     }

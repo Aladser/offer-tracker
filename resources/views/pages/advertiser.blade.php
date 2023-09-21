@@ -25,6 +25,7 @@
                 </select><br>
                 <input type="submit" class='btn btn-outline-dark' value='Добавить'>
             </form>
+            <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
         </article>
 
         <article class="mt-4">

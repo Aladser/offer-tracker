@@ -10,8 +10,8 @@ class CreateOffersTable extends Migration
     {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
-            $table->string('url')->nullable(false)->unique();
             $table->string('name')->unique();
+            $table->string('url')->nullable(false);
 
             $table->boolean('status')->default(false);
             $table->integer('price')->unsigned()->default(0);
