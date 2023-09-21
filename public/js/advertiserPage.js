@@ -8,6 +8,8 @@ const addOfferForm = document.querySelector('#form-add-new-product');
 const errorPrg = document.querySelector('#form-add-error');
 /** CSRF */
 const csrfToken = document.querySelectorAll('meta')[2];
+/** таблица офферов */
+const offerTable = document.querySelector('#table-offers tbody');
 
 /** фронт-контроллер офферов */
-const offerFrontCtl = new OfferFrontCtl(offerURL, hostUsername, addOfferForm, errorPrg, csrfToken);
+const offerFrontCtl = new OfferFrontCtl(offerURL, hostUsername, addOfferForm, offerTable, errorPrg, csrfToken);

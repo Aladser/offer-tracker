@@ -46,6 +46,7 @@ class Offer extends Model
                 $offer = new Offer();
                 $offer->name = $data['name'];
                 $offer->URL = $data['url'];
+                $offer->price = $data['price'];
                 $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
                 $offer->advertiser_id = $userId;
                 $isAdded = $offer->save();
@@ -55,6 +56,7 @@ class Offer extends Model
                         'id' => $offer->id,
                         'name' => $offer->name,
                         'URL' => $offer->URL,
+                        'price' => $offer->price,
                         'theme' => $offer->theme->name,
                         'user' => $offer->advertiser->name,
                         ]
