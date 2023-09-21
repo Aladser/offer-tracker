@@ -7,7 +7,7 @@ const addOfferForm = document.querySelector('#form-add-new-product');
 /** поле ошибки формы добавления */
 const errorPrg = document.querySelector('#form-add-error');
 /** CSRF */
-const csrfToken = document.querySelectorAll('meta')[2];
+const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** таблица офферов */
 const offerTable = document.querySelector('#table-offers tbody');
 
