@@ -43,9 +43,8 @@ class OfferFrontCtl {
         event.preventDefault();
         let formData = new FormData(this.form);
         formData.append('user', this.userName.textContent);
-        let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
         
-        fetch(this.URL, {method:'post', headers: headers, body:formData}).then(response => response.text()).then(data => {
+        fetch(this.URL, {method:'post', body:formData}).then(response => response.text()).then(data => {
             try {
                 let offer = JSON.parse(data);
                 if (offer.result === 0) {
@@ -100,7 +99,8 @@ class OfferFrontCtl {
 
         fetch(`${this.URL}/status`, {method:'post', headers: headers, body:data}).then(response => response.text()).then(rslt => {
             if (rslt != 1) {
-                this.errorPrg.textContent = rslt;
+                this.errorPrg.textContent = 'ошибка ДБ';
+                console.log(rslt);
             }
         })
     }
