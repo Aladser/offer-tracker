@@ -1,4 +1,13 @@
-<x-app-layout>
+<x-app-layout class='position-relative'>
+    @section('css')
+        <link href="/css/advertiserPage.css" rel="stylesheet" />
+    @endsection
+
+    @section('js')
+        <script src="/js/OfferFrontCtl.js" defer></script>
+        <script src="/js/advertiserPage.js" defer></script>
+    @endsection
+
     <section class='w-50 mx-auto'>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -46,7 +55,7 @@
                             </tr>
 
                             @foreach ($user->offers->all() as $product)
-                                <tr data-id='{{$product->id}}'>
+                                <tr data-id='{{$product->id}}' class='table-offers__tr position-relative'>
                                     <td class='fw-bolder'>{{$product->name}}</td>
                                     <td>{{$product->price}} </td>
                                     <td class='p-0'>
@@ -66,7 +75,4 @@
                 </div>
         </article>
     </section>
-    
-    <script src="/js/OfferFrontCtl.js"></script>
-    <script src="/js/advertiserPage.js"></script>
 </x-app-layout>

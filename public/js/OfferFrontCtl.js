@@ -10,8 +10,8 @@ class OfferFrontCtl {
         this.csrfToken = csrfToken;
     }
     
-    add(e) {
-        e.preventDefault();
+    add(event) {
+        event.preventDefault();
         let formData = new FormData(this.form);
         formData.append('user', this.userName.textContent);
         let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
@@ -45,8 +45,12 @@ class OfferFrontCtl {
         +'<tr>';
     }
 
-    remove(row) {
-
+    remove(button) {
+        let id = button.closest('tr').getAttribute('data-id');
+        let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
+        fetch(`${this.URL}/${id}`, {method:'delete', headers: headers}).then(response => response.text()).then(data => {
+            console.log(data);
+        })
     }
 
     update(row) {     
