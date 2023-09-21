@@ -21,6 +21,7 @@ class OfferFrontCtl {
                 if (offer.result === 0) {
                     this.errorPrg.textContent = offer.error;
                 } else {
+                    console.log(offer);
                     this.errorPrg.textContent = "OK";
                 }
             } catch(err) {
