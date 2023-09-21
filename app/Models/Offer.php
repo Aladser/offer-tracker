@@ -20,11 +20,13 @@ class Offer extends Model
         return $this->belongsTo(OfferTheme::class, 'theme_id', 'id');
     }
 
+    /** создатель оффера */
     public function advertiser()
     {
         return $this->belongsTo(User::class, 'advertiser_id', 'id');
     }
 
+    /** подписки */
     public function links()
     {
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
@@ -35,7 +37,7 @@ class Offer extends Model
         // поиск имени
         $isNameExisted = !is_null(Offer::where('name', $data['name'])->first());
         if ($isNameExisted) {
-            return ['result' => 0, 'error' => 'Название оффера занято'];
+            return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
             // поиск пользователя
             $userId = User::where('name', $data['user'])->value('id');
@@ -63,5 +65,17 @@ class Offer extends Model
                 ];
             }
         } 
+    }
+
+    public static function remove($id)
+    {
+        return Offer::find($id)->delete();
+    }
+
+    public static function setStatus($id, $status)
+    {   
+        $offer = Offer::find($id);
+        $offer->status = $status === 'true' ? 1 : 0;
+        return $offer->save();
     }
 }

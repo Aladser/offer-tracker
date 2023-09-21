@@ -67,6 +67,14 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        return 'destroy';
+        return Offer::remove($id);
+    }
+
+    /** установить статус */
+    public function status(Request $request)
+    {
+        $status = $request->all()['status']; 
+        $id = $request->all()['id'];
+        return Offer::setStatus($id, $status);
     }
 }

@@ -61,9 +61,9 @@
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>
                                             @if ($product->status===1)
-                                            <input type="checkbox" name="status" class='form-check-input mx-auto' checked> 
+                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' checked> 
                                             @else
-                                            <input type="checkbox" name="status" class='form-check-input mx-auto'>
+                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto'>
                                             @endif
                                         </div>
                                     </td>
