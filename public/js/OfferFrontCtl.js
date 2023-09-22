@@ -11,7 +11,7 @@ class OfferFrontCtl {
         this.csrfToken = csrfToken;
 
         // клик на строке
-        offerTable.querySelectorAll('tr').forEach(row => row.onclick = e => {
+        offerTable.querySelectorAll('.table-offers__tr').forEach(row => row.onclick = e => {
             if (e.target.tagName === 'INPUT') {
                 this.setOfferStatus(e.target.closest('tr'), e.target);
             } else {

@@ -32,39 +32,32 @@ class Offer extends Model
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
-    public static function add($data)
+    public static function getOfferName($name)
     {
-        // поиск имени
-        $isNameExisted = !is_null(Offer::where('name', $data['name'])->first());
-        if ($isNameExisted) {
-            return ['result' => 0, 'error' => 'Название оффера уже занято'];
-        } else {
-            // поиск пользователя
-            $userId = User::where('name', $data['user'])->value('id');
-            if (is_null($userId)) {
-                return ['result' => 0, 'error' => "Ошибкa: пользователь {$data['user']} не существует"];
-            } else {
-                // добавление нового оффера
-                $offer = new Offer();
-                $offer->name = $data['name'];
-                $offer->URL = $data['url'];
-                $offer->price = $data['price'];
-                $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-                $offer->advertiser_id = $userId;
-                $isAdded = $offer->save();
-                return [
-                    'result' => $isAdded,
-                    'row' => [
-                        'id' => $offer->id,
-                        'name' => $offer->name,
-                        'URL' => $offer->URL,
-                        'price' => $offer->price,
-                        'theme' => $offer->theme->name,
-                        'user' => $offer->advertiser->name,
-                        ]
-                ];
-            }
-        } 
+        return Offer::where('name', $name)->first();
+    }
+
+    public static function add($data, $userId)
+    {
+        $offer = new Offer();
+        $offer->name = $data['name'];
+        $offer->URL = $data['url'];
+        $offer->price = $data['price'];
+        $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
+        $offer->advertiser_id = $userId;
+        $isAdded = $offer->save();
+        
+        return [
+            'result' => $isAdded,
+            'row' => [
+                'id' => $offer->id,
+                'name' => $data['name'],
+                'URL' => $data['url'],
+                'price' => $data['price'],
+                'theme' => $offer->theme->name,
+                'user' => $offer->advertiser->name,
+                ]
+        ];
     }
 
     public static function remove($id)

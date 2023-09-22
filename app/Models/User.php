@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(OfferSubscription::class, 'follower_id', 'id');
     }
+
+    public static function getUserId($name)
+    {
+        return User::where('name', $name)->value('id');
+    }
 }

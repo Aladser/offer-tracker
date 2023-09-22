@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\AdvertiserProduct;
 use App\Models\Offer;
 use App\Models\OfferSubscription;
@@ -26,7 +27,20 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        return Offer::add($request->all());
+        $data = $request->all();
+        // поиск имени
+        $isOfferName = !is_null(Offer::getOfferName($data['name']));
+        if ($isOfferName) {
+            return ['result' => 0, 'error' => 'Название оффера уже занято'];
+        } else {
+            // поиск пользователя
+            $userId = User::getUserId($data['user']);
+            if (is_null($userId)) {
+                return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
+            } else {
+                return Offer::add($data, $userId);
+            }
+        }
     }
 
     /** Отобразить указанный ресурс.
