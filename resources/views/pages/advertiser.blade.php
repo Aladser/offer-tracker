@@ -10,38 +10,13 @@
 
     <section class='w-50 mx-auto'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Панель офферов
-                 <span id='hostUsername' class='fw-bolder'>{{$user->name}}</span>
-            </h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель офферов</h2>
         </x-slot>
 
-        <article class='pt-4'>
-            <h3 class='h3 fw-bolder m-0 text-center pb-2'>Добавление нового оффера</h3>
-            <form action='/' method='post' id='form-add-new-product' class='text-center'>
-                @csrf
-                
-                <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Имя:</label><br>
-                <input type="text" name="name" class='w-50 mb-2 border' id="offer-new__name" required><br>
-
-                <label for="offer-new__price" class='fw-bolder w-50 text-start ps-2'>Цена:</label><br>
-                <input type="number" name="price" class='w-50 mb-2 border' id="offer-new__price" required><br>
-
-                <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>URL:</label><br>
-                <input type="url" name="url" class='w-50 mb-2 border' id="offer-new__url" required><br>
-
-                <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Тема:</label><br>
-                <select name="theme" class='w-50 mb-2 border' id="offer-new__theme">
-                    @foreach ($themes as $theme)
-                    <option value="{{$theme}}">{{$theme}}</option>
-                    @endforeach
-                </select><br>
-                
-                <input type="submit" class='btn btn-outline-dark' value='Добавить'>
-            </form>
-            <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
+        <article class='pt-4 text-center'>
+            <a href="/offer/create" class='btn btn-primary'>Добавить оффер</a>
+            <a href="" class='btn btn-primary'>Статистика офферов</a>
         </article>
-
         <article class="mt-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4 bg-white border-b border-gray-200 text-center">

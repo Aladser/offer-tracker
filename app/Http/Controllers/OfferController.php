@@ -11,13 +11,17 @@ use App\Models\OfferTheme;
 
 class OfferController extends Controller
 {
-    /** Показать форму создания нового ресурса.
+    /** Показать форму создания нового оффера.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return 'create';
+        $themes = [];
+        foreach (OfferTheme::all()->toArray() as $theme) {
+            $themes[] = $theme['name'];
+        }
+        return view('add-offer', ['themes' => $themes]);
     }
 
     /** Сохраните вновь созданный ресурс в хранилище.
@@ -38,19 +42,9 @@ class OfferController extends Controller
             if (is_null($userId)) {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             } else {
-                return Offer::add($data, $userId);
+                return ['result' => Offer::add($data, $userId), 'offerName' => $data['name']];
             }
         }
-    }
-
-    /** Отобразить указанный ресурс.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return 'show';
     }
 
     /** Показать форму редактирования указанного ресурса.

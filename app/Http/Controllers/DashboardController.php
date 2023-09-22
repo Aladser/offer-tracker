@@ -24,10 +24,6 @@ class DashboardController extends Controller
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);
         }
         
-        $themes = [];
-        foreach (OfferTheme::all()->toArray() as $theme) {
-            $themes[] = $theme['name'];
-        }
-        return view($url, ['user' => $request->user(), 'themes' => $themes] );
+        return view($url, ['user' => $request->user()] );
     }
 }

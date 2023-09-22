@@ -45,19 +45,8 @@ class Offer extends Model
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
         $offer->advertiser_id = $userId;
-        $isAdded = $offer->save();
         
-        return [
-            'result' => $isAdded,
-            'row' => [
-                'id' => $offer->id,
-                'name' => $data['name'],
-                'URL' => $data['url'],
-                'price' => $data['price'],
-                'theme' => $offer->theme->name,
-                'user' => $offer->advertiser->name,
-                ]
-        ];
+        return $offer->save() ? 1 : 0;
     }
 
     public static function remove($id)
