@@ -7,7 +7,7 @@ use App\Http\Controllers\StatisticController;
 
 Route::get('/', fn() => view('welcome'))->name('main');
 // страница пользователя
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
 // аутентификация
 require __DIR__.'/auth.php';
 
