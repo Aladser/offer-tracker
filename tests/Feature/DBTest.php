@@ -60,7 +60,7 @@ class DBTest extends TestCase
         foreach (OfferSubscription::all() as $click) {
             echo "  {$click->follower->name} подписался {$click->created_at} на {$click->product->name}\n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 9);
+        $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 
     public function testFollowers()
@@ -69,7 +69,7 @@ class DBTest extends TestCase
         foreach (Offer::all() as $offer) {
             echo "{$offer->name}. Подписчиков:{$offer->links->count()}\n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 9);
+        $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 
     public function testDoubleSubscriptions()
@@ -79,17 +79,53 @@ class DBTest extends TestCase
         $subscription->follower_id = 1;
         $subscription->offer_id = 3;
         $subscription->save();
+        $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 
     public function testGetUserOffers() {
         if (User::all()->count() === 0) {
             $this->seed();
         }
-        foreach (User::find(2)->offers->all() as $product) {
+        echo "Все подписки офферов:\n";
+        $offers = User::find(2)->offers->all(); 
+        foreach ($offers as $product) {
             foreach ($product->links as $link) {
-                echo "{$link->product->name} {$link->created_at}\n";
+                echo "имя:{$link->product->name} создан:{$link->created_at} цена:{$link->product->price}\n";
             }
         }
+
+        echo "\nДата: 2023-09-22 22:44:42\n";
+
+        $table = DB::table('offer_subscriptions')
+        ->join('offers', function($join) {
+            $date = new \DateTime("2023-09-22 22:44:42");
+            $date->modify('-1 day');
+            $lastDayDate = $date->format('Y-m-d H:i:s');
+            echo "Прошлый день: $lastDayDate. Сумма = ";
+            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastDayDate);
+        });
+        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+
+        $table = DB::table('offer_subscriptions')
+        ->join('offers', function($join) {
+            $date = new \DateTime("2023-09-22 22:44:42");
+            $date->modify('-1 month');
+            $lastMonthDate = $date->format('Y-m-d H:i:s');
+            echo "Прошлый месяц: $lastMonthDate. Сумма = ";
+            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastMonthDate);
+        });
+        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+
+        $table = DB::table('offer_subscriptions')
+        ->join('offers', function($join) {
+            $date = new \DateTime("2023-09-22 22:44:42");
+            $date->modify('-1 year');
+            $lastYearDate = $date->format('Y-m-d H:i:s');
+            echo "Прошлый год: $lastYearDate. Сумма = ";
+            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastYearDate);
+        });
+        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+        $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 }
 
