@@ -28,8 +28,10 @@
             <option value="{{$theme}}">{{$theme}}</option>
             @endforeach
         </select><br>
-        
-        <input type="submit" class='btn btn-outline-dark' value='Добавить'>
+        <div class='mt-3'>
+            <input type="submit" class='btn btn-outline-dark col-2' value='Добавить'>
+            <input type="submit" class='btn btn-outline-dark col-2' id='form-add-new__btn-back' value='Назад'>
+        </div>
     </form>
     <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
 </x-app-layout>

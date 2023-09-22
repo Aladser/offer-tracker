@@ -14,9 +14,10 @@
         </x-slot>
 
         <article class='pt-4 text-center'>
-            <a href="/offer/create" class='btn btn-primary'>Добавить оффер</a>
-            <a href="" class='btn btn-primary'>Статистика офферов</a>
+            <a href="/offer/create" class='btn btn-outline-dark col-3'>Добавить оффер</a>
+            <a href="" class='btn btn-outline-dark col-3'>Статистика офферов</a>
         </article>
+        
         <article class="mt-4">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-4 bg-white border-b border-gray-200 text-center">
