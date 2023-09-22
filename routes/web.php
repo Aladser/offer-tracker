@@ -5,7 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\StatisticController;
 
-Route::get('/', function () {return view('welcome');})->name('main');
+Route::get('/', fn() => view('welcome'))->name('main');
 // страница пользователя
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
 // аутентификация
