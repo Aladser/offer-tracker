@@ -14,4 +14,5 @@ require __DIR__.'/auth.php';
 Route::resource('/offer', OfferController::class)->except(['index', 'show']);
 Route::post('/offer/status', [OfferController::class, 'status']);
 
-Route::get('/advertiser/{id}/statistic', StatisticController::class);
+Route::get('/advertiser/{id}/index', [StatisticController::class, 'index']);
+Route::post('/advertiser/{id}/money', [StatisticController::class, 'money']);

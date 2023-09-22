@@ -72,7 +72,6 @@ class DBTest extends TestCase
         $this->assertDatabaseCount('offer_subscriptions', 9);
     }
 
-    /*
     public function testDoubleSubscriptions()
     {
         $this->expectException(\Illuminate\Database\QueryException::class);
@@ -81,6 +80,16 @@ class DBTest extends TestCase
         $subscription->offer_id = 3;
         $subscription->save();
     }
-    */
+
+    public function testGetUserOffers() {
+        if (User::all()->count() === 0) {
+            $this->seed();
+        }
+        foreach (User::find(2)->offers->all() as $product) {
+            foreach ($product->links as $link) {
+                echo "{$link->product->name} {$link->created_at}\n";
+            }
+        }
+    }
 }
 

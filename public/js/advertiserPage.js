@@ -7,13 +7,13 @@ offerTable.querySelectorAll('.table-offers__tr').forEach(row => row.onclick = e 
     if (e.target.tagName === 'INPUT') {
         offerFrontCtl.setOfferStatus(e.target.closest('tr'), e.target);
     } else {
-        click(e.target.closest('tr'));
+        clickRow(e.target.closest('tr'));
     }
 });
 
 
 /** клик строки таблицы */
-function click(row) {
+function clickRow(row) {
     if (row.classList.contains('table-offers__tr--active')) {
         row.classList.remove('table-offers__tr--active');
         row.querySelector('button').remove();

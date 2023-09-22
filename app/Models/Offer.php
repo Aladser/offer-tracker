@@ -51,6 +51,7 @@ class Offer extends Model
 
     public static function remove($id)
     {
+        OfferSubsciption::where('offer_id', $id)->delete();
         return Offer::find($id)->delete();
     }
 

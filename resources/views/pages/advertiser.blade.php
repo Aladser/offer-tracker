@@ -15,7 +15,7 @@
 
         <article class='pt-4 text-center'>
             <a href="/offer/create" class='btn btn-outline-dark col-3'>Добавить оффер</a>
-            <a href="/advertiser/{{$user->id}}/statistic" class='btn btn-outline-dark col-3'>Статистика офферов</a>
+            <a href="/advertiser/{{$user->id}}/index" class='btn btn-outline-dark col-3'>Статистика офферов</a>
         </article>
         
         <article class="mt-4">
@@ -37,9 +37,9 @@
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>
                                             @if ($product->status===1)
-                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' checked> 
+                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='выключить' checked> 
                                             @else
-                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto'>
+                                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='включить' >
                                             @endif
                                         </div>
                                     </td>
