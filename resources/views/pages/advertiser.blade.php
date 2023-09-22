@@ -15,7 +15,7 @@
 
         <article class='pt-4 text-center'>
             <a href="/offer/create" class='btn btn-outline-dark col-3'>Добавить оффер</a>
-            <a href="" class='btn btn-outline-dark col-3'>Статистика офферов</a>
+            <a href="/advertiser/{{$user->id}}/statistic" class='btn btn-outline-dark col-3'>Статистика офферов</a>
         </article>
         
         <article class="mt-4">

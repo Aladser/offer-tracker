@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\StatisticController;
 
 Route::get('/', function () {return view('welcome');})->name('main');
 // страница пользователя
@@ -12,3 +13,5 @@ require __DIR__.'/auth.php';
 
 Route::resource('/offer', OfferController::class)->except(['index', 'show']);
 Route::post('/offer/status', [OfferController::class, 'status']);
+
+Route::get('/advertiser/{id}/statistic', StatisticController::class);

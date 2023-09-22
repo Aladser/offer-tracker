@@ -21,7 +21,7 @@ class OfferController extends Controller
         foreach (OfferTheme::all()->toArray() as $theme) {
             $themes[] = $theme['name'];
         }
-        return view('add-offer', ['themes' => $themes]);
+        return view('pages/add-offer', ['themes' => $themes]);
     }
 
     /** Сохраните вновь созданный ресурс в хранилище.
