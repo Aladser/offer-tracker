@@ -19,9 +19,10 @@
                             <p class='d-inline-block fw-bold'>Отчетный период: </p>&nbsp;&nbsp;
                             <form id='time-period-article__switcher'>
                                 <input type="hidden" value='{{$user->id}}' id='time-period-article__input-id'>
-                                <p class='d-inline-block'><input name="times" type="radio" value="last-day" checked>  Последний день</p>&nbsp;&nbsp;
+                                <p class='d-inline-block'><input name="times" type="radio" value="last-day">  Последний день</p>&nbsp;&nbsp;
                                 <p class='d-inline-block'><input name="times" type="radio" value="last-month">  Последний месяц</p>&nbsp;&nbsp;
-                                <p class='d-inline-block'><input name="times" type="radio" value="last-year">  Последний год</p>
+                                <p class='d-inline-block'><input name="times" type="radio" value="last-year">  Последний год</p>&nbsp;&nbsp;
+                                <p class='d-inline-block'><input name="times" type="radio" value="all-time" checked> Все время</p>
                             </form>
                     </article>
 
