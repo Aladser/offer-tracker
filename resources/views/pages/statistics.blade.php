@@ -33,11 +33,11 @@
                             <th scope="col">Доходы</th>
                         </tr>
 
-                        @foreach ($user->offers->all() as $product)
-                            <tr data-id='{{$product->id}}' class='table-offers__tr position-relative'>
-                                <td class='fw-bolder'>{{$product->name}}</td>
-                                <td>{{$product->links->count()}} </td>
-                                <td>{{$product->links->count() * $product->price}} р.</td>
+                        @foreach ($user->offers->all() as $offer)
+                            <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
+                                <td class='fw-bolder'>{{$offer->name}}</td>
+                                <td>{{$offer->links->count()}} </td>
+                                <td>{{$offer->links->count() * $offer->price}} р.</td>
                             </tr>
                         @endforeach
                     </table>

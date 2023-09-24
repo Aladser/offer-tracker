@@ -11,20 +11,11 @@ use App\Models\User;
 use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\OfferSubscription;
+use App\Http\Controllers\StatisticController;
 
 class DBTest extends TestCase
 {
     use RefreshDatabase;
-
-    private static function getDate($period = null)
-    {
-        $date = new \DateTime();
-        $date->modify('+' . env('TIMEZONE') . 'hours');
-        if (!is_null($period)) {
-            $date->modify($period);
-        }
-        return $date->format('Y-m-d H:i:s');
-    }
     
     public function testUsers()
     {
@@ -109,32 +100,47 @@ class DBTest extends TestCase
             $this->seed();
         }
 
-        echo "Текущее время: ".DBTest::getDate()."\n";
+        $advertiser_id = 2;
+        $offers = User::find(2)->offers; 
 
-        $table = DB::table('offer_subscriptions')
-        ->join('offers', function($join) {
-            $lastDayDate = DBTest::getDate('-1 day');
-            echo "Прошлый день: $lastDayDate. Сумма = ";
-            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastDayDate);
-        });
-        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+        // офферы за все время
+        echo 'Офферы рекламщика ' . User::find($advertiser_id)->name . "\n" . StatisticController::getDate() . ":\n";
+        foreach ($offers->all() as $offer) {
+            echo "$offer->id $offer->name. Цена: $offer->price Переходы: {$offer->links->count()} Доход:"
+                . $offer->links->count() * $offer->price . "\n";
+        }
+        $data = DB::table('offer_subscriptions')->join('offers', 'offers.id', '=', 'offer_subscriptions.offer_id');
+        echo "Подписчиков: {$data->where('advertiser_id', $advertiser_id)->get()->count()}. Сумма: {$data->get()->sum('price')}\n\n";
 
-        $table = DB::table('offer_subscriptions')
-        ->join('offers', function($join) {
-            $lastMonthDate = DBTest::getDate('-1 month');
-            echo "Прошлый месяц: $lastMonthDate. Сумма = ";
-            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastMonthDate);
-        });
-        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+        // офферы за последний день
+        $lastDate = StatisticController::getDate('-1 day');
+        echo "$lastDate:\n";
+        foreach ($offers->all() as $offer) {
+            echo "$offer->id $offer->name. Цена: $offer->price Переходы: {$offer->links->where('created_at', '>', $lastDate)->count()} Доход:"
+                . $offer->links->where('created_at', '>', $lastDate)->count() * $offer->price . "\n";
+        }
+        $data = DB::table('offer_subscriptions')->join('offers', 'offers.id', '=', 'offer_subscriptions.offer_id');
+        echo "Подписчиков: {$data->where('advertiser_id', $advertiser_id)->where('created_at', '>', $lastDate)->count()}. Сумма: {$data->where('created_at', '>', $lastDate)->sum('price')}\n\n";
 
-        $table = DB::table('offer_subscriptions')
-        ->join('offers', function($join) {
-            $lastYearDate =  DBTest::getDate('-1 year');
-            echo "Прошлый год: $lastYearDate. Сумма = ";
-            $join->on('offers.id', '=', 'offer_subscriptions.offer_id')->where('advertiser_id', '=', '2')->where('created_at', '>', $lastYearDate);
-        });
-        echo $table->get()->sum('price') . "р. Подписчиков:" . $table->get()->count() . "\n";
+        // офферы за последний месяц
+        $lastDate = StatisticController::getDate('-1 month');
+        echo "$lastDate\n";
+        foreach ($offers->all() as $offer) {
+            echo "$offer->id $offer->name. Цена: $offer->price Переходы: {$offer->links->where('created_at', '>', $lastDate)->count()} Доход:"
+                . $offer->links->where('created_at', '>', $lastDate)->count() * $offer->price . "\n";
+        }
+        $data = DB::table('offer_subscriptions')->join('offers', 'offers.id', '=', 'offer_subscriptions.offer_id');
+        echo "Подписчиков: {$data->where('advertiser_id', $advertiser_id)->where('created_at', '>', $lastDate)->count()}. Сумма: {$data->where('created_at', '>', $lastDate)->sum('price')}\n\n";
 
+        // офферы за последний год
+        $lastDate = StatisticController::getDate('-1 year');
+        echo "$lastDate:\n";
+        foreach ($offers->all() as $offer) {
+            echo "$offer->id $offer->name. Цена: $offer->price Переходы: {$offer->links->where('created_at', '>', $lastDate)->count()} Доход:"
+                . $offer->links->where('created_at', '>', $lastDate)->count() * $offer->price . "\n";
+        }
+        $data = DB::table('offer_subscriptions')->join('offers', 'offers.id', '=', 'offer_subscriptions.offer_id');
+        echo "Подписчиков: {$data->where('advertiser_id', $advertiser_id)->where('created_at', '>', $lastDate)->count()}. Сумма: {$data->where('created_at', '>', $lastDate)->sum('price')}\n\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 11);
     }

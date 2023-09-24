@@ -18,4 +18,15 @@ class StatisticController extends Controller
 
         return $period . ', ' . json_encode($request->user());
     }
+
+    /** получить текущее время с учетом часового пояса */
+    public static function getDate($period = null)
+    {
+        $date = new \DateTime();
+        $date->modify('+' . env('TIMEZONE') . 'hours');
+        if (!is_null($period)) {
+            $date->modify($period);
+        }
+        return $date->format('Y-m-d H:i:s');
+    }
 }
