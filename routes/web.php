@@ -12,10 +12,10 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name
 // аутентификация
 require __DIR__.'/auth.php';
 
-Route::resource('/offer', OfferController::class)->except(['index', 'show']);
+Route::resource('/offer', OfferController::class)->except(['index', 'show'])->middleware(['auth']);
 Route::post('/offer/status', [OfferController::class, 'status']);
 
-Route::get('/advertiser/{id}/index', [StatisticController::class, 'index']);
+Route::get('/advertiser/{id}/index', [StatisticController::class, 'index'])->middleware(['auth']);
 Route::post('/advertiser/{id}/money', [StatisticController::class, 'money']);
 
-Route::resource('/offer-theme', OfferThemeController::class)->except(['index', 'show', 'create', 'edit', 'update']);
+Route::resource('/offer-theme', OfferThemeController::class)->except(['index', 'show', 'create', 'edit', 'update'])->middleware(['auth']);

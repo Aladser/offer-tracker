@@ -11,7 +11,12 @@ class Advertiser extends Model
     use HasFactory;
     public $timestamps = false;
 
-    /** создатель оффера */
+    public static function findAdvertiser($name)
+    {
+        $table = DB::table('advertisers')->join('users', 'users.id', '=', 'advertisers.user_id');
+        return $table->where('name', $name)->first()->id;
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -23,13 +28,7 @@ class Advertiser extends Model
         return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
 
-    public static function findAdvertiser($name)
-    {
-        $table = DB::table('advertisers')->join('users', 'users.id', '=', 'advertisers.user_id');
-        return $table->where('name', $name)->first()->id;
-    }
-
-    /** обще число подписок на офферы */
+    /** общеt число подписок на офферы */
     public function offerSubscriptionCount($timePeriod = null) {
         $totalOffers = 0;
         foreach ($this->offers->all() as $offer) {
