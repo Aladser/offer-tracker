@@ -4,19 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
+use App\Models\User;
 
 class StatisticController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages/statistics', ['user' => $request->user()] );
-    }
+        $lastDay = StatisticController::getDate('-1 day');
+        $lastMonth = StatisticController::getDate('-1 month');
+        $lastYear = StatisticController::getDate('-1 year');
+        $allTime = StatisticController::getDate();
+        $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
 
-    public function money(Request $request, $id)
-    {
-        $period = $request->all()['period'];
-
-        return $period . ', ' . json_encode($request->user());
+        return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
     }
 
     /** получить текущее время с учетом часового пояса */

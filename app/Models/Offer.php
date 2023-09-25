@@ -66,12 +66,20 @@ class Offer extends Model
     /** число переходов новее текущей даты */
     public function linkCount($timePeriod = null)
     {
-        return is_null($timePeriod) ? $this->links->count() : $this->links->where('created_at', '>', $timePeriod)->count();
+        if (is_null($timePeriod)) {
+            return $this->links->count();
+        } else {
+            return $this->links->where('created_at', '>', $timePeriod)->count();
+        }
     }
 
     /** число переходов новее текущей даты */
     public function money($timePeriod = null)
     {
-        return is_null($timePeriod) ? $this->links->count()*$this->price : $this->links->where('created_at', '>', $timePeriod)->count()*$this->price;
+        if (is_null($timePeriod)) {
+            return $this->links->count()*$this->price;
+        } else {
+            return $this->links->where('created_at', '>', $timePeriod)->count()*$this->price;
+        }
     }
 }

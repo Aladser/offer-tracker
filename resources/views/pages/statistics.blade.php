@@ -36,8 +36,56 @@
                         @foreach ($user->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
-                                <td>{{$offer->links->count()}} </td>
-                                <td>{{$offer->links->count() * $offer->price}} р.</td>
+                                <td>{{$offer->linkCount()}} </td>
+                                <td>{{$offer->money()}} р.</td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                    <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-day'>
+                        <tr>
+                            <th scope="col">Оффер</th>
+                            <th scope="col">Число переходов</th>
+                            <th scope="col">Доходы</th>
+                        </tr>
+
+                        @foreach ($user->offers->all() as $offer)
+                            <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
+                                <td class='fw-bolder'>{{$offer->name}}</td>
+                                <td>{{$offer->linkCount($times['lastDay'])}} </td>
+                                <td>{{$offer->money($times['lastDay'])}} р.</td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                    <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-month'>
+                        <tr>
+                            <th scope="col">Оффер</th>
+                            <th scope="col">Число переходов</th>
+                            <th scope="col">Доходы</th>
+                        </tr>
+
+                        @foreach ($user->offers->all() as $offer)
+                            <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
+                                <td class='fw-bolder'>{{$offer->name}}</td>
+                                <td>{{$offer->linkCount($times['lastMonth'])}} </td>
+                                <td>{{$offer->money($times['lastMonth'])}} р.</td>
+                            </tr>
+                        @endforeach
+                    </table>
+
+                    <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-year'>
+                        <tr>
+                            <th scope="col">Оффер</th>
+                            <th scope="col">Число переходов</th>
+                            <th scope="col">Доходы</th>
+                        </tr>
+
+                        @foreach ($user->offers->all() as $offer)
+                            <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
+                                <td class='fw-bolder'>{{$offer->name}}</td>
+                                <td>{{$offer->linkCount($times['lastYear'])}} </td>
+                                <td>{{$offer->money($times['lastYear'])}} р.</td>
                             </tr>
                         @endforeach
                     </table>
