@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\AdvertiserProduct;
+use App\Models\Advertiser;
 use App\Models\Offer;
 use App\Models\OfferSubscription;
 use App\Models\OfferTheme;
 
 class OfferController extends Controller
 {
-    /** Показать форму создания нового оффера.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /** Показать форму создания нового оффера */
     public function create()
     {
         $themes = [];
@@ -24,11 +21,7 @@ class OfferController extends Controller
         return view('pages/add-offer', ['themes' => $themes]);
     }
 
-    /** Сохраните вновь созданный ресурс в хранилище.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /** Сохраните вновь созданный ресурс в хранилище */
     public function store(Request $request)
     {
         $data = $request->all();
@@ -36,12 +29,12 @@ class OfferController extends Controller
         if (Offer::hasOffer($data['name'])) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
-            // поиск пользователя
-            $userId = User::getUserId($data['user']);
-            if (is_null($userId)) {
+            // поиск рекламщика
+            $advertiserId = Advertiser::findAdvertiser($data['user']); 
+            if (is_null($advertiserId)) {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             } else {
-                return ['result' => Offer::add($data, $userId), 'offerName' => $data['name']];
+                return ['result' => Offer::add($data, $advertiserId), 'offerName' => $data['name']];
             }
         }
     }
@@ -74,7 +67,7 @@ class OfferController extends Controller
      */
     public function destroy($id)
     {
-        return Offer::remove($id);
+        return ['response' => Offer::remove($id) ? 1 : 0];
     }
 
     /** установить статус */

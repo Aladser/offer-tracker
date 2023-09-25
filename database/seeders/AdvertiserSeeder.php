@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Advertiser;
 
-class ArvertiserSeeder extends Seeder
+class AdvertiserSeeder extends Seeder
 {
     public function run()
     {

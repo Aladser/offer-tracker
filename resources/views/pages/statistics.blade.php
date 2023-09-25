@@ -33,7 +33,7 @@
                             <th scope="col">Доходы</th>
                         </tr>
 
-                        @foreach ($user->offers->all() as $offer)
+                        @foreach ($user->advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
                                 <td>{{$offer->linkCount()}} </td>
@@ -43,8 +43,8 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount()}}</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerIncome()}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount()}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerIncome()}}</td>
                         </tr>
                     </table>
 
@@ -55,7 +55,7 @@
                             <th scope="col">Доходы</th>
                         </tr>
 
-                        @foreach ($user->offers->all() as $offer)
+                        @foreach ($user->advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
                                 <td>{{$offer->linkCount($times['lastDay'])}} </td>
@@ -65,8 +65,8 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastDay'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastDay'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastDay'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerIncome($times['lastDay'])}}</td>
                         </tr>
                     </table>
 
@@ -77,7 +77,7 @@
                             <th scope="col">Доходы</th>
                         </tr>
 
-                        @foreach ($user->offers->all() as $offer)
+                        @foreach ($user->advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
                                 <td>{{$offer->linkCount($times['lastMonth'])}} </td>
@@ -87,8 +87,8 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastMonth'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastMonth'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastMonth'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerIncome($times['lastMonth'])}}</td>
                         </tr>
                     </table>
 
@@ -99,7 +99,7 @@
                             <th scope="col">Доходы</th>
                         </tr>
 
-                        @foreach ($user->offers->all() as $offer)
+                        @foreach ($user->advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
                                 <td>{{$offer->linkCount($times['lastYear'])}} </td>
@@ -109,8 +109,8 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastYear'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastYear'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastYear'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerIncome($times['lastYear'])}}</td>
                         </tr>
                     </table>
                 </section>

@@ -40,34 +40,13 @@ class User extends Authenticatable
         return $this->belongsTo(UserRole::class, 'role_id', 'id');
     }
 
-    public function offers()
+    public function advertiser()
     {
-        return $this->hasMany(Offer::class, 'advertiser_id', 'id');
+        return $this->hasOne(Advertiser::class);
     }
 
     public function offer_subscriptions()
     {
         return $this->hasMany(OfferSubscription::class, 'follower_id', 'id');
-    }
-
-    public static function getUserId($name)
-    {
-        return User::where('name', $name)->value('id');
-    }
-
-    public function offerSubscriptionCount($timePeriod = null) {
-        $totalOffers = 0;
-        foreach ($this->offers->all() as $offer) {
-            $totalOffers += $offer->linkCount($timePeriod);
-        }
-        return $totalOffers;
-    }
-
-    public function offerIncome($timePeriod = null) {
-        $totalIncome = 0;
-        foreach ($this->offers->all() as $offer) {
-            $totalIncome += $offer->linkCount($timePeriod) * $offer->price;
-        }
-        return $totalIncome;
     }
 }

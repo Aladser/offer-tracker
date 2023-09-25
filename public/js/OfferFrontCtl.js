@@ -44,18 +44,21 @@ class OfferFrontCtl {
         let id = row.getAttribute('data-id');
         let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
         fetch(`${this.URL}/${id}`, {method:'delete', headers: headers}).then(response => response.text()).then(data => {
-            if (data = 1) {
-                row.remove();
-            } else {
+            try{
+                let rslt = JSON.parse(data);
+                if (rslt.response === 1) {
+                    row.remove();
+                } else {
+                    this.errorPrg.textContent = data;
+                }
+            } catch(e) {
                 this.errorPrg.textContent = data;
             }
+            
         })
     }
 
-    /** установить статус
-     * @param {*} row оффер
-     * @param {*} inputStatus переключатель статуса 
-     */
+    /** установить статус */
     setOfferStatus(row, inputStatus) {
         let data = new URLSearchParams();
         data.set('id', row.getAttribute('data-id'));

@@ -23,9 +23,10 @@ class Offer extends Model
     /** создатель оффера */
     public function advertiser()
     {
-        return $this->belongsTo(User::class, 'advertiser_id', 'id');
+        return $this->belongsTo(Advertiser::class, 'advertiser_id', 'id');
     }
 
+    
     /** подписки */
     public function links()
     {
@@ -37,21 +38,21 @@ class Offer extends Model
         return !is_null(Offer::where('name', $name)->first());
     }
 
-    public static function add($data, $userId)
+    public static function add($data, $advertiserId)
     {
         $offer = new Offer();
         $offer->name = $data['name'];
         $offer->URL = $data['url'];
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-        $offer->advertiser_id = $userId;
+        $offer->advertiser_id = $advertiserId;
         
         return $offer->save() ? 1 : 0;
     }
 
     public static function remove($id)
     {
-        OfferSubsciption::where('offer_id', $id)->delete();
+        OfferSubscription::where('offer_id', $id)->delete();
         return Offer::find($id)->delete();
     }
 

@@ -9,6 +9,7 @@ use Database\Seeders\UserSeed;
 use Database\Seeders\OfferThemeSeed;
 use Database\Seeders\OfferSeed;
 use Database\Seeders\OfferSubscriptionSeed;
+use Database\Seeders\AdvertiserSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,12 +18,16 @@ class DatabaseSeeder extends Seeder
         DB::update('ALTER TABLE user_roles AUTO_INCREMENT = 1');
         $userRoleSeed = new UserRoleSeed();
         $userSeed = new UserSeed();
+        $advertiserSeed = new AdvertiserSeeder();
+        
         $offerThemeSeed = new OfferThemeSeed();
         $offerSeed = new OfferSeed();
         $offerSubscriptionSeed = new OfferSubscriptionSeed();
 
         $userRoleSeed->run();
         $userSeed->run();
+        $advertiserSeed->run();
+
         $offerThemeSeed->run();
         $offerSeed->run();
         $offerSubscriptionSeed->run();

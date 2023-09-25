@@ -30,20 +30,20 @@
                                 <th scope="col">Подписчики</th>
                             </tr>
 
-                            @foreach ($user->offers->all() as $product)
-                                <tr data-id='{{$product->id}}' class='table-offers__tr position-relative'>
-                                    <td class='fw-bolder'>{{$product->name}}</td>
-                                    <td>{{$product->price}} </td>
+                            @foreach ($user->advertiser->offers->all() as $offer)
+                                <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
+                                    <td class='fw-bolder'>{{$offer->name}}</td>
+                                    <td>{{$offer->price}} </td>
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>
-                                            @if ($product->status===1)
+                                            @if ($offer->status===1)
                                             <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='выключить' checked> 
                                             @else
                                             <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='включить' >
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{$product->links->count()}} </td>
+                                    <td>{{$offer->links->count()}} </td>
                                 </tr>
                             @endforeach
                         </table>
