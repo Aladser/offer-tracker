@@ -54,4 +54,20 @@ class User extends Authenticatable
     {
         return User::where('name', $name)->value('id');
     }
+
+    public function offerSubscriptionCount($timePeriod = null) {
+        $totalOffers = 0;
+        foreach ($this->offers->all() as $offer) {
+            $totalOffers += $offer->linkCount($timePeriod);
+        }
+        return $totalOffers;
+    }
+
+    public function offerIncome($timePeriod = null) {
+        $totalIncome = 0;
+        foreach ($this->offers->all() as $offer) {
+            $totalIncome += $offer->linkCount($timePeriod) * $offer->price;
+        }
+        return $totalIncome;
+    }
 }

@@ -32,9 +32,9 @@ class Offer extends Model
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
-    public static function getOfferName($name)
+    public static function hasOffer($name)
     {
-        return Offer::where('name', $name)->first();
+        return !is_null(Offer::where('name', $name)->first());
     }
 
     public static function add($data, $userId)

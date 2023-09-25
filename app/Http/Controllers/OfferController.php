@@ -33,8 +33,7 @@ class OfferController extends Controller
     {
         $data = $request->all();
         // поиск имени
-        $isOfferName = !is_null(Offer::getOfferName($data['name']));
-        if ($isOfferName) {
+        if (Offer::hasOffer($data['name'])) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
             // поиск пользователя
