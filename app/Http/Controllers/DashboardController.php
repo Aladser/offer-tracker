@@ -24,7 +24,7 @@ class DashboardController extends Controller
                 break;
             case 'рекламодатель':
                 $url = 'pages/advertiser';
-                break;
+                return view($url, ['advertiser' => $request->user()->advertiser, 'userId' => $request->user()->id] );
             default:
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);
         }

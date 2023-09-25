@@ -16,7 +16,7 @@ class StatisticController extends Controller
         $allTime = StatisticController::getDate();
         $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
 
-        return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
+        return view('pages/statistics', ['advertiser' => $request->user()->advertiser, 'times' => $times, 'userId' => $request->user()->id] );
     }
 
     /** получить текущее время с учетом часового пояса */

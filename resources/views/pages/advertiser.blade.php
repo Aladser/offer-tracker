@@ -15,7 +15,7 @@
 
         <article class='pt-4 text-center'>
             <a href="/offer/create" class='btn btn-outline-dark col-3'>Добавить оффер</a>
-            <a href="/advertiser/{{$user->id}}/index" class='btn btn-outline-dark col-3'>Статистика офферов</a>
+            <a href="/advertiser/{{$userId}}/index" class='btn btn-outline-dark col-3'>Статистика офферов</a>
         </article>
         
         <article class="mt-4">
@@ -30,7 +30,7 @@
                                 <th scope="col">Подписчики</th>
                             </tr>
 
-                            @foreach ($user->advertiser->offers->all() as $offer)
+                            @foreach ($advertiser->offers->all() as $offer)
                                 <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                     <td class='fw-bolder'>{{$offer->name}}</td>
                                     <td>{{$offer->price}} </td>
