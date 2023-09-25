@@ -28,8 +28,8 @@ class UserOffersTest extends TestCase
         $totalMoney = 0;
         echo 'Офферы ' . User::find($advertiser_id)->name . "\n" . StatisticController::getDate() . ":\n";
         foreach ($offers->all() as $offer) {
-            $count = $offer->getLinkCount();
-            $money = $offer->getMoney();
+            $count = $offer->linkCount();
+            $money = $offer->money();
             echo "$offer->id $offer->name. Цена: $offer->price Переходы: $count Доход: $money\n";
             $totalOffers += $count;
             $totalMoney += $money;
@@ -41,8 +41,8 @@ class UserOffersTest extends TestCase
         $lastDate = StatisticController::getDate('-1 day');
         echo "$lastDate:\n";
         foreach ($offers->all() as $offer) {
-            $count = $offer->getLinkCount($lastDate);
-            $money = $offer->getMoney($lastDate);
+            $count = $offer->linkCount($lastDate);
+            $money = $offer->money($lastDate);
             echo "$offer->id $offer->name. Цена: $offer->price Переходы: $count Доход: $money\n";
             $totalOffers += $count;
             $totalMoney += $money;
@@ -54,8 +54,8 @@ class UserOffersTest extends TestCase
         $lastDate = StatisticController::getDate('-1 month');
         echo "$lastDate:\n";
         foreach ($offers->all() as $offer) {
-            $count = $offer->getLinkCount($lastDate);
-            $money = $offer->getMoney($lastDate);
+            $count = $offer->linkCount($lastDate);
+            $money = $offer->money($lastDate);
             echo "$offer->id $offer->name. Цена: $offer->price Переходы: $count Доход: $money\n";
             $totalOffers += $count;
             $totalMoney += $money;
@@ -67,8 +67,8 @@ class UserOffersTest extends TestCase
         $lastDate = StatisticController::getDate('-1 year');
         echo "$lastDate:\n";
         foreach ($offers->all() as $offer) {
-            $count = $offer->getLinkCount($lastDate);
-            $money = $offer->getMoney($lastDate);
+            $count = $offer->linkCount($lastDate);
+            $money = $offer->money($lastDate);
             echo "$offer->id $offer->name. Цена: $offer->price Переходы: $count Доход: $money\n";
             $totalOffers += $count;
             $totalMoney += $money;

@@ -55,6 +55,7 @@ class Offer extends Model
         return Offer::find($id)->delete();
     }
 
+    /** установить активность */
     public static function setStatus($id, $status)
     {   
         $offer = Offer::find($id);
@@ -62,21 +63,15 @@ class Offer extends Model
         return $offer->save();
     }
 
-    public function getLinkCount($timePeriod = null)
+    /** число переходов новее текущей даты */
+    public function linkCount($timePeriod = null)
     {
-        if (!is_null($timePeriod)) {
-            return $this->links->where('created_at', '>', $timePeriod)->count();
-        } else {
-            return $this->links->count();
-        }
+        return is_null($timePeriod) ? $this->links->count() : $this->links->where('created_at', '>', $timePeriod)->count();
     }
 
-    public function getMoney($timePeriod = null)
+    /** число переходов новее текущей даты */
+    public function money($timePeriod = null)
     {
-        if (!is_null($timePeriod)) {
-            return $this->links->where('created_at', '>', $timePeriod)->count() * $this->price;
-        } else {
-            return $this->links->count() * $this->price;
-        }
+        return is_null($timePeriod) ? $this->links->count()*$this->price : $this->links->where('created_at', '>', $timePeriod)->count()*$this->price;
     }
 }
