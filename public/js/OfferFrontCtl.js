@@ -54,7 +54,6 @@ class OfferFrontCtl {
             } catch(e) {
                 this.errorPrg.textContent = data;
             }
-            
         })
     }
 
@@ -71,9 +70,5 @@ class OfferFrontCtl {
                 console.log(rslt);
             }
         })
-    }
-    
-    update(row) {     
-
     }
 }

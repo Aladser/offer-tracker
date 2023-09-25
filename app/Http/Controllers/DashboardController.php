@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\OfferTheme;
 
 class DashboardController extends Controller
 {
@@ -17,14 +18,12 @@ class DashboardController extends Controller
         $url = null;
         switch ($request->user()->role->name) {
             case 'администратор':
-                $url = 'pages/admin';
-                break;
+                return view('pages/admin', ['userId' => $request->user()->id, 'themes' => OfferTheme::all()->toArray()] );
             case 'веб-мастер':
                 $url = 'pages/webmaster';
                 break;
             case 'рекламодатель':
-                $url = 'pages/advertiser';
-                return view($url, ['advertiser' => $request->user()->advertiser, 'userId' => $request->user()->id] );
+                return view('pages/advertiser', ['advertiser' => $request->user()->advertiser, 'userId' => $request->user()->id] );
             default:
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);
         }

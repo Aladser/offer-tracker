@@ -26,8 +26,9 @@ function clickRow(row) {
 
         // кнопка удаления
         row.innerHTML += "<button id='table-offers__btn-remove' title='Удалить'>🗑</button>";
+        // удаление строки при нажатии кнопки удаления
         row.lastChild.onclick = e => offerFrontCtl.remove(e.target);
-
+        // флаг новой выделенной строки
         row.classList.add('table-offers__tr--active');
     }
 }

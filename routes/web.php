@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OfferController;
+use App\Http\Controllers\OfferThemeController;
 use App\Http\Controllers\StatisticController;
 
 Route::get('/', fn() => view('welcome'))->name('main');
@@ -16,3 +17,5 @@ Route::post('/offer/status', [OfferController::class, 'status']);
 
 Route::get('/advertiser/{id}/index', [StatisticController::class, 'index']);
 Route::post('/advertiser/{id}/money', [StatisticController::class, 'money']);
+
+Route::resource('/offer-theme', OfferThemeController::class)->except(['index', 'show', 'create', 'edit', 'update']);

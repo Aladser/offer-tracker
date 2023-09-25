@@ -1,0 +1,14 @@
+.themes-table__tr:hover {
+    background-color: #ddd;
+}
+
+.table-themes__tr:hover, .table-themes__tr--active {
+    background-color: #ddd;
+    cursor: default;
+}
+
+#table-themes__btn-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
