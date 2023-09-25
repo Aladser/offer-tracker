@@ -15,7 +15,7 @@ class UserRole extends Model
         'name',
     ];
 
-    public function getRoles()
+    public static function getRoles()
     {
         return UserRole::where('name', '!=', 'администратор')->orderBy('id', 'ASC')->get()->toArray();
     }
