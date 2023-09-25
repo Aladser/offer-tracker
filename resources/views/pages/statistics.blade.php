@@ -40,6 +40,12 @@
                                 <td>{{$offer->money()}} р.</td>
                             </tr>
                         @endforeach
+
+                        <tr>
+                            <td class="fw-bolder table-secondary">Всего</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount()}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerIncome()}}</td>
+                        </tr>
                     </table>
 
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-day'>
@@ -56,6 +62,12 @@
                                 <td>{{$offer->money($times['lastDay'])}} р.</td>
                             </tr>
                         @endforeach
+
+                        <tr>
+                            <td class="fw-bolder table-secondary">Всего</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastDay'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastDay'])}}</td>
+                        </tr>
                     </table>
 
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-month'>
@@ -72,6 +84,12 @@
                                 <td>{{$offer->money($times['lastMonth'])}} р.</td>
                             </tr>
                         @endforeach
+
+                        <tr>
+                            <td class="fw-bolder table-secondary">Всего</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastMonth'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastMonth'])}}</td>
+                        </tr>
                     </table>
 
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-year'>
@@ -88,6 +106,12 @@
                                 <td>{{$offer->money($times['lastYear'])}} р.</td>
                             </tr>
                         @endforeach
+
+                        <tr>
+                            <td class="fw-bolder table-secondary">Всего</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerSubscriptionCount($times['lastYear'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->offerIncome($times['lastYear'])}}</td>
+                        </tr>
                     </table>
                 </section>
             </div>
