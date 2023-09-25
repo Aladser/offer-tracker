@@ -18,7 +18,9 @@ class UserOffersTest extends TestCase
     use RefreshDatabase;
 
     public function testGetUserOffers() {
-        $this->seed();
+        if (UserRole::count() === 0) {
+            $this->seed();
+        }
 
         $user = User::find(2);
         $offers = $user->offers; 
