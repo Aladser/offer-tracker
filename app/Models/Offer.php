@@ -61,4 +61,22 @@ class Offer extends Model
         $offer->status = $status === 'true' ? 1 : 0;
         return $offer->save();
     }
+
+    public function getLinkCount($timePeriod = null)
+    {
+        if (!is_null($timePeriod)) {
+            return $this->links->where('created_at', '>', $timePeriod)->count();
+        } else {
+            return $this->links->count();
+        }
+    }
+
+    public function getMoney($timePeriod = null)
+    {
+        if (!is_null($timePeriod)) {
+            return $this->links->where('created_at', '>', $timePeriod)->count() * $this->price;
+        } else {
+            return $this->links->count() * $this->price;
+        }
+    }
 }
