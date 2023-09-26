@@ -40,9 +40,17 @@
             @endif
 
             <section class="w-75 p-4 mx-auto">
-                    <h3 class='h1 text-center pb-4'>Офферы рекламодателей</h3>
-                    @if (!$auth)
+                    <h3 class='h1 text-center pb-4'>Офферы</h3>
+                    @if (!$user)
                         <p class='text-center'>Для перехода по ссылкам авторизуйтесь на сайте</p>
+                    @else
+                        @if ($user->role->name === 'администратор')
+                            <p class='text-center'>Для управления сайтом перейдите в профиль</p>
+                        @elseif ($user->role->name === 'рекламодатель')
+                            <p class='text-center'>Для просмотра своих офферов перейдите в профиль</p>
+                        @else
+                        <p class='text-center'>Перейдите в профиль, чтобы перейти по заинтересованной ссылке</p>
+                        @endif
                     @endif
                     <div class="d-flex flex-wrap justify-content-around w-100">
                         @foreach ($offers as $offer)

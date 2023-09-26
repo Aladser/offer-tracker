@@ -8,7 +8,7 @@ use App\Http\Controllers\StatisticController;
 use App\Models\Offer;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', fn() => view('welcome', ['offers' => Offer::getActiveOffers(), 'auth' => !is_null(Auth::user())]))
+Route::get('/', fn() => view('welcome', ['offers' => Offer::getActiveOffers(), 'user' => Auth::user()]))
     ->name('main');
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])
