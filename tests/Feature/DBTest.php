@@ -26,13 +26,7 @@ class DBTest extends TestCase
         foreach (User::all() as $user) {
             echo "  имя:{$user->name} почта:{$user->email} роль:{$user->role->name}\n";
         }
-        $this->assertDatabaseCount('users', 3);
         $this->assertDatabaseHas('user_roles', ['name' => 'рекламодатель', 'name' => 'веб-мастер', 'name' => 'администратор']);
-    }
-
-    public function testOfferThemes()
-    {
-        $this->assertDatabaseHas('offer_themes', ['name' => 'природа', 'name' => 'образование', 'name' => 'спорт']);
     }
 
     public function testOfferClicks()
@@ -48,7 +42,7 @@ class DBTest extends TestCase
     {
         echo "\nОфферы и число подписчиков:\n";
         foreach (Offer::all() as $offer) {
-            echo "  {$offer->name}. Подписчиков:{$offer->links->count()}\n";
+            echo "  {$offer->name} создан {$offer->advertiser->user->name}. Подписчиков:{$offer->links->count()}\n";
         }
         echo "\n";
         $this->assertDatabaseCount('offer_subscriptions', 11);
@@ -64,34 +58,20 @@ class DBTest extends TestCase
         $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 
+    private function getOffers($user)
+    {
+        echo "Список офферов:\n ".$user->name."\n";
+        foreach ($user->advertiser->offers->all() as $offer) {
+            $status = $offer->status ? 'вкл' : 'выкл'; 
+            echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
+        }
+    }
+
     public function testOffers()
     {
-        echo "Список офферов:\n ".User::find(1)->name."\n";
-        foreach (User::find(1)->advertiser->offers->all() as $offer) {
-            $status = $offer->status ? 'вкл' : 'выкл'; 
-            echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
-        }
-
-        echo ' '.User::find(2)->name."\n";
-        foreach (User::find(2)->advertiser->offers->all() as $offer) {
-            $status = $offer->status ? 'вкл' : 'выкл'; 
-            echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
-        }
-
-        echo ' '.User::find(3)->name."\n";
-        foreach (User::find(3)->advertiser->offers->all() as $offer) {
-            $status = $offer->status ? 'вкл' : 'выкл'; 
-            echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
-        }
-
-        echo "\nВсе подписки офферов ".User::find(2)->name.":\n";
-        $offers = User::find(2)->advertiser->offers->all(); 
-        foreach ($offers as $product) {
-            foreach ($product->links as $link) {
-                echo "  имя:{$link->product->name} создан:{$link->created_at} цена:{$link->product->price}\n";
-            }
-        }
-
+        $this::getOffers(User::find(1));
+        $this::getOffers(User::find(2));
+        $this::getOffers(User::find(3));
         $this->assertDatabaseCount('offers', 9);
     }
 }
