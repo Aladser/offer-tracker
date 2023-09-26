@@ -33,7 +33,7 @@ class DBTest extends TestCase
     {
         echo "\nКлики офферов\n";
         foreach (OfferSubscription::all() as $click) {
-            echo "  {$click->follower->name} подписался {$click->created_at} на {$click->product->name}\n";
+            echo "  {$click->follower->name} подписался {$click->created_at} на {$click->offer->name}\n";
         }
         $this->assertDatabaseCount('offer_subscriptions', 11);
     }

@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use App\Models\Offer;
+use App\Models\OfferSubscription;
 use App\Http\Controllers\StatisticController;
 
 class UserOffersTest extends TestCase
@@ -34,6 +36,28 @@ class UserOffersTest extends TestCase
         $this::getUserOffers($advertiser, StatisticController::getDate('-1 month'));
         $this::getUserOffers($advertiser, StatisticController::getDate('-1 year'));
 
+        $this->assertDatabaseCount('offer_subscriptions', 11);
+    }
+
+    // активные подписки без подписок конкретного пользователя 
+    public function testGetActiveOffers()
+    {
+        $subscrOffers = OfferSubscription::where('follower_id',3)->select('offer_id');
+        echo " Все активные офферы:\n";
+        $offers = Offer::where('status', 1);
+        foreach ($offers->get() as $offer) {
+            echo "имя:{$offer->name} статус:{$offer->status} цена:{$offer->price} тема:{$offer->theme->name}\n";
+        }
+        echo " Активные офферы без User3:\n";
+        $offers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+        foreach ($offers->get() as $offer) {
+            echo "имя:{$offer->name} статус:{$offer->status} цена:{$offer->price} тема:{$offer->theme->name}\n";
+        }
+        echo " Подписки User3:\n";
+        foreach (OfferSubscription::where('follower_id',3)->get() as $subscription) {
+            $status = $subscription->offer->status ? 'активна' : 'неактивна';
+            echo "Подписка на {$subscription->offer->name} пользователя {$subscription->follower->name} $status \n";
+        }
         $this->assertDatabaseCount('offer_subscriptions', 11);
     }
 }
