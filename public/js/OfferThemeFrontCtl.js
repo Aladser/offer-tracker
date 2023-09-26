@@ -31,7 +31,7 @@ class OfferThemeFrontCtl {
         })
     }
 
-    static clickRow(row) {
+    static clickRow(offerThemeTable, row) {
         if (row.classList.contains('table-themes__tr--active')) {
             row.classList.remove('table-themes__tr--active');
             row.querySelector('button').remove();

@@ -2,6 +2,11 @@
     @section('css')
         <link href="/css/webmaster.css" rel="stylesheet" />
     @endsection
+
+    @section('js')
+        <script src="/js/webmaster.js" defer></script>
+    @endsection
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель вебмастера</h2>
     </x-slot>

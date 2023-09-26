@@ -71,4 +71,25 @@ class OfferFrontCtl {
             }
         })
     }
+
+    /** клик строки таблицы */
+    static clickRow(offerTable, row) {
+        if (row.classList.contains('table-offers__tr--active')) {
+            row.classList.remove('table-offers__tr--active');
+            row.querySelector('button').remove();
+        } else {
+            let activeRow = offerTable.querySelector('.table-offers__tr--active');
+            if (activeRow) {
+                activeRow.classList.remove('table-offers__tr--active');
+                offerTable.querySelector('button').remove();
+            }
+
+            // кнопка удаления
+            row.innerHTML += "<button id='table-offers__btn-remove' title='Удалить'>🗑</button>";
+            // удаление строки при нажатии кнопки удаления
+            row.lastChild.onclick = e => offerFrontCtl.remove(e.target);
+            // флаг новой выделенной строки
+            row.classList.add('table-offers__tr--active');
+        }
+    }
 }

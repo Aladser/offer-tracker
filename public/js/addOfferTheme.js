@@ -4,9 +4,15 @@ const offerThemeFrontCtl = new OfferThemeFrontCtl('/offer-theme', document.query
 const msgPrg = document.querySelector('#form-add-error');
 /** таблица тем */
 const offerThemeTable = document.querySelector('#table-themes');
-offerThemeTable.querySelectorAll('.table-themes__tr').forEach(row => row.onclick = e => OfferThemeFrontCtl.clickRow(e.target.closest('tr')));
+offerThemeTable.querySelectorAll('.table-themes__tr').forEach(row => {
+    row.onclick = e => {
+        OfferThemeFrontCtl.clickRow(offerThemeTable, e.target.closest('tr'));
+    };
+});
 
 /** форма создания оффера */
 const addThemeForm = document.querySelector('#form-add-theme');
 /** добавление темы */
-addThemeForm.onsubmit = event => offerThemeFrontCtl.add(addThemeForm, offerThemeTable.querySelector('tbody'), msgPrg, event);
+addThemeForm.onsubmit = event => {
+    offerThemeFrontCtl.add(addThemeForm, offerThemeTable.querySelector('tbody'), msgPrg, event);
+};

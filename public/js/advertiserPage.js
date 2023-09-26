@@ -7,28 +7,6 @@ offerTable.querySelectorAll('.table-offers__tr').forEach(row => row.onclick = e 
     if (e.target.tagName === 'INPUT') {
         offerFrontCtl.setOfferStatus(e.target.closest('tr'), e.target);
     } else {
-        clickRow(e.target.closest('tr'));
+        OfferFrontCtl.clickRow(offerTable, e.target.closest('tr'));
     }
 });
-
-
-/** клик строки таблицы */
-function clickRow(row) {
-    if (row.classList.contains('table-offers__tr--active')) {
-        row.classList.remove('table-offers__tr--active');
-        row.querySelector('button').remove();
-    } else {
-        let activeRow = offerTable.querySelector('.table-offers__tr--active');
-        if (activeRow) {
-            activeRow.classList.remove('table-offers__tr--active');
-            offerTable.querySelector('button').remove();
-        }
-
-        // кнопка удаления
-        row.innerHTML += "<button id='table-offers__btn-remove' title='Удалить'>🗑</button>";
-        // удаление строки при нажатии кнопки удаления
-        row.lastChild.onclick = e => offerFrontCtl.remove(e.target);
-        // флаг новой выделенной строки
-        row.classList.add('table-offers__tr--active');
-    }
-}
