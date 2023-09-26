@@ -32,11 +32,13 @@ class Offer extends Model
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
+    /** показать активные подписки */
     public static function getActiveOffers()
     {
         return Offer::where('status', 1)->get();
     }
 
+    /** показать активные подписки без подписок конкретного пользователя */
     public static function getActiveOffersWithoutUser($userId)
     {
         $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
