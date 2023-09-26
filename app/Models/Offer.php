@@ -37,6 +37,12 @@ class Offer extends Model
         return Offer::where('status', 1)->get();
     }
 
+    public static function getActiveOffersWithoutUser($userId)
+    {
+        $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
+        return Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+    }
+
     public static function hasOffer($name)
     {
         return !is_null(Offer::where('name', $name)->first());

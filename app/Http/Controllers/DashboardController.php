@@ -25,9 +25,13 @@ class DashboardController extends Controller
                         ['userId' => $request->user()->id, 'themes' => OfferTheme::all()->toArray()] 
                     );
             case 'веб-мастер':
+                $userId = $request->user()->id;
                 return view(
                         'pages/webmaster',
-                        ['subscriptions' => OfferSubscription::where('follower_id', $request->user()->id), 'offers' => Offer::where('status', 1)]
+                        [
+                            'subscriptions' => OfferSubscription::where('follower_id', $userId),
+                            'offers' => Offer::getActiveOffersWithoutUser($userId)
+                        ]
                     );
             case 'рекламодатель':
                 return view(
