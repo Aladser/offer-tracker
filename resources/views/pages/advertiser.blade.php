@@ -10,7 +10,7 @@
 
     <section class='w-50 mx-auto'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель офферов</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>
 
         <article class='pt-4 text-center'>
@@ -33,7 +33,7 @@
                             @foreach ($advertiser->offers->all() as $offer)
                                 <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                     <td class='fw-bolder'>{{$offer->name}}</td>
-                                    <td>{{$offer->price}} </td>
+                                    <td>{{$offer->price}} р.</td>
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>
                                             @if ($offer->status===1)

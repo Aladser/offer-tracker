@@ -17,7 +17,7 @@
     <section class="p-6 bg-white border-b border-gray-200 text-center fs-4 w-75 mx-auto mt-4">
         <a href="/dashboard" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
         <article class='mb-4'>
-        <h3 class='h3 fw-bold'>Добавить новую тему</h3>
+            <h3 class='fw-bold w-50 mx-auto'>Добавить новую тему</h3>
             <form action='/' method='post' id='form-add-theme' class='text-center mt-4 w-75 mx-auto'>
                 @csrf
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Название:</label><br>
@@ -32,7 +32,7 @@
             <table class='table w-50 mx-auto' id='table-themes'>
                 @foreach ($themes as $theme)
                 <tr data-id="{{$theme['id']}}" class='table-themes__tr position-relative'>
-                    <td>{{$theme['name']}}</td>
+                    <td class='cursor-pointer'>{{$theme['name']}}</td>
                 </tr>
                 @endforeach
             </table>
