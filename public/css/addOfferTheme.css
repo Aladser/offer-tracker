@@ -2,7 +2,8 @@
     background-color: #ddd;
 }
 
-.table-themes__tr:hover, .table-themes__tr--active {
+.table-themes__tr:hover, 
+.table-themes__tr--active {
     background-color: #ddd;
     cursor: default;
 }

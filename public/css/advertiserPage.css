@@ -1,4 +1,5 @@
-.table-offers__tr:hover, .table-offers__tr--active {
+.table-offers__tr:hover, 
+.table-offers__tr--active {
     background-color: #ddd;
     cursor: default;
 }

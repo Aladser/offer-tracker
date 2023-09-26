@@ -2,6 +2,7 @@
     border: 1px solid #666;
 }
 
-.subscriptions__item:hover, .offers__item:hover {
+.subscriptions__item:hover, 
+.offers__item:hover {
     background-color: #ddd;
 }
