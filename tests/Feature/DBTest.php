@@ -67,25 +67,25 @@ class DBTest extends TestCase
     public function testOffers()
     {
         echo "Список офферов:\n ".User::find(1)->name."\n";
-        foreach (User::find(1)->offers->all() as $offer) {
+        foreach (User::find(1)->advertiser->offers->all() as $offer) {
             $status = $offer->status ? 'вкл' : 'выкл'; 
             echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
         }
 
         echo ' '.User::find(2)->name."\n";
-        foreach (User::find(2)->offers->all() as $offer) {
+        foreach (User::find(2)->advertiser->offers->all() as $offer) {
             $status = $offer->status ? 'вкл' : 'выкл'; 
             echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
         }
 
         echo ' '.User::find(3)->name."\n";
-        foreach (User::find(3)->offers->all() as $offer) {
+        foreach (User::find(3)->advertiser->offers->all() as $offer) {
             $status = $offer->status ? 'вкл' : 'выкл'; 
             echo "  url:{$offer->url} имя:{$offer->name} статус:$status цена:{$offer->price}\n";
         }
 
         echo "\nВсе подписки офферов ".User::find(2)->name.":\n";
-        $offers = User::find(2)->offers->all(); 
+        $offers = User::find(2)->advertiser->offers->all(); 
         foreach ($offers as $product) {
             foreach ($product->links as $link) {
                 echo "  имя:{$link->product->name} создан:{$link->created_at} цена:{$link->product->price}\n";
