@@ -9,8 +9,7 @@ use App\Models\OfferSubscription;
 
 class DashboardController extends Controller
 {
-    /**
-     * Handle the incoming request.
+    /** Обработать входящий запрос
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -22,21 +21,33 @@ class DashboardController extends Controller
             case 'администратор':
                 return view(
                         'pages/admin', 
-                        ['userId' => $request->user()->id, 'themes' => OfferTheme::all()->toArray()] 
+                        [
+                            // id пользователя-рекламщика 
+                            'userId' => $request->user()->id,
+                            // все темы офферов 
+                            'themes' => OfferTheme::all()->toArray()
+                        ] 
                     );
             case 'веб-мастер':
                 $userId = $request->user()->id;
                 return view(
                         'pages/webmaster',
                         [
+                            // подписки пользователя
                             'subscriptions' => OfferSubscription::where('follower_id', $userId),
+                            // все доступные офферы без подписок пользователя
                             'offers' => Offer::getActiveOffersWithoutUser($userId)
                         ]
                     );
             case 'рекламодатель':
                 return view(
                         'pages/advertiser', 
-                        ['advertiser' => $request->user()->advertiser, 'userId' => $request->user()->id] 
+                        [
+                            // рекламодатель
+                            'advertiser' => $request->user()->advertiser,
+                            // id пользователя-рекламщика (оптимизация) 
+                            'userId' => $request->user()->id
+                        ] 
                     );
             default:
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);

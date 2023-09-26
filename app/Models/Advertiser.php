@@ -28,7 +28,7 @@ class Advertiser extends Model
         return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
 
-    /** общеt число подписок на офферы */
+    /** общее число подписок на офферы */
     public function offerSubscriptionCount($timePeriod = null) {
         $totalOffers = 0;
         foreach ($this->offers->all() as $offer) {
