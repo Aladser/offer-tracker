@@ -26,5 +26,5 @@ Route::post('/advertiser/{id}/money', [StatisticController::class, 'money'])
     ->middleware(['auth']);;
 
 Route::resource('/offer-theme', OfferThemeController::class)
-    ->except(['index', 'show', 'create', 'edit', 'update'])
+    ->except(['show', 'create', 'edit', 'update'])
     ->middleware(['auth']);

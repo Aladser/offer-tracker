@@ -54,7 +54,7 @@
                     @endif
                     <div class="d-flex flex-wrap justify-content-around w-100">
                         @foreach ($offers as $offer)
-                            <article class='p-3 m-2 pe-none text-center bg-ddd border-333 color-333 fs-3'>
+                            <article class='p-3 m-2 pe-none text-center bg-ddd color-333 fs-3 shadow rounded'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>цена: {{$offer->price}}р.</p>
                                 <p>тема: {{$offer->theme->name}}</p>
