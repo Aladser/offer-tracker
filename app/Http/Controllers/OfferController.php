@@ -14,11 +14,7 @@ class OfferController extends Controller
     /** Показать форму создания нового оффера */
     public function create()
     {
-        $themes = [];
-        foreach (OfferTheme::all()->toArray() as $theme) {
-            $themes[] = $theme['name'];
-        }
-        return view('pages/add-offer', ['themes' => $themes]);
+        return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
     /** Сохраните вновь созданный ресурс в хранилище */

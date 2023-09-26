@@ -32,6 +32,26 @@ class Offer extends Model
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
+    /** число переходов новее текущей даты */
+    public function linkCount($timePeriod = null)
+    {
+        if (is_null($timePeriod)) {
+            return $this->links->count();
+        } else {
+            return $this->links->where('created_at', '>', $timePeriod)->count();
+        }
+    }
+
+    /** число переходов новее текущей даты */
+    public function money($timePeriod = null)
+    {
+        if (is_null($timePeriod)) {
+            return $this->links->count() * $this->price;
+        } else {
+            return $this->links->where('created_at', '>', $timePeriod)->count() * $this->price;
+        }
+    }
+
     /** показать активные подписки */
     public static function getActiveOffers()
     {
@@ -39,7 +59,7 @@ class Offer extends Model
     }
 
     /** показать активные подписки без подписок конкретного пользователя */
-    public static function getActiveOffersWithoutUser($userId)
+    public static function getActiveOffersExceptUser($userId)
     {
         $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
         return Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
@@ -64,7 +84,6 @@ class Offer extends Model
 
     public static function remove($id)
     {
-        OfferSubscription::where('offer_id', $id)->delete();
         return Offer::find($id)->delete();
     }
 
@@ -74,25 +93,5 @@ class Offer extends Model
         $offer = Offer::find($id);
         $offer->status = $status === 'true' ? 1 : 0;
         return $offer->save();
-    }
-
-    /** число переходов новее текущей даты */
-    public function linkCount($timePeriod = null)
-    {
-        if (is_null($timePeriod)) {
-            return $this->links->count();
-        } else {
-            return $this->links->where('created_at', '>', $timePeriod)->count();
-        }
-    }
-
-    /** число переходов новее текущей даты */
-    public function money($timePeriod = null)
-    {
-        if (is_null($timePeriod)) {
-            return $this->links->count()*$this->price;
-        } else {
-            return $this->links->where('created_at', '>', $timePeriod)->count()*$this->price;
-        }
     }
 }

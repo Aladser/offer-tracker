@@ -11,12 +11,6 @@ class Advertiser extends Model
     use HasFactory;
     public $timestamps = false;
 
-    public static function findAdvertiser($name)
-    {
-        $table = DB::table('advertisers')->join('users', 'users.id', '=', 'advertisers.user_id');
-        return $table->where('name', $name)->first()->id;
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -44,5 +38,11 @@ class Advertiser extends Model
             $totalIncome += $offer->linkCount($timePeriod) * $offer->price;
         }
         return $totalIncome;
+    }
+
+    public static function findAdvertiser($name)
+    {
+        $table = DB::table('advertisers')->join('users', 'users.id', '=', 'advertisers.user_id');
+        return $table->where('name', $name)->first()->id;
     }
 }

@@ -25,7 +25,7 @@
         <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Тема:</label><br>
         <select name="theme" class='w-50 mb-2 border' id="offer-new__theme">
             @foreach ($themes as $theme)
-            <option value="{{$theme}}">{{$theme}}</option>
+            <option value="{{$theme->name}}">{{$theme->name}}</option>
             @endforeach
         </select><br>
         <div class='mt-3'>
