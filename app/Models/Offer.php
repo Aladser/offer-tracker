@@ -26,11 +26,15 @@ class Offer extends Model
         return $this->belongsTo(Advertiser::class, 'advertiser_id', 'id');
     }
 
-    
     /** подписки */
     public function links()
     {
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
+    }
+
+    public static function getActiveOffers()
+    {
+        return Offer::where('status', 1)->get();
     }
 
     public static function hasOffer($name)

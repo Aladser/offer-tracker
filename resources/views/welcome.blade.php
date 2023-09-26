@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link href="/css/welcome.css" rel="stylesheet" />
 
         <title>{{config('app.name')}}</title>
 
@@ -23,7 +24,7 @@
         </style>
     </head>
     <body class="antialiased">
-        <main class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+        <main class="min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
@@ -38,9 +39,21 @@
                 </div>
             @endif
 
-            <div class="p-6 bg-white border-b border-gray-200 text-center display-5">
-                Основной контейнер домашней страницы.
-            </div>
+            <section class="w-75 p-4 mx-auto">
+                    <h3 class='h1 text-center pb-4'>Офферы рекламодателей</h3>
+                    @if (!$auth)
+                        <p class='text-center'>Для перехода по ссылкам авторизуйтесь на сайте</p>
+                    @endif
+                    <div class="d-flex flex-wrap justify-content-around w-100">
+                        @foreach ($offers as $offer)
+                            <article class='p-3 m-2 pe-none text-center bg-ddd border-333 color-333 fs-3'>
+                                <p class='fw-bolder'>{{$offer->name}}</p>
+                                <p>цена: {{$offer->price}}р.</p>
+                                <p>тема: {{$offer->theme->name}}</p>
+                            </article>
+                        @endforeach
+                    </div>
+            </section>
         </main>        
     </body>
 </html>
