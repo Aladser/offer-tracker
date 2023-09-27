@@ -4,7 +4,7 @@ class OfferThemeFrontCtl {
      * 
      * @param {*} URL URL бэк-контроллера
      * @param {*} offerThemeTable  таблица тем
-     * @param {*} msgHTMLElement информационное поле
+     * @param {*} msgHTMLElement информационное поле ошибок
      * @param {*} addThemeForm форма добавления темы
      * @param {*} csrfToken csrf-токен
      */
