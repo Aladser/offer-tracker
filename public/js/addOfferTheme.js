@@ -7,11 +7,8 @@ const msgPrg = document.querySelector('#form-add-error');
 /** форма создания оффера */
 const addThemeForm = document.querySelector('#form-add-theme');
 
+/** CSRF */
+const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
 /** фрон-контроллер таблицы тем */
-const offerThemeFrontCtl = new OfferThemeFrontCtl(
-    '/offer-theme',
-    offerThemeTable,
-    msgPrg,
-    addThemeForm,
-    document.querySelector('meta[name="csrf-token"]')
-);
+const offerThemeFrontCtl = new OfferThemeFrontCtl('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);
