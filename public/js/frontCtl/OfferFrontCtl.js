@@ -55,8 +55,11 @@ class OfferFrontCtl {
                     this.msgPrg.textContent = offer.error;
                 }
             } catch(err) {
-                console.log(data);
-                this.msgPrg.textContent = 'Ошибка БД. Подробности смотри в консоли';
+                if (data.includes('<title>Page Expired</title>')) {
+                    window.open('/wrong-uri', '_self');
+                } else {
+                    this.msgPrg.textContent = data;
+                }
             }
         })
     }
@@ -74,7 +77,11 @@ class OfferFrontCtl {
                     this.errorPrg.textContent = data;
                 }
             } catch(e) {
-                this.errorPrg.textContent = data;
+                if (data.includes('<title>Page Expired</title>')) {
+                    window.open('/wrong-uri', '_self');
+                } else {
+                    this.msgPrg.textContent = data;
+                }
             }
         })
     }
