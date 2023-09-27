@@ -34,7 +34,7 @@
                         <h4 class='h4 fw-bolder'>Доступные офферы</h4>
                         <section class='w-100 h-100 table-items offers'  id='list-active-offers'>
                             @foreach ($offers->get() as $offer)
-                                <article id="offer-{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer offers__item' draggable='true'>
+                                <article id="offer-{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
                                     <p class='fw-bolder'>{{$offer->name}}</p>
                                     <p>цена: {{$offer->price}} р.</p>
                                     <p>тема: {{$offer->theme->name}}</p>

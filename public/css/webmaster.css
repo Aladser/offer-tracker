@@ -4,5 +4,9 @@
 
 .subscriptions__item:hover, 
 .offers__item:hover {
+    background-color: #ccc;
+}
+
+.bg-ddd {
     background-color: #ddd;
 }

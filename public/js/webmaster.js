@@ -31,11 +31,13 @@ function onDrop(event) {
         draggableElement.id = `offer-${id}`;
         draggableElement.classList.remove('subscriptions__item');
         draggableElement.classList.add('offers__item');
+        draggableElement.classList.add('bg-light');
     } else {
         id = draggableElement.id.substring(6);
         draggableElement.id = `subscription-${id}`;
         draggableElement.classList.remove('offers__item');
         draggableElement.classList.add('subscriptions__item');
+        draggableElement.classList.remove('bg-light');
     }
     draggableElement.style.backgroundColor = 'white';
 }
