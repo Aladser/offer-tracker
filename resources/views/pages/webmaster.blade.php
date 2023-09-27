@@ -14,6 +14,7 @@
     <div class="py-12">
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
                 <div class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center">
                     <!-- офферы-подписки пользователя -->
                     <section class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>

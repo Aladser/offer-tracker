@@ -35,32 +35,16 @@ class OfferController extends Controller
         }
     }
 
-    /** Показать форму редактирования указанного ресурса.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         return 'edit';
     }
 
-    /** Обновите указанный ресурс в хранилище.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         return 'update';
     }
 
-    /** Удалить указанный ресурс из хранилища.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         return ['response' => Offer::remove($id) ? 1 : 0];
@@ -72,5 +56,21 @@ class OfferController extends Controller
         $status = $request->all()['status']; 
         $id = $request->all()['id'];
         return Offer::setStatus($id, $status);
+    }
+
+    /** подписка на оффер */
+    public function subscribe(Request $request)
+    {
+        $id = $request->all()['offerId'];
+        $user = $request->user()->id;
+        return ['result' => Offer::subscribe($id, $user)];
+    }
+
+    /** отписка от оффера */
+    public function unsubscribe(Request $request)
+    {
+        $id = $request->all()['offerId'];
+        $user = $request->user()->id;
+        return ['result' => Offer::unsubscribe($id, $user)];
     }
 }

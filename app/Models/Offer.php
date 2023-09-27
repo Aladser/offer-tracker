@@ -62,7 +62,8 @@ class Offer extends Model
     public static function getActiveOffersExceptUserSubscriptions($userId)
     {
         $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
-        return Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+        $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+        return $activeOffers;
     }
 
     public static function hasOffer($name)
@@ -96,5 +97,20 @@ class Offer extends Model
             OfferSubscription::where('offer_id', $id)->delete();
         }
         return $offer->save();
+    }
+
+    public static function subscribe($offerId, $userId)
+    {
+        $offerSubscription = new OfferSubscription();
+        $offerSubscription->follower_id = $userId;
+        $offerSubscription->offer_id = $offerId;
+        $rslt = $offerSubscription->save();
+        return $rslt ? 1 : 0;
+    }
+
+    public static function unsubscribe($offerId, $userId)
+    {
+        $rslt = OfferSubscription::where('follower_id', $userId)->where('offer_id', $offerId)->delete();
+        return $rslt;
     }
 }
