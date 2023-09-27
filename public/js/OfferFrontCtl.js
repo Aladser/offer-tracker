@@ -1,40 +1,62 @@
 /** Фронт-контроллер офферов */
 class OfferFrontCtl {
-    /**
-     * 
-     * @param {*} URL URL сервера
+    /** Фронт-контроллер офферов
+     * @param {*} URL url бэк-части
      * @param {*} offerTable таблица офферов
+     * @param {*} addOfferForm форма добавления нового оффера
+     * @param {*} msgPrg поле ошибок
+     * @param {*} username имя пользователя
      * @param {*} csrfToken csrf-токен
      */
-    constructor(URL, csrfToken) {        
+    constructor(URL, offerTable, addOfferForm, msgPrg, username, csrfToken) {        
         this.URL = URL;
+        this.offerTable = offerTable;
+        this.addOfferForm = addOfferForm;
+        this.msgPrg = msgPrg;
+        this.username = username;
         this.csrfToken = csrfToken;
+
+        // таблица офферов
+        if (this.offerTable !== null) {
+            this.offerTable.querySelectorAll('.table-offers__tr').forEach(row => row.onclick = e => {
+                    if (e.target.tagName === 'INPUT') {
+                        this.setOfferStatus(e.target.closest('tr'), e.target);
+                    } else {
+                        this.clickRow(offerTable, e.target.closest('tr'));
+                    }
+                }
+            );
+        }
+
+        // форма добавления нового оффера
+        if (this.addOfferForm != null) {
+            this.addOfferForm.onsubmit = event =>this.add(event);
+        }
     }
     
-    /**
-     * добавить оффер в БД
+    /** добавить оффер в БД
      * @param {*} form форма нового оффера
      * @param {*} msgHTMLElement HTML-элемент поля информации 
      * @param {*} username HTML-элемент имени пользователя
      * @param {*} event
      */
-    add(form, msgHTMLElement, username, event) {
+    add(event) {
         event.preventDefault();
-        let formData = new FormData(form);
-        formData.append('user', username.textContent);
+        let formData = new FormData(this.addOfferForm);
+        formData.append('user', this.username);
         
         fetch(this.URL, {method:'post', body:formData}).then(response => response.text()).then(data => {
             try {
                 let offer = JSON.parse(data);
                 if (offer.result === 1) {
                     event.target.reset();
-                    msgHTMLElement.textContent = `${offer.offerName} добавлен`;
+                    this.msgPrg.textContent = `${offer.offerName} добавлен`;
                 } else {
-                    msgHTMLElement.textContent = offer.error;
+                    this.msgPrg.textContent = offer.error;
                 }
             } catch(err) {
                 console.log(data);
-                msgHTMLElement.textContent = 'Ошибка БД. Подробности смотри в консоли';
+                this.msgPrg.textContent = 'Ошибка БД. Подробности смотри в консоли';
             }
         })
     }
@@ -57,23 +79,8 @@ class OfferFrontCtl {
         })
     }
 
-    /** установить статус */
-    setOfferStatus(row, inputStatus) {
-        let data = new URLSearchParams();
-        data.set('id', row.getAttribute('data-id'));
-        data.set('status', inputStatus.checked);
-        let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
-
-        fetch(`${this.URL}/status`, {method:'post', headers: headers, body:data}).then(response => response.text()).then(rslt => {
-            if (rslt != 1) {
-                this.errorPrg.textContent = 'ошибка ДБ';
-                console.log(rslt);
-            }
-        })
-    }
-
     /** клик строки таблицы */
-    static clickRow(offerTable, row) {
+    clickRow(offerTable, row) {
         if (row.classList.contains('table-offers__tr--active')) {
             row.classList.remove('table-offers__tr--active');
             row.querySelector('button').remove();
@@ -91,5 +98,20 @@ class OfferFrontCtl {
             // флаг новой выделенной строки
             row.classList.add('table-offers__tr--active');
         }
+    }
+
+    /** установить статус */
+    setOfferStatus(row, inputStatus) {
+        let data = new URLSearchParams();
+        data.set('id', row.getAttribute('data-id'));
+        data.set('status', inputStatus.checked);
+        let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
+
+        fetch(`${this.URL}/status`, {method:'post', headers: headers, body:data}).then(response => response.text()).then(rslt => {
+            if (rslt != 1) {
+                this.errorPrg.textContent = 'ошибка ДБ';
+                console.log(rslt);
+            }
+        })
     }
 }
