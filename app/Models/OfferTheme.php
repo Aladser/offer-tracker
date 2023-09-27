@@ -24,7 +24,7 @@ class OfferTheme extends Model
 
     public static function destroy($id)
     {
-        return OfferTheme::find($id)->delete() ? 1 : 0;
+        return OfferTheme::find($id)->delete();
     }
 
     public static function hasTheme($name)

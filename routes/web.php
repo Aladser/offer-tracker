@@ -28,3 +28,5 @@ Route::post('/advertiser/{id}/money', [StatisticController::class, 'money'])
 Route::resource('/offer-theme', OfferThemeController::class)
     ->except(['show', 'create', 'edit', 'update'])
     ->middleware(['auth']);
+// подмена csrf
+Route::get('/wrong-uri', fn() => view('wrongcsrf'));

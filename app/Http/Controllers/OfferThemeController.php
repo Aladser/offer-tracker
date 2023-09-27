@@ -24,6 +24,6 @@ class OfferThemeController extends Controller
 
     public function destroy($id)
     {
-        return json_encode(['result' => OfferTheme::destroy($id)]);
+        return ['result' => OfferTheme::destroy($id) ? 1 : 0];
     }
 }
