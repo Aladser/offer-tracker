@@ -19,7 +19,7 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth'])
 require __DIR__.'/auth.php';
 
 // контроллер офферов
-Route::resource('/offer', OfferController::class)->except(['index', 'show'])
+Route::resource('/offer', OfferController::class)->except(['index', 'show', 'edit', 'update'])
     ->middleware(['auth']);
 Route::post('/offer/status', [OfferController::class, 'status']);
 

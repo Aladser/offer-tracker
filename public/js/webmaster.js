@@ -1,8 +1,6 @@
 const subscribeURL = 'offer/subscribe';
 const unsubscribeURL = 'offer/unsubscribe';
 
-/** CSRF */
-const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** поле ошибки */
 const prgError = document.querySelector('#prg-error');
 
@@ -40,50 +38,35 @@ function onDrop(event) {
         draggableElement.classList.remove('subscriptions__item');
         draggableElement.classList.add('offers__item');
         draggableElement.classList.add('bg-light');
-        unsubscribe(id);
+        switchSubscription(unsubscribeURL,id);
     } else {
         id = draggableElement.id.substring(6);
         draggableElement.id = `subscription-${id}`;
         draggableElement.classList.remove('offers__item');
         draggableElement.classList.add('subscriptions__item');
         draggableElement.classList.remove('bg-light');
-        subscribe(id);
+        switchSubscription(subscribeURL, id);
     }
     draggableElement.style.backgroundColor = 'white';
 }
 
-/** подписаться на оффер */
-function subscribe(offerId) {
+function switchSubscription (URL, offerId) {
     let data = new URLSearchParams();
     data.set('offerId', offerId);
-    let headers = {'X-CSRF-TOKEN': csrfToken.getAttribute('content')};
+    let headers = {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')};
 
-    fetch(subscribeURL, {method:'post', headers: headers, body:data}).then(response => response.text()).then(data => {
+    fetch(URL, {method:'post', headers: headers, body:data}).then(response => response.text()).then(data => {
         try {
             result = JSON.parse(data).result;
             if (result !== 1) {
                 prgError.textContent = data;
             }
         } catch(e) {
-            prgError.textContent = data;
-        }
-    })
-}
-
-/** отписаться от оффера */
-function unsubscribe(offerId) {
-    let data = new URLSearchParams();
-    data.set('offerId', offerId);
-    let headers = {'X-CSRF-TOKEN': csrfToken.getAttribute('content')};
-
-    fetch(unsubscribeURL, {method:'post', headers: headers, body:data}).then(response => response.text()).then(data => {
-        try {
-            result = JSON.parse(data).result;
-            if (result !== 1) {
+            if (data.includes('<title>Page Expired</title>')) {
+                window.open('/wrong-uri', '_self');
+            } else {
                 prgError.textContent = data;
             }
-        } catch(e) {
-            prgError.textContent = data;
         }
     })
 }

@@ -35,16 +35,6 @@ class OfferController extends Controller
         }
     }
 
-    public function edit($id)
-    {
-        return 'edit';
-    }
-
-    public function update(Request $request, $id)
-    {
-        return 'update';
-    }
-
     public function destroy($id)
     {
         return ['response' => Offer::remove($id) ? 1 : 0];
