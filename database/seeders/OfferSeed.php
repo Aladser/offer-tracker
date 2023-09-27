@@ -43,7 +43,8 @@ class OfferSeed extends Seeder
             'name'=>'Оффер 5', 
             'theme_id'=>2, 
             'advertiser_id' => 2, 
-            'price' => random_int(100, 200)
+            'price' => random_int(100, 200),
+            'status' => 1
         ]);
         Offer::create([
             'url'=>'http://127.0.0.1:8000/6', 

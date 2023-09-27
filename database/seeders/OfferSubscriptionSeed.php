@@ -11,13 +11,13 @@ class OfferSubscriptionSeed extends Seeder
     {
         OfferSubscription::create(['follower_id' => 1, 'offer_id' => 3]);
         OfferSubscription::create(['follower_id' => 2, 'offer_id' => 3]);
-        OfferSubscription::create(['follower_id' => 3, 'offer_id' => 3]);
+        OfferSubscription::create(['follower_id' => 3, 'offer_id' => 4]);
+        OfferSubscription::create(['follower_id' => 3, 'offer_id' => 5]);
         OfferSubscription::create(['follower_id' => 2, 'offer_id' => 5]);
         OfferSubscription::create(['follower_id' => 1, 'offer_id' => 7]);
         OfferSubscription::create(['follower_id' => 2, 'offer_id' => 7]);
         OfferSubscription::create(['follower_id' => 1, 'offer_id' => 8]);
         OfferSubscription::create(['follower_id' => 2, 'offer_id' => 2]);
-        OfferSubscription::create(['follower_id' => 3, 'offer_id' => 2]);
 
         $date = new \DateTime();
         $date->modify('-2 day');
