@@ -4,7 +4,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/OfferFrontCtl.js" defer></script>
+        <script src="/js/frontCtl/OfferFrontCtl.js" defer></script>
         <script src="/js/advertiserPage.js" defer></script>
     @endsection
 

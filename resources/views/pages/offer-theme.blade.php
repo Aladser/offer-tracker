@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('js')
-        <script src="/js/OfferThemeFrontCtl.js" defer></script>
+        <script src="/js/frontCtl/OfferThemeFrontCtl.js" defer></script>
         <script src="/js/addOfferTheme.js" defer></script>
     @endsection
 
