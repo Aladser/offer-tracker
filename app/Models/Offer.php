@@ -59,7 +59,7 @@ class Offer extends Model
     }
 
     /** показать активные подписки без подписок конкретного пользователя */
-    public static function getActiveOffersExceptUser($userId)
+    public static function getActiveOffersExceptUserSubscriptions($userId)
     {
         $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
         return Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
