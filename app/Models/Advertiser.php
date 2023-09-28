@@ -32,7 +32,7 @@ class Advertiser extends Model
     }
 
     /** доход от подписок */
-    public function offerIncome($timePeriod = null) {
+    public function offerExpense($timePeriod = null) {
         $totalIncome = 0;
         foreach ($this->offers->all() as $offer) {
             $totalIncome += $offer->linkCount($timePeriod) * $offer->price;
