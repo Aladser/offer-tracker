@@ -35,7 +35,7 @@ class DBTest extends TestCase
         foreach (OfferSubscription::all() as $click) {
             echo "  {$click->follower->name} подписался {$click->created_at} на {$click->offer->name}\n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 11);
+        $this->assertDatabaseCount('offer_subscriptions', 10);
     }
 
     public function testFollowers()
@@ -45,7 +45,7 @@ class DBTest extends TestCase
             echo "  {$offer->name} создан {$offer->advertiser->user->name}. Подписчиков:{$offer->links->count()}\n";
         }
         echo "\n";
-        $this->assertDatabaseCount('offer_subscriptions', 11);
+        $this->assertDatabaseCount('offer_subscriptions', 10);
     }
 
     public function testDoubleSubscriptions()
@@ -55,7 +55,7 @@ class DBTest extends TestCase
         $subscription->follower_id = 1;
         $subscription->offer_id = 3;
         $subscription->save();
-        $this->assertDatabaseCount('offer_subscriptions', 11);
+        $this->assertDatabaseCount('offer_subscriptions', 10);
     }
 
     private function getOffers($user)

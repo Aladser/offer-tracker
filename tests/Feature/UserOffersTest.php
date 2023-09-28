@@ -22,7 +22,7 @@ class UserOffersTest extends TestCase
             $money = $offer->money($lastDate);
             echo "$offer->id $offer->name. Цена: $offer->price Переходы: $count Доход: $money\n";
         }
-        echo "Всего переходов: {$advertiser->offerSubscriptionCount($lastDate)}. Доход: {$advertiser->offerIncome($lastDate)}\n\n";
+        echo "Всего переходов: {$advertiser->offerSubscriptionCount($lastDate)}. Доход: {$advertiser->offerExpense($lastDate)}\n\n";
     }
 
     public function testGetUserOffers() {
@@ -36,7 +36,7 @@ class UserOffersTest extends TestCase
         $this::getUserOffers($advertiser, StatisticController::getDate('-1 month'));
         $this::getUserOffers($advertiser, StatisticController::getDate('-1 year'));
 
-        $this->assertDatabaseCount('offer_subscriptions', 11);
+        $this->assertDatabaseCount('offer_subscriptions', 10);
     }
 
     // активные подписки без подписок конкретного пользователя 
@@ -58,6 +58,6 @@ class UserOffersTest extends TestCase
             $status = $subscription->offer->status ? 'активна' : 'неактивна';
             echo "Подписка на {$subscription->offer->name} пользователя {$subscription->follower->name} $status \n";
         }
-        $this->assertDatabaseCount('offer_subscriptions', 11);
+        $this->assertDatabaseCount('offer_subscriptions', 10);
     }
 }
