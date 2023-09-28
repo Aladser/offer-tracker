@@ -22,16 +22,12 @@ require __DIR__.'/auth.php';
 Route::resource('/offer', OfferController::class)->except(['index', 'show', 'edit', 'update'])
     ->middleware(['auth']);
 Route::post('/offer/status', [OfferController::class, 'status']);
+Route::get('/offer/statistics', [StatisticController::class, 'index'])->middleware(['auth']);
 
 // подписка-отписка вебмастеров на офферы
 Route::post('/offer/subscribe', [OfferController::class, 'subscribe']);
 Route::post('/offer/unsubscribe', [OfferController::class, 'unsubscribe']);
 
-// статистика рекламодателя
-Route::get('/advertiser/{id}/index', [StatisticController::class, 'index'])
-    ->middleware(['auth']);
-Route::post('/advertiser/{id}/money', [StatisticController::class, 'money'])
-    ->middleware(['auth']);
 
 // контроллер тем офферов
 Route::resource('/offer-theme', OfferThemeController::class)

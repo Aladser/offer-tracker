@@ -45,7 +45,9 @@ class DashboardController extends Controller
                             // подписки пользователя
                             'subscriptions' => OfferSubscription::where('follower_id', $userId),
                             // все доступные офферы без подписок пользователя
-                            'offers' => Offer::getActiveOffersExceptUserSubscriptions($userId)
+                            'offers' => Offer::getActiveOffersExceptUserSubscriptions($userId),
+                            // id пользователя-рекламщика (оптимизация) 
+                            'userId' => $request->user()->id,
                         ]
                     );
             case 'рекламодатель':
