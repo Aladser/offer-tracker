@@ -13,8 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     public $timestamps = false; // без времени создания
 
-    /**
-     * The attributes that are mass assignable.
+    /** Атрибуты, которые можно назначать массово.
      *
      * @var array<int, string>
      */
@@ -25,8 +24,7 @@ class User extends Authenticatable
         'role_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
+    /** Атрибуты, которые следует скрыть для сериализации.
      *
      * @var array<int, string>
      */
@@ -45,8 +43,8 @@ class User extends Authenticatable
         return $this->hasOne(Advertiser::class);
     }
 
-    public function offer_subscriptions()
+    public function webmaster()
     {
-        return $this->hasMany(OfferSubscription::class, 'follower_id', 'id');
+        return $this->hasOne(Webmaster::class);
     }
 }

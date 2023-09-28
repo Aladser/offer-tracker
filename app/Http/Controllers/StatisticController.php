@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
 use App\Models\User;
+use App\Models\SystemOption;
 
 class StatisticController extends Controller
 {
@@ -16,7 +17,13 @@ class StatisticController extends Controller
         $allTime = StatisticController::getDate();
         $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
 
+        $commision = SystemOption::where('name', 'commission')->first()->value('value')/ 100;
+
         if ($request->user()->role->name === 'рекламодатель') {
+            $offers = $request->user()->advertiser->offers;
+            //dd($request->user()->advertiser->offers->toArray());
+            return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
+        } else if($request->user()->role->name === 'веб-мастер') {
             return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
         } else {
             return redirect('/dashboard');
@@ -27,7 +34,8 @@ class StatisticController extends Controller
     public static function getDate($period = null)
     {
         $date = new \DateTime();
-        $date->modify('+' . env('TIMEZONE') . 'hours');
+        $timezone = env('TIMEZONE');
+        $date->modify("+ $timezone hours");
         if (!is_null($period)) {
             $date->modify($period);
         }

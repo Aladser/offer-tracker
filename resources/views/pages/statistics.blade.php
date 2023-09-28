@@ -32,9 +32,7 @@
                     <!-- полная таблица -->
                     <table class='table w-75 mx-auto fs-4 w-100' id='table-offers'>
                         <tr>
-                            <th scope="col">Оффер</th>
-                            <th scope="col">Число переходов</th>
-                            <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
+                            <th scope="col">Оффер</th><th scope="col">Число переходов</th><th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                         </tr>
 
                         @foreach ($user->advertiser->offers->all() as $offer)
