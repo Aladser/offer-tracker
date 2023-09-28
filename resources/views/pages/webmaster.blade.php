@@ -24,7 +24,7 @@
                                 @if ($subscription->offer->status == 1)
                                     <article id="subscription-{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
                                         <p class='fw-bolder'>{{$subscription->offer->name}}</p>
-                                        <p>цена: {{$subscription->offer->price}} р.</p>
+                                        <p>цена: {{$subscription->offer->price}} р. за переход</p>
                                         <p>тема: {{$subscription->offer->theme->name}}</p>
                                     </article>
                                 @endif
@@ -39,7 +39,7 @@
                             @foreach ($offers->get() as $offer)
                                 <article id="offer-{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
                                     <p class='fw-bolder'>{{$offer->name}}</p>
-                                    <p>цена: {{$offer->price}} р.</p>
+                                    <p>цена: {{$offer->price}} р. за переход</p>
                                     <p>тема: {{$offer->theme->name}}</p>
                                 </article>
                             @endforeach

@@ -15,7 +15,6 @@ class CreateOfferSubscriptionsTable extends Migration
     {
         Schema::create('offer_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('created_at')->useCurrent();
 
             $table->bigInteger('follower_id')->unsigned();
             $table->foreign('follower_id')->references('id')->on('users')->cascadeOnDelete();

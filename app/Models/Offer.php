@@ -39,12 +39,12 @@ class Offer extends Model
     }
 
     /** число переходов новее текущей даты */
-    public function linkCount($timePeriod = null)
+    public function clickCount($timePeriod = null)
     {
         if (is_null($timePeriod)) {
-            return $this->links->count();
+            return $this->clicks->count();
         } else {
-            return $this->links->where('created_at', '>', $timePeriod)->count();
+            return $this->clicks->where('created_at', '>', $timePeriod)->count();
         }
     }
 
@@ -52,9 +52,9 @@ class Offer extends Model
     public function money($timePeriod = null)
     {
         if (is_null($timePeriod)) {
-            return $this->links->count() * $this->price;
+            return $this->clicks->count() * $this->price;
         } else {
-            return $this->links->where('created_at', '>', $timePeriod)->count() * $this->price;
+            return $this->clicks->where('created_at', '>', $timePeriod)->count() * $this->price;
         }
     }
 

@@ -26,7 +26,7 @@ class Advertiser extends Model
     public function offerSubscriptionCount($timePeriod = null) {
         $totalOffers = 0;
         foreach ($this->offers->all() as $offer) {
-            $totalOffers += $offer->linkCount($timePeriod);
+            $totalOffers += $offer->clickCount($timePeriod);
         }
         return $totalOffers;
     }
@@ -35,7 +35,7 @@ class Advertiser extends Model
     public function offerExpense($timePeriod = null) {
         $totalIncome = 0;
         foreach ($this->offers->all() as $offer) {
-            $totalIncome += $offer->linkCount($timePeriod) * $offer->price;
+            $totalIncome += $offer->clickCount($timePeriod) * $offer->price;
         }
         return $totalIncome;
     }

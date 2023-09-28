@@ -38,7 +38,7 @@
                         @foreach ($advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
-                                <td>{{$offer->linkCount()}} </td>
+                                <td>{{$offer->clickCount()}} </td>
                                 <td>{{$offer->money()}} р.</td>
                             </tr>
                         @endforeach
@@ -61,7 +61,7 @@
                         @foreach ($advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
-                                <td>{{$offer->linkCount($times['lastDay'])}} </td>
+                                <td>{{$offer->clickCount($times['lastDay'])}} </td>
                                 <td>{{$offer->money($times['lastDay'])}} р.</td>
                             </tr>
                         @endforeach
@@ -84,7 +84,7 @@
                         @foreach ($advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
-                                <td>{{$offer->linkCount($times['lastMonth'])}} </td>
+                                <td>{{$offer->clickCount($times['lastMonth'])}} </td>
                                 <td>{{$offer->money($times['lastMonth'])}} р.</td>
                             </tr>
                         @endforeach
@@ -107,7 +107,7 @@
                         @foreach ($advertiser->offers->all() as $offer)
                             <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer->name}}</td>
-                                <td>{{$offer->linkCount($times['lastYear'])}} </td>
+                                <td>{{$offer->clickCount($times['lastYear'])}} </td>
                                 <td>{{$offer->money($times['lastYear'])}} р.</td>
                             </tr>
                         @endforeach
