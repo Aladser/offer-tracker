@@ -22,12 +22,9 @@ class Advertiser extends Model implements OfferTotalValueInterface
         return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
 
-    public function offerSubscriptionCount($timePeriod = null) {
-        $totalOffers = 0;
-        foreach ($this->offers->all() as $offer) {
-            $totalOffers += $offer->clickCount($timePeriod);
-        }
-        return $totalOffers;
+    public function offerClickCount($timePeriod = null) {
+        $table = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id')->where('advertiser_id', $this->id);
+        return !is_null($timePeriod) ? $table->where('created_at', '>', $timePeriod)->count() : $table->count();
     }
 
     public function offerMoney($timePeriod = null) {

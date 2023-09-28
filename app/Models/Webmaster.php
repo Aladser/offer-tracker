@@ -20,7 +20,7 @@ class Webmaster extends Model implements OfferTotalValueInterface
         return $this->hasMany(OfferSubscription::class, 'follower_id', 'id');
     }
 
-    public function offerSubscriptionCount($timePeriod = null) {
+    public function offerClickCount($timePeriod = null) {
         
     }
 

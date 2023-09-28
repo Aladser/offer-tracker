@@ -45,7 +45,7 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount()}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerClickCount()}}</td>
                             <td class="fw-bolder table-secondary">{{$user->advertiser->offerMoney()}} р.</td>
                         </tr>
                     </table>
@@ -55,7 +55,7 @@
                         <tr>
                             <th scope="col">Оффер</th>
                             <th scope="col">Число переходов</th>
-                            <th scope="col">Расходы</th>
+                            <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                         </tr>
 
                         @foreach ($user->advertiser->offers->all() as $offer)
@@ -68,7 +68,7 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastDay'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerClickCount($times['lastDay'])}}</td>
                             <td class="fw-bolder table-secondary">{{$user->advertiser->offerMoney($times['lastDay'])}} р.</td>
                         </tr>
                     </table>
@@ -78,7 +78,7 @@
                         <tr>
                             <th scope="col">Оффер</th>
                             <th scope="col">Число переходов</th>
-                            <th scope="col">Доходы</th>
+                            <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                         </tr>
 
                         @foreach ($user->advertiser->offers->all() as $offer)
@@ -91,7 +91,7 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastMonth'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerClickCount($times['lastMonth'])}}</td>
                             <td class="fw-bolder table-secondary">{{$user->advertiser->offerMoney($times['lastMonth'])}} р.</td>
                         </tr>
                     </table>
@@ -101,7 +101,7 @@
                         <tr>
                             <th scope="col">Оффер</th>
                             <th scope="col">Число переходов</th>
-                            <th scope="col">Доходы</th>
+                            <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                         </tr>
 
                         @foreach ($user->advertiser->offers->all() as $offer)
@@ -114,7 +114,7 @@
 
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerSubscriptionCount($times['lastYear'])}}</td>
+                            <td class="fw-bolder table-secondary">{{$user->advertiser->offerClickCount($times['lastYear'])}}</td>
                             <td class="fw-bolder table-secondary">{{$user->advertiser->offerMoney($times['lastYear'])}} р.</td>
                         </tr>
                     </table>
