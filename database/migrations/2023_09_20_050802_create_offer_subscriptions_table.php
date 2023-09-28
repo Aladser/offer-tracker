@@ -17,7 +17,7 @@ class CreateOfferSubscriptionsTable extends Migration
             $table->id();
 
             $table->bigInteger('follower_id')->unsigned();
-            $table->foreign('follower_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('follower_id')->references('id')->on('webmasters')->cascadeOnDelete();
 
             $table->bigInteger('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();

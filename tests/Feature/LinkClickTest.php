@@ -16,7 +16,7 @@ class LinkClickTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testAdvertiserClicks()
+    public function testAdvertiserOfferClicks()
     {
         if (User::count() === 0) {
             $this->seed();
@@ -32,6 +32,26 @@ class LinkClickTest extends TestCase
         $table = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
         echo "Итог. переходов:{$table->where('advertiser_id', 1)->count()} сумма:";
         echo $table->sum('price')."\n";
+
+        $this->assertDatabaseCount('offer_subscriptions', 6);
+    }
+
+    public function testWebmasterSubscriptionClicks()
+    {
+        if (User::count() === 0) {
+            $this->seed();
+        }
+
+        $webmaster = Webmaster::find(1);
+        echo "клики и расходы мастера {$webmaster->user->name}:\n";
+
+        foreach ($webmaster->subscriptions as $subscription) {
+            $offer = $subscription->offer;
+            echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
+            echo $offer->clicks->count() * $offer->price . "\n";
+        }
+
+        var_dump(OfferClick::selectRaw("offer_id, sum(offer_id) as count"))->groupBy('offer_id')->get();
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
