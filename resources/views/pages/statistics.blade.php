@@ -46,7 +46,7 @@
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
                             <td class="fw-bolder table-secondary">{{$advertiser->offerSubscriptionCount()}}</td>
-                            <td class="fw-bolder table-secondary">{{$advertiser->offerIncome()}} р.</td>
+                            <td class="fw-bolder table-secondary">{{$advertiser->offerExpense()}} р.</td>
                         </tr>
                     </table>
 
@@ -69,7 +69,7 @@
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
                             <td class="fw-bolder table-secondary">{{$advertiser->offerSubscriptionCount($times['lastDay'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$advertiser->offerIncome($times['lastDay'])}} р.</td>
+                            <td class="fw-bolder table-secondary">{{$advertiser->offerExpense($times['lastDay'])}} р.</td>
                         </tr>
                     </table>
 
@@ -92,7 +92,7 @@
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
                             <td class="fw-bolder table-secondary">{{$advertiser->offerSubscriptionCount($times['lastMonth'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$advertiser->offerIncome($times['lastMonth'])}} р.</td>
+                            <td class="fw-bolder table-secondary">{{$advertiser->offerExpense($times['lastMonth'])}} р.</td>
                         </tr>
                     </table>
 
@@ -115,7 +115,7 @@
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
                             <td class="fw-bolder table-secondary">{{$advertiser->offerSubscriptionCount($times['lastYear'])}}</td>
-                            <td class="fw-bolder table-secondary">{{$advertiser->offerIncome($times['lastYear'])}} р.</td>
+                            <td class="fw-bolder table-secondary">{{$advertiser->offerExpense($times['lastYear'])}} р.</td>
                         </tr>
                     </table>
                 </section>
