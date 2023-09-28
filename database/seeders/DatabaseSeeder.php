@@ -10,6 +10,7 @@ use Database\Seeders\OfferThemeSeed;
 use Database\Seeders\OfferSeed;
 use Database\Seeders\OfferSubscriptionSeed;
 use Database\Seeders\AdvertiserSeeder;
+use Database\Seeders\OfferClickSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $offerThemeSeed = new OfferThemeSeed();
         $offerSeed = new OfferSeed();
         $offerSubscriptionSeed = new OfferSubscriptionSeed();
+        $offerClickSeeder = new OfferClickSeeder();
 
         $userRoleSeed->run();
         $userSeed->run();
@@ -31,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $offerThemeSeed->run();
         $offerSeed->run();
         $offerSubscriptionSeed->run();
+        $offerClickSeeder->run();
     }
 }

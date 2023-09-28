@@ -74,7 +74,7 @@ class OfferSeed extends Seeder
             'theme_id'=>1, 
             'advertiser_id' => 2, 
             'price' => random_int(1, 10), 
-            'status' => 0
+            'status' => 1
         ]);
     }
 }

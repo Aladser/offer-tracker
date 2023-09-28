@@ -32,6 +32,12 @@ class Offer extends Model
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
+    /** переходы */
+    public function clicks()
+    {
+        return $this->hasMany(OfferClick::class, 'offer_id', 'id');
+    }
+
     /** число переходов новее текущей даты */
     public function linkCount($timePeriod = null)
     {
