@@ -32,7 +32,7 @@
                         <tr>
                             <th scope="col">Оффер</th>
                             <th scope="col">Число переходов</th>
-                            <th scope="col">Доходы</th>
+                            <th scope="col">Расходы</th>
                         </tr>
 
                         @foreach ($advertiser->offers->all() as $offer)
