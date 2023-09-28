@@ -1,6 +1,12 @@
+/* мои ообщие стили */
 .cursor-pointer {
   cursor: pointer;
 }
+
+.border-333 {
+  border: 1px solid #333;
+}
+
 
 /*
 ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
