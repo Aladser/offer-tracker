@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOfferSystemOptionsTable extends Migration
+class CreateSystemOptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateOfferSystemOptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('offer_system_options', function (Blueprint $table) {
+        Schema::create('system_options', function (Blueprint $table) {
             $table->string('name')->unique()->primary();
             $table->char('value', 30)->nullable();
         });
@@ -26,6 +26,6 @@ class CreateOfferSystemOptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offer_system_options');
+        Schema::dropIfExists('system_options');
     }
 }

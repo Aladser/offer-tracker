@@ -11,7 +11,7 @@ use Database\Seeders\OfferSeed;
 use Database\Seeders\OfferSubscriptionSeed;
 use Database\Seeders\AdvertiserSeeder;
 use Database\Seeders\OfferClickSeeder;
-use App\Models\OfferSystemOption;
+use App\Models\SystemOption;
 
 class DatabaseSeeder extends Seeder
 {
@@ -36,6 +36,6 @@ class DatabaseSeeder extends Seeder
         $offerSubscriptionSeed->run();
         $offerClickSeeder->run();
 
-        OfferSystemOption::create(['name' => 'commission', 'value' => 25]);
+        SystemOption::create(['name' => 'commission', 'value' => 25]);
     }
 }

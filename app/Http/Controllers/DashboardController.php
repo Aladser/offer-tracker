@@ -8,7 +8,7 @@ use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\OfferClick;
 use App\Models\OfferSubscription;
-use App\Models\OfferSystemOption;
+use App\Models\SystemOption;
 
 class DashboardController extends Controller
 {
@@ -24,7 +24,7 @@ class DashboardController extends Controller
                 $table = DB::table('offer_clicks')->join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
                 $totalIncome = $table->sum('price');
                 $totalClicks = $table->count();
-                $commission = OfferSystemOption::commission();
+                $commission = SystemOption::commission();
 
                 return view(
                         'pages/admin', 
