@@ -21,11 +21,13 @@
                         <h4 class='h4 fw-bolder'>Ваши офферы</h4>
                         <section class='w-100 h-100 table-items subscriptions' id='list-subscriptions'>
                             @foreach ($subscriptions->get() as $subscription)
-                            <article id="subscription-{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
-                                <p class='fw-bolder'>{{$subscription->offer->name}}</p>
-                                <p>цена: {{$subscription->offer->price}} р.</p>
-                                <p>тема: {{$subscription->offer->theme->name}}</p>
-                            </article>
+                                @if ($subscription->offer->status == 1)
+                                    <article id="subscription-{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
+                                        <p class='fw-bolder'>{{$subscription->offer->name}}</p>
+                                        <p>цена: {{$subscription->offer->price}} р.</p>
+                                        <p>тема: {{$subscription->offer->theme->name}}</p>
+                                    </article>
+                                @endif
                             @endforeach
                         </section>
                     </section>

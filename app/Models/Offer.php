@@ -93,9 +93,6 @@ class Offer extends Model
     {   
         $offer = Offer::find($id);
         $offer->status = $status === 'true' ? 1 : 0;
-        if ($status === 'false') {
-            OfferSubscription::where('offer_id', $id)->delete();
-        }
         return $offer->save();
     }
 

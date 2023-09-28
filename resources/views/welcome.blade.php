@@ -6,7 +6,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="/css/welcome.css" rel="stylesheet" />
 
-        <title>{{config('app.name')}}</title>
+        <title>{{config('app.name')}}: страница интересных ссылок</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -40,22 +40,21 @@
             @endif
 
             <section class="w-75 p-4 mx-auto">
-                    <h3 class='h1 text-center pb-4'>Офферы</h3>
-                    @if (!$user)
-                        <p class='text-center'>Для перехода по ссылкам авторизуйтесь на сайте</p>
-                    @else
+                    <h3 class='h1 text-center pb-4'>Страница интересных ссылок</h3>
+                    @auth
                         @if ($user->role->name === 'администратор')
                             <p class='text-center'>Для управления сайтом перейдите в профиль</p>
                         @elseif ($user->role->name === 'рекламодатель')
-                            <p class='text-center'>Для просмотра своих офферов перейдите в профиль</p>
+                            <p class='text-center'>Для просмотра ваших офферов перейдите в профиль</p>
                         @else
-                        <p class='text-center'>Перейдите в профиль, чтобы перейти по заинтересованной ссылке</p>
+                        <p class='text-center'>Для просмотра ваших подписок на офферы перейдите в профиль</p>
                         @endif
-                    @endif
+                    @endauth
                     <div class="d-flex flex-wrap justify-content-around w-100">
                         @foreach ($offers as $offer)
-                            <article class='p-3 m-2 pe-none text-center bg-ddd color-333 fs-3 shadow rounded'>
+                            <article class='p-3 m-2 pe-none text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$offer->id}}'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
+                                <p><a href="{{$offer->url}}">ссылка</a></p>
                                 <p>цена: {{$offer->price}}р.</p>
                                 <p>тема: {{$offer->theme->name}}</p>
                             </article>
