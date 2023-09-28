@@ -17,7 +17,7 @@ class StatisticController extends Controller
         $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
 
         if ($request->user()->role->name === 'рекламодатель') {
-            return view('pages/statistics', ['advertiser' => $request->user()->advertiser, 'times' => $times, 'userId' => $request->user()->id] );
+            return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
         } else {
             return redirect('/dashboard');
         }
