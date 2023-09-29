@@ -90,7 +90,7 @@ class Offer extends Model
         $offerSubscription->webmaster_id = $webmasterId;
         $offerSubscription->refcode = "$webmasterId@$offerId";
         $rslt = $offerSubscription->save();
-        return $rslt ? 1 : 0;
+        return $rslt ? $offerSubscription->refcode : 0;
     }
 
     /** отписаться от оффера */

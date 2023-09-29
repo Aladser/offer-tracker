@@ -16,6 +16,15 @@ activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragst
 activeOffersList.ondragover = onDragOver;
 activeOffersList.ondrop = onDrop;
 
+/** реф.код */
+let refCode = null;
+
+/** окно показа ссылки */
+const refFrame = document.querySelector('#article-new-subscription');
+const refFrameField = document.querySelector('#article-new-subscription__ref');
+const refFrameBtn = document.querySelector('#article-new-subscription__btn');
+refFrameBtn.onclick = () => refFrame.classList.add('d-none');
+
 // функции событий
 function onDragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.id);
@@ -58,9 +67,12 @@ function switchSubscription (URL, offerId) {
     fetch(URL, {method:'post', headers: headers, body:data}).then(response => response.text()).then(data => {
         try {
             result = JSON.parse(data).result;
-            if (result !== 1) {
+            if (result == 0) {
                 prgError.textContent = 'Ошибка сервера. Подробности в консоли';
                 console.log(data);
+            } else if (result !== 1) {
+                refFrame.classList.remove('d-none');
+                refFrameField.textContent = `/dashboard?ref=${result}`;
             }
         } catch(e) {
             if (data.includes('<title>Page Expired</title>')) {

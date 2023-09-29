@@ -50,6 +50,7 @@
                         </tr>
                     </table>
 
+
                     <!-- последний день id='table-offers-last-day'-->
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-day'>
                         <tr>
@@ -70,6 +71,7 @@
                             <td class="fw-bolder table-secondary">{{$offersLastDay['totalMoney']}} р.</td>
                         </tr>
                     </table>
+
 
                     <!-- последний месяц id='table-offers-last-month'-->
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-month'>
@@ -92,6 +94,7 @@
                         </tr>
                     </table>
 
+                    
                     <!-- последний год id='table-offers-last-year'-->
                     <table class='table w-75 mx-auto fs-4 w-100 d-none' id='table-offers-last-year'>
                         <tr>
