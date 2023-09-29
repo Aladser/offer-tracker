@@ -65,7 +65,7 @@ class OfferService
             if (is_null($date)) {
                 foreach ($subscriptions as $subscription) {
                     $offer = $subscription->offer; // оффер
-                    $clicks = $offer->clicks->count(); // число посетителей
+                    $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id)->count(); // число посетителей
 
                     $sum = $clicks * $offer->price;  // расходы рекламщика
                     $income = $this->getIncome($sum, $this->commission); // доходы вебмастера
@@ -77,7 +77,7 @@ class OfferService
             } else {
                 foreach ($subscriptions as $subscription) {
                     $offer = $subscription->offer;
-                    $clicks = $offer->clicks->where('created_at', '>', $date)->count();
+                    $clicks = $offer->clicks->where('webmaster_id', $user->webmaster->id)->where('created_at', '>', $date)->count();
                     $sum = $offer->clicks->count() * $offer->price;
                     $income = $this->getIncome($sum, $this->commission);
                     

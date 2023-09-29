@@ -16,9 +16,8 @@ class LinkClickTest extends TestCase
 
     public function testAdvertiserOfferClicks()
     {
-        if (User::count() === 0) {
-            $this->seed();
-        }
+        system('clear');
+        $this->seed();
         $offerService = new OfferService();
         $advertiser = Advertiser::find(1);
 
@@ -42,14 +41,12 @@ class LinkClickTest extends TestCase
         $offerService = new OfferService();
         $webmaster = Webmaster::find(1);
 
-
         echo "\nстатистика подписок мастера {$webmaster->user->name}:\n";
         $data = $offerService->getOfferData($webmaster->user);
         foreach ($data['offers'] as $offer) {
             echo "{$offer['name']} посетителей:{$offer['clicks']} получено:{$offer['money']}\n";
         }
         echo "Всего: посетителей:{$data['totalClicks']} получено:{$data['totalMoney']}\n";
-
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }

@@ -23,4 +23,10 @@ class OfferSubscription extends Model
     {
         return $this->belongsTo(Webmaster::class, 'webmaster_id', 'id');
     }
+
+    /** переходы */
+    public function clicks()
+    {
+        return $this->hasMany(OfferClick::class, 'offer_id', 'offer_id');
+    }
 }
