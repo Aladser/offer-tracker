@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\OfferService;
 use App\Models\OfferSubscription;
 use App\Models\User;
 use App\Models\SystemOption;
@@ -11,18 +12,37 @@ class StatisticController extends Controller
 {
     public function index(Request $request)
     {
+        // временыые промежутки
         $lastDay = StatisticController::getDate('-1 day');
         $lastMonth = StatisticController::getDate('-1 month');
         $lastYear = StatisticController::getDate('-1 year');
         $allTime = StatisticController::getDate();
         $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
-
+        // комиссия
         $commision = SystemOption::where('name', 'commission')->first()->value('value')/ 100;
 
         if ($request->user()->role->name === 'рекламодатель') {
-            $offers = $request->user()->advertiser->offers;
-            //dd($request->user()->advertiser->offers->toArray());
-            return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
+            $totalClicks = 0;
+            $totalMoney = 0;
+            $advertiserOffers = [];
+
+            foreach ($request->user()->advertiser->offers as $offer) {
+                $clicks = $offer->clicks->count();
+                $price = $offer->price;
+                $money = $clicks * $price;
+                $totalClicks += $clicks;
+                $totalMoney += $money;
+                $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
+            }
+
+            $data = [
+                'user' => $request->user(),
+                'times' => $times, 
+                'offers'=>$advertiserOffers, 
+                'totalClicks'=>$totalClicks, 
+                'totalMoney'=>$totalMoney
+            ];
+            return view('pages/statistics', $data);
         } else if($request->user()->role->name === 'веб-мастер') {
             return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
         } else {

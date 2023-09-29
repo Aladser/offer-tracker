@@ -23,7 +23,7 @@ class OfferClickSeeder extends Seeder
         $date = StatisticController::getDate('-3 month');
         OfferClick::create(['offer_id' => 1, 'created_at' => $date, 'webmaster_id' => 2]);
 
-        OfferClick::create(['offer_id' => 4, 'webmaster_id' => 2]);
+        OfferClick::create(['offer_id' => 4, 'webmaster_id' => 1]);
         OfferClick::create(['offer_id' => 4, 'webmaster_id' => 3]);
     }
 }

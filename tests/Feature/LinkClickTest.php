@@ -6,11 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Offer;
-use App\Models\OfferClick;
-use App\Models\OfferSubscription;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
+use App\Models\SystemOption;
 
 class LinkClickTest extends TestCase
 {
@@ -23,15 +21,27 @@ class LinkClickTest extends TestCase
         }
 
         $advertiser = Advertiser::find(1);
-        echo "  клики и расходы рекламщика {$advertiser->user->name}:\n";
+        $commission = SystemOption::where('name', 'commission')->first()->value('value');
+        echo "  Комиссия $commission%\n";
+        echo "  Клики и расходы рекламщика {$advertiser->user->name}:\n";
+        $totalClicks = 0;
+        $totalMoney = 0;
+
+        $advertiserOffers = [];
 
         foreach ($advertiser->offers as $offer) {
-            echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
-            echo $offer->clicks->count() * $offer->price . "\n";
+            $clicks = $offer->clicks->count();
+            $price = $offer->price;
+            $money = $clicks * $price;
+            $totalClicks += $clicks;
+            $totalMoney += $money;
+            $advertiserOffers[] = ['name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
         }
-        $table = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
-        echo " Итог. переходов:{$table->where('advertiser_id', 1)->count()} сумма:";
-        echo $table->sum('price')."\n";
+
+        foreach ($advertiserOffers as $offer) {
+            echo "name:".$offer['name']." clicks:".$offer['clicks']." money:".$offer['money']."\n";
+        }
+        echo " Итог. переходов:$totalClicks сумма:$totalMoney\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
@@ -43,21 +53,32 @@ class LinkClickTest extends TestCase
         }
 
         $webmaster = Webmaster::find(1);
-        echo "\n  клики и доходы мастера {$webmaster->user->name}:\n";
+        echo "\n  Клики и доходы мастера {$webmaster->user->name}:\n";
         $subscriptions = $webmaster->subscriptions;
+        $commission = SystemOption::where('name', 'commission')->first()->value('value');
         $counts = 0;
-        $money = 0;
+        $totalExpense = 0;
+        $totalIncome = 0;
 
         foreach ($subscriptions as $subscription) {
             $offer = $subscription->offer;
+            $clicks = $offer->clicks->count();
+            $sum = $offer->clicks->count() * $offer->price;
+            $income = $this->getIncome($sum, $commission);
+
             echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
-            echo $offer->clicks->count() * $offer->price . "\n";
-            $counts += $offer->clicks->count();
-            $money += $offer->clicks->count() * $offer->price;
+            echo "$income ($sum)\n";
+            $counts += $clicks;
+            $totalExpense += $sum;
+            $totalIncome += $income;
         }
 
-        echo " Итог. переходов:$counts сумма:$money\n";
+        echo " Итог. переходов:$counts заработано:$totalIncome (потратили $totalExpense)\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
+    }
+
+    private function getIncome($money, $commission) {
+        return $money * (100-$commission)/100;
     }
 }
