@@ -65,9 +65,9 @@ class Offer extends Model
     }
 
     /** показать активные подписки без подписок конкретного пользователя */
-    public static function getActiveOffersExceptUserSubscriptions($userId)
+    public static function getActiveOffersExceptUserSubscriptions($webmasterId)
     {
-        $subscrOffers = OfferSubscription::where('follower_id', $userId)->select('offer_id');
+        $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
         $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
         return $activeOffers;
     }
@@ -105,15 +105,15 @@ class Offer extends Model
     public static function subscribe($offerId, $userId)
     {
         $offerSubscription = new OfferSubscription();
-        $offerSubscription->follower_id = $userId;
         $offerSubscription->offer_id = $offerId;
+        $offerSubscription->webmaster_id = $userId;
         $rslt = $offerSubscription->save();
         return $rslt ? 1 : 0;
     }
 
     public static function unsubscribe($offerId, $userId)
     {
-        $rslt = OfferSubscription::where('follower_id', $userId)->where('offer_id', $offerId)->delete();
+        $rslt = OfferSubscription::where('webmaster_id', $userId)->where('offer_id', $offerId)->delete();
         return $rslt;
     }
 }

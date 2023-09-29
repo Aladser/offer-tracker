@@ -23,7 +23,7 @@ class LinkClickTest extends TestCase
         }
 
         $advertiser = Advertiser::find(1);
-        echo "клики и расходы рекламщика {$advertiser->user->name}:\n";
+        echo "  клики и расходы рекламщика {$advertiser->user->name}:\n";
 
         foreach ($advertiser->offers as $offer) {
             echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
@@ -43,15 +43,20 @@ class LinkClickTest extends TestCase
         }
 
         $webmaster = Webmaster::find(1);
-        echo "клики и расходы мастера {$webmaster->user->name}:\n";
+        echo "  клики и доходы мастера {$webmaster->user->name}:\n";
+        $subscriptions = $webmaster->subscriptions;
+        $counts = 0;
+        $money = 0;
 
-        foreach ($webmaster->subscriptions as $subscription) {
+        foreach ($subscriptions as $subscription) {
             $offer = $subscription->offer;
             echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
             echo $offer->clicks->count() * $offer->price . "\n";
+            $counts += $offer->clicks->count();
+            $money += $offer->clicks->count() * $offer->price;
         }
 
-        var_dump(OfferClick::selectRaw("offer_id, sum(offer_id) as count"))->groupBy('offer_id')->get();
+        echo "Итог. переходов:$counts сумма:$money\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }

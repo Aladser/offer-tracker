@@ -9,13 +9,13 @@ class OfferSubscriptionSeed extends Seeder
 {
     public function run()
     {
-        OfferSubscription::create(['follower_id' => 1, 'offer_id' => 1]);
-        OfferSubscription::create(['follower_id' => 1, 'offer_id' => 2]);
-        OfferSubscription::create(['follower_id' => 1, 'offer_id' => 3]);
+        OfferSubscription::create(['webmaster_id' => 1, 'offer_id' => 2]);
+        OfferSubscription::create(['webmaster_id' => 1, 'offer_id' => 4]);
+        OfferSubscription::create(['webmaster_id' => 1, 'offer_id' => 8]);
 
-        OfferSubscription::create(['follower_id' => 2, 'offer_id' => 1]);
-        OfferSubscription::create(['follower_id' => 2, 'offer_id' => 2]);
+        OfferSubscription::create(['webmaster_id' => 2, 'offer_id' => 1]);
+        OfferSubscription::create(['webmaster_id' => 2, 'offer_id' => 2]);
 
-        OfferSubscription::create(['follower_id' => 3, 'offer_id' => 1]);
+        OfferSubscription::create(['webmaster_id' => 3, 'offer_id' => 1]);
     }
 }

@@ -39,15 +39,16 @@ class DashboardController extends Controller
                     );
             case 'веб-мастер':
                 $userId = $request->user()->id;
+                $webmasterId = $request->user()->webmaster->id;
                 return view(
                         'pages/webmaster',
                         [
                             // подписки пользователя
-                            'subscriptions' => OfferSubscription::where('follower_id', $userId),
+                            'subscriptions' => OfferSubscription::where('webmaster_id', $webmasterId),
                             // все доступные офферы без подписок пользователя
-                            'offers' => Offer::getActiveOffersExceptUserSubscriptions($userId),
+                            'offers' => Offer::getActiveOffersExceptUserSubscriptions($webmasterId),
                             // id пользователя-рекламщика (оптимизация) 
-                            'userId' => $request->user()->id,
+                            'userId' => $userId,
                         ]
                     );
             case 'рекламодатель':

@@ -13,4 +13,9 @@ class OfferClick extends Model
     {
         return $this->belongsTo(Offer::class, 'offer_id', 'id');
     }
+
+    public function webmaster()
+    {
+        return $this->belongsTo(Webmaster::class, 'webmaster_id', 'id');
+    }
 }

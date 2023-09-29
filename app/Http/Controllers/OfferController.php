@@ -52,15 +52,15 @@ class OfferController extends Controller
     public function subscribe(Request $request)
     {
         $id = $request->all()['offerId'];
-        $user = $request->user()->id;
-        return ['result' => Offer::subscribe($id, $user)];
+        $webmasterId = $request->user()->webmaster->id;
+        return ['result' => Offer::subscribe($id, $webmasterId)];
     }
 
     /** отписка от оффера */
     public function unsubscribe(Request $request)
     {
         $id = $request->all()['offerId'];
-        $user = $request->user()->id;
-        return ['result' => Offer::unsubscribe($id, $user)];
+        $webmasterId = $request->user()->webmaster->id;
+        return ['result' => Offer::unsubscribe($id, $webmasterId)];
     }
 }

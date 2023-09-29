@@ -21,6 +21,6 @@ class OfferSubscription extends Model
 
     public function follower()
     {
-        return $this->belongsTo(User::class, 'follower_id', 'id');
+        return $this->belongsTo(Webmaster::class, 'webmaster_id', 'id');
     }
 }

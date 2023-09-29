@@ -12,6 +12,9 @@ class CreateOfferClicksTable extends Migration
             $table->id();
             $table->timestamp('created_at')->useCurrent();
 
+            $table->bigInteger('webmaster_id')->unsigned();
+            $table->foreign('webmaster_id')->references('id')->on('webmasters')->cascadeOnDelete();
+
             $table->bigInteger('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
         });

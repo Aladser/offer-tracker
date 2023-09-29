@@ -16,13 +16,13 @@ class CreateOfferSubscriptionsTable extends Migration
         Schema::create('offer_subscriptions', function (Blueprint $table) {
             $table->id();
 
-            $table->bigInteger('follower_id')->unsigned();
-            $table->foreign('follower_id')->references('id')->on('webmasters')->cascadeOnDelete();
+            $table->bigInteger('webmaster_id')->unsigned();
+            $table->foreign('webmaster_id')->references('id')->on('webmasters')->cascadeOnDelete();
 
             $table->bigInteger('offer_id')->unsigned();
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
 
-            $table->unique(['follower_id', 'offer_id']);
+            $table->unique(['webmaster_id', 'offer_id']);
         });
     }
 

@@ -59,13 +59,15 @@ function switchSubscription (URL, offerId) {
         try {
             result = JSON.parse(data).result;
             if (result !== 1) {
-                prgError.textContent = data;
+                prgError.textContent = 'Ошибка сервера. Подробности в консоли';
+                console.log(data);
             }
         } catch(e) {
             if (data.includes('<title>Page Expired</title>')) {
                 window.open('/wrong-uri', '_self');
             } else {
-                prgError.textContent = data;
+                prgError.textContent = 'Ошибка сервера. Подробности в консоли';
+                console.log(data);
             }
         }
     })
