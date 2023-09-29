@@ -23,12 +23,14 @@ class LinkClickTest extends TestCase
         $offerService = new OfferService();
         $advertiser = Advertiser::find(1);
 
+
         echo "статистика офферов рекламщика {$advertiser->user->name}:\n";
         $data = $offerService->getOfferData($advertiser->user);
         foreach ($data['offers'] as $offer) {
-            echo "name:{$offer['name']} clicks:{$offer['clicks']} money:{$offer['money']}\n";
+            echo "{$offer['name']} посетителей:{$offer['clicks']} потрачено:{$offer['money']}\n";
         }
-        echo "Всего: переходов:{$data['totalClicks']} расходов:{$data['totalMoney']}\n";
+        echo "Всего: посетителей:{$data['totalClicks']} потрачено:{$data['totalMoney']}\n";
+
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
@@ -38,29 +40,17 @@ class LinkClickTest extends TestCase
         if (User::count() === 0) {
             $this->seed();
         }
-
+        $offerService = new OfferService();
         $webmaster = Webmaster::find(1);
-        echo "\n  Клики и доходы мастера {$webmaster->user->name}:\n";
-        $subscriptions = $webmaster->subscriptions;
-        $commission = SystemOption::where('name', 'commission')->first()->value('value');
-        $counts = 0;
-        $totalExpense = 0;
-        $totalIncome = 0;
 
-        foreach ($subscriptions as $subscription) {
-            $offer = $subscription->offer;
-            $clicks = $offer->clicks->count();
-            $sum = $offer->clicks->count() * $offer->price;
-            $income = $this->getIncome($sum, $commission);
 
-            echo "{$offer->name}. цена:{$offer->price} переходов:{$offer->clicks->count()} сумма:";
-            echo "$income ($sum)\n";
-            $counts += $clicks;
-            $totalExpense += $sum;
-            $totalIncome += $income;
+        echo "\nстатистика подписок мастера {$webmaster->user->name}:\n";
+        $data = $offerService->getOfferData($webmaster->user);
+        foreach ($data['offers'] as $offer) {
+            echo "{$offer['name']} посетителей:{$offer['clicks']} получено:{$offer['money']}\n";
         }
+        echo "Всего: посетителей:{$data['totalClicks']} получено:{$data['totalMoney']}\n";
 
-        echo " Итог. переходов:$counts заработано:$totalIncome (потратили $totalExpense)\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
