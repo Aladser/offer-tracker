@@ -19,12 +19,13 @@ class DashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $commission = SystemOption::commission();
+
         switch ($request->user()->role->name) {
             case 'администратор':
                 $table = DB::table('offer_clicks')->join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
                 $totalIncome = $table->sum('price');
                 $totalClicks = $table->count();
-                $commission = SystemOption::commission();
 
                 return view(
                         'pages/admin', 
@@ -48,6 +49,8 @@ class DashboardController extends Controller
                             'offers' => Offer::getActiveOffersExceptUserSubscriptions($webmasterId),
                             // id пользователя-рекламщика (оптимизация) 
                             'userId' => $userId,
+                            // доля платы вебмастера 
+                            'incomePercent' => round((100-$commission)/100, 2),
                         ]
                     );
             case 'рекламодатель':
