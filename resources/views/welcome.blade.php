@@ -50,11 +50,11 @@
                         <p class='text-center'>Для просмотра ваших подписок на офферы перейдите в профиль</p>
                         @endif
                     @endauth
+
                     <div class="d-flex flex-wrap justify-content-around w-100">
                         @foreach ($offers as $offer)
-                            <article class='p-3 m-2 pe-none text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$offer->id}}'>
-                                <p class='fw-bolder'>{{$offer->name}}</p>
-                                <p><a href="{{$offer->url}}">ссылка</a></p>
+                            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$offer->id}}'>
+                                <a href="{{$offer->url}}"><p title="{{$offer->url}}">{{$offer->name}}</p></a>
                                 <p>цена: {{$offer->price}}р.</p>
                                 <p>тема: {{$offer->theme->name}}</p>
                             </article>

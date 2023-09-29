@@ -11,16 +11,17 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('url')->nullable(false);
+            $table->string('url')->nullable(false)->default('https://laravel.su/docs/8.x/queries');
 
-            $table->boolean('status')->default(false);
             $table->integer('price')->unsigned()->default(0);
 
             $table->bigInteger('theme_id')->unsigned();
             $table->foreign('theme_id')->references('id')->on('offer_themes')->cascadeOnDelete();
 
             $table->bigInteger('advertiser_id')->unsigned();
-            $table->foreign('advertiser_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('advertiser_id')->references('id')->on('advertisers')->cascadeOnDelete();
+
+            $table->boolean('status')->default(true);
         });
     }
 
