@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
 use App\Models\SystemOption;
+use App\Services\OfferService;
 
 class LinkClickTest extends TestCase
 {
@@ -19,29 +20,15 @@ class LinkClickTest extends TestCase
         if (User::count() === 0) {
             $this->seed();
         }
-
+        $offerService = new OfferService();
         $advertiser = Advertiser::find(1);
-        $commission = SystemOption::where('name', 'commission')->first()->value('value');
-        echo "  Комиссия $commission%\n";
-        echo "  Клики и расходы рекламщика {$advertiser->user->name}:\n";
-        $totalClicks = 0;
-        $totalMoney = 0;
 
-        $advertiserOffers = [];
-
-        foreach ($advertiser->offers as $offer) {
-            $clicks = $offer->clicks->count();
-            $price = $offer->price;
-            $money = $clicks * $price;
-            $totalClicks += $clicks;
-            $totalMoney += $money;
-            $advertiserOffers[] = ['name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
+        echo "статистика офферов рекламщика {$advertiser->user->name}:\n";
+        $data = $offerService->getOfferData($advertiser->user);
+        foreach ($data['offers'] as $offer) {
+            echo "name:{$offer['name']} clicks:{$offer['clicks']} money:{$offer['money']}\n";
         }
-
-        foreach ($advertiserOffers as $offer) {
-            echo "name:".$offer['name']." clicks:".$offer['clicks']." money:".$offer['money']."\n";
-        }
-        echo " Итог. переходов:$totalClicks сумма:$totalMoney\n";
+        echo "Всего: переходов:{$data['totalClicks']} расходов:{$data['totalMoney']}\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }

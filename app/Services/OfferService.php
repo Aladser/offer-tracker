@@ -34,7 +34,7 @@ class OfferService
         return $data;
     }
 
-    private function getOfferData(User $user, $date = null) {
+    public function getOfferData(User $user, $date = null) {
         $totalClicks = 0;
         $totalMoney = 0;
         $advertiserOffers = [];
@@ -96,7 +96,7 @@ class OfferService
     }
 
     /** получить текущее время с учетом часового пояса */
-    private function getDate($period = null)
+    public static function getDate($period = null)
     {
         $date = new \DateTime();
         $timezone = env('TIMEZONE');
