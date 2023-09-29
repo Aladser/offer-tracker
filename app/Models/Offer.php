@@ -82,18 +82,21 @@ class Offer extends Model
         return $offer->save();
     }
 
-    public static function subscribe($offerId, $userId)
+    /** подписаться на оффер */
+    public static function subscribe($offerId, $webmasterId)
     {
         $offerSubscription = new OfferSubscription();
         $offerSubscription->offer_id = $offerId;
-        $offerSubscription->webmaster_id = $userId;
+        $offerSubscription->webmaster_id = $webmasterId;
+        $offerSubscription->refcode = "$webmasterId@$offerId";
         $rslt = $offerSubscription->save();
         return $rslt ? 1 : 0;
     }
 
-    public static function unsubscribe($offerId, $userId)
+    /** отписаться от оффера */
+    public static function unsubscribe($offerId, $webmasterId)
     {
-        $rslt = OfferSubscription::where('webmaster_id', $userId)->where('offer_id', $offerId)->delete();
+        $rslt = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->delete();
         return $rslt;
     }
 }

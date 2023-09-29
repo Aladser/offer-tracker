@@ -40,6 +40,7 @@ class OfferSeed extends Seeder
             'theme_id'=>2, 
             'advertiser_id' => 1, 
             'price' => random_int(1, 10),
+            'status' => 0
         ]);
         Offer::create([
             'name'=>'Оффер 6', 

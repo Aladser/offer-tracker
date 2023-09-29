@@ -25,5 +25,10 @@ class OfferClickSeeder extends Seeder
 
         OfferClick::create(['offer_id' => 4, 'webmaster_id' => 1]);
         OfferClick::create(['offer_id' => 4, 'webmaster_id' => 3]);
+
+        $date = OfferService::getDate('-2 month');
+        OfferClick::create(['offer_id' => 1, 'webmaster_id' => 1, 'created_at' => $date]);
+        $date = OfferService::getDate('-2 year');
+        OfferClick::create(['offer_id' => 1, 'webmaster_id' => 1, 'created_at' => $date]);
     }
 }
