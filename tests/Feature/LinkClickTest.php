@@ -30,7 +30,7 @@ class LinkClickTest extends TestCase
             echo $offer->clicks->count() * $offer->price . "\n";
         }
         $table = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
-        echo "Итог. переходов:{$table->where('advertiser_id', 1)->count()} сумма:";
+        echo " Итог. переходов:{$table->where('advertiser_id', 1)->count()} сумма:";
         echo $table->sum('price')."\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
@@ -43,7 +43,7 @@ class LinkClickTest extends TestCase
         }
 
         $webmaster = Webmaster::find(1);
-        echo "  клики и доходы мастера {$webmaster->user->name}:\n";
+        echo "\n  клики и доходы мастера {$webmaster->user->name}:\n";
         $subscriptions = $webmaster->subscriptions;
         $counts = 0;
         $money = 0;
@@ -56,7 +56,7 @@ class LinkClickTest extends TestCase
             $money += $offer->clicks->count() * $offer->price;
         }
 
-        echo "Итог. переходов:$counts сумма:$money\n";
+        echo " Итог. переходов:$counts сумма:$money\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
