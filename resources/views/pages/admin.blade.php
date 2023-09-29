@@ -19,9 +19,9 @@
 
                     <article class='mt-4'>
                         <h3 class='fw-bold w-50 mx-auto mb-2'>Доход системы за все время</h3>
-                        <table class='table mx-auto w-50'>
-                            <tr> <td class='w-50 fw-bolder'>Число переходов</td><td>{{$income['clicks']}}</td> </tr>
-                            <tr> <td class='w-50 fw-bolder'>Доход</td><td>{{$income['income']}} руб.</td> </tr>
+                        <table class='table mx-auto w-50 fs-5'>
+                            <tr> <td class='w-50 fw-bolder'>Число переходов</td><td>{{$clicks}}</td> </tr>
+                            <tr> <td class='w-50 fw-bolder'>Доход</td><td>{{round(($income*$commission)/100, 2)}} руб.</td> </tr>
                         </table>
                     </article>
 
@@ -29,7 +29,7 @@
                         <h3 class='fw-bold w-50 mx-auto mb-2'>Комиссия системы (%)</h3>
                         <form id='form-change-commission'>
                             <div class='position-relative col-2 mx-auto'>
-                                <input type="number" name='commission' id='input-change-commission' class='text-center fs-4 fw-bolder border border-opacity-25 position-relative' value="{{$income['commission']}}" size='100' required>
+                                <input type="number" name='commission' id='input-change-commission' class='text-center fs-4 fw-bolder border border-opacity-25 position-relative' value="{{$commission}}" size='100' required>
                                 <input type="submit" value="✓"  class='position-absolute p-1 bg-ddd rounded-circle d-none' id='btn-change-commission' title='сохранить'>
                             </div>
                         </form>

@@ -29,12 +29,11 @@ class DashboardController extends Controller
                 return view(
                         'pages/admin', 
                         [
-                            // id пользователя-рекламщика 
                             'userId' => $request->user()->id,
-                            // все темы офферов 
                             'themes' => OfferTheme::all()->toArray(),
-                            // доход системы
-                            'income' => ['income'=>$totalIncome, 'clicks'=>$totalClicks, 'commission' => $commission],
+                            'income'=>$totalIncome,
+                            'clicks'=>$totalClicks,
+                            'commission' => $commission
                         ] 
                     );
             case 'веб-мастер':
