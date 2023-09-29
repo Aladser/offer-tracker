@@ -15,6 +15,7 @@ class CreateOfferSubscriptionsTable extends Migration
     {
         Schema::create('offer_subscriptions', function (Blueprint $table) {
             $table->id();
+            $table->string('redirect-url')->unique()->nullable(false);
 
             $table->bigInteger('webmaster_id')->unsigned();
             $table->foreign('webmaster_id')->references('id')->on('webmasters')->cascadeOnDelete();

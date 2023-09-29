@@ -55,7 +55,6 @@
                         @foreach ($offers as $offer)
                             <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$offer->id}}'>
                                 <a href="{{$offer->url}}"><p title="{{$offer->url}}">{{$offer->name}}</p></a>
-                                <p>цена: {{$offer->price}}р.</p>
                                 <p>тема: {{$offer->theme->name}}</p>
                             </article>
                         @endforeach
