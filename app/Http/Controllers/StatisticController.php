@@ -10,36 +10,15 @@ use App\Models\SystemOption;
 
 class StatisticController extends Controller
 {
+    /** страница статистики */
     public function index(Request $request, OfferService $offerService)
     {
-        // временыые промежутки
-        $lastDay = StatisticController::getDate('-1 day');
-        $lastMonth = StatisticController::getDate('-1 month');
-        $lastYear = StatisticController::getDate('-1 year');
-        $allTime = StatisticController::getDate();
-        $times = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
-        
         if ($request->user()->role->name === 'рекламодатель') {
-            $data = $offerService->getStatistics($request->user());
-            $data['user'] = $request->user();
-            $data['times'] = $times;
-            return view('pages/statistics', $data);
+            return view('pages/statistics', $offerService->getStatisticsData($request->user()));
         } else if($request->user()->role->name === 'веб-мастер') {
             return view('pages/statistics', ['user' => $request->user(), 'times' => $times] );
         } else {
             return redirect('/dashboard');
         }
-    }
-
-    /** получить текущее время с учетом часового пояса */
-    public static function getDate($period = null)
-    {
-        $date = new \DateTime();
-        $timezone = env('TIMEZONE');
-        $date->modify("+ $timezone hours");
-        if (!is_null($period)) {
-            $date->modify($period);
-        }
-        return $date->format('Y-m-d H:i:s');
     }
 }
