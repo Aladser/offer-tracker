@@ -26,38 +26,18 @@ class Offer extends Model
         return $this->belongsTo(Advertiser::class, 'advertiser_id', 'id');
     }
 
-    /** подписки */
+    /** подписано вебмастеров */
     public function links()
     {
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');
     }
 
-    /** переходы */
+    /** переходы посетителей */
     public function clicks()
     {
         return $this->hasMany(OfferClick::class, 'offer_id', 'id');
     }
-
-    /** число переходов новее текущей даты */
-    public function clickCount($timePeriod = null)
-    {
-        if (is_null($timePeriod)) {
-            return $this->clicks->count();
-        } else {
-            return $this->clicks->where('created_at', '>', $timePeriod)->count();
-        }
-    }
-
-    /** число переходов новее текущей даты */
-    public function money($timePeriod = null)
-    {
-        if (is_null($timePeriod)) {
-            return $this->clicks->count() * $this->price;
-        } else {
-            return $this->clicks->where('created_at', '>', $timePeriod)->count() * $this->price;
-        }
-    }
-
+    
     /** показать активные подписки */
     public static function getActiveOffers()
     {

@@ -43,7 +43,7 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{$offer->clicks->count()}} </td>
+                                    <td>{{$offer->links->count()}} </td>
                                 </tr>
                             @endforeach
                         </table>

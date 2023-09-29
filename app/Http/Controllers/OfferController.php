@@ -27,7 +27,7 @@ class OfferController extends Controller
         } else {
             // поиск рекламщика
             $advertiserId = Advertiser::findAdvertiser($data['user']); 
-            if (is_null($advertiserId)) {
+            if (!$advertiserId) {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             } else {
                 return ['result' => Offer::add($data, $advertiserId), 'offerName' => $data['name']];

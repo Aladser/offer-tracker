@@ -46,6 +46,7 @@ class OfferFrontCtl {
         formData.append('user', this.username);
         
         fetch(this.URL, {method:'post', body:formData}).then(response => response.text()).then(data => {
+            console.log(data);
             try {
                 let offer = JSON.parse(data);
                 if (offer.result === 1) {

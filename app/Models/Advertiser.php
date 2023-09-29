@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Http\Interfaces\OfferTotalValueInterface;
 
-class Advertiser extends Model implements OfferTotalValueInterface
+class Advertiser extends Model
 {
     public $timestamps = false;
 
@@ -16,29 +15,14 @@ class Advertiser extends Model implements OfferTotalValueInterface
         return $this->belongsTo(User::class);
     }
 
-    /** офферы */
     public function offers()
     {
         return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
 
-    public function offerClickCount($timePeriod = null) {
-        $table = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id')->where('advertiser_id', $this->id);
-        return !is_null($timePeriod) ? $table->where('created_at', '>', $timePeriod)->count() : $table->count();
-    }
-
-    public function offerMoney($timePeriod = null) {
-        $totalIncome = 0;
-        foreach ($this->offers->all() as $offer) {
-            $totalIncome += $offer->clickCount($timePeriod) * $offer->price;
-        }
-        return $totalIncome;
-    }
-
-    /** используется в контроллере */
     public static function findAdvertiser($name)
     {
-        $table = DB::table('advertisers')->join('users', 'users.id', '=', 'advertisers.user_id');
-        return $table->where('name', $name)->first()->id;
+        $user = User::where('name', $name);
+        return !is_null($user) ? User::where('name', $name)->first()->value('id') : false;
     }
 }
