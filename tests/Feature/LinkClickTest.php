@@ -5,11 +5,10 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Services\OfferService;
 use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
-use App\Models\SystemOption;
-use App\Services\OfferService;
 
 class LinkClickTest extends TestCase
 {
