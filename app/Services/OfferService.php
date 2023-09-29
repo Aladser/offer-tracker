@@ -96,7 +96,7 @@ class OfferService
     }
 
     /** получить текущее время с учетом часового пояса */
-    private static function getDate($period = null)
+    private function getDate($period = null)
     {
         $date = new \DateTime();
         $timezone = env('TIMEZONE');
