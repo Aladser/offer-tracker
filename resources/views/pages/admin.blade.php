@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('title')
+        <x-title> Панель администратора</x-title>
+    @endsection
+
     @section('css')
         <link href="/css/admin.css" rel="stylesheet" />
     @endsection

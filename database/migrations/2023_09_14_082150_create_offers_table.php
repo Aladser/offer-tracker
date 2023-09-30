@@ -11,7 +11,7 @@ class CreateOffersTable extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('url')->nullable(false)->default('https://laravel.su/docs/8.x/queries');
+            $table->string('url')->nullable(false)->default('https://laravel.su/docs/8.x');
 
             $table->integer('price')->unsigned()->default(0);
 

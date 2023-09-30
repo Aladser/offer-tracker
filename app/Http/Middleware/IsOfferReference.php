@@ -14,9 +14,11 @@ class IsOfferReference
         $params = $request->all();
         if (array_key_exists('ref', $params)) {
             $refCode = $params['ref'];
-            $isReference = OfferSubscription::where('refcode', $refCode)->first();
-            if (is_null($isReference)) {
+            $reference = OfferSubscription::where('refcode', $refCode)->first();
+            if (is_null($reference)) {
                 return redirect('page404');
+            } else {
+                return redirect($reference->offer->url);
             }
         }
         return $next($request);

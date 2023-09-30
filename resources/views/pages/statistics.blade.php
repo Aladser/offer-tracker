@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('title')
+        <x-title> Статистика</x-title>
+    @endsection
+
     @section('js')
         <script src="/js/statistics.js" defer></script>
     @endsection

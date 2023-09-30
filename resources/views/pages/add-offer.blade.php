@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('title')
+        <x-title> Добавить новый оффер</x-title>
+    @endsection
+
     @section('js')
         <script src="/js/frontCtl/OfferFrontCtl.js" defer></script>
         <script src="/js/addOffer.js" defer></script>

@@ -1,4 +1,8 @@
 <x-app-layout>
+    @section('title')
+        <x-title> Темы офферов</x-title>
+    @endsection
+
     @section('js')
         <script src="/js/frontCtl/OfferThemeFrontCtl.js" defer></script>
         <script src="/js/addOfferTheme.js" defer></script>

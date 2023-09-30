@@ -16,15 +16,6 @@ activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragst
 activeOffersList.ondragover = onDragOver;
 activeOffersList.ondrop = onDrop;
 
-/** реф.код */
-let refCode = null;
-
-/** окно показа ссылки */
-const refFrame = document.querySelector('#article-new-subscription');
-const refFrameField = document.querySelector('#article-new-subscription__ref');
-const refFrameBtn = document.querySelector('#article-new-subscription__btn');
-refFrameBtn.onclick = () => refFrame.classList.add('d-none');
-
 // функции событий
 function onDragStart(event) {
     event.dataTransfer.setData('text/plain', event.target.id);
@@ -47,19 +38,19 @@ function onDrop(event) {
         draggableElement.classList.remove('subscriptions__item');
         draggableElement.classList.add('offers__item');
         draggableElement.classList.add('bg-light');
-        switchSubscription(unsubscribeURL,id);
+        switchSubscription(unsubscribeURL, id, draggableElement);
     } else {
         id = draggableElement.id.substring(6);
         draggableElement.id = `subscription-${id}`;
         draggableElement.classList.remove('offers__item');
         draggableElement.classList.add('subscriptions__item');
         draggableElement.classList.remove('bg-light');
-        switchSubscription(subscribeURL, id);
+        switchSubscription(subscribeURL, id, draggableElement);
     }
     draggableElement.style.backgroundColor = 'white';
 }
 
-function switchSubscription (URL, offerId) {
+function switchSubscription(URL, offerId, offer) {
     let data = new URLSearchParams();
     data.set('offerId', offerId);
     let headers = {'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')};
@@ -70,9 +61,10 @@ function switchSubscription (URL, offerId) {
             if (result == 0) {
                 prgError.textContent = 'Ошибка сервера. Подробности в консоли';
                 console.log(data);
-            } else if (result !== 1) {
-                refFrame.classList.remove('d-none');
-                refFrameField.textContent = `/dashboard?ref=${result}`;
+            } else if (result == 1) {
+                offer.querySelector('.subscriptions__ref').remove();
+            } else {
+                offer.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
             }
         } catch(e) {
             if (data.includes('<title>Page Expired</title>')) {

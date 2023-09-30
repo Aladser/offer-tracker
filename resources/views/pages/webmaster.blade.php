@@ -1,4 +1,9 @@
 <x-app-layout>
+    @section('title')
+        <x-title> Панель вебмастера</x-title>
+    @endsection
+
+
     @section('css')
         <link href="/css/webmaster.css" rel="stylesheet" />
     @endsection
@@ -32,6 +37,7 @@
                                         <p class='fw-bolder'>{{$subscription->offer->name}}</p>
                                         <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                         <p>тема: {{$subscription->offer->theme->name}}</p>
+                                        <a href="?ref={{$subscription->refcode}}" title="?ref={{$subscription->refcode}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
                                     </article>
                                 @endif
                             @endforeach

@@ -1,4 +1,8 @@
 <x-app-layout class='position-relative'>
+    @section('title')
+        <x-title>Панель рекламодателя</x-title>
+    @endsection
+
     @section('css')
         <link href="/css/advertiserPage.css" rel="stylesheet" />
     @endsection
