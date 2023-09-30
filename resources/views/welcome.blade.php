@@ -40,29 +40,35 @@
             @endif
 
             <section class="w-75 p-4 mx-auto">
-                    <h3 class='h1 text-center pb-4'>Страница интересных ссылок</h3>
-                    @auth
-                        @if ($user->role->name === 'администратор')
-                            <p class='text-center'>Для управления сайтом перейдите в профиль</p>
-                        @elseif ($user->role->name === 'рекламодатель')
-                            <p class='text-center'>Для просмотра ваших офферов перейдите в профиль</p>
-                        @else
-                        <p class='text-center'>Для просмотра ваших подписок на офферы перейдите в профиль</p>
-                        @endif
-                    @endauth
+                <h3 class='h1 text-center pb-4'>Страница интересных ссылок</h3>
+                <p class='text-center fs-5 mb-4'>
+                    Здесь расположены все подписки на офферы с указанием, какой оффер и вебмастер-подписчик
+                </p>
 
-                    <div class="d-flex flex-wrap justify-content-around w-100">
-                        <!-- тестовая нерабочая ссылка -->
-                        <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded'>
-                            <a href="?ref=1"><p title="?ref=1@1"> Тестовая ссылка </p></a>
+                @auth
+                    @if ($user->role->name === 'администратор')
+                        <p class='text-center'>Для управления сайтом перейдите в профиль</p>
+                    @elseif ($user->role->name === 'рекламодатель')
+                        <p class='text-center'>Для просмотра ваших офферов перейдите в профиль</p>
+                    @else
+                    <p class='text-center'>Для просмотра ваших подписок на офферы перейдите в профиль</p>
+                    @endif
+                @endauth
+
+                <div class="d-flex flex-wrap justify-content-around w-100">
+                    <!-- тестовая нерабочая ссылка -->
+                    <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded'>
+                        <a href="?ref=1"><p title="?ref=1@1"> Тестовая ссылка </p></a>
+                    </article>
+                    @for ($i = 0; $i < count($subscriptions); $i++)
+                        <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$subscriptions[$i]->id}}'>
+                            <a href="?ref={{$subscriptions[$i]->refcode}}"><p title="{{$subscriptions[$i]->offer->url}}">Ссылка {{$i}}</p></a>
+                            <p>оффер:{{$subscriptions[$i]->offer->name}}</p>
+                            <p>веб-мастер:{{$subscriptions[$i]->follower->user->name}}</p>
+                            <p>тема: {{$subscriptions[$i]->offer->theme->name}}</p>
                         </article>
-                        @for ($i = 0; $i < count($subscriptions); $i++)
-                            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$subscriptions[$i]->id}}'>
-                                <a href="?ref={{$subscriptions[$i]->refcode}}"><p title="{{$subscriptions[$i]->offer->url}}">Ссылка вебмастера {{$i}}</p></a>
-                                <p>тема: {{$subscriptions[$i]->offer->theme->name}}</p>
-                            </article>
-                        @endfor
-                    </div>
+                    @endfor
+                </div>
             </section>
         </main>        
     </body>
