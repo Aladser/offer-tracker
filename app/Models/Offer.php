@@ -38,12 +38,6 @@ class Offer extends Model
         return $this->hasMany(OfferClick::class, 'offer_id', 'id');
     }
     
-    /** показать активные подписки */
-    public static function getActiveOffers()
-    {
-        return Offer::where('status', 1)->get();
-    }
-
     /** показать активные подписки без подписок конкретного пользователя */
     public static function getActiveOffersExceptUserSubscriptions($webmasterId)
     {

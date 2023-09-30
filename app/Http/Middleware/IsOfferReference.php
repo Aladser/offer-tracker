@@ -18,6 +18,7 @@ class IsOfferReference
             if (is_null($reference)) {
                 return redirect('page404');
             } else {
+                dd($reference->toArray());
                 return redirect($reference->offer->url);
             }
         }

@@ -5,10 +5,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OfferThemeController;
 use App\Http\Controllers\StatisticController;
-use App\Models\Offer;
+use App\Models\OfferSubscription;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', fn() => view('welcome', ['offers' => Offer::getActiveOffers(), 'user' => Auth::user()]))
+Route::get('/', fn() => view('welcome', ['subscriptions' => OfferSubscription::all(), 'user' => Auth::user()]))
     ->name('main');
     
 // страница пользователя

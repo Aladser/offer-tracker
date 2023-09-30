@@ -52,12 +52,16 @@
                     @endauth
 
                     <div class="d-flex flex-wrap justify-content-around w-100">
-                        @foreach ($offers as $offer)
-                            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$offer->id}}'>
-                                <a href="{{$offer->url}}"><p title="{{$offer->url}}">{{$offer->name}}</p></a>
-                                <p>тема: {{$offer->theme->name}}</p>
+                        <!-- тестовая нерабочая ссылка -->
+                        <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded'>
+                            <a href="?ref=1"><p title="?ref=1@1"> Тестовая ссылка </p></a>
+                        </article>
+                        @for ($i = 0; $i < count($subscriptions); $i++)
+                            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$subscriptions[$i]->id}}'>
+                                <a href="?ref={{$subscriptions[$i]->refcode}}"><p title="{{$subscriptions[$i]->offer->url}}">Ссылка вебмастера {{$i}}</p></a>
+                                <p>тема: {{$subscriptions[$i]->offer->theme->name}}</p>
                             </article>
-                        @endforeach
+                        @endfor
                     </div>
             </section>
         </main>        
