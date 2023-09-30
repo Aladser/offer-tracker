@@ -23,4 +23,12 @@ class OfferClick extends Model
     {
         return $this->belongsTo(Webmaster::class, 'webmaster_id', 'id');
     }
+
+    public static function add($webmasterId, $offerId)
+    {
+        $click = new OfferClick();
+        $click->webmaster_id = $webmasterId;
+        $click->offer_id = $offerId;        
+        return $click->save() ? 1 : 0;
+    }
 }
