@@ -8,7 +8,12 @@ use App\Http\Controllers\StatisticController;
 use App\Models\OfferSubscription;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', fn() => view('welcome', ['subscriptions' => OfferSubscription::all(), 'user' => Auth::user()]))
+Route::get('/', function() {
+        return view(
+            'welcome', 
+            ['subscriptions' => OfferSubscription::getActiveSubscriptions(), 'user' => Auth::user()]
+        );
+    })
     ->name('main');
     
 // страница пользователя

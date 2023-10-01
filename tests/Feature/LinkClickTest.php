@@ -9,6 +9,7 @@ use App\Services\OfferService;
 use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
+use App\Models\OfferSubscription;
 
 class LinkClickTest extends TestCase
 {
@@ -53,5 +54,17 @@ class LinkClickTest extends TestCase
 
     private function getIncome($money, $commission) {
         return $money * (100-$commission)/100;
+    }
+
+    public function testSubscriptions()
+    {
+        if (User::count() === 0) {
+            $this->seed();
+        }
+        $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id');
+        var_dump($subscriptions->get()->toArray());
+        echo 'подписок = ' . $subscriptions->count() . "\n";
+        echo 'активных подписок = ' . $subscriptions->where('status', 1)->count()."\n";
+        $this->assertDatabaseCount('offer_subscriptions', 6);
     }
 }

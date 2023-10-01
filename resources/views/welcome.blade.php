@@ -40,9 +40,9 @@
             @endif
 
             <section class="w-75 p-4 mx-auto">
-                <h3 class='h1 text-center pb-4'>Страница интересных ссылок</h3>
+                <h3 class='h1 text-center pb-4'>Реферальные ссылки</h3>
                 <p class='text-center fs-5 mb-4'>
-                    Здесь расположены все подписки на офферы с указанием, какой оффер и вебмастер-подписчик
+                    Все реферальные ссылки с указанием, какой оффер и вебмастер-подписчик
                 </p>
 
                 @auth
@@ -51,14 +51,14 @@
                     @elseif ($user->role->name === 'рекламодатель')
                         <p class='text-center'>Для просмотра ваших офферов перейдите в профиль</p>
                     @else
-                    <p class='text-center'>Для просмотра ваших подписок на офферы перейдите в профиль</p>
+                        <p class='text-center'>Для просмотра ваших реферальных ссылок перейдите в профиль</p>
                     @endif
                 @endauth
 
                 <div class="d-flex flex-wrap justify-content-around w-100">
                     <!-- тестовая нерабочая ссылка -->
                     <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded'>
-                        <a href="?ref=1"><p title="?ref=1@1"> Тестовая ссылка </p></a>
+                        <a href="?ref=1"><p title="?ref=1@1"> Тестовая<br> неработающая<br> ссылка </p></a>
                     </article>
                     @for ($i = 0; $i < count($subscriptions); $i++)
                         <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$subscriptions[$i]->id}}'>

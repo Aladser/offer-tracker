@@ -29,4 +29,9 @@ class OfferSubscription extends Model
     {
         return $this->hasMany(OfferClick::class, 'offer_id', 'offer_id');
     }
+
+    public static function getActiveSubscriptions()
+    {
+        return OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id')->where('status','1')->get();
+    }
 }
