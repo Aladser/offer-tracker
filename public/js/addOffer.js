@@ -14,7 +14,4 @@ const msgPrg = document.querySelector('#form-add-error');
 const username = document.querySelector('#navpanel-username').textContent;
 
 /** фронт-контроллер офферов */
-const offerFrontCtl = new OfferFrontCtl(offerURL, null, addOfferForm, msgPrg, username, csrfToken);
-
-/** кнопка назад */
-document.querySelector('#form-add-new__btn-back').onclick = () => window.open('/dashboard', '_self');
+const offerService = new OfferService(offerURL, null, addOfferForm, msgPrg, username, csrfToken);

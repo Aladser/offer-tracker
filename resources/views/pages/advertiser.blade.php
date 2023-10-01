@@ -8,8 +8,8 @@
     @endsection
 
     @section('js')
-        <script src="/js/frontCtl/OfferFrontCtl.js" defer></script>
-        <script src="/js/advertiserPage.js" defer></script>
+        <script src="/js/services/OfferService.js" defer></script>
+        <script src="/js/pages/advertiser.js" defer></script>
     @endsection
 
     <section class='w-50 mx-auto'>
@@ -18,8 +18,8 @@
         </x-slot>
 
         <article class='pt-4 text-center'>
-            <a href="/offer/create" class='btn btn-outline-dark col-3'>Добавить оффер</a>
-            <a href="/offer/statistics" class='btn btn-outline-dark col-3'>Статистика офферов</a>
+            <a href="{{route('offer.create')}}" class='btn btn-outline-dark col-3'>Добавить оффер</a>
+            <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark col-3'>Статистика офферов</a>
         </article>
         
         <article class="mt-4">

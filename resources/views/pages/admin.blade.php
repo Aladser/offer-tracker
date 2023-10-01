@@ -8,7 +8,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/admin.js" defer></script>
+        <script src="/js/pages/admin.js" defer></script>
     @endsection
 
     <x-slot name="header">
@@ -19,7 +19,8 @@
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section class="p-6 bg-white border-b border-gray-200 text-center">
-                    <a href="/offer-theme" class='btn btn-outline-dark col-2'>Темы офферов</a>
+                    <a href="" class='btn btn-outline-dark col-2'>Пользователи</a>
+                    <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark col-2'>Темы офферов</a>
 
                     <article class='mt-4'>
                         <h3 class='fw-bold w-50 mx-auto mb-2'>Доход системы за все время</h3>

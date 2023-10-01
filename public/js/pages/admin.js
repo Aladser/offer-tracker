@@ -24,6 +24,7 @@ function setInputCommission() {
     }
 }
 
+// отправка новой комиссии на сервер
 commissionForm.onsubmit = function(e) {
     e.preventDefault();
     commissionValue = e.target.commission.value;

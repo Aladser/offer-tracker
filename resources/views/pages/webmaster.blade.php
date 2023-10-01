@@ -9,7 +9,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/webmaster.js" defer></script>
+        <script src="/js/pages/webmaster.js" defer></script>
     @endsection
 
     <x-slot name="header">
@@ -20,7 +20,7 @@
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative">
                 <p class='text-center p-3'>
-                    <a href="/offer/statistics" class='btn btn-outline-dark'>Статистика офферов</a>
+                    <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark'>Статистика офферов</a>
                 </p>
                 <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
                 <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>

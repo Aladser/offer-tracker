@@ -1,5 +1,5 @@
 /** Фронт-контроллер таблицы */
-class OfferThemeFrontCtl {
+class OfferThemeService {
     /** фронт-часть контроллера тем офферов
      * 
      * @param {*} URL URL бэк-контроллера
@@ -86,7 +86,7 @@ class OfferThemeFrontCtl {
             }
 
             row.innerHTML += "<button id='table-themes__btn-remove' title='Удалить'>🗑</button>";
-            row.lastChild.onclick = e => offerThemeFrontCtl.remove(e.target);
+            row.lastChild.onclick = e => this.remove(e.target);
             row.classList.add('table-themes__tr--active');
         }
     }

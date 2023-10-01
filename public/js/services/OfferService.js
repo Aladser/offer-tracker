@@ -1,5 +1,5 @@
 /** Фронт-контроллер офферов */
-class OfferFrontCtl {
+class OfferService {
     /** Фронт-контроллер офферов
      * @param {*} URL url бэк-части
      * @param {*} offerTable таблица офферов
@@ -46,7 +46,6 @@ class OfferFrontCtl {
         formData.append('user', this.username);
         
         fetch(this.URL, {method:'post', body:formData}).then(response => response.text()).then(data => {
-            console.log(data);
             try {
                 let offer = JSON.parse(data);
                 if (offer.result === 1) {
@@ -102,7 +101,7 @@ class OfferFrontCtl {
             // кнопка удаления
             row.innerHTML += "<button id='table-offers__btn-remove' title='Удалить'>🗑</button>";
             // удаление строки при нажатии кнопки удаления
-            row.lastChild.onclick = e => offerFrontCtl.remove(e.target);
+            row.lastChild.onclick = e => this.remove(e.target);
             // флаг новой выделенной строки
             row.classList.add('table-offers__tr--active');
         }

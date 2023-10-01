@@ -11,4 +11,4 @@ const addThemeForm = document.querySelector('#form-add-theme');
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
 /** фрон-контроллер таблицы тем */
-const offerThemeFrontCtl = new OfferThemeFrontCtl('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);
+const offerThemeService = new OfferThemeService('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);

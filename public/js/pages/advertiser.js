@@ -5,4 +5,4 @@ const offerTable = document.querySelector('#table-offers tbody');
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
 /** фронт-контроллер офферов */
-const offerFrontCtl = new OfferFrontCtl('/offer', offerTable, null, null, null, csrfToken);
+const offerService = new OfferService('/offer', offerTable, null, null, null, csrfToken);

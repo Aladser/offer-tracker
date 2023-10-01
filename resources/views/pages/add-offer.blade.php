@@ -4,7 +4,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/frontCtl/OfferFrontCtl.js" defer></script>
+        <script src="/js/services/OfferService.js" defer></script>
         <script src="/js/addOffer.js" defer></script>
     @endsection
 
@@ -34,7 +34,7 @@
         </select><br>
         <div class='mt-3'>
             <input type="submit" class='btn btn-outline-dark col-2' value='Добавить'>
-            <input type="submit" class='btn btn-outline-dark col-2' id='form-add-new__btn-back' value='Назад'>
+            <a href="{{route('dashboard')}}" class='btn btn-outline-dark col-2'>Назад</a>
         </div>
     </form>
     <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>

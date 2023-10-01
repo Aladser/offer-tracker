@@ -27,7 +27,8 @@ require __DIR__.'/auth.php';
 Route::resource('/offer', OfferController::class)->except(['index', 'show', 'edit', 'update'])
     ->middleware(['auth']);
 Route::post('/offer/status', [OfferController::class, 'status']);
-Route::get('/offer/statistics', [StatisticController::class, 'index'])->middleware(['auth']);
+Route::get('/offer/statistics', [StatisticController::class, 'index'])
+    ->middleware(['auth'])->name('offer.statistics');
 
 // подписка-отписка вебмастеров на офферы
 Route::post('/offer/subscribe', [OfferController::class, 'subscribe']);
