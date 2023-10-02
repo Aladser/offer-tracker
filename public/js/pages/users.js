@@ -1,5 +1,14 @@
-const nameInput = document.querySelector('#form-add-user__name');
-const passwordInput = document.querySelector('#form-add-user__password');
+/** таблица тем */
+const userTable = document.querySelector('#table-users');
 
-nameInput.value = '';
-passwordInput.value = '';
+/** поле результата добавления */
+const msgPrg = document.querySelector('#form-add-error');
+
+/** форма создания оффера */
+const addUserForm = document.querySelector('#form-add-user');
+
+/** CSRF */
+const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
+/** фрон-контроллер таблицы тем */
+const userService = new UserService('/offer-theme', userTable, msgPrg, addUserForm, csrfToken);

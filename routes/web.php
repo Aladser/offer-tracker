@@ -20,7 +20,7 @@ Route::get('/', function() {
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
 // пользователи
-Route::get('/user/index', [UserController::class, 'index'])->middleware(['auth'])->name('users');
+Route::get('/users/index', [UserController::class, 'index'])->middleware(['auth'])->name('users');
 
 // аутентификация
 require __DIR__.'/auth.php';

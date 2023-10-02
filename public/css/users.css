@@ -1,3 +1,19 @@
 .w-40 {
     width: 40%;
 }
+
+.table-users__tr:hover {
+    background-color: #ddd;
+}
+
+.table-users__tr:hover, 
+.table-users__tr--active {
+    background-color: #ddd;
+    cursor:pointer;
+}
+
+#table-users__btn-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

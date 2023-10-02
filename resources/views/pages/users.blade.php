@@ -4,6 +4,7 @@
     @endsection
 
     @section('js')
+        <script src="/js/services/UserService.js" defer></script>
         <script src="/js/pages/users.js" defer></script>
     @endsection
 
@@ -25,7 +26,7 @@
                 <input type="text" name="name" class='mb-2 border w-50' id="form-add-user__name" required><br>
 
                 <label for="form-add-user__email" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
-                <input type="text" name="name" class='mb-2 border w-50' id="form-add-user__email" required><br>
+                <input type="email" name="name" class='mb-2 border w-50' id="form-add-user__email" required><br>
 
                 <label for="form-add-user__password1" class='fw-bolder text-start ps-2 w-40'>Пароль:</label>
                 <input type="password" name="name" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password"><br>
@@ -42,7 +43,7 @@
 
                 <input type="submit" class='btn btn-outline-dark col-2' value='Добавить'>
             </form>
-            <p id='form-add-user-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
+            <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
         </article>
 
         <article>
@@ -50,7 +51,9 @@
             <table class='table w-50 mx-auto' id='table-users'>
                 <tr> <th>Имя:</th> <th>email</th> <th>Роль</th> </tr>
                 @foreach ($users as $user)
-                    <tr> <td>{{$user->name}}</td> <td>{{$user->email}}</td> <td>{{$user->role->name}}</td> </tr>
+                    <tr class='table-users__tr position-relative' data-id="{{$user->id}}"> 
+                        <td>{{$user->name}}</td> <td>{{$user->email}}</td> <td>{{$user->role->name}}</td> 
+                    </tr>
                 @endforeach
             </table>
         </article>
