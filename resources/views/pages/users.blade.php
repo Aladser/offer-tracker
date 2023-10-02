@@ -41,7 +41,7 @@
                     @endforeach
                 </select><br>
 
-                <input type="submit" class='btn btn-outline-dark col-2' value='Добавить'>
+                <input type="submit" class='btn btn-outline-dark' value='Добавить'>
             </form>
             <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
         </article>
