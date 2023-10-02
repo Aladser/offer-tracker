@@ -4,7 +4,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/users.js" defer></script>
+        <script src="/js/pages/users.js" defer></script>
     @endsection
 
     @section('css')
@@ -17,23 +17,26 @@
 
     <section class="p-6 bg-white border-b border-gray-200 text-center fs-4 w-75 mx-auto mt-4">
         <a href="{{route('dashboard')}}" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
-        <article class='mb-4'>
+        <article class='mb-4 w-50 mx-auto'>
             <h3 class='fw-bold w-50 mx-auto'>Добавить нового Пользователя</h3>
             <form method='post' id='form-add-user' class='text-center mt-4 w-75 mx-auto'>
                 @csrf
-                <label for="form-add-user__name" class='fw-bolder w-50 text-start ps-2'>Название:</label><br>
-                <input type="text" name="name" class='w-50 mb-2 border' id="form-add-user__name" required><br>
+                <label for="form-add-user__name" class='fw-bolder text-start ps-2 w-40'>Имя:</label>
+                <input type="text" name="name" class='mb-2 border w-50' id="form-add-user__name" required><br>
 
-                <label for="form-add-user__email" class='fw-bolder w-50 text-start ps-2'>Почта:</label><br>
-                <input type="text" name="name" class='w-50 mb-2 border' id="form-add-user__email" required><br>
+                <label for="form-add-user__email" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
+                <input type="text" name="name" class='mb-2 border w-50' id="form-add-user__email" required><br>
 
-                <label for="form-add-user__password" class='fw-bolder w-50 text-start ps-2'>Пароль:</label><br>
-                <input type="password" name="name" class='w-50 mb-2 border' id="form-add-user__paasword" required><br>
+                <label for="form-add-user__password1" class='fw-bolder text-start ps-2 w-40'>Пароль:</label>
+                <input type="password" name="name" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password"><br>
 
-                <label for="form-add-user__role" class='fw-bolder w-50 text-start ps-2'>Почта:</label><br>
-                <select name="theme" class='w-50 mb-2 border' id="form-add-user__role">
+                <label for="form-add-user__password2" class='fw-bolder text-start ps-2 w-40'>Подтвердите пароль:</label>
+                <input type="password" name="name" class='mb-2 border w-50' id="form-add-user__password2" required autocomplete="new-password"><br>
+
+                <label for="form-add-user__role" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
+                <select name="theme" class='mb-2 border w-50' id="form-add-user__role">
                     @foreach ($roles as $role)
-                    <option value="{{$role->name}}">{{$role->name}}</option>
+                        <option value="{{$role['name']}}">{{$role['name']}}</option>
                     @endforeach
                 </select><br>
 
@@ -45,7 +48,10 @@
         <article>
             <h3 class='h3 fw-bold'>Список пользователей</h3>
             <table class='table w-50 mx-auto' id='table-users'>
-
+                <tr> <th>Имя:</th> <th>email</th> <th>Роль</th> </tr>
+                @foreach ($users as $user)
+                    <tr> <td>{{$user->name}}</td> <td>{{$user->email}}</td> <td>{{$user->role->name}}</td> </tr>
+                @endforeach
             </table>
         </article>
     </section>
