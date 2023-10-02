@@ -19,7 +19,7 @@
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section class="p-6 bg-white border-b border-gray-200 text-center">
-                    <a href="" class='btn btn-outline-dark col-2'>Пользователи</a>
+                    <a href="{{route('users')}}" class='btn btn-outline-dark col-2'>Пользователи</a>
                     <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark col-2'>Темы офферов</a>
 
                     <article class='mt-4'>
