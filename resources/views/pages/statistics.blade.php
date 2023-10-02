@@ -4,7 +4,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/statistics.js" defer></script>
+        <script src="/js/pages/statistics.js" defer></script>
     @endsection
 
     <x-slot name="header">

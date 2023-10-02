@@ -5,7 +5,7 @@
 
     @section('js')
         <script src="/js/services/OfferThemeService.js" defer></script>
-        <script src="/js/addOfferTheme.js" defer></script>
+        <script src="/js/pages/addOfferTheme.js" defer></script>
     @endsection
 
     @section('css')
