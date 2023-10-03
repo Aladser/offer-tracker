@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\UserRole;
 use App\Models\User;
 
 class UserController extends Controller
 {
+    /** показ страницы пользователей */
     public function index()
     {
         return view(
@@ -65,4 +67,38 @@ class UserController extends Controller
         return $user->save();
     }
     
+    // вход в систему
+    public function authenticate(Request $request)
+    {
+        // валидация полей
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        
+        // проверка наличия записи в БД
+        if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'status' => 1])) {
+            $request->session()->regenerate();
+            return redirect()->intended('dashboard');
+        }
+
+        $userData = $request->all();
+        $isEmail = User::where('email', $userData['email'])->count() == 1;
+        if (!$isEmail) {
+            return back()->withErrors([
+                'email' => 'Неверная почта или пароль',
+            ]);
+        } else {
+            $isStatus = User::where('email', $userData['email'])->first()->status == 0;
+            if ($isStatus) {
+                return back()->withErrors([
+                    'status' => 'Данная учетная запись выключена администратором',
+                ]);
+            } else {
+                return back()->withErrors([
+                    'password' => 'Неверная почта или пароль',
+                ]);
+            }
+        }
+    }
 }
