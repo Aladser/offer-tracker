@@ -18,8 +18,8 @@
 
     <section class="p-6 bg-white border-b border-gray-200 text-center fs-4 w-75 mx-auto mt-4">
         <a href="{{route('dashboard')}}" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
-        <article class='mb-4 w-50 mx-auto'>
-            <h3 class='fw-bold w-50 mx-auto'>Добавить нового Пользователя</h3>
+        <article class='mb-4 w-75 mx-auto'>
+            <h3 class='fw-bold mx-auto'>Добавить нового пользователя</h3>
             <form method='post' id='form-add-user' class='text-center mt-4 w-75 mx-auto'>
                 @csrf
                 <label for="form-add-user__name" class='fw-bolder text-start ps-2 w-40'>Имя:</label>
@@ -48,7 +48,7 @@
 
         <article>
             <h3 class='h3 fw-bold'>Список пользователей</h3>
-            <table class='table w-50 mx-auto' id='table-users'>
+            <table class='table w-75 mx-auto' id='table-users'>
                 <tr> 
                     <th>Имя</th> 
                     <th>email</th> 

@@ -18,26 +18,36 @@ Route::get('/', function() {
     ->name('main');
     
 // страница пользователя
-Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
+Route::get('/dashboard', DashboardController::class)
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 // пользователи
-Route::resource('/users', UserController::class)->except(['show', 'create', 'edit', 'update'])->middleware(['auth']);
+Route::resource('/users', UserController::class)
+    ->except(['show', 'create', 'edit', 'update'])
+    ->middleware(['auth']);
 Route::post('/users/status', [UserController::class, 'status']);
 
 // аутентификация
 require __DIR__.'/auth.php';
 
 // контроллер офферов
-Route::resource('/offer', OfferController::class)->except(['index', 'show', 'edit', 'update'])->middleware(['auth']);
+Route::resource('/offer', OfferController::class)
+    ->except(['index', 'show', 'edit', 'update'])
+    ->middleware(['auth']);
 Route::post('/offer/status', [OfferController::class, 'status']);
-Route::get('/offer/statistics', [StatisticController::class, 'index'])->middleware(['auth'])->name('offer.statistics');
+Route::get('/offer/statistics', [StatisticController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('offer.statistics');
 
 // подписка-отписка вебмастеров на офферы
 Route::post('/offer/subscribe', [OfferController::class, 'subscribe']);
 Route::post('/offer/unsubscribe', [OfferController::class, 'unsubscribe']);
 
 // контроллер тем офферов
-Route::resource('/offer-theme', OfferThemeController::class)->except(['show', 'create', 'edit', 'update'])->middleware(['auth']);
+Route::resource('/offer-theme', OfferThemeController::class)
+    ->except(['show', 'create', 'edit', 'update'])
+    ->middleware(['auth']);
 
 // подмена csrf
 Route::get('/wrong-uri', fn() => view('wrongcsrf'));
