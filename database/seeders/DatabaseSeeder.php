@@ -30,9 +30,11 @@ class DatabaseSeeder extends Seeder
 
         $userRoleSeed->run();
         $userSeed->run();
+        
         Advertiser::create(['user_id' => 2]);
         Advertiser::create(['user_id' => 3]);
         Advertiser::create(['user_id' => 4]);
+        
         Webmaster::create(['user_id' => 5]);
         Webmaster::create(['user_id' => 6]);
         Webmaster::create(['user_id' => 7]);

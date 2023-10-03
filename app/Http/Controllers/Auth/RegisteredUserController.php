@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -11,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use App\Models\UserRole;
+use App\Models\User;
+use App\Models\Advertiser;
+use App\Models\Webmaster;
 
 class RegisteredUserController extends Controller
 {
@@ -44,8 +46,15 @@ class RegisteredUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role_id = UserRole::find($request->role)->toArray()['id'];
+        $user->role_id = UserRole::find($request->role)->id;
         $user->save();
+
+        // запись в таблицу рекламодателей или вебмастеров
+        if ($request->role == 2) {
+            Advertiser::create(['user_id' => $user->id]);
+        } else if ($request->role == 3){
+            Webmaster::create(['user_id' => $user->id]);
+        }
 
         event(new Registered($user));
 
