@@ -52,4 +52,17 @@ class UserController extends Controller
     {
         return ['result' => User::find($id)->delete() ? 1 : 0];
     }
+
+    /** установить статус */
+    public function status(Request $request)
+    {
+        $requestData = $request->all();
+        $status = $requestData['status']; 
+        $id = $requestData['id'];
+
+        $user = User::find($id);
+        $user->status = $status === 'true' ? 1 : 0;
+        return $user->save();
+    }
+    
 }

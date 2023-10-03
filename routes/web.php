@@ -22,6 +22,7 @@ Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name
 
 // пользователи
 Route::resource('/users', UserController::class)->except(['show', 'create', 'edit', 'update'])->middleware(['auth']);
+Route::post('/users/status', [UserController::class, 'status']);
 
 // аутентификация
 require __DIR__.'/auth.php';
