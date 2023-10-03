@@ -20,6 +20,7 @@ Route::get('/', function() {
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth'])
+    ->middleware(['active_user'])
     ->name('dashboard');
 
 // пользователи

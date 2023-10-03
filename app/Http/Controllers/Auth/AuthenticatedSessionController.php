@@ -14,8 +14,12 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $requestData = $request->all();
+        if (count($requestData) != 0) {
+            return view('auth.login', ['data' => $requestData]);
+        } 
         return view('auth.login');
     }
 
