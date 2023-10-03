@@ -29,13 +29,13 @@
                 <input type="email" name="email" class='mb-2 border w-50' id="form-add-user__email" required><br>
 
                 <label for="form-add-user__password1" class='fw-bolder text-start ps-2 w-40'>Пароль:</label>
-                <input type="password" name="password1" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password"><br>
+                <input type="password" name="password1" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password" required><br>
 
                 <label for="form-add-user__password2" class='fw-bolder text-start ps-2 w-40'>Подтвердите пароль:</label>
-                <input type="password" name="password2" class='mb-2 border w-50' id="form-add-user__password2" required autocomplete="new-password"><br>
+                <input type="password" name="password2" class='mb-2 border w-50' id="form-add-user__password2" required autocomplete="new-password" required><br>
 
                 <label for="form-add-user__role" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
-                <select name="theme" class='mb-2 border w-50' id="form-add-user__role">
+                <select name="role" class='mb-2 border w-50' id="form-add-user__role">
                     @foreach ($roles as $role)
                         <option value="{{$role['name']}}">{{$role['name']}}</option>
                     @endforeach

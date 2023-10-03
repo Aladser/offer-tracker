@@ -30,22 +30,26 @@ class UserService {
 
         fetch(this.URL, {method:'post', headers: headers, body:formData}).then(response => response.text()).then(data => {
             console.log(data);
-            return;
-
             try { 
                 data = JSON.parse(data);
                 if (data.result == 1) {
                     form.reset();
-                    this.table.querySelector('tbody').innerHTML += `<tr data-id="${data.row.id}" class='table-users__tr position-relative'><td>${data.row.name}</td></tr>`;
+                    this.table.querySelector('tbody').innerHTML 
+                        += `<tr data-id="${data.row.id}" class='table-users__tr position-relative'>`
+                        +`<td>${data.row['name']}</td>`
+                        +`<td>${data.row['email']}</td>`
+                        +`<td>${data.row['role']}</td>`
+                        +`</tr>`;
                     this.msgElement.textContent = "";
                     this.table.querySelectorAll('.table-users__tr').forEach(row => {
                             row.onclick = e => this.clickRow(e.target.closest('tr'));
                         }
                     );
                 } else {
-                    this.msgElement.textContent = data.result;
+                    this.msgElement.textContent = data.description;
                 }
             } catch(e) {
+                console.log(e);
                 if (data.includes('<title>Page Expired</title>')) {
                     window.open('/wrong-uri', '_self');
                 } else {
@@ -62,13 +66,13 @@ class UserService {
 
         fetch(`${this.URL}/${id}`, {method:'delete', headers: headers}).then(response => response.text()).then(data => {
             console.log(data);
-            return;
-
             try {
                 data = JSON.parse(data);
                 if (data.result == 1) {
                     row.remove();
                     this.msgElement.textContent = "";
+                } else {
+                    this.msgElement.textContent = data.description;
                 }
             } catch(e) {
                 if (data.includes('<title>Page Expired</title>')) {
