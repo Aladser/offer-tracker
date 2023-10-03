@@ -16,24 +16,13 @@ use App\Models\Webmaster;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     *
-     * @return \Illuminate\View\View
-     */
+    /** Показать страницу регистраци */
     public function create()
     {
         return view('auth.register', ['roles' => UserRole::getRoles()]);
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
+    /** Создание пользователя */
     public function store(Request $request)
     {
         $request->validate([
@@ -42,7 +31,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = new User;
+        // создание пользователя
+        $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
