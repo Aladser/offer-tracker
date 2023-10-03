@@ -1,6 +1,6 @@
 <x-app-layout class='position-relative'>
     @section('title')
-        <x-title>Панель рекламодателя</x-title>
+        <x-title>панель рекламодателя</x-title>
     @endsection
 
     @section('css')

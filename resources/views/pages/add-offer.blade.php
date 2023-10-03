@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title> Добавить новый оффер</x-title>
+        <x-title> добавить новый оффер</x-title>
     @endsection
 
     @section('js')

@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title>: Пользователи</x-title>
+        <x-title> пользователи</x-title>
     @endsection
 
     @section('js')
@@ -26,13 +26,13 @@
                 <input type="text" name="name" class='mb-2 border w-50' id="form-add-user__name" required><br>
 
                 <label for="form-add-user__email" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
-                <input type="email" name="name" class='mb-2 border w-50' id="form-add-user__email" required><br>
+                <input type="email" name="email" class='mb-2 border w-50' id="form-add-user__email" required><br>
 
                 <label for="form-add-user__password1" class='fw-bolder text-start ps-2 w-40'>Пароль:</label>
-                <input type="password" name="name" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password"><br>
+                <input type="password" name="password1" class='mb-2 border w-50' id="form-add-user__password1" required autocomplete="new-password"><br>
 
                 <label for="form-add-user__password2" class='fw-bolder text-start ps-2 w-40'>Подтвердите пароль:</label>
-                <input type="password" name="name" class='mb-2 border w-50' id="form-add-user__password2" required autocomplete="new-password"><br>
+                <input type="password" name="password2" class='mb-2 border w-50' id="form-add-user__password2" required autocomplete="new-password"><br>
 
                 <label for="form-add-user__role" class='fw-bolder text-start ps-2 w-40'>Почта:</label>
                 <select name="theme" class='mb-2 border w-50' id="form-add-user__role">
@@ -41,7 +41,7 @@
                     @endforeach
                 </select><br>
 
-                <input type="submit" class='btn btn-outline-dark' value='Добавить'>
+                <input type="submit" class='btn btn-outline-dark' value='Добавить' id='form-add-user__btn-submit' disabled>
             </form>
             <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
         </article>

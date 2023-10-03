@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title> Панель администратора</x-title>
+        <x-title> панель администратора</x-title>
     @endsection
 
     @section('css')
