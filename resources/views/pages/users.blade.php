@@ -49,11 +49,27 @@
         <article>
             <h3 class='h3 fw-bold'>Список пользователей</h3>
             <table class='table w-50 mx-auto' id='table-users'>
-                <tr> <th>Имя:</th> <th>email</th> <th>Роль</th> </tr>
+                <tr> 
+                    <th>Имя</th> 
+                    <th>email</th> 
+                    <th>Роль</th>
+                    <th>Статус</th> 
+                </tr>
                 @foreach ($users as $user)
-                    <tr class='table-users__tr position-relative' data-id="{{$user->id}}"> 
-                        <td>{{$user->name}}</td> <td>{{$user->email}}</td> <td>{{$user->role->name}}</td> 
-                    </tr>
+                <tr class='table-users__tr position-relative' data-id="{{$user->id}}"> 
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td class='p-0'>
+                        <div class='form-switch p-0 h-100'>
+                            @if ($user->status===1)
+                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='деактивировать' checked> 
+                            @else
+                            <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='активировать'>
+                            @endif
+                        </div>
+                    </td>
+                    <td class='pe-3'>{{$user->role->name}}</td>
+                </tr>
                 @endforeach
             </table>
         </article>

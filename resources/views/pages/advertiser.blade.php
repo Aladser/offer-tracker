@@ -30,14 +30,15 @@
                             <tr>
                                 <th scope="col">Оффер</th>
                                 <th scope="col">Цена</th>
-                                <th scope="col">Статус</th>
                                 <th scope="col">Подписчики</th>
+                                <th scope="col">Статус</th>
                             </tr>
 
                             @foreach ($advertiser->offers->all() as $offer)
                                 <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                                     <td class='fw-bolder'>{{$offer->name}}</td>
                                     <td>{{$offer->price}} р.</td>
+                                    <td>{{$offer->links->count()}} </td>
                                     <td class='p-0'>
                                         <div class='form-switch p-0 h-100'>
                                             @if ($offer->status===1)
@@ -47,7 +48,6 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{$offer->links->count()}} </td>
                                 </tr>
                             @endforeach
                         </table>

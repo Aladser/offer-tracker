@@ -42,7 +42,9 @@ class UserController extends Controller
                     'row' => ['id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'role'=> $user->role->name]
                 ];
         } else {
-            return ['result' => 0, 'description' => 'Серверная ошибка сохранения пользователя'];
+            return ['result' => 0, 
+                    'description' => 'Серверная ошибка сохранения пользователя'
+                ];
         }
     }
 
