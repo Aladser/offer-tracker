@@ -12,14 +12,14 @@
     @endsection
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель администратора</h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">панель администратора</h2>
     </x-slot>
 
     <div class="py-12">
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section class="p-6 bg-white border-b border-gray-200 text-center">
-                    <a href="{{route('users')}}" class='btn btn-outline-dark col-2'>Пользователи</a>
+                    <a href="{{route('users.index')}}" class='btn btn-outline-dark col-2'>Пользователи</a>
                     <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark col-2'>Темы офферов</a>
 
                     <article class='mt-4'>

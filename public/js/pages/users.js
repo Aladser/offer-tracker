@@ -11,4 +11,4 @@ const addUserForm = document.querySelector('#form-add-user');
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
 /** фрон-контроллер таблицы тем */
-const userService = new UserService('/offer-theme', userTable, msgPrg, addUserForm, csrfToken);
+const userService = new UserService('/users', userTable, msgPrg, addUserForm, csrfToken);

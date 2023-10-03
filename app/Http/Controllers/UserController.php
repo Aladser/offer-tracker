@@ -15,4 +15,14 @@ class UserController extends Controller
             ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(), 'users' => User::all()],
         );
     }
+
+    public function store(Request $request)
+    {
+        return 'store '.json_encode($request->all());
+    }
+
+    public function destroy($id)
+    {
+        return "destroy $id";
+    }
 }

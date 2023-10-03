@@ -14,7 +14,7 @@
 
     <section class='w-50 mx-auto'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">панель рекламодателя</h2>
         </x-slot>
 
         <article class='pt-4 text-center'>

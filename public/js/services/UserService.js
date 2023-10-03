@@ -1,6 +1,6 @@
-/** Фронт-контроллер таблицы */
+/** Фронт-контроллер таблицы пользователей */
 class UserService {
-    /** фронт-часть контроллера тем офферов
+    /** фронт-часть контроллера пользователей
      * 
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем
@@ -27,14 +27,12 @@ class UserService {
         event.preventDefault();
         let formData = new FormData(form);
         let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
-        alert(formData);
-        return;
 
         fetch(this.URL, {method:'post', headers: headers, body:formData}).then(response => response.text()).then(data => {
             console.log(data);
             return;
 
-            try {
+            try { 
                 data = JSON.parse(data);
                 if (data.result == 1) {
                     form.reset();
@@ -61,13 +59,11 @@ class UserService {
         let row = button.closest('tr'); 
         let id = row.getAttribute('data-id');
         let headers = {'X-CSRF-TOKEN': this.csrfToken.getAttribute('content')};
-        alert(id);
-        return;
 
         fetch(`${this.URL}/${id}`, {method:'delete', headers: headers}).then(response => response.text()).then(data => {
             console.log(data);
             return;
-            
+
             try {
                 data = JSON.parse(data);
                 if (data.result == 1) {

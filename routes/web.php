@@ -19,8 +19,9 @@ Route::get('/', function() {
     
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)->middleware(['auth'])->name('dashboard');
+
 // пользователи
-Route::get('/users/index', [UserController::class, 'index'])->middleware(['auth'])->name('users');
+Route::resource('/users', UserController::class)->except(['show', 'create', 'edit', 'update'])->middleware(['auth']);
 
 // аутентификация
 require __DIR__.'/auth.php';
