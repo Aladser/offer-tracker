@@ -20,7 +20,7 @@ class IsActiveUser
     {
         if ($request->user()->status == 0) {
             Auth::logout();
-            return redirect('/login?no-user=1');
+            return redirect('/login');
         }
 
         return $next($request);
