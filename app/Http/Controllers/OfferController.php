@@ -22,22 +22,22 @@ class OfferController extends Controller
     {
         $data = $request->all();
         // поиск имени
-        if (Offer::hasOffer($data['name'])) {
+        if ($this->hasOffer($data['name'])) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
             // поиск рекламщика
-            $advertiserId = Advertiser::findAdvertiser($data['user']); 
+            $advertiserId = $this->findAdvertiser($data['user']); 
             if (!$advertiserId) {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             } else {
-                return ['result' => Offer::add($data, $advertiserId), 'offerName' => $data['name']];
+                return ['result' => $this->add($data, $advertiserId), 'offerName' => $data['name']];
             }
         }
     }
 
     public function destroy($id)
     {
-        return ['response' => Offer::remove($id) ? 1 : 0];
+        return ['response' => Offer::find($id)->delete() ? 1 : 0];
     }
 
     /** установить статус */
@@ -45,22 +45,56 @@ class OfferController extends Controller
     {
         $status = $request->all()['status']; 
         $id = $request->all()['id'];
-        return Offer::setStatus($id, $status);
+        $offer = Offer::find($id);
+        $offer->status = $status === 'true' ? 1 : 0;
+        return $offer->save();
     }
 
     /** подписка на оффер */
     public function subscribe(Request $request)
     {
-        $id = $request->all()['offerId'];
+        $offerId = $request->all()['offerId'];
         $webmasterId = $request->user()->webmaster->id;
-        return ['result' => Offer::subscribe($id, $webmasterId)];
+
+        $offerSubscription = new OfferSubscription();
+        $offerSubscription->offer_id = $offerId;
+        $offerSubscription->webmaster_id = $webmasterId;
+        $offerSubscription->refcode = "$webmasterId@$offerId";
+        $rslt = $offerSubscription->save();
+        return ['result' => $rslt ? $offerSubscription->refcode : 0];
     }
 
     /** отписка от оффера */
     public function unsubscribe(Request $request)
     {
-        $id = $request->all()['offerId'];
+        $offerId = $request->all()['offerId'];
         $webmasterId = $request->user()->webmaster->id;
-        return ['result' => Offer::unsubscribe($id, $webmasterId)];
+        $rslt = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->delete();
+        return ['result' => $rslt];
+    }
+
+    /** поиск рекламодателя по имени */
+    private function findAdvertiser($name)
+    {
+        $user = User::where('name', $name);
+        return !is_null($user) ? User::where('name', $name)->first()->value('id') : false;
+    }
+
+    /** поиск оффера по имени  */
+    private function hasOffer($name)
+    {
+        return !is_null(Offer::where('name', $name)->first());
+    }
+
+    private function add($data, $advertiserId)
+    {
+        $offer = new Offer();
+        $offer->name = $data['name'];
+        $offer->URL = $data['url'];
+        $offer->price = $data['price'];
+        $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
+        $offer->advertiser_id = $advertiserId;
+        
+        return $offer->save() ? 1 : 0;
     }
 }

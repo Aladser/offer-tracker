@@ -62,8 +62,7 @@
                     </article>
                     @for ($i = 0; $i < count($subscriptions); $i++)
                         <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='{{$subscriptions[$i]->id}}'>
-                            <a href="?ref={{$subscriptions[$i]->refcode}}"><p title="{{$subscriptions[$i]->offer->url}}">Ссылка {{$i}}</p></a>
-                            <p>оффер:{{$subscriptions[$i]->offer->name}}</p>
+                            <a href="?ref={{$subscriptions[$i]->refcode}}"><p title="{{$subscriptions[$i]->offer->url}}">{{$subscriptions[$i]->offer->name}}</p></a>
                             <p>веб-мастер:{{$subscriptions[$i]->follower->user->name}}</p>
                             <p>тема: {{$subscriptions[$i]->offer->theme->name}}</p>
                         </article>

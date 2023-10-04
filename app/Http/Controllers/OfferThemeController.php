@@ -15,15 +15,18 @@ class OfferThemeController extends Controller
     public function store(Request $request)
     {
         $name = $request->all()['name']; 
-        if (OfferTheme::hasTheme($name)) {
+        $isTheme = !is_null(OfferTheme::where('name', $name)->first());
+        if ($isTheme) {
             return ['result' => 'тема уже существует'];
         } else {
-            return OfferTheme::add($name);
+            $theme = new OfferTheme();
+            $theme->name = $name;
+            return ['result' => $theme->save() ? 1 : 0, 'row' => $theme->toArray()];
         }
     }
 
     public function destroy($id)
     {
-        return ['result' => OfferTheme::destroy($id) ? 1 : 0];
+        return ['result' => OfferTheme::find($id)->delete() ? 1 : 0];
     }
 }

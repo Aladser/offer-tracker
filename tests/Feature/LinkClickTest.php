@@ -10,7 +10,6 @@ use App\Services\OfferService;
 use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
-use App\Models\OfferSubscription;
 use App\Models\OfferClick;
 use App\Models\SystemOption;
 

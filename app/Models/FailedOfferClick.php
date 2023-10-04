@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class FailedOfferClick extends Model
 {
     public $timestamps = false;
+
+    protected $fillable = [
+        'url',
+    ];
 }

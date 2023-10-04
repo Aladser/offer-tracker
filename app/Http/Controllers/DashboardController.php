@@ -15,27 +15,28 @@ class DashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $user = $request->user();
         $commission = SystemOption::commission();
 
-        switch ($request->user()->role->name) {
+        switch ($user->role->name) {
             case 'администратор':
-                $table = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
+                $clicks = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
                 // общий доход системы
-                $totalIncome = $table
-                    ->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'))
+                $totalIncome = $clicks
+                    ->select(DB::raw('(1-income_part) * price as money'))
                     ->get()
                     ->sum('money');
                 
                 return view(
                         'pages/admin', 
                         [
-                            'userId' => $request->user()->id,
+                            'userId' => $user->id,
                             // темы офферов
                             'themes' => OfferTheme::all()->toArray(),
                             //  доход системы
                             'income'=>$totalIncome,
                             // общее число кликов
-                            'clicks'=>$table->count(),
+                            'clicks'=>$clicks->count(),
                             // комиссия
                             'commission' => $commission,
                             // число ошибочных реферальных ссылок
@@ -43,16 +44,16 @@ class DashboardController extends Controller
                         ] 
                     );
             case 'веб-мастер':
-                $webmasterId = $request->user()->webmaster->id;
+                $webmasterId = $user->webmaster->id;
                 return view(
                         'pages/webmaster',
                         [
                             // подписки пользователя
                             'subscriptions' => OfferSubscription::where('webmaster_id', $webmasterId),
                             // все доступные офферы без подписок пользователя
-                            'offers' => Offer::getActiveOffersExceptUserSubscriptions($webmasterId),
+                            'offers' => $this->getActiveOffersExceptUserSubscriptions($webmasterId),
                             // id пользователя-рекламщика (оптимизация) 
-                            'userId' => $request->user()->id,
+                            'userId' => $user->id,
                             // доля оплаты вебмастера 
                             'incomePercent' => round((100-$commission)/100, 2),
                         ]
@@ -62,13 +63,22 @@ class DashboardController extends Controller
                         'pages/advertiser', 
                         [
                             // рекламодатель
-                            'advertiser' => $request->user()->advertiser,
+                            'advertiser' => $user->advertiser,
                             // id пользователя-рекламщика (для оптимизации) 
-                            'userId' => $request->user()->id
+                            'userId' => $user->id
                         ]
                     );
             default:
-                dd('ошибка роли пользователя: ' . $request->user()->role->name);
+                dd('ошибка роли пользователя: ' . $user->role->name);
         }
     }
+
+    /** показать активные подписки без подписок конкретного пользователя */
+    private function getActiveOffersExceptUserSubscriptions($webmasterId)
+    {
+        $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
+        $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+        return $activeOffers;
+    }
+    
 }

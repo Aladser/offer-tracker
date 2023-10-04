@@ -23,10 +23,4 @@ class Advertiser extends Model
     {
         return $this->hasMany(Offer::class, 'advertiser_id', 'id');
     }
-
-    public static function findAdvertiser($name)
-    {
-        $user = User::where('name', $name);
-        return !is_null($user) ? User::where('name', $name)->first()->value('id') : false;
-    }
 }

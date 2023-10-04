@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserRole extends Model
 {
-    use HasFactory;
-
     public $timestamps = false;
 
     protected $fillable = [
@@ -18,14 +16,5 @@ class UserRole extends Model
     public function users()
     {
         return $this->hasMany(User::class, 'role_id', 'id');
-    }
-
-    public static function getRoles($allRoles = false)
-    {
-        if ($allRoles) {
-            return UserRole::orderBy('id', 'ASC')->get()->toArray();
-        } else {
-            return UserRole::where('name', '!=', 'администратор')->orderBy('id', 'ASC')->get()->toArray();
-        }
     }
 }

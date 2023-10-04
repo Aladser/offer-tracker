@@ -19,7 +19,7 @@ class RegisteredUserController extends Controller
     /** Показать страницу регистраци */
     public function create()
     {
-        return view('auth.register', ['roles' => UserRole::getRoles()]);
+        return view('auth.register', ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray()]);
     }
 
     /** Создание пользователя */

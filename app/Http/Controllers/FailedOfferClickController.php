@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FailedOfferClick;
 
-/** контроллер по переходам-отказам */
+/** контроллер по отказанным реферальным ссылкам */
 class FailedOfferClickController extends Controller
 {
-    public static function add($url)
+    public function add($url)
     {
-        $click = new FailedOfferClick();
-        $click->url = $url;
-        return $click->save() ? 1 : 0;
+        return FailedOfferClick::create(['url' => $url]);
     }
 }
