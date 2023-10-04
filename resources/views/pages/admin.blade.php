@@ -30,13 +30,11 @@
                         </table>
                     </article>
 
-                    <article class='mt-4 position-relative'>
+                    <article class='mt-4 w-50 mx-auto'>
                         <h3 class='fw-bold w-50 mx-auto mb-2'>Комиссия системы (%)</h3>
                         <form id='form-change-commission'>
-                            <div class='position-relative col-2 mx-auto'>
-                                <input type="number" name='commission' id='input-change-commission' class='text-center fs-4 fw-bolder border border-opacity-25 position-relative' value="{{$commission}}" size='100' required>
-                                <input type="submit" value="✓"  class='position-absolute p-1 bg-ddd rounded-circle d-none' id='btn-change-commission' title='сохранить'>
-                            </div>
+                            <input type="number" name='commission' id='input-change-commission' class='text-center fs-4 fw-bolder border border-opacity-25 position-relative' value="{{$commission}}" size='100' required>
+                            <input type="submit" value="✓"  class='p-1 ps-2 pe-2 ms-1 bg-ddd rounded-circle d-none' id='btn-change-commission' title='сохранить'>
                         </form>
                         <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
                     </article>

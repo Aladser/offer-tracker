@@ -23,22 +23,25 @@ class DashboardController extends Controller
 
         switch ($request->user()->role->name) {
             case 'администратор':
-                $table = DB::table('offer_clicks')->join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
-                $totalIncome = $table->sum('price');
+                $table = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
+                $totalIncome = $table->sum(DB::raw('price * income_part'));
                 $totalClicks = $table->count();
-
+                
                 return view(
                         'pages/admin', 
                         [
                             'userId' => $request->user()->id,
+                            // темы офферов
                             'themes' => OfferTheme::all()->toArray(),
+                            //  доход системы
                             'income'=>$totalIncome,
+                            // общее число кликов
                             'clicks'=>$totalClicks,
+                            // комиссия
                             'commission' => $commission
                         ] 
                     );
             case 'веб-мастер':
-                $userId = $request->user()->id;
                 $webmasterId = $request->user()->webmaster->id;
                 return view(
                         'pages/webmaster',
@@ -48,8 +51,8 @@ class DashboardController extends Controller
                             // все доступные офферы без подписок пользователя
                             'offers' => Offer::getActiveOffersExceptUserSubscriptions($webmasterId),
                             // id пользователя-рекламщика (оптимизация) 
-                            'userId' => $userId,
-                            // доля платы вебмастера 
+                            'userId' => $request->user()->id,
+                            // доля оплаты вебмастера 
                             'incomePercent' => round((100-$commission)/100, 2),
                         ]
                     );
@@ -59,9 +62,9 @@ class DashboardController extends Controller
                         [
                             // рекламодатель
                             'advertiser' => $request->user()->advertiser,
-                            // id пользователя-рекламщика (оптимизация) 
+                            // id пользователя-рекламщика (для оптимизации) 
                             'userId' => $request->user()->id
-                        ] 
+                        ]
                     );
             default:
                 dd('ошибка роли пользователя: ' . $request->user()->role->name);
