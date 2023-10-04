@@ -20,10 +20,8 @@ class DashboardController extends Controller
         switch ($request->user()->role->name) {
             case 'администратор':
                 $table = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
-                // общее число переходов
-                $totalClicks = $table->count();
                 // общий доход системы
-                $totalIncome = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id')
+                $totalIncome = $table
                     ->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'))
                     ->get()
                     ->sum('money');
@@ -37,7 +35,7 @@ class DashboardController extends Controller
                             //  доход системы
                             'income'=>$totalIncome,
                             // общее число кликов
-                            'clicks'=>$totalClicks,
+                            'clicks'=>$table->count(),
                             // комиссия
                             'commission' => $commission,
                             // число ошибочных реферальных ссылок
