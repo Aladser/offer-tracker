@@ -17,7 +17,9 @@
     </x-slot>
 
     <section class="p-6 bg-white border-b border-gray-200 text-center fs-4 w-75 mx-auto mt-4">
+        
         <a href="{{route('dashboard')}}" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
+
         <article class='mb-4 w-75 mx-auto'>
             <h3 class='fw-bold mx-auto'>Добавить нового пользователя</h3>
             <form method='post' id='form-add-user' class='text-center mt-4 w-75 mx-auto'>
@@ -73,5 +75,6 @@
                 @endforeach
             </table>
         </article>
+
     </section>
 </x-app-layout>

@@ -19,6 +19,7 @@
     <div class="py-12">
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative">
+
                 <p class='text-center p-3'>
                     <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark'>Статистика офферов</a>
                 </p>
@@ -58,12 +59,7 @@
                         </article>
                     </article>
                 </section>
-
-                <article class='border border-dark w-50 mx-auto text-center shadow-lg p-4 mb-2 bg-white rounded d-none' id='article-new-subscription'>
-                    <p class='fw-bolder'>Реферальная ссылка</p>
-                    <p class='fs-3' id='article-new-subscription__ref'></p>
-                    <button class='btn btn-outline-dark mt-1' id='article-new-subscription__btn'>ОК</button>
-                </article>
+                
             </section>
         </div>
     </div>
