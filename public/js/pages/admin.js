@@ -21,13 +21,12 @@ function setInputCommission() {
         } else {
             commissionBtn.classList.remove('d-none');
         }
-    }
+    };
 }
 
 // отправка новой комиссии на сервер
 commissionForm.onsubmit = function(e) {
     e.preventDefault();
-    commissionValue = e.target.commission.value;
     commissionBtn.classList.add('d-none');
 
     let formData = new FormData(commissionForm);
@@ -40,5 +39,5 @@ commissionForm.onsubmit = function(e) {
         } catch(e) {
             msgPrg.textContent = data;
         }
-    })
-}
+    });
+};

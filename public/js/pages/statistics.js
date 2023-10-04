@@ -18,5 +18,5 @@ function setStatisticTime() {
         activeTimeRadio.classList.add('d-none');
         activeTimeRadio = times.get(e.target.value);
         activeTimeRadio.classList.remove('d-none');
-    }
+    };
 }

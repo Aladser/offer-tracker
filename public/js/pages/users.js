@@ -29,7 +29,7 @@ passwordInput2.oninput = input;
 
 /** проверить форму добавления пользователя */
 function input() {
-    if (nameInput.value != '' && emailInput.value != '' && passwordInput1.value != '' && passwordInput2.value != '') {
+    if (nameInput.value !== '' && emailInput.value !== '' && passwordInput1.value !== '' && passwordInput2.value !== '') {
         addUserButton.disabled = !(passwordInput1.value === passwordInput2.value);
         msgPrg.textContent = passwordInput1.value === passwordInput2.value ? '' : 'Введенные пароли не совпадают';
     } else {
