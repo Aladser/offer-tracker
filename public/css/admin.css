@@ -1,8 +1,14 @@
-#btn-change-commission {
-    top:15%;
-    left:62%
+.article-commission__prg-submit {
+    display: inline-block;
+    position: absolute;
+    top: 0.2rem;
+    right: -1.8rem;
 }
-
-.bg-ddd {
+.article-commission__btn-submit {
     background-color: #ddd;
+    border-radius: 50%;
+
+    padding: 0.2rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
 }

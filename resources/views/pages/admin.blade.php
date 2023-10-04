@@ -19,22 +19,26 @@
         <div class="w-75 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <section class="p-6 bg-white border-b border-gray-200 text-center">
-                    <a href="{{route('users.index')}}" class='btn btn-outline-dark col-2'>Пользователи</a>
-                    <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark col-2'>Темы офферов</a>
+                    <a href="{{route('users.index')}}" class='btn btn-outline-dark'>Пользователи</a>
+                    <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark'>Темы офферов</a>
 
                     <article class='mt-4'>
-                        <h3 class='fw-bold w-50 mx-auto mb-2'>Доход системы за все время</h3>
+                        <h3 class='fw-bold w-75 mx-auto mb-2'>Доход системы за все время</h3>
                         <table class='table mx-auto w-50 fs-5'>
                             <tr> <td class='w-50 fw-bolder'>Число переходов</td><td>{{$clicks}}</td> </tr>
                             <tr> <td class='w-50 fw-bolder'>Доход</td><td>{{round(($income*$commission)/100, 2)}} руб.</td> </tr>
                         </table>
                     </article>
 
-                    <article class='mt-4 w-50 mx-auto'>
-                        <h3 class='fw-bold w-50 mx-auto mb-2'>Комиссия системы (%)</h3>
-                        <form id='form-change-commission'>
-                            <input type="number" name='commission' id='input-change-commission' class='text-center fs-4 fw-bolder border border-opacity-25 position-relative' value="{{$commission}}" size='100' required>
-                            <input type="submit" value="✓"  class='p-1 ps-2 pe-2 ms-1 bg-ddd rounded-circle d-none' id='btn-change-commission' title='сохранить'>
+                    <article class="mt-4 w-75 mx-auto d-flex flex-column align-items-center article-commission">
+                        <h3 class='fw-bold w-50 pb-4'>Комиссия системы (%)</h3>
+                        <form id='form-change-commission' class='input-group w-50'>
+                            <div class='position-relative w-75 mx-auto'>
+                                <input type="number" name='commission' id='input-change-commission' class='form-control text-center' value="{{$commission}}" size='100' required>
+                                <p class='article-commission__prg-submit'>
+                                    <input type="submit" value="✓"  class='article-commission__btn-submit d-none' id='btn-change-commission' title='сохранить'>
+                                </p>
+                            </div>
                         </form>
                         <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
                     </article>

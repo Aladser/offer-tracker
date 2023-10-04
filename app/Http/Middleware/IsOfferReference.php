@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\OfferClickController;
+use App\Http\Controllers\FailedOfferClickController;
 use App\Models\OfferSubscription;
 
 /** отлавливает реферальную ссылку */
@@ -27,6 +28,7 @@ class IsOfferReference
             $subscription = OfferSubscription::where('refcode', $refCode)->first();
             if (is_null($subscription)) {
                 Log::stack(['slack', $logChannel])->info("переход по ссылке {$request->path()}?ref=$refCode завершился с ошибкой");
+                FailedOfferClickController::add("{$request->path()}?ref=$refCode");
                 return redirect('page404');
             } else {
                 // зафиксировать факт перенаправления
