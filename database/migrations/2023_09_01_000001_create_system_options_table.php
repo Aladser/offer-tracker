@@ -15,7 +15,7 @@ class CreateSystemOptionsTable extends Migration
     {
         Schema::create('system_options', function (Blueprint $table) {
             $table->string('name')->unique()->primary();
-            $table->char('value', 30)->nullable();
+            $table->char('value', 255)->nullable();
         });
     }
 

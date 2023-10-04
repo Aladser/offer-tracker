@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\SystemOption;
 
+// таблица общих свойств. Для эксперимента сделана через api
 class SystemOptionController extends Controller
 {
     public function store(Request $request)

@@ -57,24 +57,29 @@ class OfferService
                 $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
             }
         // веб-мастер
-        } else {
+        } else if ($user->role->name === 'веб-мастер'){
             $subscriptions = $user->webmaster->subscriptions;
             foreach ($subscriptions as $subscription) {
                 $offer = $subscription->offer;
                 // число посещений
                 if (is_null($date)) {
-                    $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id)->count();
+                    $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id);
                 } else {
-                    $clicks = $offer->clicks->where('webmaster_id', $user->webmaster->id)->where('created_at', '>', $date)->count();
+                    $clicks = $offer->clicks->where('webmaster_id', $user->webmaster->id)->where('created_at', '>', $date);
                 }
-                // доход за переходы
-                $sum = $offer->clicks->count() * $offer->price;
-                $income = $this->getIncome($sum, $this->commission);
-                
-                $totalClicks += $clicks;
+                $clickCount = $clicks->count();
+
+                $income = 0;
+                foreach ($clicks as $click) {
+                    $income += $click->income_part * $offer->price;
+                } 
+
+                $totalClicks += $clickCount;
                 $totalMoney += $income;
-                $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$income];
+                $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clickCount, 'money'=>$income];
             }
+        } else {
+            return null;
         }
 
         return [
@@ -94,10 +99,5 @@ class OfferService
             $date->modify($period);
         }
         return $date->format('Y-m-d H:i:s');
-    }
-
-    /** доход-процент вебмастера */
-    private function getIncome($money) {
-        return round($money * (100-$this->commission)/100, 2);
     }
 }

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
 use App\Models\OfferSubscription;
+use App\Models\SystemOption;
 
 class LinkClickTest extends TestCase
 {
@@ -39,32 +40,30 @@ class LinkClickTest extends TestCase
         if (User::count() === 0) {
             $this->seed();
         }
+        $totalClicks = 0;
+        $totalMoney = 0;
         $offerService = new OfferService();
         $webmaster = Webmaster::find(1);
+        $this->commission = SystemOption::where('name', 'commission')->first()->value('value');
 
-        echo "\nстатистика подписок мастера {$webmaster->user->name}:\n";
-        $data = $offerService->getOfferData($webmaster->user);
-        foreach ($data['offers'] as $offer) {
-            echo "{$offer['name']} посетителей:{$offer['clicks']} получено:{$offer['money']}\n";
+        echo "\nпереходы вебмастера {$webmaster->user->name}:\n";
+        foreach ($webmaster->subscriptions as $subscription) {
+            $offer = $subscription->offer;
+            // число посещений
+            $clicks = $subscription->clicks->where('webmaster_id', $webmaster->id);
+
+            $clickCount = $clicks->count();
+            $income = 0;
+            foreach ($clicks as $click) {
+                $income += $click->income_part * $offer->price;
+            }
+            
+            $totalClicks += $clickCount;
+            $totalMoney += $income;
+            echo " name:{$offer->name} clicks:{$clickCount} money:{$income}\n";
         }
-        echo "Всего: посетителей:{$data['totalClicks']} получено:{$data['totalMoney']}\n";
+        echo "Всего: переходов {$totalClicks} деньги {$totalMoney}\n";
 
-        $this->assertDatabaseCount('offer_subscriptions', 6);
-    }
-
-    private function getIncome($money, $commission) {
-        return $money * (100-$commission)/100;
-    }
-
-    public function testSubscriptions()
-    {
-        if (User::count() === 0) {
-            $this->seed();
-        }
-        $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id');
-        var_dump($subscriptions->get()->toArray());
-        echo 'подписок = ' . $subscriptions->count() . "\n";
-        echo 'активных подписок = ' . $subscriptions->where('status', 1)->count()."\n";
         $this->assertDatabaseCount('offer_subscriptions', 6);
     }
 }

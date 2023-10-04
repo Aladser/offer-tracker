@@ -19,15 +19,16 @@ class UserController extends Controller
         );
     }
 
+    /** сохранить нового пользователя */
     public function store(Request $request)
     {
         $userData = $request->all();
 
         // проверка существования почты и имени пользователя
-        if (count(User::where('name', $userData['name'])->get()) === 1) {
+        if (User::where('name', $userData['name'])->count() === 1) {
             return ['result' => 0, 'description' => 'Имя занято'];
         }
-        if (count(User::where('email', $userData['email'])->get()) == 1) {
+        if (User::where('email', $userData['email'])->count() == 1) {
             return ['result' => 0, 'description' => 'Почта занята'];
         }
 
