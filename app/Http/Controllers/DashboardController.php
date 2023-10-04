@@ -9,14 +9,10 @@ use App\Models\Offer;
 use App\Models\OfferClick;
 use App\Models\OfferSubscription;
 use App\Models\SystemOption;
+use App\Models\FailedOfferClick;
 
 class DashboardController extends Controller
 {
-    /** Обработать входящий запрос
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function __invoke(Request $request)
     {
         $commission = SystemOption::commission();
@@ -24,8 +20,13 @@ class DashboardController extends Controller
         switch ($request->user()->role->name) {
             case 'администратор':
                 $table = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
-                $totalIncome = $table->sum(DB::raw('price * income_part'));
+                // общее число переходов
                 $totalClicks = $table->count();
+                // общий доход системы
+                $totalIncome = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id')
+                    ->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'))
+                    ->get()
+                    ->sum('money');
                 
                 return view(
                         'pages/admin', 
@@ -38,7 +39,9 @@ class DashboardController extends Controller
                             // общее число кликов
                             'clicks'=>$totalClicks,
                             // комиссия
-                            'commission' => $commission
+                            'commission' => $commission,
+                            // число ошибочных реферальных ссылок
+                            'failed_references' => FailedOfferClick::all()->count(),
                         ] 
                     );
             case 'веб-мастер':

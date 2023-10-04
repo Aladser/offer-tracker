@@ -4,12 +4,14 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use App\Services\OfferService;
 use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
 use App\Models\OfferSubscription;
+use App\Models\OfferClick;
 use App\Models\SystemOption;
 
 class LinkClickTest extends TestCase
@@ -40,6 +42,7 @@ class LinkClickTest extends TestCase
         if (User::count() === 0) {
             $this->seed();
         }
+
         $totalClicks = 0;
         $totalMoney = 0;
         $offerService = new OfferService();
@@ -65,5 +68,19 @@ class LinkClickTest extends TestCase
         echo "Всего: переходов {$totalClicks} деньги {$totalMoney}\n";
 
         $this->assertDatabaseCount('offer_subscriptions', 6);
+    }
+
+    public function testCommissions()
+    {
+        //select name, income_part, price, (1-income_part) * price as commission from offer_clicks join offers on offers.id = offer_clicks.offer_id ;
+
+        if (User::count() === 0) {
+            $this->seed();
+        }
+
+        $extendedClicks = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
+        $table = $extendedClicks->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'));
+        var_dump($table->get()->toArray());
+        echo "{$table->get()->sum('money')}\n";
     }
 }
