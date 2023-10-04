@@ -14,10 +14,6 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     public $timestamps = false; // без времени создания
 
-    /** Атрибуты, которые можно назначать массово.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
@@ -25,10 +21,6 @@ class User extends Authenticatable
         'role_id',
     ];
 
-    /** Атрибуты, которые следует скрыть для сериализации.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',

@@ -45,13 +45,17 @@ class DashboardController extends Controller
                     );
             case 'веб-мастер':
                 $webmasterId = $user->webmaster->id;
+                // активные офферы без учета подписок
+                $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
+                $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
+                
                 return view(
                         'pages/webmaster',
                         [
                             // подписки пользователя
                             'subscriptions' => OfferSubscription::where('webmaster_id', $webmasterId),
                             // все доступные офферы без подписок пользователя
-                            'offers' => $this->getActiveOffersExceptUserSubscriptions($webmasterId),
+                            'offers' => $activeOffers,
                             // id пользователя-рекламщика (оптимизация) 
                             'userId' => $user->id,
                             // доля оплаты вебмастера 
@@ -72,13 +76,4 @@ class DashboardController extends Controller
                 dd('ошибка роли пользователя: ' . $user->role->name);
         }
     }
-
-    /** показать активные подписки без подписок конкретного пользователя */
-    private function getActiveOffersExceptUserSubscriptions($webmasterId)
-    {
-        $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
-        $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
-        return $activeOffers;
-    }
-    
 }
