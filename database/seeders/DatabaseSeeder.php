@@ -44,6 +44,6 @@ class DatabaseSeeder extends Seeder
         $offerSubscriptionSeed->run();
         $offerClickSeeder->run();
 
-        SystemOption::create(['name' => 'commission', 'value' => 25]);
+        SystemOption::create(['name' => 'commission', 'value' => 10]);
     }
 }
