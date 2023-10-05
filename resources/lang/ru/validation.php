@@ -91,10 +91,10 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'numeric' => 'The :attribute must be at least :min.',
-        'file' => 'The :attribute must be at least :min kilobytes.',
-        'string' => 'The :attribute must be at least :min characters.',
-        'array' => 'The :attribute must have at least :min items.',
+        'numeric' => 'The :attribute должен быть не менее :min.',
+        'file' => 'The :attribute должен быть не менее :min кб.',
+        'string' => 'The :attribute должен быть не менее :min символов.',
+        'array' => 'The :attribute должен быть не менее :min элементов.',
     ],
     'multiple_of' => 'The :attribute must be a multiple of :value.',
     'not_in' => 'The selected :attribute is invalid.',
@@ -125,7 +125,7 @@ return [
     'starts_with' => 'The :attribute must start with one of the following: :values.',
     'string' => 'The :attribute must be a string.',
     'timezone' => 'The :attribute must be a valid timezone.',
-    'unique' => 'The :attribute has already been taken.',
+    'unique' => 'The :attribute должен быть уникальным .',
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute must be a valid URL.',
     'uuid' => 'The :attribute must be a valid UUID.',
@@ -142,8 +142,14 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'name' => [
+            'unique' => 'Указанное имя уже занято',
+        ],
+        'email' => [
+            'unique' => 'Указанная почта уже занята',
+        ],
+        'password' => [
+            'min' => 'Пароль должен содержать не менее 8 символов',
         ],
     ],
 

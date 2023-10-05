@@ -87,7 +87,7 @@ class UserController extends Controller
         $isEmail = User::where('email', $userData['email'])->count() == 1;
         if (!$isEmail) {
             return back()->withErrors([
-                'email' => 'Неверная почта или пароль',
+                'email' => 'Учетная запись с указанной почтой не существует',
             ]);
         } else {
             $isStatus = User::where('email', $userData['email'])->first()->status == 0;
@@ -97,7 +97,7 @@ class UserController extends Controller
                 ]);
             } else {
                 return back()->withErrors([
-                    'password' => 'Неверная почта или пароль',
+                    'password' => 'Неверный пароль',
                 ]);
             }
         }
