@@ -105,6 +105,7 @@ class TableFrontController {
       }
     }
   
+    /** действия после добавления данных БД */
     processData(data) {
       alert('нет реализации метода processData');
     }
