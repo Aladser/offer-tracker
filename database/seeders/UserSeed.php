@@ -17,56 +17,23 @@ class UserSeed extends Seeder
             'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
             'role_id' => 1,
         ]);
+
+        for ($i=1;$i<4; $i++) {
+            User::create([
+                'name' => "advertiser$i",
+                'email' => "advertiser$i@mail.ru",
+                'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
+                'role_id' => 2,
+            ]);
+        }
         
-
-        $maxId++;
-        User::create([
-            'name' => "advertiser",
-            'email' => "advertiser@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 2,
-        ]);
-
-        $maxId++;
-        User::create([
-            'name' => "User$maxId",
-            'email' => "user$maxId@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 2,
-            'status' => 0
-        ]);
-
-        
-        $maxId++;
-        User::create([
-            'name' => "User$maxId",
-            'email' => "user$maxId@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 2,
-            'status' => 0,
-        ]);
-        $maxId++;
-        User::create([
-            'name' => "webmaster",
-            'email' => "webmaster@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 3,
-        ]);
-
-
-        $maxId++;
-        User::create([
-            'name' => "User$maxId",
-            'email' => "user$maxId@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 3,
-        ]);
-        $maxId++;
-        User::create([
-            'name' => "User$maxId",
-            'email' => "user$maxId@mail.ru",
-            'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
-            'role_id' => 3,
-        ]);
+        for ($i=1;$i<4; $i++) {
+            User::create([
+                'name' => "webmaster$i",
+                'email' => "webmaster$i@mail.ru",
+                'password' => '$2y$10$PTy20SmgowBKIDav9AwsBOp5p0a90mWw4FILg5EiNNs79./j4D6lS',
+                'role_id' => 3,
+            ]);
+        }
     }
 }
