@@ -58,14 +58,14 @@ class FrontController {
                 row.onclick = (e) => this.clickRow(e.target.closest("tr"))
               })
             } else {
-              this.msgElement.textContent = data.description
+              this.msgElement.textContent = data.description;
             }
           } catch (e) {
             console.log(e)
             if (data.includes("<title>Page Expired</title>")) {
               window.open("/wrong-uri", "_self")
             } else {
-              this.msgElement.textContent = data
+              this.msgElement.textContent = data;
             }
           }
         })

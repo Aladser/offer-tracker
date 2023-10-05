@@ -17,11 +17,21 @@ class OfferThemeController extends Controller
         $name = $request->all()['name']; 
         $isTheme = !is_null(OfferTheme::where('name', $name)->first());
         if ($isTheme) {
-            return ['result' => 'тема уже существует'];
+            return ['result' => 0, 'description' => 'тема уже существует'];
         } else {
             $theme = new OfferTheme();
             $theme->name = $name;
-            return ['result' => $theme->save() ? 1 : 0, 'row' => $theme->toArray()];
+            $themeSaved = $theme->save();
+
+            if ($themeSaved) {
+                return ['result' => 1, 
+                        'row' => ['id'=>$theme->id, 'name'=>$theme->name]
+                    ];
+            } else {
+                return ['result' => 0, 
+                        'description' => 'Серверная ошибка сохранения пользователя'
+                    ];
+            }
         }
     }
 
