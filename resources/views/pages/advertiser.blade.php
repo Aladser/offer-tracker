@@ -8,13 +8,14 @@
     @endsection
 
     @section('js')
+        <script src="/js/services/FrontController.js" defer></script>
         <script src="/js/services/OfferService.js" defer></script>
         <script src="/js/pages/advertiser.js" defer></script>
     @endsection
 
     <section class='w-50 mx-auto'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">панель рекламодателя</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>
         
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
@@ -27,15 +28,14 @@
                     <tr>
                         <th scope="col">Оффер</th>
                         <th scope="col">Цена</th>
-                        <th scope="col">Подписчики</th>
                         <th scope="col">Статус</th>
+                        <th scope="col">Подписчики</th>
                     </tr>
 
                     @foreach ($advertiser->offers->all() as $offer)
                         <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
                             <td class='fw-bolder'>{{$offer->name}}</td>
                             <td>{{$offer->price}} р.</td>
-                            <td>{{$offer->links->count()}} </td>
                             <td class='p-0'>
                                 <div class='form-switch p-0 h-100'>
                                     @if ($offer->status===1)
@@ -45,6 +45,7 @@
                                     @endif
                                 </div>
                             </td>
+                            <td>{{$offer->links->count()}} </td>
                         </tr>
                     @endforeach
                 </table>
