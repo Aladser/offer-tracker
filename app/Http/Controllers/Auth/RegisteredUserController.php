@@ -31,6 +31,13 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // проверка имени пользователя
+        $isUser = User::where('name', $request->name)->count() != 0;
+        if ($isUser) {
+            return back()->withErrors([
+                'name' => 'Имя занято',
+            ]);
+        }
         // создание пользователя
         $user = new User();
         $user->name = $request->name;
