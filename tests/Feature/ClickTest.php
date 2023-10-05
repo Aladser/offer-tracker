@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
-use App\Services\OfferStatisctics;
+use App\Services\OfferStatistics;
 use App\Models\User;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
@@ -22,12 +22,12 @@ class ClickTest extends TestCase
         system('clear');
         $this->seedTest();
 
-        $offerService = new OfferStatisctics();
+        $offerStatistics = new OfferStatistics();
         $advertiser = Advertiser::find(1);
 
 
         echo "офферы рекламщика {$advertiser->user->name}:\n";
-        $data = $offerService->getOfferData($advertiser->user);
+        $data = $offerStatistics->getOfferData($advertiser->user);
         foreach ($data['offers'] as $offer) {
             echo "{$offer['name']} посетителей:{$offer['clicks']} потрачено:{$offer['money']}\n";
         }
@@ -43,7 +43,6 @@ class ClickTest extends TestCase
 
         $totalClicks = 0;
         $totalMoney = 0;
-        $offerService = new OfferStatisctics();
         $webmaster = Webmaster::find(1);
         $this->commission = SystemOption::where('name', 'commission')->first()->value('value');
 
