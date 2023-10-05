@@ -13,6 +13,7 @@ use Database\Seeders\OfferClickSeeder;
 use App\Models\SystemOption;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
+use App\Models\UserRole;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +21,6 @@ class DatabaseSeeder extends Seeder
     {
         DB::update('ALTER TABLE user_roles AUTO_INCREMENT = 1');
 
-        $userRoleSeed = new UserRoleSeed();
         $userSeed = new UserSeed();
         
         $offerThemeSeed = new OfferThemeSeed();
@@ -28,7 +28,9 @@ class DatabaseSeeder extends Seeder
         $offerSubscriptionSeed = new OfferSubscriptionSeed();
         $offerClickSeeder = new OfferClickSeeder();
 
-        $userRoleSeed->run();
+        UserRole::create(['name' => 'администратор']);
+        UserRole::create(['name' => 'рекламодатель']);
+        UserRole::create(['name' => 'веб-мастер']);
         $userSeed->run();
         
         Advertiser::create(['user_id' => 2]);
