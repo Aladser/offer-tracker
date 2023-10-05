@@ -30,9 +30,15 @@ passwordInput2.oninput = input;
 /** проверить форму добавления пользователя */
 function input() {
     if (nameInput.value !== '' && emailInput.value !== '' && passwordInput1.value !== '' && passwordInput2.value !== '') {
-        addUserButton.disabled = !(passwordInput1.value === passwordInput2.value);
-        msgPrg.textContent = passwordInput1.value === passwordInput2.value ? '' : 'Введенные пароли не совпадают';
+        if (passwordInput1.value === passwordInput2.value) {
+            addUserButton.disabled = false;
+            msgPrg.textContent = '';
+        } else {
+            addUserButton.disabled = true;
+            msgPrg.textContent = 'Введенные пароли не совпадают';
+        }
     } else {
         addUserButton.disabled = true;
+        msgPrg.textContent = '';
     }
 }
