@@ -9,11 +9,11 @@ class OfferThemeService {
      * @param {*} csrfToken csrf-токен
      */
     constructor(URL, offerThemeTable, msgHTMLElement, addThemeForm, csrfToken) {
-      this.URL = URL
-      this.offerThemeTable = offerThemeTable
-      this.msgHTMLElement = msgHTMLElement
-      this.addThemeForm = addThemeForm
-      this.csrfToken = csrfToken
+      this.URL = URL;
+      this.offerThemeTable = offerThemeTable;
+      this.msgHTMLElement = msgHTMLElement;
+      this.addThemeForm = addThemeForm;
+      this.csrfToken = csrfToken;
   
       this.offerThemeTable
         .querySelectorAll(".table-themes__tr")

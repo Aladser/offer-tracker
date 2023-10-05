@@ -1,6 +1,6 @@
-/** Фронт-контроллер таблицы пользователей */
-class UserService {
-    /** фронт-часть контроллера пользователей
+/** Фронт-контроллер */
+class FrontController {
+    /** фронт-часть фронт-контроллера
      *
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем
@@ -14,6 +14,7 @@ class UserService {
       this.msgElement = msgElement;
       this.form = form;
       this.csrfToken = csrfToken;
+      this.tableClass = table.id;
   
       // клики строки таблицы
       this.table.querySelectorAll(".table-users__tr").forEach((row) => {

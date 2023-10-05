@@ -11,7 +11,7 @@ const addUserForm = document.querySelector('#form-add-user');
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 
 /** фронт-контроллер таблицы тем */
-const userService = new UserService('/users', userTable, msgPrg, addUserForm, csrfToken);
+const userService = new FrontController('/users', userTable, msgPrg, addUserForm, csrfToken);
 
 
 /** кнопка отправки формы добавления пользователя */

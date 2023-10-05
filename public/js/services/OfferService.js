@@ -9,12 +9,12 @@ class OfferService {
      * @param {*} csrfToken csrf-токен
      */
     constructor(URL, offerTable, addOfferForm, msgPrg, username, csrfToken) {
-      this.URL = URL
-      this.offerTable = offerTable
-      this.addOfferForm = addOfferForm
-      this.msgPrg = msgPrg
-      this.username = username
-      this.csrfToken = csrfToken
+      this.URL = URL;
+      this.offerTable = offerTable;
+      this.addOfferForm = addOfferForm;
+      this.msgPrg = msgPrg;
+      this.username = username;
+      this.csrfToken = csrfToken;
   
       // таблица офферов
       if (this.offerTable !== null) {
