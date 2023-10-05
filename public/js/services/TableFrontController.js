@@ -4,8 +4,8 @@ class TableFrontController {
      *
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем
-     * @param {*} msgElement информационное поле ошибок
-     * @param {*} form форма добавления темы
+     * @param {*} msgElement инфоэлемент
+     * @param {*} form форма добавления элемента
      * @param {*} csrfToken csrf-токен
      */
     constructor(URL, table, msgElement, form, csrfToken) {

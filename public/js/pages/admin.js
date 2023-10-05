@@ -24,7 +24,7 @@ function setInputCommission() {
     };
 }
 
-// отправка новой комиссии на сервер
+// отправка нового значения комиссии на сервер
 commissionForm.onsubmit = function(e) {
     e.preventDefault();
     commissionBtn.classList.add('d-none');
