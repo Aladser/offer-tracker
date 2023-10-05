@@ -10,7 +10,8 @@ use App\Models\OfferSubscription;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function() {
-        $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id')->where('status','1')->get();
+        $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id')
+            ->where('status','1')->get();
         return view(
             'welcome', 
             ['subscriptions' => $subscriptions, 'user' => Auth::user()]
@@ -52,3 +53,5 @@ Route::resource('/offer-theme', OfferThemeController::class)
 
 // подмена csrf
 Route::get('/wrong-uri', fn() => view('wrongcsrf'));
+// выключен JS
+Route::get('/noscript', fn() => view('noscript'));
