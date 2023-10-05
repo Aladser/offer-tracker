@@ -1,5 +1,5 @@
 /** Фронт-контроллер офферов */
-class OfferService {
+class OfferService extends FrontController{
     /** Фронт-контроллер офферов
      * @param {*} URL url бэк-части
      * @param {*} offerTable таблица офферов

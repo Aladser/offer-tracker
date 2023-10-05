@@ -51,12 +51,7 @@ class FrontController {
           try {
             data = JSON.parse(data)
             if (data.result == 1) {
-              form.reset()
-              this.createRow(data);
-              this.msgElement.textContent = ""
-              this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-                row.onclick = (e) => this.click(e.target.closest("tr"))
-              })
+              this.processData(form, data);
             } else {
               this.msgElement.textContent = data.description;
             }
@@ -115,12 +110,8 @@ class FrontController {
       }
     }
   
-    /** создать строку таблицы
-     * 
-     * @param {*} data данные из БД
-     */
-    createRow(data) {
-      alert('нет реализации метода createRow');
+    processData(data) {
+      alert('нет реализации метода processData');
     }
 
   }
