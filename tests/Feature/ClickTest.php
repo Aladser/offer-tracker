@@ -13,14 +13,17 @@ use App\Models\Webmaster;
 use App\Models\OfferClick;
 use App\Models\SystemOption;
 
-class LinkClickTest extends TestCase
+class ClickTest extends TestCase
 {
     use RefreshDatabase;
 
     public function testAdvertiserOfferClicks()
     {
-        system('clear');
-        $this->seed();
+        if (User::count() === 0) {
+            $this->seed();
+            system('clear');
+        }
+
         $offerService = new OfferService();
         $advertiser = Advertiser::find(1);
 
@@ -79,7 +82,13 @@ class LinkClickTest extends TestCase
 
         $extendedClicks = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
         $table = $extendedClicks->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'));
-        var_dump($table->get()->toArray());
-        echo "{$table->get()->sum('money')}\n";
+
+        echo "\nКомиссии\n";
+        foreach ($table->get()->toArray() as $click) {
+            echo "цена:{$click['price']} комиссия:{$click['commission']} деньги:{$click['money']}\n";
+        }
+        echo "Всего денег: {$table->get()->sum('money')}\n";
+
+        $this->assertDatabaseCount('offer_subscriptions', 6);
     }
 }
