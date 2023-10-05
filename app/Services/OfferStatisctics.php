@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\User;
 use App\Http\Controllers\SystemOptionController;
 
-class OfferService
+class OfferStatisctics
 {
     private $commission;
 
@@ -20,10 +20,10 @@ class OfferService
         $data['user'] = $user;
 
         // временные промежутки
-        $lastDay = OfferService::getDate('-1 day');
-        $lastMonth = OfferService::getDate('-1 month');
-        $lastYear = OfferService::getDate('-1 year');
-        $allTime = OfferService::getDate();
+        $lastDay = OfferStatisctics::getDate('-1 day');
+        $lastMonth = OfferStatisctics::getDate('-1 month');
+        $lastYear = OfferStatisctics::getDate('-1 year');
+        $allTime = OfferStatisctics::getDate();
         $data['times'] = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
 
         // статистика офферов
