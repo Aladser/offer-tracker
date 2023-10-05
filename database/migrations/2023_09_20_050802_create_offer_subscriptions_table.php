@@ -24,6 +24,7 @@ class CreateOfferSubscriptionsTable extends Migration
             $table->foreign('offer_id')->references('id')->on('offers')->cascadeOnDelete();
 
             $table->unique(['webmaster_id', 'offer_id']);
+            $table->index(['webmaster_id', 'offer_id', 'refcode']);
         });
     }
 

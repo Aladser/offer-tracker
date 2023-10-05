@@ -22,6 +22,7 @@ class CreateOffersTable extends Migration
             $table->foreign('advertiser_id')->references('id')->on('advertisers')->cascadeOnDelete();
 
             $table->boolean('status')->default(true);
+            $table->unique(['name', 'advertiser_id']);
         });
     }
 
