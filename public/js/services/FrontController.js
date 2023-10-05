@@ -17,7 +17,7 @@ class FrontController {
   
       // клики строки таблицы
       this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-        row.onclick = (e) => this.clickRow(row, e.target.closest("tr"))
+        row.onclick = (e) => this.click(row, e.target.closest("tr"))
       })
   
       // таблица
@@ -28,7 +28,7 @@ class FrontController {
               if (e.target.tagName === "INPUT") {
                 this.setStatus(e.target.closest("tr"), e.target)
               } else {
-                this.clickRow(e.target.closest("tr"))
+                this.click(e.target.closest("tr"))
               }
             })
         )
@@ -55,7 +55,7 @@ class FrontController {
               this.createRow(data);
               this.msgElement.textContent = ""
               this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-                row.onclick = (e) => this.clickRow(e.target.closest("tr"))
+                row.onclick = (e) => this.click(e.target.closest("tr"))
               })
             } else {
               this.msgElement.textContent = data.description;
@@ -97,7 +97,7 @@ class FrontController {
         })
     }
   
-    clickRow(row) {
+    click(row) {
       if (row.classList.contains(`${this.table.id}__tr--active`)) {
         row.classList.remove(`${this.table.id}__tr--active`)
         row.querySelector("button").remove()
