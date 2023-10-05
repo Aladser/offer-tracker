@@ -1,4 +1,4 @@
-class OfferService extends TableFrontController{
+class OfferTableFrontController extends TableFrontController{
     constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
       super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
       this.username = username;

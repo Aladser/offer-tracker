@@ -8,4 +8,4 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const msgPrg = document.querySelector('#prg-error');
 
 /** фронт-контроллер офферов */
-const offerService = new OfferService('/offer', offerTable, msgPrg, null, csrfToken, null);
+const offerService = new OfferTableFrontController('/offer', offerTable, msgPrg, null, csrfToken, null);

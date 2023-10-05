@@ -5,7 +5,7 @@
 
     @section('js')
         <script src="/js/services/TableFrontController.js" defer></script>
-        <script src="/js/services/OfferService.js" defer></script>
+        <script src="/js/services/OfferTableFrontController.js" defer></script>
         <script src="/js/pages/addOffer.js" defer></script>
     @endsection
 

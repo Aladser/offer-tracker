@@ -1,5 +1,5 @@
 /** Фронт-контроллер таблицы пользователей */
-class UserService extends TableFrontController{
+class UserTableFrontController extends TableFrontController{
   /** добавить строку в таблицу
    * @param {*} form форма добавления
    * @param {*} data данные из БД
