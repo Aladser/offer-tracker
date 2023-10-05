@@ -55,10 +55,8 @@ class DBTest extends TestCase
 
     private function getOffers($id)
     {
-        if (User::count() === 0) {
-            $this->seed();
-        }
-
+        $this->seedTest();
+        
         $advertiser = Advertiser::find($id);
         echo $advertiser->user->name . "\n";
         foreach ($advertiser->offers->all() as $offer) {

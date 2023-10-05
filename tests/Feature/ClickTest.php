@@ -19,16 +19,14 @@ class ClickTest extends TestCase
 
     public function testAdvertiserOfferClicks()
     {
-        if (User::count() === 0) {
-            $this->seed();
-            system('clear');
-        }
+        system('clear');
+        $this->seedTest();
 
         $offerService = new OfferService();
         $advertiser = Advertiser::find(1);
 
 
-        echo "статистика офферов рекламщика {$advertiser->user->name}:\n";
+        echo "офферы рекламщика {$advertiser->user->name}:\n";
         $data = $offerService->getOfferData($advertiser->user);
         foreach ($data['offers'] as $offer) {
             echo "{$offer['name']} посетителей:{$offer['clicks']} потрачено:{$offer['money']}\n";
@@ -41,9 +39,7 @@ class ClickTest extends TestCase
 
     public function testWebmasterSubscriptionClicks()
     {
-        if (User::count() === 0) {
-            $this->seed();
-        }
+        $this->seedTest();
 
         $totalClicks = 0;
         $totalMoney = 0;
@@ -75,10 +71,7 @@ class ClickTest extends TestCase
     public function testCommissions()
     {
         //select name, income_part, price, (1-income_part) * price as commission from offer_clicks join offers on offers.id = offer_clicks.offer_id ;
-
-        if (User::count() === 0) {
-            $this->seed();
-        }
+        $this->seedTest();
 
         $extendedClicks = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
         $table = $extendedClicks->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'));
