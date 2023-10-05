@@ -35,9 +35,22 @@ class OfferController extends Controller
         }
     }
 
+
+    private function add($data, $advertiserId)
+    {
+        $offer = new Offer();
+        $offer->name = $data['name'];
+        $offer->URL = $data['url'];
+        $offer->price = $data['price'];
+        $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
+        $offer->advertiser_id = $advertiserId;
+        
+        return $offer->save() ? 1 : 0;
+    }
+    
     public function destroy($id)
     {
-        return ['response' => Offer::find($id)->delete() ? 1 : 0];
+        return ['result' => Offer::find($id)->delete() ? 1 : 0];
     }
 
     /** установить статус */
@@ -84,17 +97,5 @@ class OfferController extends Controller
     private function hasOffer($name)
     {
         return !is_null(Offer::where('name', $name)->first());
-    }
-
-    private function add($data, $advertiserId)
-    {
-        $offer = new Offer();
-        $offer->name = $data['name'];
-        $offer->URL = $data['url'];
-        $offer->price = $data['price'];
-        $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-        $offer->advertiser_id = $advertiserId;
-        
-        return $offer->save() ? 1 : 0;
     }
 }

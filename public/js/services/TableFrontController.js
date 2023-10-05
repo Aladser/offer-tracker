@@ -1,5 +1,5 @@
 /** Фронт-контроллер */
-class FrontController {
+class TableFrontController {
     /** фронт-часть фронт-контроллера
      *
      * @param {*} URL URL бэк-контроллера
@@ -14,11 +14,6 @@ class FrontController {
       this.msgElement = msgElement;
       this.form = form;
       this.csrfToken = csrfToken;
-  
-      // клики строки таблицы
-      this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-        row.onclick = (e) => this.click(row, e.target.closest("tr"))
-      })
   
       // таблица
       if (this.table !== null) {
@@ -56,7 +51,6 @@ class FrontController {
               this.msgElement.textContent = data.description;
             }
           } catch (e) {
-            console.log(e)
             if (data.includes("<title>Page Expired</title>")) {
               window.open("/wrong-uri", "_self")
             } else {
@@ -75,18 +69,19 @@ class FrontController {
         .then((response) => response.text())
         .then((data) => {
           try {
-            data = JSON.parse(data)
+            data = JSON.parse(data);
             if (data.result == 1) {
-              row.remove()
-              this.msgElement.textContent = ""
+              row.remove();
+              this.msgElement.textContent = "";
             } else {
-              this.msgElement.textContent = data.description
+              this.msgElement.textContent = data;
             }
-          } catch (e) {
+          } catch (err) {
+            console.log(err);
             if (data.includes("<title>Page Expired</title>")) {
               window.open("/wrong-uri", "_self")
             } else {
-              this.msgElement.textContent = data
+              this.msgElement.textContent = err;
             }
           }
         })

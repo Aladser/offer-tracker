@@ -14,4 +14,4 @@ const msgPrg = document.querySelector('#form-add-error');
 const username = document.querySelector('#navpanel-username').textContent;
 
 /** фронт-контроллер офферов */
-const offerService = new OfferService(offerURL, null, addOfferForm, msgPrg, username, csrfToken);
+const offerService = new OfferService(offerURL, null, msgPrg, addOfferForm, csrfToken,  username);

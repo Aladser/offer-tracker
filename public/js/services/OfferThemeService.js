@@ -1,5 +1,5 @@
 /** Фронт-контроллер таблицы */
-class OfferThemeService extends FrontController{
+class OfferThemeService extends TableFrontController{
   /** создать строку таблицы
    * 
    * @param {*} data данные из БД

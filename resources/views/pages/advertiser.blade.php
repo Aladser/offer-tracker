@@ -8,7 +8,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/services/FrontController.js" defer></script>
+        <script src="/js/services/TableFrontController.js" defer></script>
         <script src="/js/services/OfferService.js" defer></script>
         <script src="/js/pages/advertiser.js" defer></script>
     @endsection
@@ -49,6 +49,8 @@
                         </tr>
                     @endforeach
                 </table>
+
+                <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
             </div>
         </section>
     </section>

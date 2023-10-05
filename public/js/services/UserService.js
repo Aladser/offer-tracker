@@ -1,7 +1,7 @@
 /** Фронт-контроллер таблицы пользователей */
-class UserService extends FrontController{
-  /** создать строку таблицы
-   * 
+class UserService extends TableFrontController{
+  /** добавить строку в таблицу
+   * @param {*} form форма добавления
    * @param {*} data данные из БД
    */
   processData(form, data) {
@@ -22,7 +22,11 @@ class UserService extends FrontController{
     })
   }
 
-  /** установить статус */
+  /** включить-выключить пользователя
+   * 
+   * @param {*} row строка таблицы
+   * @param {*} inputStatus статус
+   */
   setStatus(row, inputStatus) {
     let data = new URLSearchParams()
     data.set("id", row.getAttribute("data-id"))
