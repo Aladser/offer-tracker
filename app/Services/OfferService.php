@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Models\SystemOption;
+use App\Http\Controllers\SystemOptionController;
 
 class OfferService
 {
@@ -12,7 +12,7 @@ class OfferService
     public function __construct()
     {
         // комиссия системы
-        $this->commission = SystemOption::where('name', 'commission')->first()->value('value');
+        $this->commission = SystemOptionController::commission();
     }
 
     public function getStatisticsData(User $user)

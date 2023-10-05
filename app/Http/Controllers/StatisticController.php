@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\OfferService;
-use App\Models\OfferSubscription;
-use App\Models\User;
-use App\Models\SystemOption;
 
 class StatisticController extends Controller
 {

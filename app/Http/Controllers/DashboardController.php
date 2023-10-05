@@ -8,7 +8,6 @@ use App\Models\OfferTheme;
 use App\Models\Offer;
 use App\Models\OfferClick;
 use App\Models\OfferSubscription;
-use App\Models\SystemOption;
 use App\Models\FailedOfferClick;
 
 class DashboardController extends Controller
@@ -16,7 +15,7 @@ class DashboardController extends Controller
     public function __invoke(Request $request)
     {
         $user = $request->user();
-        $commission = SystemOption::commission();
+        $commission = SystemOptionController::commission();
 
         switch ($user->role->name) {
             case 'администратор':
