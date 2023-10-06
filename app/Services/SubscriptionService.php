@@ -4,8 +4,8 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
-use App\Events\WebmasterSigned;
-use App\Events\WebmasterUnsigned;
+//use App\Events\WebmasterSigned;
+//use App\Events\WebmasterUnsigned;
 
 class SubscriptionService
 {
@@ -22,7 +22,7 @@ class SubscriptionService
         $isSubscribed = $offerSubscription->save();
 
         if($isSubscribed) {
-            WebmasterSigned::dispatch($offerSubscription); // событие подписки
+            //WebmasterSigned::dispatch($offerSubscription); // событие подписки
             
             return ['result' => $offerSubscription->refcode];
         } else {
@@ -44,7 +44,7 @@ class SubscriptionService
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {
-            WebmasterUnsigned::dispatch($subscriptionId, $webmaster, $offer); // событие отписки
+            //WebmasterUnsigned::dispatch($subscriptionId, $webmaster, $offer); // событие отписки
         } 
 
         return ['result' => $isUnsubscribed];
