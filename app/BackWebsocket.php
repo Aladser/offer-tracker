@@ -19,11 +19,13 @@ class Chat implements MessageComponentInterface
     public function onOpen(ConnectionInterface $conn)
     {
         $this->clients->attach($conn); // добавление клиента
+        echo "Соединение установлено\n";
     }
 
     public function onClose(ConnectionInterface $conn)
     {
         $this->clients->detach($conn);
+        echo "Соединение закрыто\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
@@ -33,6 +35,7 @@ class Chat implements MessageComponentInterface
         foreach ($this->clients as $client) {
             $client->send($msg);
         }
+        echo "Сообщение получено\n";
     }
 
     public function onError(ConnectionInterface $conn, Exception $e)

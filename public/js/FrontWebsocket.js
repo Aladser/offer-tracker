@@ -1,25 +1,29 @@
 class FrontWebsocket
 {
-    constructor()
-    {
+    constructor() {
         this.websocket = new WebSocket('ws://localhost:8888');
         this.websocket.onerror = this.onError;
-        this.websocket.onmessage = e => this.onMessage(e);
+        this.websocket.onmessage = this.onMessage;
+        this.websocket.onmessage = this.onopen;
     }
 
     // получение ошибок вебсокета
-    onError = (e) => console.log(e);
+    onError (e) {
+        console.log(e);
+    }
 
     // получение сообщений
-    onMessage(e)
-    {
+    onMessage(e) {
         let data = JSON.parse(e.data);
         console.log(data);
     }
 
     // отправка сообщений
-    sendData(data)
-    {
+    sendData(data) {
         this.websocket.send(JSON.stringify(data));
     }
+
+    onOpen(e) {
+        console.log("Соединение установлено");
+    };
 }
