@@ -13,7 +13,7 @@ use App\Models\OfferSubscription;
 
 class WebmasterSigned
 {
-    public OfferSubscription $click;
+    public OfferSubscription $subscription;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,9 +22,9 @@ class WebmasterSigned
      *
      * @return void
      */
-    public function __construct(OfferSubscription $click)
+    public function __construct(OfferSubscription $subscription)
     {
-        $this->click = $click;
+        $this->subscription = $subscription;
     }
 
     /**

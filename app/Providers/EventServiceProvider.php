@@ -6,6 +6,10 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use App\Events\WebmasterSigned;
+use App\Events\WebmasterUnsigned;
+use App\Listeners\Subscription;
+use App\Listeners\Unsubscription;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -18,7 +22,10 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         WebmasterSigned::class => [
-            SubscriptionsUpdating::class,
+            Subscription::class,
+        ],
+        WebmasterUnsigned::class => [
+            Unsubscription::class,
         ]
     ];
 
