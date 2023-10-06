@@ -4,7 +4,7 @@ class FrontWebsocket
         this.websocket = new WebSocket('ws://localhost:8888');
         this.websocket.onerror = this.onError;
         this.websocket.onmessage = this.onMessage;
-        this.websocket.onmessage = this.onopen;
+        this.websocket.onopen = this.onOpen;
     }
 
     // получение ошибок вебсокета
@@ -25,5 +25,5 @@ class FrontWebsocket
 
     onOpen(e) {
         console.log("Соединение установлено");
-    };
+    }; 
 }

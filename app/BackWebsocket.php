@@ -2,13 +2,12 @@
 
 namespace App;
 
-
 use Exception;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
 /** Чат - серверная часть */
-class Chat implements MessageComponentInterface
+class BackWebsocket implements MessageComponentInterface
 {
     private \SplObjectStorage $clients;           // хранение всех подключенных пользователей
 
