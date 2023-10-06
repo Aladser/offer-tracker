@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Events\WebmasterSigned;
 use Illuminate\Support\Facades\Log;
 
+/** прослушивает подписки вебмастеров */
 class Subscription
 {
     private $logChannel;

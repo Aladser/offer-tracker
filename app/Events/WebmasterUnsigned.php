@@ -12,7 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Models\Webmaster;
 use App\Models\Offer;
 
-
+/** событие отписки вебмастера */
 class WebmasterUnsigned implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;

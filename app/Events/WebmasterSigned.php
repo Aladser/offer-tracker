@@ -11,27 +11,18 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\OfferSubscription;
 
+/** событие подписки вебмастера */
 class WebmasterSigned implements ShouldBroadcast
 {
     public OfferSubscription $subscription;
 
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
     public function __construct(OfferSubscription $subscription)
     {
         $this->subscription = $subscription;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
         return new PrivateChannel($this->subscription->offer->advertiser->id);

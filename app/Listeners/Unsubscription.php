@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Events\WebmasterUnsigned;
 use Illuminate\Support\Facades\Log;
 
+/** прослушивает отписки вебмастеров */
 class Unsubscription
 {
     private $logChannel;
