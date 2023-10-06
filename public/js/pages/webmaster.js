@@ -32,6 +32,7 @@ function onDrop(event) {
 	let dropzone = event.target.closest('.table-items');
 	dropzone.append(draggableElement);
 
+	// отписка
 	if (draggableElement.id.includes('subscription')) {
 		id = draggableElement.id.substring(13);
 		draggableElement.id = `offer-${id}`;
@@ -39,6 +40,7 @@ function onDrop(event) {
 		draggableElement.classList.add('offers__item');
 		draggableElement.classList.add('bg-light');
 		switchSubscription(unsubscribeURL, id, draggableElement);
+	// подписка
 	} else {
 		id = draggableElement.id.substring(6);
 		draggableElement.id = `subscription-${id}`;

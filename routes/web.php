@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Services\SubscriptionService;
+use App\Models\OfferSubscription;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\OfferThemeController;
 use App\Http\Controllers\StatisticController;
-use App\Models\OfferSubscription;
-use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function() {
         $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id')
@@ -43,8 +44,8 @@ Route::get('/offer/statistics', [StatisticController::class, 'index'])
     ->name('offer.statistics');
 
 // подписка-отписка вебмастеров на офферы
-Route::post('/offer/subscribe', [OfferController::class, 'subscribe']);
-Route::post('/offer/unsubscribe', [OfferController::class, 'unsubscribe']);
+Route::post('/offer/subscribe', [SubscriptionService::class, 'subscribe']);
+Route::post('/offer/unsubscribe', [SubscriptionService::class, 'unsubscribe']);
 
 // контроллер тем офферов
 Route::resource('/offer-theme', OfferThemeController::class)

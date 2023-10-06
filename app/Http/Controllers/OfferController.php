@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Advertiser;
 use App\Models\Offer;
-use App\Models\OfferSubscription;
 use App\Models\OfferTheme;
 
 class OfferController extends Controller
@@ -35,7 +33,6 @@ class OfferController extends Controller
         }
     }
 
-
     private function add($data, $advertiserId)
     {
         $offer = new Offer();
@@ -61,29 +58,6 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->status = $status === 'true' ? 1 : 0;
         return $offer->save();
-    }
-
-    /** подписка на оффер */
-    public function subscribe(Request $request)
-    {
-        $offerId = $request->all()['offerId'];
-        $webmasterId = $request->user()->webmaster->id;
-
-        $offerSubscription = new OfferSubscription();
-        $offerSubscription->offer_id = $offerId;
-        $offerSubscription->webmaster_id = $webmasterId;
-        $offerSubscription->refcode = "$webmasterId@$offerId";
-        $rslt = $offerSubscription->save();
-        return ['result' => $rslt ? $offerSubscription->refcode : 0];
-    }
-
-    /** отписка от оффера */
-    public function unsubscribe(Request $request)
-    {
-        $offerId = $request->all()['offerId'];
-        $webmasterId = $request->user()->webmaster->id;
-        $rslt = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->delete();
-        return ['result' => $rslt];
     }
 
     /** поиск рекламодателя по имени */

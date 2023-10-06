@@ -3,14 +3,14 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\OfferService;
+use App\Services\OfferStatistics;
 
-class OfferServiceProvider extends ServiceProvider
+class OfferStatisticsProvider extends ServiceProvider
 {
     public function register()
     {
         $this->app->singleton(Connection::class, function ($app) {
-            return new OfferService();
+            return new OfferStatistics();
         });
     }
 
