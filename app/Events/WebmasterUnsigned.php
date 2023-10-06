@@ -13,7 +13,7 @@ use App\Models\Webmaster;
 use App\Models\Offer;
 
 
-class WebmasterUnsigned
+class WebmasterUnsigned implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -30,6 +30,6 @@ class WebmasterUnsigned
 
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel($this->offer->advertiser->id);
     }
 }

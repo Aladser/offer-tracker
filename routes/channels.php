@@ -4,15 +4,19 @@ use Illuminate\Support\Facades\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
-| Broadcast Channels
-|--------------------------------------------------------------------------
+| Трансляционные каналы
+|----------------------------------------------------------------- -------------------------
 |
-| Here you may register all of the event broadcasting channels that your
-| application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
+| Здесь вы можете зарегистрировать все каналы трансляции мероприятий, которые ваш
+| поддержка приложений. Данные обратные вызовы авторизации канала:
+| используется для проверки, может ли аутентифицированный пользователь прослушивать канал.
 |
 */
 
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
+});
+
+Broadcast::channel('App.Models.Advertiser.{id}', function ($user, $id) {
+    return (int) $user->advertiser->id === (int) $id;
 });

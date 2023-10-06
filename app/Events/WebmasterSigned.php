@@ -11,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 use App\Models\OfferSubscription;
 
-class WebmasterSigned
+class WebmasterSigned implements ShouldBroadcast
 {
     public OfferSubscription $subscription;
 
@@ -34,6 +34,6 @@ class WebmasterSigned
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel($this->subscription->offer->advertiser->id);
     }
 }
