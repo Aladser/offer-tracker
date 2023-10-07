@@ -27,7 +27,7 @@ class DashboardController extends Controller
                     ->sum('money');
                 
                 return view(
-                        'pages/admin', 
+                        'pages/dashboard/admin', 
                         [
                             'userId' => $user->id,
                             // темы офферов
@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
                 
                 return view(
-                        'pages/webmaster',
+                        'pages/dashboard/webmaster',
                         [
                             // подписки пользователя
                             'subscriptions' => OfferSubscription::where('webmaster_id', $webmasterId),
@@ -63,7 +63,7 @@ class DashboardController extends Controller
                     );
             case 'рекламодатель':
                 return view(
-                        'pages/advertiser', 
+                        'pages/dashboard/advertiser', 
                         [
                             // рекламодатель
                             'advertiser' => $user->advertiser,

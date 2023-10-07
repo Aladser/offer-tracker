@@ -9,7 +9,9 @@
     @endsection
 
     @section('js')
-        <script src="/js/pages/webmaster.js" defer></script>
+        <script src="/js/FrontWebsocket.js" defer></script>
+        <script src="/js/SubscriptionCtl.js" defer></script>
+        <script src="/js/pages/dashboard/webmaster.js" defer></script>
     @endsection
 
     <x-slot name="header">

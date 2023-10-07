@@ -1,4 +1,5 @@
-class CommissionCtl{
+class CommissionCtl
+{
     constructor(url, commissionForm, msgPrg) {
         this.url = url;
         // форма комиссиии

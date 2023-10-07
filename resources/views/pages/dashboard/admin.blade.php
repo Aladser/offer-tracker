@@ -10,7 +10,7 @@
     @section('js')
         <script src="/js/FrontWebsocket.js" defer></script>
         <script src="/js/CommissionCtl.js" defer></script>
-        <script src="/js/pages/admin.js" defer></script>
+        <script src="/js/pages/dashboard/admin.js" defer></script>
     @endsection
 
     <x-slot name="header">
