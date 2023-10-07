@@ -9,27 +9,11 @@ use App\Models\Offer;
 use App\Models\OfferClick;
 use App\Models\OfferSubscription;
 use App\Models\FailedOfferClick;
-use App\ScriptLinuxProcess;
 
 class DashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // тест вебсокета
-        $os = explode(' ', php_uname())[0];
-        if ($os !== 'Windows') {
-            $websocket = new ScriptLinuxProcess(
-                'offer-service',
-                dirname(__DIR__, 2) . '/offer-service.php',
-                dirname(__DIR__, 3) . '/storage/logs/websocket.log',
-                dirname(__DIR__, 3) . '/storage/logs/pids.log'
-            );
-            if (!$websocket->isActive()) {
-                $websocket->run();
-            }
-            echo $websocket->getPID();
-        }
-
         $user = $request->user();
         $commission = SystemOptionController::commission();
 
