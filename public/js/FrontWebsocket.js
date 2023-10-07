@@ -1,7 +1,7 @@
 class FrontWebsocket
 {
-    constructor() {
-        this.websocket = new WebSocket('ws://localhost:8888');
+    constructor(url) {
+        this.websocket = new WebSocket(url);
         this.websocket.onerror = this.onError;
         this.websocket.onmessage = this.onMessage;
         this.websocket.onopen = this.onOpen;
@@ -9,7 +9,7 @@ class FrontWebsocket
 
     // получение ошибок вебсокета
     onError (e) {
-        console.log(e);
+        alert(`ошибка вебсокета ${e}`);
     }
 
     // получение сообщений
