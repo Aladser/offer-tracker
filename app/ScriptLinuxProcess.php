@@ -44,7 +44,7 @@ class ScriptLinuxProcess
     }
 
     /** убивает процесс */
-    public function disable()
+    public function kill()
     {
         exec("pkill -f {$this->processName}");
     }
