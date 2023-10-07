@@ -2,9 +2,9 @@ class FrontWebsocket
 {
     constructor(url) {
         this.websocket = new WebSocket(url);
-        this.websocket.onerror = this.onError;
-        this.websocket.onmessage = this.onMessage;
-        this.websocket.onopen = this.onOpen;
+        this.websocket.onerror = e => this.onError(e);
+        this.websocket.onmessage = e => this.onMessage(e);
+        this.websocket.onopen = e => this.onOpen(e);
     }
 
     // получение ошибок вебсокета
@@ -14,7 +14,7 @@ class FrontWebsocket
 
     // получение сообщений
     onMessage(e) {
-        let data = JSON.parse(e.data);
+        //let data = JSON.parse(e.data);
         //console.log(data);
     }
 
@@ -24,5 +24,6 @@ class FrontWebsocket
     }
 
     onOpen(e) {
+        
     }; 
 }

@@ -18,7 +18,6 @@ class SubscriptionCtl
 
         /** вебсокет */
         this.websocket = new FrontWebsocket('ws://localhost:8888');
-        this.serverResponse = false;
     }
 
     onDragStart(event) {

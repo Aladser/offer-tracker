@@ -1,11 +1,15 @@
 class OfferTableFrontController extends TableFrontController{
     constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
       super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
-      this.username = username;
+      this.username = username.textContent;
 
       if (this.form !== null) {
         this.form.onsubmit = (event) => this.add(event);
       }
+
+
+    /** вебсокет */
+    this.websocket = new AdvertiserFrontWebsocket('ws://localhost:8888',this.table, this.username);
     }
   
     /** добавить оффер в БД

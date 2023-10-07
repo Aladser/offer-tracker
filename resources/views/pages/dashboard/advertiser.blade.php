@@ -9,6 +9,7 @@
 
     @section('js')
         <script src="/js/websockets/FrontWebsocket.js" defer></script>
+        <script src="/js/websockets/AdvertiserFrontWebsocket.js" defer></script>
         <script src="/js/TableFrontControllers/TableFrontController.js" defer></script>
         <script src="/js/TableFrontControllers/OfferTableFrontController.js" defer></script>
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
@@ -46,7 +47,7 @@
                                     @endif
                                 </div>
                             </td>
-                            <td>{{$offer->links->count()}} </td>
+                            <td class='table-offers__td-link-count'>{{$offer->links->count()}} </td>
                         </tr>
                     @endforeach
                 </table>
