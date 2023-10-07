@@ -14,7 +14,7 @@ class FrontWebsocket
 
     // получение сообщений
     onMessage(e) {
-        //let data = JSON.parse(e.data);
+        let data = JSON.parse(e.data);
         //console.log(data);
     }
 

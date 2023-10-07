@@ -4,8 +4,6 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
-//use App\Events\WebmasterSigned;
-//use App\Events\WebmasterUnsigned;
 
 class SubscriptionService
 {
@@ -24,6 +22,12 @@ class SubscriptionService
         if($isSubscribed) {
             $advertiserName = $offerSubscription->offer->advertiser->user->name;
             $offer = $offerSubscription->offer->id;
+
+            \Ratchet\Client\connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
+                $conn->send(json_encode(['type' => 'SUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
+                $conn->close();
+            });
+            
             return ['result' => $offerSubscription->refcode, 'advertiser' => $advertiserName, 'offer' => $offer];
         } else {
             return ['result' => 0];
@@ -42,6 +46,11 @@ class SubscriptionService
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {
+            \Ratchet\Client\connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
+                $conn->send(json_encode(['type' => 'UNSUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
+                $conn->close();
+            });
+
             return ['result' => 1, 'advertiser' => $advertiserName, 'offer' => $offer];
         } else {
             return ['result' => 0];

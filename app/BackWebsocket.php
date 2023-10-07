@@ -32,8 +32,11 @@ class BackWebsocket implements MessageComponentInterface
         $data = json_decode($msg);
 
         foreach ($this->clients as $client) {
-            $client->send($msg);
+            if ($from !== $client) {
+                $client->send($msg);
+            }
         }
+
         echo "Сообщение получено\n";
     }
 
