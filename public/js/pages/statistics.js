@@ -1,9 +1,6 @@
 /** форма переключателей временного периода */
 const timeSwitcher = document.querySelector('#time-period-article__switcher');
 
-/** вебсокет */
-const websocket = new FrontWebsocket('ws://localhost:8888');
-
 /** таблица переключателей времени */
 const times = new Map();
 times.set('last-day', document.querySelector('#table-offers-last-day'));
@@ -23,3 +20,6 @@ function setStatisticTime() {
         activeTimeRadio.classList.remove('d-none');
     };
 }
+
+/** вебсокет */
+const websocket = new StatisticsFrontWebsocket('ws://localhost:8888');

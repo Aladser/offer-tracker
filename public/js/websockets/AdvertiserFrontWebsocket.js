@@ -9,7 +9,11 @@ class AdvertiserFrontWebsocket extends FrontWebsocket
     // получение сообщений: изменение числа подписчиков
     onMessage(e) {
         let data = JSON.parse(e.data);
-        if (data.advertiser === this.username) {
+        if (data.response !== 'subscribe' && data.response !== 'unsubscribe') {
+            return;
+        }
+
+        if (data.advertiser === this.username) {     
             let row = this.offerTable.querySelector(`tr[data-id="${data.offer}"]`);
             let counter = row.querySelector('.table-offers__td-link-count'); 
             if (data.response == 'subscribe') {
