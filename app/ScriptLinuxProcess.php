@@ -26,7 +26,6 @@ class ScriptLinuxProcess
         $this->processFile = $scriptFilepath;
         $this->processLogFile = $processLogFilepath;
         $this->pidsParseFile = $pidParseFilepath;
-        $this->PID = $this->findPID();
     }
 
     /** проверить наличие процесса */
@@ -42,33 +41,12 @@ class ScriptLinuxProcess
     {
         $this->clearLogs();
         exec("php $this->processFile > $this->processLogFile &");
-        $this->PID = $this->findPID();
     }
 
     /** убивает процесс */
     public function disable()
     {
-        exec("kill {$this->PID}");
-    }
-
-    /** поиск PID */
-    private function findPID()
-    {
-        $pidsArr = file($this->pidsParseFile);
-        for ($i=0; $i<count($pidsArr); $i++) {
-            if (mb_stripos($pidsArr[$i], "php {$this->processFile}" != -1)) {
-                $processArr = explode('    ', $pidsArr[$i]);
-                $processArr = $processArr[2];
-                $processArr = explode(' ', $processArr);
-                return $processArr[0];
-            }
-        }
-        return -1;
-    }
-
-    public function getPID()
-    {
-        return $this->PID;
+        exec("pkill -f {$this->processName}");
     }
 
     /** очистить логи вебсокета */
