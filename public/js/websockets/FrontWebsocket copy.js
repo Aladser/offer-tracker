@@ -15,7 +15,7 @@ class FrontWebsocket
     // получение сообщений
     onMessage(e) {
         let data = JSON.parse(e.data);
-        console.log(data);
+        //console.log(data);
     }
 
     // отправка сообщений
@@ -24,6 +24,5 @@ class FrontWebsocket
     }
 
     onOpen(e) {
-        console.log("Соединение установлено");
     }; 
 }

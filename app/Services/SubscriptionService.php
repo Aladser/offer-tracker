@@ -22,9 +22,9 @@ class SubscriptionService
         $isSubscribed = $offerSubscription->save();
 
         if($isSubscribed) {
-            //WebmasterSigned::dispatch($offerSubscription); // событие подписки
-            
-            return ['result' => $offerSubscription->refcode];
+            $webmasterName = $offerSubscription->follower->user->name;
+            $offerName = $offerSubscription->offer->name;
+            return ['result' => $offerSubscription->refcode, 'webmaster' => $webmasterName, 'offer' => $offerName];
         } else {
             return ['result' => 0];
         }
@@ -37,16 +37,14 @@ class SubscriptionService
         $offerId = $request->all()['offerId'];
         $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->first();
 
-        $subscriptionId = $offerSubscription->id;
-        $webmaster = $offerSubscription->follower;
-        $offer = $offerSubscription->offer;
-
+        $webmasterName = $offerSubscription->follower->user->name;
+        $offerName = $offerSubscription->offer->name;
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {
-            //WebmasterUnsigned::dispatch($subscriptionId, $webmaster, $offer); // событие отписки
-        } 
-
-        return ['result' => $isUnsubscribed];
+            return ['result' => 1, 'webmaster' => $webmasterName, 'offer' => $offerName];
+        } else {
+            return ['result' => 0];
+        }
     }
 }

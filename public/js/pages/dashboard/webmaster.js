@@ -10,6 +10,3 @@ const activeOffersList = document.querySelector('#list-active-offers');
 
 // контроллер подписок
 const subscriptionCtl = new SubscriptionCtl(subscriptionsList, activeOffersList, subscribeURL, unsubscribeURL);
-
-/** вебсокет */
-const websocket = new FrontWebsocket('ws://localhost:8888');

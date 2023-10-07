@@ -15,6 +15,10 @@ class SubscriptionCtl
         this.activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
         this.activeOffersList.ondragover = e => this.onDragOver(e);
         this.activeOffersList.ondrop = e => this.onDrop(e);
+
+        /** вебсокет */
+        this.websocket = new FrontWebsocket('ws://localhost:8888');
+        this.serverResponse = false;
     }
 
     onDragStart(event) {
@@ -66,14 +70,20 @@ class SubscriptionCtl
             body: data
         }).then(response => response.text()).then(data => {
             try {
-                let result = JSON.parse(data).result;
+                data = JSON.parse(data);
+                let result = data.result;
+                // ошибка
                 if (result == 0) {
                     prgError.textContent = 'Ошибка сервера. Подробности в консоли';
                     console.log(data);
                 } else if (result == 1) {
+                    // отписка - убирание реф.ссылки
                     offer.querySelector('.subscriptions__ref').remove();
+                    this.sendData(data, 'unsubscribe');
                 } else {
+                    // подписка - добавление реферальной ссылки
                     offer.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
+                    this.sendData(data, 'subscribe');
                 }
             } catch (e) {
                 if (data.includes('<title>Page Expired</title>')) {
@@ -84,5 +94,11 @@ class SubscriptionCtl
                 }
             }
         });
+    }
+
+    sendData(data, response) {
+        data.response = response;
+        delete data.result;
+        this.websocket.sendData(data);
     }
 }

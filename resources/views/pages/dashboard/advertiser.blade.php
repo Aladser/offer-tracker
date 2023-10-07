@@ -8,7 +8,7 @@
     @endsection
 
     @section('js')
-        <script src="/js/FrontWebsocket.js" defer></script>
+        <script src="/js/websockets/FrontWebsocket.js" defer></script>
         <script src="/js/TableFrontControllers/TableFrontController.js" defer></script>
         <script src="/js/TableFrontControllers/OfferTableFrontController.js" defer></script>
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
