@@ -1,10 +1,9 @@
 /** обновление статистики рекламодателей и вебмастеров */
 class StatisticsFrontWebsocket extends FrontWebsocket
 {
-    constructor(url, offerTables, username) {
-        super(url);
+    constructor(url, username, offerTables) {
+        super(url, username);
         this.offerTables = offerTables;
-        this.username = username.textContent;
     }
 
     /** обновляет статистику рекламодателя или вебмастера */

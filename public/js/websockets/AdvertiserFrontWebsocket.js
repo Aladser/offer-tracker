@@ -1,9 +1,8 @@
 class AdvertiserFrontWebsocket extends FrontWebsocket
 {
-    constructor(url, offerTable, username) {
-        super(url);
+    constructor(url, username, offerTable) {
+        super(url, username);
         this.offerTable = offerTable; 
-        this.username = username;
     }
 
     // получение сообщений: изменение числа подписчиков
