@@ -1,9 +1,10 @@
 /** обновление статистики рекламодателей и вебмастеров */
 class StatisticsFrontWebsocket extends FrontWebsocket
 {
-    constructor(url, offerTable, username) {
+    constructor(url, offerTables, username) {
         super(url);
-        this.offerTable = offerTable; 
+        this.offerTable = offerTables.get('all-time');
+        this.offerTables = offerTables;
         this.username = username.textContent;
 
         this.totalClicksElement = this.offerTable.querySelector('.table-offers__total-clicks'); 

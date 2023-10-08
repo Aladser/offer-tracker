@@ -2,8 +2,6 @@
 const timeSwitcher = document.querySelector('#time-period-article__switcher');
 /** пользователь*/
 const user = document.querySelector("#element-username");
-/** таблица статистики */
-const offerTable = document.querySelector("#table-offers");
 
 /** таблиц переключателей времени */
 const tables = new Map();
@@ -27,4 +25,4 @@ function setStatisticTime() {
 
 
 /** вебсокет */
-const websocket = new StatisticsFrontWebsocket('ws://localhost:8888', offerTable, user);
+const websocket = new StatisticsFrontWebsocket('ws://localhost:8888', tables, user);
