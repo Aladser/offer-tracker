@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\ScriptLinuxProcess;
 
-class isActiveOfferBackgroundWorker
+class isActiveWebsocket
 {
     public function handle(Request $request, Closure $next)
     {

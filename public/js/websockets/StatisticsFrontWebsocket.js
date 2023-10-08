@@ -5,6 +5,9 @@ class StatisticsFrontWebsocket extends FrontWebsocket
         super(url);
         this.offerTable = offerTable; 
         this.username = username.textContent;
+
+        this.totalClicksElement = this.offerTable.querySelector('.table-offers__total-clicks'); 
+        this.totalMoneyElement = this.offerTable.querySelector('.table-offers__total-money');
     }
 
     /** обновляет статистику рекламодателя или вебмастера */
@@ -15,16 +18,25 @@ class StatisticsFrontWebsocket extends FrontWebsocket
         }
 
         let row = this.offerTable.querySelector(`tr[data-id="${data.offer}"]`);
-        let clickCell = row.querySelector('.table-offers__clicks'); // ячейка числа кликов
-        let moneyCell = row.querySelector('.table-offers__money');  // ячейка денежной суммы
         if (data.advertiser === this.username) {
             // статистика рекламодателя
-            clickCell.textContent = parseInt(clickCell.textContent) + 1;
-            moneyCell.textContent = parseInt(moneyCell.textContent) + data.price;
+            this.refreshCellData(data, row, 'рекламодатель');
         } else if (data.webmaster === this.username) {
             // статистика вебмастера
-            clickCell.textContent = parseInt(clickCell.textContent) + 1;
-            moneyCell.textContent = parseInt(moneyCell.textContent) + (data.price * data.income_part);
+            this.refreshCellData(data, row, 'веб-мастер');
         }
+    }
+
+    // обновить данные ячеек
+    refreshCellData(data, row, role) {
+        let clickCell = row.querySelector('.table-offers__clicks'); // ячейка числа кликов
+        let moneyCell = row.querySelector('.table-offers__money');  // ячейка денежной суммы
+        let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
+ 
+        clickCell.textContent = parseInt(clickCell.textContent) + 1;
+        moneyCell.textContent = parseInt(moneyCell.textContent) + money;
+
+        this.totalClicksElement.textContent = parseInt(this.totalClicksElement.textContent) + 1;
+        this.totalMoneyElement.textContent = parseInt(this.totalMoneyElement.textContent) + money;
     }
 }

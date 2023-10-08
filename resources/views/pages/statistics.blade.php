@@ -51,8 +51,8 @@
                         @endforeach
                         <tr>
                             <td class="fw-bolder table-secondary">Всего</td>
-                            <td class="fw-bolder table-secondary">{{$offersAllTime['totalClicks']}}</td>
-                            <td class="fw-bolder table-secondary">{{$offersAllTime['totalMoney']}} р.</td>
+                            <td class="fw-bolder table-secondary table-offers__total-clicks">{{$offersAllTime['totalClicks']}}</td>
+                            <td class="fw-bolder table-secondary table-offers__total-money">{{$offersAllTime['totalMoney']}} р.</td>
                         </tr>
                     </table>
 
