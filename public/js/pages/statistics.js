@@ -15,11 +15,11 @@ timeSwitcher.times.forEach(input => input.addEventListener('click', setTimePerio
 
 /** установить временной промежуток временной промежуток */
 function setStatisticTime() {
-    let activeTimeRadio = document.querySelector('#table-offers');
+    let activeTable = document.querySelector('#table-offers');
     return function(e) {
-        activeTimeRadio.classList.add('d-none');
-        activeTimeRadio = tables.get(e.target.value);
-        activeTimeRadio.classList.remove('d-none');
+        activeTable.classList.add('d-none');
+        activeTable = tables.get(e.target.value);
+        activeTable.classList.remove('d-none');
     };
 }
 

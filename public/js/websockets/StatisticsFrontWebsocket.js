@@ -10,7 +10,7 @@ class StatisticsFrontWebsocket extends FrontWebsocket
     /** обновляет статистику рекламодателя или вебмастера */
     onMessage(e) {
         let data = JSON.parse(e.data);
-        if (data.type !== 'CLICK') {
+        if (data.type !== 'CLICK' || !(data.advertiser === this.username || data.webmaster === this.username)) {
             return;
         }
 
@@ -32,7 +32,7 @@ class StatisticsFrontWebsocket extends FrontWebsocket
         if (data.advertiser === this.username) {
             // статистика рекламодателя
             this.refreshCellData(data, rows, 'рекламодатель');
-        } else if (data.webmaster === this.username) {
+        } else {
             // статистика вебмастера
             this.refreshCellData(data, rows, 'веб-мастер');
         }
