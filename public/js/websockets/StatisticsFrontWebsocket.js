@@ -3,12 +3,8 @@ class StatisticsFrontWebsocket extends FrontWebsocket
 {
     constructor(url, offerTables, username) {
         super(url);
-        this.offerTable = offerTables.get('all-time');
         this.offerTables = offerTables;
         this.username = username.textContent;
-
-        this.totalClicksElement = this.offerTable.querySelector('.table-offers__total-clicks'); 
-        this.totalMoneyElement = this.offerTable.querySelector('.table-offers__total-money');
     }
 
     /** обновляет статистику рекламодателя или вебмастера */
@@ -18,26 +14,41 @@ class StatisticsFrontWebsocket extends FrontWebsocket
             return;
         }
 
-        let row = this.offerTable.querySelector(`tr[data-id="${data.offer}"]`);
+        let rows = [];
+        // обновляется строка оффера каждой таблицы
+        this.offerTables.forEach(table => {
+            let cells = table.querySelectorAll(`tr[data-id="${data.offer}"] td`);
+            let rowCount =  table.childNodes[1].childNodes.length;
+            // (последняя-2) строка - строка итогов
+            let lastRow = table.childNodes[1].childNodes[rowCount-2].childNodes; 
+            rows.push({
+                'clickCell':cells[1], // ячейка числа переходов оффера
+                'moneyCell':cells[2], // ячейка денежной суммы оффера
+                'totalClicksElement':lastRow[3], // ячейка общего числа переходов
+                'totalMoneyElement':lastRow[5] // ячейка общей денежной суммы
+            });
+        });
+
         if (data.advertiser === this.username) {
             // статистика рекламодателя
-            this.refreshCellData(data, row, 'рекламодатель');
+            this.refreshCellData(data, rows, 'рекламодатель');
         } else if (data.webmaster === this.username) {
             // статистика вебмастера
-            this.refreshCellData(data, row, 'веб-мастер');
+            this.refreshCellData(data, rows, 'веб-мастер');
         }
     }
 
     // обновить данные ячеек
-    refreshCellData(data, row, role) {
-        let clickCell = row.querySelector('.table-offers__clicks'); // ячейка числа кликов
-        let moneyCell = row.querySelector('.table-offers__money');  // ячейка денежной суммы
-        let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
- 
-        clickCell.textContent = parseInt(clickCell.textContent) + 1;
-        moneyCell.textContent = parseInt(moneyCell.textContent) + money;
-
-        this.totalClicksElement.textContent = parseInt(this.totalClicksElement.textContent) + 1;
-        this.totalMoneyElement.textContent = parseInt(this.totalMoneyElement.textContent) + money;
+    refreshCellData(data, rows, role) {
+        rows.forEach(row => {
+            // величина расхода рекламодателя или доход вебмастера за переход
+            let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
+     
+            row.clickCell.textContent = parseInt(row.clickCell.textContent) + 1;
+            row.moneyCell.textContent = parseInt(row.moneyCell.textContent) + money;
+    
+            row.totalClicksElement.textContent = parseInt(row.totalClicksElement.textContent) + 1;
+            row.totalMoneyElement.textContent = parseInt(row.totalMoneyElement.textContent) + money;
+        });
     }
 }
