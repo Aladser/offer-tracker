@@ -10,7 +10,6 @@ class isActiveWebsocket
 {
     public function handle(Request $request, Closure $next)
     {
-        // тест вебсокета
         $os = explode(' ', php_uname())[0];
         if ($os !== 'Windows') {
             $websocket = new ScriptLinuxProcess(
