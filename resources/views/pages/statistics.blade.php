@@ -45,8 +45,8 @@
                         @foreach ($offersAllTime['offers'] as $offer)
                             <tr data-id="{{$offer['id']}}" class='table-offers__tr position-relative'>
                                 <td class='fw-bolder'>{{$offer['name']}}</td>
-                                <td>{{$offer['clicks']}} </td>
-                                <td>{{$offer['money']}} р.</td>
+                                <td class='table-offers__clicks'>{{$offer['clicks']}} </td>
+                                <td class='table-offers__money'>{{$offer['money']}} р.</td>
                             </tr>
                         @endforeach
                         <tr>

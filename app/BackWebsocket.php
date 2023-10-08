@@ -18,13 +18,13 @@ class BackWebsocket implements MessageComponentInterface
     public function onOpen(ConnectionInterface $conn)
     {
         $this->clients->attach($conn); // добавление клиента
-        echo "Соединение установлено\n";
+        echo "cоединение установлено\n";
     }
 
     public function onClose(ConnectionInterface $conn)
     {
         $this->clients->detach($conn);
-        echo "Соединение закрыто\n";
+        echo "cоединение закрыто\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
@@ -37,12 +37,12 @@ class BackWebsocket implements MessageComponentInterface
             }
         }
 
-        echo "Сообщение получено\n";
+        echo "Получено сообщение: $msg\n";
     }
 
     public function onError(ConnectionInterface $conn, Exception $e)
     {
-        echo "error: {$e->getMessage()}\n";
+        echo "Ошибка: {$e->getMessage()}\n";
         $conn->close();
     }
 }

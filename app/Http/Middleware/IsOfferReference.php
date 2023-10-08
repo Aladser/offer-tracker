@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\OfferClickController;
 use App\Http\Controllers\FailedOfferClickController;
+use App\Http\Controllers\SystemOptionController;
 use App\Models\OfferSubscription;
-use function Ratchet\Client\connect;
+use App\Services\WebsocketService;
 
 /** отлавливает реферальную ссылку */
 class IsOfferReference
@@ -33,9 +34,25 @@ class IsOfferReference
                 return redirect('page404');
             } else {
                 // зафиксировать факт перенаправления
-                OfferClickController::add($subscription->follower->id, $subscription->offer->id);
+                $webmasterId = $subscription->follower->id;
+                $webmaster = $subscription->follower->user->name;
+                $advertiser = $subscription->offer->advertiser->user->name; 
+                $offer = $subscription->offer->id;
+                $offerPrice = $subscription->offer->price;
+                $commission = SystemOptionController::commission();
+                $income_part = (100 - $commission) / 100;
+
+                OfferClickController::add($webmasterId, $offer);
                 Log::stack(['slack', $logChannel])->info("переход по ссылке {$request->path()}?ref=$refCode успешен");
-                
+                WebsocketService::send([
+                    'type' => 'CLICK',
+                    'advertiser' => $advertiser,
+                    'webmaster' => $webmaster,
+                    'offer' => $offer,
+                    'price' => $offerPrice,
+                    'income_part' => $income_part
+                ]);
+
                 return redirect($subscription->offer->url);
             }
         }

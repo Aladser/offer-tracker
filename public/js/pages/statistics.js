@@ -1,5 +1,9 @@
 /** форма переключателей временного периода */
 const timeSwitcher = document.querySelector('#time-period-article__switcher');
+/** пользователь*/
+const user = document.querySelector("#element-username");
+/** таблица статистики */
+const offerTable = document.querySelector("#table-offers");
 
 /** таблица переключателей времени */
 const times = new Map();
@@ -22,4 +26,4 @@ function setStatisticTime() {
 }
 
 /** вебсокет */
-const websocket = new StatisticsFrontWebsocket('ws://localhost:8888');
+const websocket = new StatisticsFrontWebsocket('ws://localhost:8888', offerTable, user);
