@@ -1,3 +1,4 @@
+/** базовый класс клиентского вебсокета */
 class FrontWebsocket
 {
     constructor(url, username) {

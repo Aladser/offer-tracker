@@ -36,6 +36,8 @@ class DashboardController extends Controller
                             'income'=>$totalIncome,
                             // общее число кликов
                             'clicks'=>$clicks->count(),
+                            // число подписчиков на офферы
+                            'subscriptionCount' => OfferSubscription::all()->count(),
                             // комиссия
                             'commission' => $commission,
                             // число ошибочных реферальных ссылок

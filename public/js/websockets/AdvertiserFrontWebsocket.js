@@ -1,3 +1,4 @@
+/**  статистика подписчиков рекламодателя*/
 class AdvertiserFrontWebsocket extends FrontWebsocket
 {
     constructor(url, username, offerTable) {

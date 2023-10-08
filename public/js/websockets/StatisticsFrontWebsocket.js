@@ -1,4 +1,4 @@
-/** обновление статистики рекламодателей и вебмастеров */
+/** Статистика рекламодателей и вебмастеров */
 class StatisticsFrontWebsocket extends FrontWebsocket
 {
     constructor(url, username, offerTables) {

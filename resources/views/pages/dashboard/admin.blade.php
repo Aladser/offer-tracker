@@ -9,6 +9,7 @@
 
     @section('js')
         <script src="/js/websockets/FrontWebsocket.js" defer></script>
+        <script src="/js/websockets/AdminFrontWebsocket.js" defer></script>
         <script src="/js/CommissionCtl.js" defer></script>
         <script src="/js/pages/dashboard/admin.js" defer></script>
     @endsection
@@ -26,10 +27,11 @@
 
                     <article class='mt-4'>
                         <h3 class='fw-bold w-75 mx-auto mb-2'>Доход системы за все время</h3>
-                        <table class='table mx-auto w-50 fs-5'>
-                            <tr> <td class='w-50 fw-bolder'>Число переходов</td><td>{{$clicks}}</td> </tr>
-                            <tr> <td class='w-50 fw-bolder'>Доход</td><td>{{$income}} руб.</td> </tr>
-                            <tr> <td class='w-50 fw-bolder'>Отказы реферальных ссылок</td><td>{{$failed_references}}</td> </tr>
+                        <table class='table-admin-statistics table mx-auto w-50 fs-5'>
+                            <tr> <td class='w-75 fw-bolder' id=''>Реферальных ссылок</td><td id='table-admin-statistics__subscriptions'>{{$subscriptionCount}}</td> </tr>
+                            <tr> <td class='w-75 fw-bolder'>Число переходов</td><td id='table-admin-statistics__clicks'>{{$clicks}}</td> </tr>
+                            <tr> <td class='w-75 fw-bolder'>Доход системы</td><td id='table-admin-statistics__system-income'>{{$income}} руб.</td> </tr>
+                            <tr> <td class='w-75 fw-bolder'>Отказы реферальных ссылок</td><td id='table-admin-statistics__failed_clicks'>{{$failed_references}}</td> </tr>
                         </table>
                     </article>
 
