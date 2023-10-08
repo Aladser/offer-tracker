@@ -4,7 +4,6 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
-use function Ratchet\Client\connect;
 
 class SubscriptionService
 {
@@ -24,11 +23,7 @@ class SubscriptionService
             $advertiserName = $offerSubscription->offer->advertiser->user->name;
             $offer = $offerSubscription->offer->id;
 
-            connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
-                $conn->send(json_encode(['type' => 'SUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
-                $conn->close();
-            });
-            
+            WebsocketService::send(['type' => 'SUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]);
             return ['result' => $offerSubscription->refcode, 'advertiser' => $advertiserName, 'offer' => $offer];
         } else {
             return ['result' => 0];
@@ -44,14 +39,11 @@ class SubscriptionService
 
         $advertiserName = $offerSubscription->offer->advertiser->user->name;
         $offer = $offerSubscription->offer->id;
+        
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {
-            connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
-                $conn->send(json_encode(['type' => 'UNSUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
-                $conn->close();
-            });
-
+            WebsocketService::send(['type' => 'UNSUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]);
             return ['result' => 1, 'advertiser' => $advertiserName, 'offer' => $offer];
         } else {
             return ['result' => 0];

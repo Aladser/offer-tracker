@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\OfferClickController;
 use App\Http\Controllers\FailedOfferClickController;
 use App\Models\OfferSubscription;
+use function Ratchet\Client\connect;
 
 /** отлавливает реферальную ссылку */
 class IsOfferReference
@@ -34,6 +35,7 @@ class IsOfferReference
                 // зафиксировать факт перенаправления
                 OfferClickController::add($subscription->follower->id, $subscription->offer->id);
                 Log::stack(['slack', $logChannel])->info("переход по ссылке {$request->path()}?ref=$refCode успешен");
+                
                 return redirect($subscription->offer->url);
             }
         }
