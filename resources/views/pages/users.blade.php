@@ -4,6 +4,8 @@
     @endsection
 
     @section('js')
+        <script src="/js/websockets/FrontWebsocket.js" defer></script>
+        <script src="/js/websockets/RegisterFrontWebsocket.js" defer></script>
         <script src="/js/TableFrontControllers/TableFrontController.js" defer></script>
         <script src="/js/TableFrontControllers/UserTableFrontController.js" defer></script>
         <script src="/js/pages/users.js" defer></script>
@@ -54,9 +56,9 @@
             <table class='table w-75 mx-auto' id='table-users'>
                 <tr> 
                     <th>Имя</th> 
-                    <th>email</th> 
-                    <th>Роль</th>
-                    <th>Статус</th> 
+                    <th>E-mail</th> 
+                    <th>Статус</th>
+                    <th>Роль</th> 
                 </tr>
                 @foreach ($users as $user)
                 <tr class='table-users__tr position-relative' data-id="{{$user->id}}"> 

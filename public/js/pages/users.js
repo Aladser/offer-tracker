@@ -1,21 +1,19 @@
 /** таблица тем */
 const userTable = document.querySelector('#table-users');
-
 /** поле результата добавления */
 const msgPrg = document.querySelector('#form-add-error');
-
 /** форма создания оффера */
 const addUserForm = document.querySelector('#form-add-user');
-
 /** CSRF */
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
-
 /** фронт-контроллер таблицы тем */
 const userService = new UserTableFrontController('/users', userTable, msgPrg, addUserForm, csrfToken);
-
-
 /** кнопка отправки формы добавления пользователя */
 const addUserButton = document.querySelector('#form-add-user__btn-submit');
+/** пользователь*/
+const user = document.querySelector("#element-username").textContent;
+/** вебсокет */
+const websocket = new RegisterFrontWebsocket('ws://localhost:8888', user);
 
 const nameInput = addUserForm.querySelector('input[name="name"]');
 const emailInput = addUserForm.querySelector('input[name="email"]');

@@ -8,7 +8,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
+use App\Services\WebsocketService;
 use App\Models\UserRole;
 use App\Models\User;
 use App\Models\Advertiser;
@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role_id = UserRole::find($request->role)->id;
+        $user->role_id = $request->role;
         $user->save();
 
         // запись в таблицу рекламодателей или вебмастеров
@@ -49,6 +49,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+
+        WebsocketService::send(['type'=>'REGISTER', 'id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'role'=>UserRole::find($request->role)->name]);
 
         return redirect(RouteServiceProvider::HOME);
     }
