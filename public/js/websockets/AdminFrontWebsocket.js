@@ -12,7 +12,6 @@ class AdminFrontWebsocket extends FrontWebsocket
 
     onMessage(e) {
         let data = JSON.parse(e.data);
-        console.log(data);
 
         if (data.type === 'CLICK') {
             // число кликов
@@ -22,11 +21,14 @@ class AdminFrontWebsocket extends FrontWebsocket
             let commission = ((1-data.income_part)*data.price).toFixed(2);
             this.systemIncome.textContent = (parseFloat(income) + parseFloat(commission)).toFixed(2) + ' руб.';
         } else if(data.type === 'SUBSCRIBE') {
-            // добавляется подписка
+            // увеличивается число подписок
             this.subscriptions.textContent = parseInt(this.subscriptions.textContent) + 1;
         } else if(data.type === 'UNSUBSCRIBE') {
             // уменьшается число подписок
             this.subscriptions.textContent = parseInt(this.subscriptions.textContent) - 1;
+        } else if(data.type === 'FAILED_OFFER') {
+            // инкремент числа отказов реферальных ссылок
+            this.failedClicks.textContent = parseInt(this.failedClicks.textContent) + 1;
         }
     }
 }
