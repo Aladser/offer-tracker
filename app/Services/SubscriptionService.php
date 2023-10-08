@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
+use function Ratchet\Client\connect;
 
 class SubscriptionService
 {
@@ -23,7 +24,7 @@ class SubscriptionService
             $advertiserName = $offerSubscription->offer->advertiser->user->name;
             $offer = $offerSubscription->offer->id;
 
-            \Ratchet\Client\connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
+            connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
                 $conn->send(json_encode(['type' => 'SUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
                 $conn->close();
             });
@@ -46,7 +47,7 @@ class SubscriptionService
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {
-            \Ratchet\Client\connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
+            connect(env('WEBSOCKET_ADDR'))->then(function($conn) use ($advertiserName, $offer) {
                 $conn->send(json_encode(['type' => 'UNSUBSCRIBE', 'advertiser' => $advertiserName, 'offer' => $offer]));
                 $conn->close();
             });
