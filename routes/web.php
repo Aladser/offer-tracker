@@ -23,43 +23,42 @@ Route::get('/', function() {
             'welcome', 
             ['subscriptions' => $subscriptions, 'user' => Auth::user()]
         );
-    })
-    ->name('main');
+    })->name('main');
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)
-    ->middleware(['auth'])
-    ->name('dashboard');
+    ->middleware(['auth'])->name('dashboard');
 // статистика офферов по переходам и деньгам
 Route::get('/offer/statistics', [StatisticController::class, 'index'])
-    ->middleware(['auth'])
-    ->name('offer.statistics');
+    ->middleware(['auth', 'statistics'])->name('offer.statistics');
 // подмена csrf
 Route::get('/wrong-uri', fn() => view('wrongcsrf'));
 // выключен JS
 Route::get('/noscript', fn() => view('noscript'));
-// установка комиссии
 
 
 // пользователи
 Route::resource('/users', UserController::class)
     ->except(['show', 'create', 'edit', 'update'])
-    ->middleware(['auth']);
+    ->middleware(['auth', 'admin']);
+
 // контроллер офферов
-Route::resource('/offer', OfferController::class)
-    ->except(['index', 'show', 'edit', 'update'])
-    ->middleware(['auth']);
+Route::post('/offer', [OfferController::class, 'store']);
+Route::delete('/offer', [OfferController::class, 'destroy']);
+Route::get('/offer/create', [OfferController::class, 'create'])
+    ->middleware(['auth', 'advertiser'])->name('offer.create');
+
 // контроллер тем офферов
 Route::resource('/offer-theme', OfferThemeController::class)
     ->except(['show', 'create', 'edit', 'update'])
-    ->middleware(['auth']);
+    ->middleware(['auth', 'admin']);
 
 
-// установитьт статус пользователя (активен-неактивен)
+// установить статус пользователя (активен-неактивен)
 Route::post('/users/status', [UserController::class, 'status']);
 // установка статуса оффера (активен-неактивен)
 Route::post('/offer/status', [OfferController::class, 'status']);
 // подписка-отписка вебмастеров на офферы
 Route::post('/offer/subscribe', [SubscriptionService::class, 'subscribe']);
 Route::post('/offer/unsubscribe', [SubscriptionService::class, 'unsubscribe']);
-// комиссия 
+// установка комиссии
 Route::post('/commission', [SystemOptionController::class, 'store']);

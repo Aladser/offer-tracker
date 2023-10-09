@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         return view(
             'pages/users', 
-            ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(), 'users' => User::all()],
+            ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(), 'users' => User::where('name', '!=', 'admin')->get()],
         );
     }
 
