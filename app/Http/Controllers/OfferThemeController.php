@@ -7,7 +7,7 @@ use App\Models\OfferTheme;
 
 class OfferThemeController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
         return view('pages/offer-theme', ['themes' => OfferTheme::all()->toArray()]);
     }

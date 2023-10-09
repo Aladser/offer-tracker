@@ -5,6 +5,6 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** поле результата добавления */
 const msgPrg = document.querySelector('#prg-error');
 /** пользователь*/
-const user = document.querySelector("#element-username");
+const user = document.querySelector("#element-username").textContent;
 /** фронт-контроллер офферов */
 const offerService = new OfferTableFrontController('/offer', offerTable, msgPrg, null, csrfToken, user);

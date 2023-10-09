@@ -38,6 +38,7 @@
                     <article class="mt-4 w-75 mx-auto d-flex flex-column align-items-center article-commission">
                         <h3 class='fw-bold w-50 pb-4'>Комиссия системы (%)</h3>
                         <form id='form-change-commission' class='input-group w-50'>
+                            @csrf
                             <div class='position-relative w-75 mx-auto'>
                                 <input type="number" name='commission' id='input-change-commission' class='form-control text-center' value="{{$commission}}" size='100' required>
                                 <p class='article-commission__prg-submit'>

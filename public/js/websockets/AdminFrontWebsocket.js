@@ -12,6 +12,7 @@ class AdminFrontWebsocket extends FrontWebsocket
 
     onMessage(e) {
         let data = JSON.parse(e.data);
+        console.log(data);
 
         if (data.type === 'CLICK') {
             // число кликов

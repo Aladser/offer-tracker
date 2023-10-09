@@ -1,7 +1,10 @@
+/** контроллер офферов */
 class OfferTableFrontController extends TableFrontController{
     constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
       super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
       this.username = username;
+      // примесь изменения статуса строки
+      Object.assign(OfferTableFrontController.prototype, statusFunc);
 
       if (this.form !== null) {
         this.form.onsubmit = (event) => this.add(event);
@@ -40,30 +43,6 @@ class OfferTableFrontController extends TableFrontController{
             } else {
               this.msgElement.textContent = err;
             }
-          }
-        })
-    }
-  
-    /** установить статус */
-    setStatus(row, inputStatus) {
-      let data = new URLSearchParams()
-      data.set("id", row.getAttribute("data-id"))
-      data.set("status", inputStatus.checked)
-      let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") }
-  
-      let statusSwitch = row.querySelector("input[name='status']")
-      fetch(`${this.URL}/status`, {
-        method: "post",
-        headers: headers,
-        body: data,
-      })
-        .then((response) => response.text())
-        .then((rslt) => {
-          if (rslt == 1) {
-            statusSwitch.title = inputStatus.checked ? "выключить" : "включить"
-          } else {
-            this.errorPrg.textContent = "серверная ошибка изменения статуса"
-            console.log(rslt)
           }
         })
     }

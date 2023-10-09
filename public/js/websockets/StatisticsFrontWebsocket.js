@@ -44,10 +44,10 @@ class StatisticsFrontWebsocket extends FrontWebsocket
             let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
      
             row.clickCell.textContent = parseInt(row.clickCell.textContent) + 1;
-            row.moneyCell.textContent = parseInt(row.moneyCell.textContent) + money;
+            row.moneyCell.textContent = (parseInt(row.moneyCell.textContent) + money).toFixed(2);
     
             row.totalClicksElement.textContent = parseInt(row.totalClicksElement.textContent) + 1;
-            row.totalMoneyElement.textContent = parseInt(row.totalMoneyElement.textContent) + money;
+            row.totalMoneyElement.textContent = (parseInt(row.totalMoneyElement.textContent) + money).toFixed(2);
         });
     }
 }

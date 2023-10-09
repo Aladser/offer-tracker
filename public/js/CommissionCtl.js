@@ -44,8 +44,13 @@ class CommissionCtl
                 if (result != 1) {
                     this.msgPrg.textContent = data;    
                 }
-            } catch(e) {
-                this.msgPrg.textContent = data;
+            } catch(err) {
+                if (data.includes("<title>Page Expired</title>")) {
+                    window.open("/wrong-uri", "_self")
+                } else {
+                    this.msgPrg.textContent = err;
+                    console.log(data);
+                }
             }
         });
     }

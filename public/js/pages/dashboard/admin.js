@@ -1,5 +1,5 @@
 // url бэк-части установки комиссии
-const url = 'api/commission';
+const url = '/commission';
 // форма комиссиии
 const commissionForm = document.querySelector('#form-change-commission');
 /** поле результата добавления */
