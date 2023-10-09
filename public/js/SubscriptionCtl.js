@@ -30,8 +30,23 @@ class SubscriptionCtl
         let id = event.dataTransfer.getData('text');
         let draggableElement = document.getElementById(id);
         let dropzone = event.target.closest('.table-items');
-        dropzone.append(draggableElement);
+        
+        // игнорирование перемещения реф.ссылки
+        if (draggableElement == null) {
+            return;
+        }
 
+        draggableElement.style.backgroundColor = 'white';
+        
+        // если перемещаемый элемент не покидает изначальный контейнер
+        if (dropzone.id.includes('subscription')&&draggableElement.id.includes('subscription')) {
+            return;
+        }
+        if (dropzone.id.includes('offer')&&draggableElement.id.includes('offer')) {
+            return;
+        }
+
+        dropzone.append(draggableElement);
         // отписка
         if (draggableElement.id.includes('subscription')) {
             id = draggableElement.id.substring(13);
@@ -49,7 +64,6 @@ class SubscriptionCtl
             draggableElement.classList.remove('bg-light');
             this.switchSubscription(this.subscribeURL, id, draggableElement);
         }
-        draggableElement.style.backgroundColor = 'white';
     }
 
     /** отправка переключения подписки на сервер */
