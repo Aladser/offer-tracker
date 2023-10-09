@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <x-title>: включите JavaScript</x-title>
+        <x-title>Включите JavaScript!</x-title>
 
         <style>
             /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */

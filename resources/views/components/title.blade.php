@@ -1,1 +1,1 @@
-<title>{{env('APP_NAME')}} {{$slot}}</title>
+<title>{{$slot}} - {{env('APP_NAME')}}</title>

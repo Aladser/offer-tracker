@@ -1,4 +1,8 @@
 <x-guest-layout>
+    @section('title')
+        <x-title>Подтвердить почту</x-title>
+    @endsection
+
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">

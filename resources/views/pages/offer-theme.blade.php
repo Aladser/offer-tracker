@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title> темы офферов</x-title>
+        <x-title>Темы офферов</x-title>
     @endsection
 
     @section('js')

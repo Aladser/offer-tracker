@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title> пользователи</x-title>
+        <x-title>Пользователи</x-title>
     @endsection
 
     @section('js')
