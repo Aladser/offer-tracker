@@ -25,10 +25,10 @@ class UserController extends Controller
         $userData = $request->all();
 
         // проверка существования почты и имени пользователя
-        if (User::where('name', $userData['name'])->count() === 1) {
+        if (User::where('name', $userData['name'])->exists()) {
             return ['result' => 0, 'description' => 'Имя занято'];
         }
-        if (User::where('email', $userData['email'])->count() == 1) {
+        if (User::where('email', $userData['email'])->exists()) {
             return ['result' => 0, 'description' => 'Почта занята'];
         }
 
