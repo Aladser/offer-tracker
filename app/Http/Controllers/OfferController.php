@@ -39,7 +39,11 @@ class OfferController extends Controller
     {
         $offer = new Offer();
         $offer->name = $data['name'];
-        $offer->URL = $data['url'];
+        $url = $data['url'];
+        if (mb_stripos($url, '?')) {
+            $url = mb_substr($url, 0, mb_stripos($url, '?'));
+        }
+        $offer->URL =  $url;
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
         $offer->advertiser_id = $advertiserId;
