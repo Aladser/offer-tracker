@@ -1,15 +1,14 @@
 class OfferTableFrontController extends TableFrontController{
     constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
       super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
-      this.username = username.textContent;
+      this.username = username;
 
       if (this.form !== null) {
         this.form.onsubmit = (event) => this.add(event);
       }
 
-
-    /** вебсокет */
-    this.websocket = new AdvertiserFrontWebsocket('ws://localhost:8888', this.username, this.table);
+      /** вебсокет */
+      this.websocket = new AdvertiserFrontWebsocket('ws://localhost:8888', this.username, this.table);
     }
   
     /** добавить оффер в БД
@@ -33,7 +32,6 @@ class OfferTableFrontController extends TableFrontController{
               event.target.reset()
               this.msgElement.textContent = `${offer.offerName} добавлен`;
             } else {
-              console.log(offer.error);
               this.msgElement.textContent = offer.error;
             }
           } catch (err) {

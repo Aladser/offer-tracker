@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Advertiser;
 use App\Models\Offer;
 use App\Models\OfferTheme;
 
@@ -15,20 +15,22 @@ class OfferController extends Controller
         return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
-    /** Сохраните вновь созданный ресурс в хранилище */
+    /** Сохраните оффер в БД */
     public function store(Request $request)
     {
         $data = $request->all();
-        // поиск имени
-        if ($this->hasOffer($data['name'])) {
+        // поиск имени оффера
+        if (Offer::where('name', $data['name'])->exists()) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
-            // поиск рекламщика
-            $advertiserId = $this->findAdvertiser($data['user']); 
-            if (!$advertiserId) {
-                return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
+            // поиск рекламодателя
+            $extendedAdvertisers = Advertiser::join('users', 'users.id','=','advertisers.user_id');
+            $advertiserObj = $extendedAdvertisers->where('name', $data['user']);
+            if ($advertiserObj->exists()) {
+                // добавление оффера
+                return ['result' => $this->add($data, $advertiserObj->first()->value('id')), 'offerName' => $data['name']];
             } else {
-                return ['result' => $this->add($data, $advertiserId), 'offerName' => $data['name']];
+                return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             }
         }
     }
@@ -58,18 +60,5 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->status = $status === 'true' ? 1 : 0;
         return $offer->save();
-    }
-
-    /** поиск рекламодателя по имени */
-    private function findAdvertiser($name)
-    {
-        $user = User::where('name', $name);
-        return !is_null($user) ? User::where('name', $name)->first()->value('id') : false;
-    }
-
-    /** поиск оффера по имени  */
-    private function hasOffer($name)
-    {
-        return !is_null(Offer::where('name', $name)->first());
     }
 }
