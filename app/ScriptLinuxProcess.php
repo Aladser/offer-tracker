@@ -2,7 +2,7 @@
 
 namespace App;
 
-/** PHP-скрипт как Linux процесс */
+/** PHP-скрипт как Linux PID-процесс */
 class ScriptLinuxProcess
 {
     /** имя процесса */
