@@ -79,20 +79,14 @@ class SubscriptionCtl
                     // подписка - добавление реферальной ссылки в элемент оффера
                     offer.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
                 }
-            } catch (e) {
+            } catch (err) {
                 if (data.includes('<title>Page Expired</title>')) {
                     window.open('/wrong-uri', '_self');
                 } else {
-                    prgError.textContent = 'Ошибка сервера. Подробности в консоли';
+                    prgError.textContent = err;
                     console.log(data);
                 }
             }
         });
-    }
-
-    sendData(data, response) {
-        data.response = response;
-        delete data.result;
-        this.websocket.sendData(data);
     }
 }
