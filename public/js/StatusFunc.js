@@ -1,6 +1,6 @@
 /** Примесь изменения статуса строки */
 const statusFunc = {
-  /** включить/выключить строку */
+  /** включить/выключить строку в БД*/
   setStatus(row, inputStatus) {
     let data = new URLSearchParams()
     data.set("id", row.getAttribute("data-id"))

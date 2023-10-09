@@ -1,7 +1,6 @@
-/** Фронт-контроллер */
+/** Клиентский табличный контроллер */
 class TableFrontController {
-    /** фронт-часть фронт-контроллера
-     *
+    /** 
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем
      * @param {*} msgElement инфоэлемент
@@ -20,6 +19,7 @@ class TableFrontController {
         this.table.querySelectorAll(`.${this.table.id}__tr`).forEach(
           (row) =>
             (row.onclick = (e) => {
+              // переключатель меняет статус стрки
               if (e.target.tagName === "INPUT") {
                 this.setStatus(e.target.closest("tr"), e.target)
               } else {
@@ -77,27 +77,29 @@ class TableFrontController {
               this.msgElement.textContent = data;
             }
           } catch (err) {
-            console.log(err);
             if (data.includes("<title>Page Expired</title>")) {
               window.open("/wrong-uri", "_self")
             } else {
               this.msgElement.textContent = err;
+              console.log(data);
             }
           }
         })
     }
   
     click(row) {
+      // клик на активную строку
       if (row.classList.contains(`${this.table.id}__tr--active`)) {
         row.classList.remove(`${this.table.id}__tr--active`)
         row.querySelector("button").remove()
       } else {
+        // поиск активной строки
         let activeRow = this.table.querySelector(`.${this.table.id}__tr--active`)
         if (activeRow) {
+          activeRow.querySelector("button").remove()
           activeRow.classList.remove(`${this.table.id}__tr--active`)
-          this.table.querySelector("button").remove()
         }
-  
+        // выделение строки
         row.innerHTML +=
           `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`
         row.lastChild.onclick = (e) => this.remove(e.target)
@@ -107,7 +109,7 @@ class TableFrontController {
   
     /** действия после добавления данных БД */
     processData(data) {
-      alert('нет реализации метода processData');
+      alert('нет реализации метода processData класса TableFrontController');
     }
 
   }

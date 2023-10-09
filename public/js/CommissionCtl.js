@@ -6,12 +6,10 @@ class CommissionCtl
         this.commissionForm = commissionForm;
         this.commissionInput = commissionForm.querySelector('#input-change-commission');
         this.commissionBtn = commissionForm.querySelector('#btn-change-commission');
-
-        /** поле результата добавления */
-        this.msgPrg = msgPrg;
-
         this.commissionInput.oninput = this.input();
         this.commissionForm.onsubmit = e => this.set(e);
+        /** поле результата добавления */
+        this.msgPrg = msgPrg;
     }
 
     // изменение комиссии

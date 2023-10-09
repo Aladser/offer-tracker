@@ -6,7 +6,7 @@ class StatisticsFrontWebsocket extends FrontWebsocket
         this.offerTables = offerTables;
     }
 
-    /** обновляет статистику рекламодателя или вебмастера */
+    /** обновляет строку таблицы статистики рекламодателя или вебмастера */
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type !== 'CLICK' || !(data.advertiser === this.username || data.webmaster === this.username)) {
@@ -14,11 +14,12 @@ class StatisticsFrontWebsocket extends FrontWebsocket
         }
 
         let rows = [];
-        // обновляется строка оффера каждой таблицы
+        // обновляется строка в каждой таблице
         this.offerTables.forEach(table => {
-            let cells = table.querySelectorAll(`tr[data-id="${data.offer}"] td`);
             let rowCount =  table.childNodes[1].childNodes.length;
-            // (последняя-2) строка - строка итогов
+            // ячейки изменяемой строки
+            let cells = table.querySelectorAll(`tr[data-id="${data.offer}"] td`);
+            // таблица => (последняя-2) строка - строка итогов => ячейки строки
             let lastRow = table.childNodes[1].childNodes[rowCount-2].childNodes; 
             rows.push({
                 'clickCell':cells[1], // ячейка числа переходов оффера
@@ -28,23 +29,17 @@ class StatisticsFrontWebsocket extends FrontWebsocket
             });
         });
 
-        if (data.advertiser === this.username) {
-            // статистика рекламодателя
-            this.refreshCellData(data, rows, 'рекламодатель');
-        } else {
-            // статистика вебмастера
-            this.refreshCellData(data, rows, 'веб-мастер');
-        }
+        this.refreshCellData(data, rows, data.advertiser === this.username ? 'рекламодатель' : 'веб-мастер');
     }
 
-    // обновить данные ячеек
+    /** обновить данные ячеек */
     refreshCellData(data, rows, role) {
         rows.forEach(row => {
             // величина расхода рекламодателя или доход вебмастера за переход
             let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
      
             row.clickCell.textContent = parseInt(row.clickCell.textContent) + 1;
-            row.moneyCell.textContent = (parseInt(row.moneyCell.textContent) + money).toFixed(2);
+            row.moneyCell.textContent = (parseFloat(row.moneyCell.textContent) + money).toFixed(2);
     
             row.totalClicksElement.textContent = parseInt(row.totalClicksElement.textContent) + 1;
             row.totalMoneyElement.textContent = (parseInt(row.totalMoneyElement.textContent) + money).toFixed(2);
