@@ -19,7 +19,8 @@ class RegisteredUserController extends Controller
     /** Показать страницу регистраци */
     public function create()
     {
-        return view('auth.register', ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray()]);
+        $userRoles = UserRole::where('name', '!=', 'администратор')->orderBy('name', 'desc')->get()->toArray();
+        return view('auth.register', ['roles' => $userRoles]);
     }
 
     /** Создание пользователя */
@@ -31,21 +32,26 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
+        // проверка, если подмена роли
+        $roleId = UserRole::where('name', $request->role)->first()->id;
+        if ($roleId != 2 && $roleId != 3) {
+            return redirect('/404');
+        }
+
         // создание пользователя
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role_id = $request->role;
+        $user->role_id = $roleId;
         $user->save();
 
-        // запись в таблицу рекламодателей или вебмастеров
+        // запись в таблицу рекламодателей или вебмастеров. Если отправляется другая цифра - 404
         if ($request->role == 2) {
             Advertiser::create(['user_id' => $user->id]);
         } else if ($request->role == 3){
             Webmaster::create(['user_id' => $user->id]);
         }
-
         event(new Registered($user));
 
         Auth::login($user);

@@ -29,7 +29,7 @@
                 <x-label for="role" :value="__('register.role')" />
                 <select class='block mt-1 w-full' style="border-color: rgb(219,219,219)" name="role" id="registerRole">
                     @foreach ($roles as $role)
-                    <option value={{$role['id']}}>{{$role['name']}}</option>
+                    <option>{{$role['name']}}</option>
                     @endforeach
                 </select>
             </div>
