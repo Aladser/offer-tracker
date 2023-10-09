@@ -27,7 +27,9 @@ passwordInput2.oninput = input;
 
 /** проверить форму добавления пользователя */
 function input() {
+    // проверка на пустоту полей
     if (nameInput.value !== '' && emailInput.value !== '' && passwordInput1.value !== '' && passwordInput2.value !== '') {
+        // проверка введенных паролей
         if (passwordInput1.value === passwordInput2.value) {
             addUserButton.disabled = false;
             msgPrg.textContent = '';
