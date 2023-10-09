@@ -15,8 +15,7 @@ class OfferThemeController extends Controller
     public function store(Request $request)
     {
         $name = $request->all()['name']; 
-        $isTheme = !is_null(OfferTheme::where('name', $name)->first());
-        if ($isTheme) {
+        if (OfferTheme::where('name', $name)->exists()) {
             return ['result' => 0, 'description' => 'тема уже существует'];
         } else {
             $theme = new OfferTheme();
