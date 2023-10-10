@@ -1,5 +1,5 @@
 /** Клиентский табличный контроллер */
-class TableFrontController {
+class TableClientController {
     /** 
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем

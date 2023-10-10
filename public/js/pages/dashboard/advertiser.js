@@ -7,4 +7,4 @@ const msgPrg = document.querySelector('#prg-error');
 /** пользователь*/
 const user = document.querySelector("#element-username").textContent;
 /** фронт-контроллер офферов */
-const offerService = new OfferTableFrontController('/offer', offerTable, msgPrg, null, csrfToken, user);
+const offerService = new OfferTableClientController('/offer', offerTable, msgPrg, null, csrfToken, user);

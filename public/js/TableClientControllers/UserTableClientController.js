@@ -1,9 +1,9 @@
 /** Фронт-контроллер таблицы пользователей */
-class UserTableFrontController extends TableFrontController{
+class UserTableClientController extends TableClientController{
   constructor(URL, table, msgElement, form, csrfToken) {
     super(URL, table, msgElement, form, csrfToken);
     // примесь изменения статуса строки
-    Object.assign(UserTableFrontController.prototype, statusFunc);
+    Object.assign(UserTableClientController.prototype, statusFunc);
   }
 
   /** добавить строку в таблицу

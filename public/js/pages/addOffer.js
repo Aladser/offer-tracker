@@ -9,4 +9,4 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** имя текущего пользователя*/
 const username = document.querySelector('#navpanel-username').textContent;
 /** фронт-контроллер офферов */
-const offerService = new OfferTableFrontController(offerURL, null, msgPrg, addOfferForm, csrfToken,  username);
+const offerService = new OfferTableClientController(offerURL, null, msgPrg, addOfferForm, csrfToken,  username);

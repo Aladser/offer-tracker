@@ -1,10 +1,10 @@
 /** контроллер офферов */
-class OfferTableFrontController extends TableFrontController{
+class OfferTableClientController extends TableClientController{
     constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
       super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
       this.username = username;
       // примесь изменения статуса строки
-      Object.assign(OfferTableFrontController.prototype, statusFunc);
+      Object.assign(OfferTableClientController.prototype, statusFunc);
 
       if (this.form !== null) {
         this.form.onsubmit = (event) => this.add(event);

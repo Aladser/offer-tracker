@@ -7,7 +7,7 @@ const addUserForm = document.querySelector('#form-add-user');
 /** CSRF */
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** фронт-контроллер таблицы тем */
-const userService = new UserTableFrontController('/users', userTable, msgPrg, addUserForm, csrfToken);
+const userService = new UserTableClientController('/users', userTable, msgPrg, addUserForm, csrfToken);
 /** кнопка отправки формы добавления пользователя */
 const addUserButton = document.querySelector('#form-add-user__btn-submit');
 /** пользователь*/

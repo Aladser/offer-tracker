@@ -7,4 +7,4 @@ const addThemeForm = document.querySelector('#form-add-theme');
 /** CSRF */
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** фрон-контроллер таблицы тем */
-const offerThemeService = new OfferThemeTableFrontController('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);
+const offerThemeService = new OfferThemeTableClientController('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);
