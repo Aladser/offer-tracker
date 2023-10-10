@@ -19,7 +19,6 @@ class SubscriptionCtl
 
     onDragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
-        event.currentTarget.style.backgroundColor = '#ddd';
     }
 
     onDragOver(event) {
@@ -35,9 +34,6 @@ class SubscriptionCtl
         if (draggableElement == null) {
             return;
         }
-
-        draggableElement.style.backgroundColor = 'white';
-        
         // если перемещаемый элемент не покидает изначальный контейнер
         if (dropzone.id.includes('subscription')&&draggableElement.id.includes('subscription')) {
             return;

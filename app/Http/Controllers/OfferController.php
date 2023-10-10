@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Advertiser;
 use App\Models\Offer;
 use App\Models\OfferTheme;
+use App\Services\WebsocketService;
 
 class OfferController extends Controller
 {
@@ -47,8 +48,14 @@ class OfferController extends Controller
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
         $offer->advertiser_id = $advertiserId;
-        
-        return $offer->save() ? 1 : 0;
+
+        $iAdded = $offer->save();
+        if ($iAdded) {
+            WebsocketService::send(['type' => 'NEW_OFFER', 'offer' => json_encode($offer)]);
+            return 1;
+        }  else {
+            return 0;
+        }
     }
     
     public function destroy($id)
