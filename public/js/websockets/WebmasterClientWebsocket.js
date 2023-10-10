@@ -21,9 +21,6 @@ class WebmasterClientWebsocket extends ClientWebsocket
                         <a href="?ref=${webmaster.refcode}" title="?ref=${webmaster.refcode}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
                     </article>
                 `;
-                // восстанавливается обработчик событий
-                let subscription = this.subscriptionCtl.subscriptionsList.querySelector(`#subscription-${data.offer_id}`);
-                subscription.ondragstart = e => this.subscriptionCtl.onDragStart(e);
             } else {
                 // добавляется новый активный оффер
                 this.subscriptionCtl.activeOffersList.innerHTML += `
@@ -33,10 +30,8 @@ class WebmasterClientWebsocket extends ClientWebsocket
                         <p>тема: ${data.offer_theme}</p>
                     </article>
                 `;
-                // восстанавливается обработчик событий
-                let offer = this.subscriptionCtl.activeOffersList.querySelector(`#offer-${data.offer_id}`);
-                offer.ondragstart = e => this.subscriptionCtl.onDragStart(e);
             }
+            this.subscriptionCtl.setListeners();
         } else if (data.type === 'DELETE_OFFER') {
             // удаляется оффер-подписка
             let row = document.querySelector(`#subscription-${data.id}`);

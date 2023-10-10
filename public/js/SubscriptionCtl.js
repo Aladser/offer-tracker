@@ -5,28 +5,18 @@ class SubscriptionCtl
         this.activeOffersList = activeOffersList;
         this.subscribeURL = subscribeURL;
         this.unsubscribeURL = unsubscribeURL;
-
-        // офферы-подписки
-        this.subscriptionsList.querySelectorAll('.subscriptions__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
-        this.subscriptionsList.ondragover = e => this.onDragOver(e);
-        this.subscriptionsList.ondrop = e => this.onDrop(e);
-
-        // доступные активные офферы
-        this.activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
-        this.activeOffersList.ondragover = e => this.onDragOver(e);
-        this.activeOffersList.ondrop = e => this.onDrop(e);
+        this.setListeners();
     }
 
-    static onDragStart(event) {
-        console.log(event.target.id);
+    onDragStart(event) {
         event.dataTransfer.setData('text/plain', event.target.id);
     }
 
-    static onDragOver(event) {
+    onDragOver(event) {
         event.preventDefault();
     }
 
-    static onDrop(event) {
+    onDrop(event) {
         let id = event.dataTransfer.getData('text');
         let draggableElement = document.getElementById(id);
         let dropzone = event.target.closest('.table-items');
@@ -64,7 +54,7 @@ class SubscriptionCtl
     }
 
     /** отправка переключения подписки на сервер */
-    static switchSubscription(URL, offerId, offer) {
+    switchSubscription(URL, offerId, offer) {
         let data = new URLSearchParams();
         data.set('offerId', offerId);
         let headers = {
@@ -81,7 +71,7 @@ class SubscriptionCtl
                 let result = data.result;
                 // ошибка
                 if (result == 0) {
-                    alert('Ошибка сервера. Подробности в консоли');
+                    prgError.textContent = 'Ошибка сервера. Подробности в консоли';
                     console.log(data);
                 } else if (result == 1) {
                     // отписка - убирание реф.ссылки из элемента оффера
@@ -94,10 +84,23 @@ class SubscriptionCtl
                 if (data.includes('<title>Page Expired</title>')) {
                     window.open('/wrong-uri', '_self');
                 } else {
-                    alert(err);
+                    prgError.textContent = err;
                     console.log(data);
                 }
             }
         });
+    }
+
+    /** установить обработчики событий */
+    setListeners() {
+        // офферы-подписки
+        this.subscriptionsList.querySelectorAll('.subscriptions__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.subscriptionsList.ondragover = e => this.onDragOver(e);
+        this.subscriptionsList.ondrop = e => this.onDrop(e);
+
+        // доступные активные офферы
+        this.activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.activeOffersList.ondragover = e => this.onDragOver(e);
+        this.activeOffersList.ondrop = e => this.onDrop(e);
     }
 }

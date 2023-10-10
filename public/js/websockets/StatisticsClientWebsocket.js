@@ -32,8 +32,9 @@ class StatisticsClientWebsocket extends ClientWebsocket
         this.refreshCellData(data, rows, data.advertiser === this.username ? 'рекламодатель' : 'веб-мастер');
     }
 
-    /** обновить данные ячеек */
+    /** обновить данные ячеек строки */
     refreshCellData(data, rows, role) {
+        //строка в каждой таблице
         rows.forEach(row => {
             // величина расхода рекламодателя или доход вебмастера за переход
             let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
