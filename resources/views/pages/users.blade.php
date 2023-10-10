@@ -7,8 +7,8 @@
         <script src="/js/StatusFunc.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/RegisterClientWebsocket.js" defer></script>
-        <script src="/js/TableClientControllers/TableFrontController.js" defer></script>
-        <script src="/js/TableClientControllers/UserTableFrontController.js" defer></script>
+        <script src="/js/TableClientControllers/TableClientController.js" defer></script>
+        <script src="/js/TableClientControllers/UserTableClientController.js" defer></script>
         <script src="/js/pages/users.js" defer></script>
     @endsection
 
