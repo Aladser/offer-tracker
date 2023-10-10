@@ -26,7 +26,7 @@ class Offer extends Model
         return $this->belongsTo(Advertiser::class, 'advertiser_id', 'id');
     }
 
-    /** подписано вебмастеров */
+    /** подписки вебмастеров */
     public function links()
     {
         return $this->hasMany(OfferSubscription::class, 'offer_id', 'id');

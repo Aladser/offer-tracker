@@ -11,6 +11,7 @@ const statusFunc = {
     fetch(`${this.URL}/status`, {method: "post",headers: headers,body: data,})
       .then((response) => response.text())
       .then((rslt) => {
+        console.log(rslt);
         if (rslt == 1) {
           statusSwitch.title = inputStatus.checked ? "выключить" : "включить";
         } else {

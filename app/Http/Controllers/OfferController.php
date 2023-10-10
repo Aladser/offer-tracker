@@ -83,10 +83,37 @@ class OfferController extends Controller
     /** установить статус */
     public function status(Request $request)
     {
-        $status = $request->all()['status']; 
+        $status = $request->all()['status'];
         $id = $request->all()['id'];
         $offer = Offer::find($id);
         $offer->status = $status === 'true' ? 1 : 0;
-        return $offer->save();
+        $isChanged = $offer->save();
+        
+        // сообщение вебсокету
+        if ($isChanged) {
+            if ($offer->status === 1) {
+                // список подписчиков оффера 
+                $subscriptions = $offer->links;
+                $webmasters = [];
+                foreach ($subscriptions as $subscription) {
+                    $webmasters[] = $subscription->follower->user->name;
+                }
+                // отправка в вебсокет информации о новом оффере
+                $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+                $offerData = [
+                    'type' => 'NEW_OFFER',
+                    'offer_name' => $offer->name,
+                    'offer_income' => $offer->price*$commission,
+                    'offer_theme' => $offer->theme->name,
+                    'offer_id' => $offer->id,
+                    'webmasters' => $webmasters,
+                ];
+                WebsocketService::send($offerData);
+            } else {
+                WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
+            }
+        }
+
+        return $isChanged;
     }
 }
