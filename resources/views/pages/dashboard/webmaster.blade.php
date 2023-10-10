@@ -10,6 +10,7 @@
 
     @section('js')
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
+        <script src="/js/websockets/WebmasterClientWebsocket.js" defer></script>
         <script src="/js/SubscriptionCtl.js" defer></script>
         <script src="/js/pages/dashboard/webmaster.js" defer></script>
     @endsection

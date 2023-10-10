@@ -51,7 +51,17 @@ class OfferController extends Controller
 
         $iAdded = $offer->save();
         if ($iAdded) {
-            WebsocketService::send(['type' => 'NEW_OFFER', 'offer' => json_encode($offer)]);
+            // отправка в вебсокет информации о новом оффере
+            $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+            $offerData = [
+                'type' => 'NEW_OFFER',
+                'offer_name' => $offer->name,
+                'offer_income' => $offer->price*$commission,
+                'offer_theme' => $offer->theme->name,
+                'offer_id' => "offer-{$offer->id}",
+            ];
+            WebsocketService::send($offerData);
+
             return 1;
         }  else {
             return 0;
@@ -60,7 +70,14 @@ class OfferController extends Controller
     
     public function destroy($id)
     {
-        return ['result' => Offer::find($id)->delete() ? 1 : 0];
+        if (Offer::find($id)->delete()) {
+            // отправка сообщения вебсокету об удаленном оффере 
+            WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
+
+            return ['result' => 1];
+        } else {
+            return ['result' => 0];
+        }
     }
 
     /** установить статус */

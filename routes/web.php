@@ -43,7 +43,7 @@ Route::resource('/users', UserController::class)
 
 // контроллер офферов
 Route::post('/offer', [OfferController::class, 'store']);
-Route::delete('/offer', [OfferController::class, 'destroy']);
+Route::delete('/offer/{id}', [OfferController::class, 'destroy']);
 Route::get('/offer/create', [OfferController::class, 'create'])
     ->middleware(['auth', 'advertiser'])->name('offer.create');
 
