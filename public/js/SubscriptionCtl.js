@@ -17,15 +17,16 @@ class SubscriptionCtl
         this.activeOffersList.ondrop = e => this.onDrop(e);
     }
 
-    onDragStart(event) {
+    static onDragStart(event) {
+        console.log(event.target.id);
         event.dataTransfer.setData('text/plain', event.target.id);
     }
 
-    onDragOver(event) {
+    static onDragOver(event) {
         event.preventDefault();
     }
 
-    onDrop(event) {
+    static onDrop(event) {
         let id = event.dataTransfer.getData('text');
         let draggableElement = document.getElementById(id);
         let dropzone = event.target.closest('.table-items');
@@ -63,7 +64,7 @@ class SubscriptionCtl
     }
 
     /** отправка переключения подписки на сервер */
-    switchSubscription(URL, offerId, offer) {
+    static switchSubscription(URL, offerId, offer) {
         let data = new URLSearchParams();
         data.set('offerId', offerId);
         let headers = {
@@ -80,7 +81,7 @@ class SubscriptionCtl
                 let result = data.result;
                 // ошибка
                 if (result == 0) {
-                    prgError.textContent = 'Ошибка сервера. Подробности в консоли';
+                    alert('Ошибка сервера. Подробности в консоли');
                     console.log(data);
                 } else if (result == 1) {
                     // отписка - убирание реф.ссылки из элемента оффера
@@ -93,7 +94,7 @@ class SubscriptionCtl
                 if (data.includes('<title>Page Expired</title>')) {
                     window.open('/wrong-uri', '_self');
                 } else {
-                    prgError.textContent = err;
+                    alert(err);
                     console.log(data);
                 }
             }

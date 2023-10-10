@@ -96,7 +96,10 @@ class OfferController extends Controller
                 $subscriptions = $offer->links;
                 $webmasters = [];
                 foreach ($subscriptions as $subscription) {
-                    $webmasters[] = $subscription->follower->user->name;
+                    $webmasters[] = [
+                        'name'=>$subscription->follower->user->name, 
+                        'refcode'=>$subscription->refcode
+                    ];
                 }
                 // отправка в вебсокет информации о новом оффере
                 $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
