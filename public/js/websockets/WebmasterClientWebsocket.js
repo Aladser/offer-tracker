@@ -22,7 +22,7 @@ class WebmasterClientWebsocket extends ClientWebsocket
                     </article>
                 `;
             } else {
-                // добавляется новый активный оффер
+                // показывается активный оффер
                 this.subscriptionCtl.activeOffersList.innerHTML += `
                     <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
                         <p class='fw-bolder'>${data.offer_name}</p>
@@ -33,10 +33,10 @@ class WebmasterClientWebsocket extends ClientWebsocket
             }
             this.subscriptionCtl.setListeners();
         } else if (data.type === 'DELETE_OFFER') {
-            // удаляется оффер-подписка
+            // скрывается оффер-подписка
             let row = document.querySelector(`#subscription-${data.id}`);
             if (row === null) {
-                // удаляется активный оффер
+                //  активный оффер
                 row = document.querySelector(`#offer-${data.id}`);
             }
             row.remove();

@@ -5,16 +5,16 @@ class SubscriptionCtl
         this.activeOffersList = activeOffersList;
         this.subscribeURL = subscribeURL;
         this.unsubscribeURL = unsubscribeURL;
+
+        this.subscriptionsList.ondragover = e => this.onDragOver(e);
+        this.subscriptionsList.ondrop = e => this.onDrop(e);
+        this.activeOffersList.ondragover = e => this.onDragOver(e);
+        this.activeOffersList.ondrop = e => this.onDrop(e);
         this.setListeners();
     }
 
-    onDragStart(event) {
-        event.dataTransfer.setData('text/plain', event.target.id);
-    }
-
-    onDragOver(event) {
-        event.preventDefault();
-    }
+    onDragStart = event => event.dataTransfer.setData('text/plain', event.target.id);
+    onDragOver = event => event.preventDefault();
 
     onDrop(event) {
         let id = event.dataTransfer.getData('text');
@@ -95,12 +95,7 @@ class SubscriptionCtl
     setListeners() {
         // офферы-подписки
         this.subscriptionsList.querySelectorAll('.subscriptions__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
-        this.subscriptionsList.ondragover = e => this.onDragOver(e);
-        this.subscriptionsList.ondrop = e => this.onDrop(e);
-
         // доступные активные офферы
         this.activeOffersList.querySelectorAll('.offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
-        this.activeOffersList.ondragover = e => this.onDragOver(e);
-        this.activeOffersList.ondrop = e => this.onDrop(e);
     }
 }
