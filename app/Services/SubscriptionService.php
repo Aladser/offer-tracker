@@ -5,9 +5,10 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
 
+/** Управление подписками веб-мастеров на офферы */
 class SubscriptionService
 {
-    /** подписка на оффер */
+    /** подписаться на оффер */
     public function subscribe(Request $request)
     {
         $offerId = $request->all()['offerId'];
@@ -30,7 +31,7 @@ class SubscriptionService
         }
     }
 
-    /** отписка от оффера */
+    /** отписаться от оффера */
     public function unsubscribe(Request $request)
     {
         $webmasterId = $request->user()->webmaster->id;

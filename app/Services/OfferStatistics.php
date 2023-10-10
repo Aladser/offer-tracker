@@ -3,18 +3,11 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Http\Controllers\SystemOptionController;
 
+/** Статистика офферов пользователя */
 class OfferStatistics
 {
-    private $commission;
-
-    public function __construct()
-    {
-        // комиссия системы
-        $this->commission = SystemOptionController::commission();
-    }
-
+    /** получить данные офферов рекламодателя или веб-мастера за разные временные промежутки */
     public function getStatisticsData(User $user)
     {
         $data['user'] = $user;
@@ -34,7 +27,9 @@ class OfferStatistics
         return $data;
     }
 
-    public function getOfferData(User $user, $date = null) {
+    /** получить данные офферов рекламодателя или веб-мастера */
+    public function getOfferData(User $user, $date = null) 
+    {
         $totalClicks = 0;
         $totalMoney = 0;
         $advertiserOffers = [];
@@ -89,7 +84,7 @@ class OfferStatistics
         ];
     }
 
-    /** получить текущее время с учетом часового пояса */
+    /** получить текущее время с учетом часового пояса и сдвигом */
     public static function getDate($period = null)
     {
         $date = new \DateTime();
