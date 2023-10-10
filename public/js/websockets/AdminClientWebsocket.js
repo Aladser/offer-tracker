@@ -1,5 +1,5 @@
 /** обновление статистики админа */
-class AdminFrontWebsocket extends FrontWebsocket
+class AdminClientWebsocket extends ClientWebsocket
 {
     constructor(url, username) {
         super(url, username);
@@ -12,7 +12,6 @@ class AdminFrontWebsocket extends FrontWebsocket
 
     onMessage(e) {
         let data = JSON.parse(e.data);
-        console.log(data);
 
         if (data.type === 'CLICK') {
             // число кликов

@@ -5,8 +5,8 @@
 
     @section('js')
         <script src="/js/StatusFunc.js" defer></script>
-        <script src="/js/websockets/FrontWebsocket.js" defer></script>
-        <script src="/js/websockets/RegisterFrontWebsocket.js" defer></script>
+        <script src="/js/websockets/ClientWebsocket.js" defer></script>
+        <script src="/js/websockets/RegisterClientWebsocket.js" defer></script>
         <script src="/js/TableFrontControllers/TableFrontController.js" defer></script>
         <script src="/js/TableFrontControllers/UserTableFrontController.js" defer></script>
         <script src="/js/pages/users.js" defer></script>

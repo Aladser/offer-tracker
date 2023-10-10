@@ -13,7 +13,7 @@ const addUserButton = document.querySelector('#form-add-user__btn-submit');
 /** пользователь*/
 const user = document.querySelector("#element-username").textContent;
 /** вебсокет */
-const websocket = new RegisterFrontWebsocket('ws://localhost:8888', user);
+const websocket = new RegisterClientWebsocket('ws://localhost:8888', user);
 
 const nameInput = addUserForm.querySelector('input[name="name"]');
 const emailInput = addUserForm.querySelector('input[name="email"]');

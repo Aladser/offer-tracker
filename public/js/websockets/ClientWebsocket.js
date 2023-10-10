@@ -1,5 +1,5 @@
 /** базовый класс клиентского вебсокета */
-class FrontWebsocket
+class ClientWebsocket
 {
     constructor(url, username) {
         this.websocket = new WebSocket(url);

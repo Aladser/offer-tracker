@@ -11,7 +11,7 @@ class OfferTableFrontController extends TableFrontController{
       }
 
       /** вебсокет */
-      this.websocket = new AdvertiserFrontWebsocket('ws://localhost:8888', this.username, this.table);
+      this.websocket = new AdvertiserClientWebsocket('ws://localhost:8888', this.username, this.table);
     }
   
     /** добавить оффер в БД

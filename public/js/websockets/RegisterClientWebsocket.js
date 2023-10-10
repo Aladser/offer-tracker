@@ -1,5 +1,5 @@
 /** обновление статистики админа */
-class RegisterFrontWebsocket extends FrontWebsocket
+class RegisterClientWebsocket extends ClientWebsocket
 {
     constructor(url, username) {
         super(url, username);

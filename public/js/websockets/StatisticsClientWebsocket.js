@@ -1,5 +1,5 @@
 /** Статистика рекламодателей и вебмастеров */
-class StatisticsFrontWebsocket extends FrontWebsocket
+class StatisticsClientWebsocket extends ClientWebsocket
 {
     constructor(url, username, offerTables) {
         super(url, username);

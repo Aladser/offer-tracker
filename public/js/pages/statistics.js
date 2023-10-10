@@ -9,7 +9,7 @@ tables.set('last-month', document.querySelector('#table-offers-last-month'));
 tables.set('last-year', document.querySelector('#table-offers-last-year'));
 tables.set('all-time', document.querySelector('#table-offers'));
 /** вебсокет */
-const websocket = new StatisticsFrontWebsocket('ws://localhost:8888', user, tables);
+const websocket = new StatisticsClientWebsocket('ws://localhost:8888', user, tables);
 
 // единая функция переключения таблицы для всех радиокнопок времени
 const setTimePeriod = setStatisticTime();

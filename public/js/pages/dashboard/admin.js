@@ -9,4 +9,4 @@ const user = document.querySelector("#element-username").textContent;
 /** контроллер элемента комиссии */
 const commissionCtl = new CommissionCtl(url, commissionForm, msgPrg);
 /** вебсокет */
-const websocket = new AdminFrontWebsocket('ws://localhost:8888', user);
+const websocket = new AdminClientWebsocket('ws://localhost:8888', user);
