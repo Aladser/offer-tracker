@@ -19,7 +19,7 @@ class MainClientWebsocket extends ClientWebsocket
                 this.refList.innerHTML += `
                     <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
                         <a href="?ref=${master.refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
-                        <p>веб-мастер:${master.name}</p>
+                        <p>веб-мастер: ${master.name}</p>
                         <p>тема: ${data.offer_theme}</p>
                     </article>
                 `;
@@ -32,19 +32,17 @@ class MainClientWebsocket extends ClientWebsocket
             this.refList.innerHTML += `
                 <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
                     <a href="?ref=${data.offer_refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
-                    <p>веб-мастер:${data.offer_webmaster}</p>
+                    <p>веб-мастер: ${data.offer_webmaster}</p>
                     <p>тема: ${data.offer_theme}</p>
                 </article>
             `;
         } else if(data.type == 'UNSUBSCRIBE') {
             // удаление реферальной ссылки
             let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer}']`);
-            offerRefLinks.forEach(link => console.log(link));
-            // childNodes[3] - вебмастер
             offerRefLinks = Array.from(offerRefLinks);
-            let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер:${data.webmaster}`);
-            console.log(reflink);
-            //reflink.remove();
+            // childNodes[3] - вебмастер
+            let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер: ${data.webmaster}`);
+            reflink.remove();
         }
     }
 }
