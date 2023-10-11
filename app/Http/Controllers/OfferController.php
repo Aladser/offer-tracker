@@ -92,9 +92,29 @@ class OfferController extends Controller
         // сообщение вебсокету
         if ($isChanged) {
             if ($offer->status === 1) {
-                $this->sendWebsocketMessage($offer);
+                // список подписчиков оффера 
+                $subscriptions = $offer->links;
+                $webmasters = [];
+                foreach ($subscriptions as $subscription) {
+                    $webmasters[] = [
+                        'name'=>$subscription->follower->user->name, 
+                        'refcode'=>$subscription->refcode
+                    ];
+                }
+                // отправка в вебсокет информации о новом оффере
+                $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+                $offerData = [
+                    'type' => 'VISIBLE_OFFER',
+                    'offer_name' => $offer->name,
+                    'offer_income' => $offer->price*$commission,
+                    'offer_theme' => $offer->theme->name,
+                    'offer_id' => $offer->id,
+                    'offer_url' => $offer->url,
+                    'webmasters' => $webmasters,
+                ];
+                WebsocketService::send($offerData);
             } else {
-                WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
+                WebsocketService::send(['type'=>'UNVISIBLE_OFFER', 'id' => $id]);
             }
         }
 
@@ -115,7 +135,7 @@ class OfferController extends Controller
         // отправка в вебсокет информации о новом оффере
         $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
         $offerData = [
-            'type' => 'NEW_OFFER',
+            'type' => 'VISIBLE_OFFER',
             'offer_name' => $offer->name,
             'offer_income' => $offer->price*$commission,
             'offer_theme' => $offer->theme->name,
