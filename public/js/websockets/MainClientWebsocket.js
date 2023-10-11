@@ -38,7 +38,7 @@ class MainClientWebsocket extends ClientWebsocket
             `;
         } else if(data.type == 'UNSUBSCRIBE') {
             // удаление реферальной ссылки
-            let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer}']`);
+            let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer_id}']`);
             offerRefLinks = Array.from(offerRefLinks);
             // childNodes[3] - вебмастер
             let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер: ${data.webmaster}`);

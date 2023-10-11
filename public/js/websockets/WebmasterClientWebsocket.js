@@ -9,9 +9,8 @@ class WebmasterClientWebsocket extends ClientWebsocket
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type === 'NEW_OFFER') {
-            let webmaster = data.webmasters.find(master => master.name == this.username);
-
-            if (webmaster !== undefined) {
+            if (data.hasOwnProperty('webmasters')) {
+                let webmaster = data.webmasters.find(master => master.name == this.username);
                 // показывается подписка вебмастера
                 this.subscriptionCtl.subscriptionsList.innerHTML += `
                     <article id="subscription-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
