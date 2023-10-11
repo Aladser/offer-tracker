@@ -39,10 +39,12 @@ class MainClientWebsocket extends ClientWebsocket
         } else if(data.type == 'UNSUBSCRIBE') {
             // удаление реферальной ссылки
             let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer}']`);
+            offerRefLinks.forEach(link => console.log(link));
             // childNodes[3] - вебмастер
             offerRefLinks = Array.from(offerRefLinks);
             let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер:${data.webmaster}`);
-            reflink.remove();
+            console.log(reflink);
+            //reflink.remove();
         }
     }
 }

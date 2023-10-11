@@ -23,8 +23,8 @@
         
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
             <div class="p-4 bg-white border-b border-gray-200 text-center">
-                <a href="{{route('offer.create')}}" class='btn btn-outline-dark col-3'>Добавить оффер</a>
-                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark col-3'>Статистика офферов</a>
+                <a href="{{route('offer.create')}}" class='btn btn-outline-dark'>Добавить оффер</a>
+                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark' title='статистика офферов'>Статистика</a>
 
                 <h3 class='h3 pb-3 fw-bolder mt-4'>Список офферов</h3>
                 <table class='table w-75 mx-auto fs-4 w-100' id='table-offers'>

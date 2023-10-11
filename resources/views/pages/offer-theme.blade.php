@@ -27,7 +27,7 @@
                 @csrf
                 <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Название:</label><br>
                 <input type="text" name="name" class='w-50 mb-2 border' id="offer-new__name" required><br>
-                <input type="submit" class='btn btn-outline-dark col-2' value='Добавить'>
+                <input type="submit" class='btn btn-outline-dark' value='Добавить'>
             </form>
             <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
         </article>
