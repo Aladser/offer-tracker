@@ -92,32 +92,37 @@ class OfferController extends Controller
         // сообщение вебсокету
         if ($isChanged) {
             if ($offer->status === 1) {
-                // список подписчиков оффера 
-                $subscriptions = $offer->links;
-                $webmasters = [];
-                foreach ($subscriptions as $subscription) {
-                    $webmasters[] = [
-                        'name'=>$subscription->follower->user->name, 
-                        'refcode'=>$subscription->refcode
-                    ];
-                }
-                // отправка в вебсокет информации о новом оффере
-                $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
-                $offerData = [
-                    'type' => 'NEW_OFFER',
-                    'offer_name' => $offer->name,
-                    'offer_income' => $offer->price*$commission,
-                    'offer_theme' => $offer->theme->name,
-                    'offer_id' => $offer->id,
-                    'offer_url' => $offer->url,
-                    'webmasters' => $webmasters,
-                ];
-                WebsocketService::send($offerData);
+                $this->sendWebsocketMessage($offer);
             } else {
                 WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
             }
         }
 
         return $isChanged;
+    }
+
+    private function sendWebsocketMessage($offer)
+    {
+        // список подписчиков оффера 
+        $subscriptions = $offer->links;
+        $webmasters = [];
+        foreach ($subscriptions as $subscription) {
+            $webmasters[] = [
+                'name'=>$subscription->follower->user->name, 
+                'refcode'=>$subscription->refcode
+            ];
+        }
+        // отправка в вебсокет информации о новом оффере
+        $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+        $offerData = [
+            'type' => 'NEW_OFFER',
+            'offer_name' => $offer->name,
+            'offer_income' => $offer->price*$commission,
+            'offer_theme' => $offer->theme->name,
+            'offer_id' => $offer->id,
+            'offer_url' => $offer->url,
+            'webmasters' => $webmasters,
+        ];
+        WebsocketService::send($offerData);
     }
 }
