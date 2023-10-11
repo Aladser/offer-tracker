@@ -25,6 +25,10 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+
+        <script src="/js/websockets/ClientWebsocket.js" defer></script>
+        <script src="/js/websockets/MainClientWebsocket.js" defer></script>
+        <script src="/js/pages/main.js" defer></script>
     </head>
     <body class="antialiased">
         <main class="min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -56,7 +60,7 @@
                     @endif
                 @endauth
 
-                <section class="d-flex flex-wrap justify-content-around w-100">
+                <section class="d-flex flex-wrap justify-content-around w-100" id='section-ref-list'>
                     <!-- тестовая нерабочая ссылка -->
                     <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded'>
                         <a href="?ref=1"><p title="?ref=1@1"> Тестовая<br> неработающая<br> ссылка </p></a>
