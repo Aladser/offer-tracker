@@ -3,28 +3,30 @@ class WebmasterClientWebsocket extends ClientWebsocket
 {
     constructor(url, username, subscriptionCtl) {
         super(url, username);
+        /** контроллер подписок */
         this.subscriptionCtl = subscriptionCtl;
     }
 
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type === 'NEW_OFFER') {
+            // добавляется новый оффер
             this.createOfferElement(data);
         } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
             // ищется подписка
             let row = document.querySelector(`#subscription-${data.id}`);
-            // или ищется активный оффер
+            // или ищется включенный оффер
             if (row === null) {
                 row = document.querySelector(`#offer-${data.id}`);
             }
-            // скрывается подписка или активный оффер
+            // скрывается подписка или включенный оффер
             if (row !== null) {
                 row.remove();
             }
         } else if (data.type === 'VISIBLE_OFFER') {
             // показывается оффер и подписка на него
             if (data.webmasters.length !== 0) {
-                // проверяется, есть ли подписка
+                // проверяется, есть ли подписка у вебмастера
                 let webmaster = data.webmasters.find(master => master.name == this.username);
                 if (webmaster !== undefined) {
                     // показывается подписка вебмастера
@@ -37,15 +39,17 @@ class WebmasterClientWebsocket extends ClientWebsocket
                         </article>
                     `;
                 } else {
+                    // если нет подписки у вебмастера
                     this.createOfferElement(data);
                 }
             } else {
+                // если нет подписчиков
                 this.createOfferElement(data);
             }
         }
     }
 
-    /** показывается активный оффер */
+    /** показать включенный оффер */
     createOfferElement(data) {
         this.subscriptionCtl.activeOffersList.innerHTML += `
             <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
