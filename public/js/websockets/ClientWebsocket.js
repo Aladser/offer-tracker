@@ -18,6 +18,7 @@ class ClientWebsocket
     onMessage(e) {
         let data = JSON.parse(e.data);
         //console.log(data);
+        alert("метод onMessage вебсокета ClientWebsocket не реализован");
     }
 
     // отправка сообщений

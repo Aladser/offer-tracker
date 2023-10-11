@@ -3,16 +3,15 @@ class MainClientWebsocket extends ClientWebsocket
 {
     constructor(url, refList) {
         super(url, null);
-        // список актвиных офферов
+        // список активных офферов
         this.refList = refList;
     }
 
+    /** получение типов сообщений: NEW_OFFER*/
     onMessage(e) {
         let data = JSON.parse(e.data);
-        console.clear();
-        console.log(data);
-        
         if (data.type == 'NEW_OFFER' && data.hasOwnProperty('offer_url')) {
+            // добавление реф.ссылок 
             let webmasters = data.webmasters;
             webmasters.forEach(master => {
                 this.refList.innerHTML += `
@@ -23,7 +22,7 @@ class MainClientWebsocket extends ClientWebsocket
                     </article>
                 `;
             });
-        } else {
+        } else if (data.type == 'DELETE_OFFER') {
             // удаление реф.ссылок на оффер
             document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
         }

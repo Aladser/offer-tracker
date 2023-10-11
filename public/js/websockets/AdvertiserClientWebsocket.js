@@ -6,7 +6,7 @@ class AdvertiserClientWebsocket extends ClientWebsocket
         this.offerTable = offerTable; 
     }
 
-    // получение сообщений SUBSCRIBE, UNSUBSCRIBE: изменение числа подписчиков
+    // получение сообщений: SUBSCRIBE, UNSUBSCRIBE. Изменение числа подписчиков
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type !== 'SUBSCRIBE' && data.type !== 'UNSUBSCRIBE') {

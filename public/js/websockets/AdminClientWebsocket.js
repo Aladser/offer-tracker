@@ -1,4 +1,4 @@
-/** обновление статистики админа */
+/** обновление статистики страницы админа */
 class AdminClientWebsocket extends ClientWebsocket
 {
     constructor(url, username) {
@@ -10,9 +10,9 @@ class AdminClientWebsocket extends ClientWebsocket
         this.failedClicks = document.querySelector('#table-admin-statistics__failed_clicks');
     }
 
+    /** получение типов сообщений: CLICK, SUBSCRIBE, UNSUBSCRIBE, FAILED_OFFER*/
     onMessage(e) {
         let data = JSON.parse(e.data);
-
         if (data.type === 'CLICK') {
             // число кликов
             this.clicks.textContent = parseInt(this.clicks.textContent) + 1;
