@@ -9,50 +9,51 @@ class WebmasterClientWebsocket extends ClientWebsocket
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type === 'NEW_OFFER') {
-            // показывается активный оффер
-            this.subscriptionCtl.activeOffersList.innerHTML += `
-                <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
-                    <p class='fw-bolder'>${data.offer_name}</p>
-                    <p>цена: ${data.offer_income} р. за переход</p>
-                    <p>тема: ${data.offer_theme}</p>
-                </article>
-            `;
-            this.subscriptionCtl.setListeners();
+            this.createOfferElement(data);
         } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
             // ищется подписка
             let row = document.querySelector(`#subscription-${data.id}`);
-            // скрывается активный оффер
+            // или ищется активный оффер
             if (row === null) {
                 row = document.querySelector(`#offer-${data.id}`);
             }
-                            // или подписка или активный оффер
+            // скрывается подписка или активный оффер
             if (row !== null) {
                 row.remove();
             }
         } else if (data.type === 'VISIBLE_OFFER') {
-            // показывается оффер и подписки на него
-            let webmaster = data.webmasters.find(master => master.name == this.username);
-            if (data.hasOwnProperty('webmasters') && data.webmasters.length) {
-                // показывается подписка вебмастера
-                this.subscriptionCtl.subscriptionsList.innerHTML += `
-                    <article id="subscription-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
-                        <p class='fw-bolder'>${data.offer_name}</p>
-                        <p>цена: ${data.offer_income} р. за переход</p>
-                        <p>тема: ${data.offer_theme}</p>
-                        <a href="?ref=${webmaster.refcode}" title="?ref=${webmaster.refcode}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
-                    </article>
-                `;
+            // показывается оффер и подписка на него
+            if (data.webmasters.length !== 0) {
+                // проверяется, есть ли подписка
+                let webmaster = data.webmasters.find(master => master.name == this.username);
+                if (webmaster !== undefined) {
+                    // показывается подписка вебмастера
+                    this.subscriptionCtl.subscriptionsList.innerHTML += `
+                        <article id="subscription-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
+                            <p class='fw-bolder'>${data.offer_name}</p>
+                            <p>цена: ${data.offer_income} р. за переход</p>
+                            <p>тема: ${data.offer_theme}</p>
+                            <a href="?ref=${webmaster.refcode}" title="?ref=${webmaster.refcode}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
+                        </article>
+                    `;
+                } else {
+                    this.createOfferElement(data);
+                }
             } else {
-                // показывается активный оффер
-                this.subscriptionCtl.activeOffersList.innerHTML += `
-                    <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
-                        <p class='fw-bolder'>${data.offer_name}</p>
-                        <p>цена: ${data.offer_income} р. за переход</p>
-                        <p>тема: ${data.offer_theme}</p>
-                    </article>
-                `;
+                this.createOfferElement(data);
             }
-            this.subscriptionCtl.setListeners();
         }
+    }
+
+    /** показывается активный оффер */
+    createOfferElement(data) {
+        this.subscriptionCtl.activeOffersList.innerHTML += `
+            <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
+                <p class='fw-bolder'>${data.offer_name}</p>
+                <p>цена: ${data.offer_income} р. за переход</p>
+                <p>тема: ${data.offer_theme}</p>
+            </article>
+        `;
+        this.subscriptionCtl.setListeners();
     }
 }
