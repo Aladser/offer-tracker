@@ -10,10 +10,9 @@ class MainClientWebsocket extends ClientWebsocket
     /** получение типов сообщений: NEW_OFFER*/
     onMessage(e) {
         let data = JSON.parse(e.data);
-        //console.log(data);
 
-        if (data.type == 'NEW_OFFER' && data.hasOwnProperty('offer_url')) {
-            // добавление реф.ссылок 
+        if (data.type == 'VISIBLE_OFFER') {
+            // показ подписок включенного оффера
             let webmasters = data.webmasters;
             webmasters.forEach(master => {
                 this.refList.innerHTML += `
@@ -24,11 +23,8 @@ class MainClientWebsocket extends ClientWebsocket
                     </article>
                 `;
             });
-        } else if (data.type == 'DELETE_OFFER') {
-            // удаление реф.ссылок на оффер
-            document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
         } else if(data.type == 'SUBSCRIBE') {
-            // добавление новой реферальной ссылки
+            // добавление новой подписки на включенный оффер
             this.refList.innerHTML += `
                 <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
                     <a href="?ref=${data.offer_refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
@@ -37,12 +33,15 @@ class MainClientWebsocket extends ClientWebsocket
                 </article>
             `;
         } else if(data.type == 'UNSUBSCRIBE') {
-            // удаление реферальной ссылки
+            // удаление подписки на оффер
             let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer_id}']`);
             offerRefLinks = Array.from(offerRefLinks);
             // childNodes[3] - вебмастер
             let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер: ${data.webmaster}`);
             reflink.remove();
-        }
+        } else if (data.type == 'DELETE_OFFER' || data.type == 'UNVISIBLE_OFFER') {
+            // удаление реф.ссылок на оффер
+            document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
+        } 
     }
 }
