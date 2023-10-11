@@ -13,10 +13,13 @@ class AdvertiserClientWebsocket extends ClientWebsocket
             return;
         }
 
-        // обновление страницы рекламодателя, создателя оффера
-        if (data.advertiser === this.username) {   
-            let row = this.offerTable.querySelector(`tr[data-id="${data.offer}"]`);
+        // обновление числа подписчиков оффера
+        if (data.advertiser === this.username) {
+            // оффер, данные которого обновляются
+            let row = this.offerTable.querySelector(`tr[data-id="${data.offer_id}"]`);
+            // ячейка числа подписчиков
             let counter = row.querySelector('.table-offers__td-link-count'); 
+            
             if (data.type == 'SUBSCRIBE') {
                 counter.textContent =  parseInt(counter.textContent) + 1;
             } else {

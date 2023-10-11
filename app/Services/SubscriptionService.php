@@ -60,7 +60,7 @@ class SubscriptionService
                 'type' => 'UNSUBSCRIBE',
                 'advertiser' => $advertiserName,
                 'webmaster' => $webmaster->user->name,
-                'offer' => $offer->id,
+                'offer_id' => $offer->id,
             ];
             WebsocketService::send($data);
             return ['result' => 1, 'advertiser' => $advertiserName, 'offer' => $offer->id];
