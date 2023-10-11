@@ -58,7 +58,7 @@ class OfferController extends Controller
                 'offer_name' => $offer->name,
                 'offer_income' => $offer->price*$commission,
                 'offer_theme' => $offer->theme->name,
-                'offer_id' => "offer-{$offer->id}",
+                'offer_id' => $offer->id,
             ];
             WebsocketService::send($offerData);
 
