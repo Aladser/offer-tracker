@@ -21,11 +21,14 @@ class WebmasterClientWebsocket extends ClientWebsocket
         } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
             // скрывается оффер или подписка
             let row = document.querySelector(`#subscription-${data.id}`);
+            //  активный оффер
             if (row === null) {
-                //  активный оффер
                 row = document.querySelector(`#offer-${data.id}`);
             }
-            row.remove();
+            // неактивный оффер
+            if (row !== null) {
+                row.remove();
+            }
         } else if (data.type === 'VISIBLE_OFFER') {
             // показывается оффер и подписки на него
             let webmaster = data.webmasters.find(master => master.name == this.username);
