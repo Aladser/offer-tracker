@@ -11,18 +11,7 @@ class WebmasterClientWebsocket extends ClientWebsocket
         let data = JSON.parse(e.data);
         if (data.type === 'NEW_OFFER') {
             // добавляется новый оффер
-            this.createOfferElement(data);
-        } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
-            // ищется подписка
-            let row = document.querySelector(`#subscription-${data.id}`);
-            // или ищется включенный оффер
-            if (row === null) {
-                row = document.querySelector(`#offer-${data.id}`);
-            }
-            // скрывается подписка или включенный оффер
-            if (row !== null) {
-                row.remove();
-            }
+            this.#createOfferElement(data);
         } else if (data.type === 'VISIBLE_OFFER') {
             // показывается оффер и подписка на него
             if (data.webmasters.length !== 0) {
@@ -40,17 +29,29 @@ class WebmasterClientWebsocket extends ClientWebsocket
                     `;
                 } else {
                     // если нет подписки у вебмастера
-                    this.createOfferElement(data);
+                    this.#createOfferElement(data);
                 }
             } else {
                 // если нет подписчиков
-                this.createOfferElement(data);
+                this.#createOfferElement(data);
             }
-        }
+        } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
+            // ищется подписка
+            let row = document.querySelector(`#subscription-${data.id}`);
+            // или ищется включенный оффер
+            if (row === null) {
+                row = document.querySelector(`#offer-${data.id}`);
+            }
+            // скрывается подписка или включенный оффер
+            if (row !== null) {
+                row.remove();
+            }
+        } 
+        this.subscriptionCtl.setListeners();
     }
 
-    /** показать включенный оффер */
-    createOfferElement(data) {
+    /** создать включенный оффер */
+    #createOfferElement(data) {
         this.subscriptionCtl.activeOffersList.innerHTML += `
             <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
                 <p class='fw-bolder'>${data.offer_name}</p>
@@ -58,6 +59,5 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 <p>тема: ${data.offer_theme}</p>
             </article>
         `;
-        this.subscriptionCtl.setListeners();
     }
 }
