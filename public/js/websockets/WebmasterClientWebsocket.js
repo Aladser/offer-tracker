@@ -19,13 +19,13 @@ class WebmasterClientWebsocket extends ClientWebsocket
             `;
             this.subscriptionCtl.setListeners();
         } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
-            // скрывается оффер или подписка
+            // ищется подписка
             let row = document.querySelector(`#subscription-${data.id}`);
-            //  активный оффер
+            // скрывается активный оффер
             if (row === null) {
                 row = document.querySelector(`#offer-${data.id}`);
             }
-            // неактивный оффер
+                            // или подписка или активный оффер
             if (row !== null) {
                 row.remove();
             }
