@@ -15,23 +15,12 @@ class MainClientWebsocket extends ClientWebsocket
             // показ подписок включенного оффера
             let webmasters = data.webmasters;
             webmasters.forEach(master => {
-                this.refList.innerHTML += `
-                    <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
-                        <a href="?ref=${master.refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
-                        <p>веб-мастер: ${master.name}</p>
-                        <p>тема: ${data.offer_theme}</p>
-                    </article>
-                `;
+                data.offer_refcode = master.refcode;
+                data.offer_webmaster = master.name;
+                this.#createSubscription(data);
             });
         } else if(data.type == 'SUBSCRIBE') {
-            // добавление новой подписки на включенный оффер
-            this.refList.innerHTML += `
-                <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
-                    <a href="?ref=${data.offer_refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
-                    <p>веб-мастер: ${data.offer_webmaster}</p>
-                    <p>тема: ${data.offer_theme}</p>
-                </article>
-            `;
+            this.#createSubscription(data);
         } else if(data.type == 'UNSUBSCRIBE') {
             // удаление подписки на оффер
             let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer_id}']`);
@@ -43,5 +32,16 @@ class MainClientWebsocket extends ClientWebsocket
             // удаление реф.ссылок на оффер
             document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
         } 
+    }
+
+    /** добавление новой подписки на включенный оффер */
+    #createSubscription(data) {
+        this.refList.innerHTML += `
+            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
+                <a href="?ref=${data.offer_refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
+                <p>веб-мастер: ${data.offer_webmaster}</p>
+                <p>тема: ${data.offer_theme}</p>
+            </article>
+        `;
     }
 }
