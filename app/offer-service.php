@@ -11,7 +11,7 @@ use Ratchet\WebSocket\WsServer;
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new BackWebsocket()
+            new ServerWebsocket()
         )
     ),
     env('WEBSOCKET_PORT')

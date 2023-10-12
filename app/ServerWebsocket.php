@@ -7,7 +7,7 @@ use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
 /** Чат - серверная часть */
-class BackWebsocket implements MessageComponentInterface
+class ServerWebsocket implements MessageComponentInterface
 {
     private \SplObjectStorage $clients;           // хранение всех подключенных пользователей
 
