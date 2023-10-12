@@ -53,7 +53,7 @@ class Status
     }
 
     /** отправка статуса оффера на сервер */
-    switchStatus(id, status) {
+    switchStatus(element, status) {
         alert('метод switchStatus класса Status не реализoван');
         throw('метод switchStatus класса Status не реализoван');
     }

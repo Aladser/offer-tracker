@@ -117,6 +117,6 @@ class OfferController extends Controller
             }
         }
 
-        return $isChanged;
+        return ['result' => $isChanged];
     }
 }
