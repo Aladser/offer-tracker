@@ -7,6 +7,9 @@
   border: 1px solid #333;
 }
 
+.border-666 {
+  border: 1px solid #666;
+}
 
 /*
 ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com

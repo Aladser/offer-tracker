@@ -8,11 +8,9 @@
     @endsection
 
     @section('js')
-        <script src="/js/StatusFunc.js" defer></script>
+        <script src="/js/OfferStatus.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/AdvertiserClientWebsocket.js" defer></script>
-        <script src="/js/TableClientControllers/TableClientController.js" defer></script>
-        <script src="/js/TableClientControllers/OfferTableClientController.js" defer></script>
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
     @endsection
 
@@ -21,40 +19,46 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>
         
-        <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-4">
-            <div class="p-4 bg-white border-b border-gray-200 text-center">
-                <a href="{{route('offer.create')}}" class='btn btn-outline-dark'>Добавить оффер</a>
-                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark' title='статистика офферов'>Статистика</a>
+        <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
+            <h4 class='h4 text-center p-4 fw-bolder'>Офферы</h4>
+            <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
+            <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>
+            <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
 
-                <h3 class='h3 pb-3 fw-bolder mt-4'>Список офферов</h3>
-                <table class='table w-75 mx-auto fs-4 w-100' id='table-offers'>
-                    <tr>
-                        <th scope="col">Оффер</th>
-                        <th scope="col">Цена</th>
-                        <th scope="col">Статус</th>
-                        <th scope="col">Подписчики</th>
-                    </tr>
+            <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center">
+                <!-- включенные офферы -->
+                <article class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>
+                    <h4 class='h4 fw-bolder'>Включены</h4>
+                    <article class='w-100 h-100 table-items' id='active-offers'>
+                        @foreach ($advertiser->offers->all() as $offer)
+                            @if ($offer->status == 1)
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer active-offers__item' draggable='true'>
+                                <p class='fw-bolder'>{{$offer->name}}</p>
+                                <p>Цена: {{$offer->price}} р. за переход</p>
+                                <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
+                            </article>
+                            @endif
+                        @endforeach
+                    </article>
+                </article>
 
-                    @foreach ($advertiser->offers->all() as $offer)
-                        <tr data-id='{{$offer->id}}' class='table-offers__tr position-relative'>
-                            <td class='fw-bolder'>{{$offer->name}}</td>
-                            <td>{{$offer->price}} р.</td>
-                            <td class='p-0'>
-                                <div class='form-switch p-0 h-100'>
-                                    @if ($offer->status===1)
-                                    <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='выключить' checked> 
-                                    @else
-                                    <input type="checkbox" name="status" class='table-offers__input-status form-check-input mx-auto' title='включить' >
-                                    @endif
-                                </div>
-                            </td>
-                            <td class='table-offers__td-link-count'>{{$offer->links->count()}} </td>
-                        </tr>
-                    @endforeach
-                </table>
+                <!-- выключенные офферы -->
+                <article class='w-50 d-inline-block m-0 p-3'>
+                    <h4 class='h4 fw-bolder'>Выключены</h4>
+                    <article class='w-100 h-100 table-items'  id='deactive-offers'>
+                        @foreach ($advertiser->offers->all() as $offer)
+                            @if ($offer->status == 0)
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light deactive-offers__item' draggable='true'>
+                                <p class='fw-bolder'>{{$offer->name}}</p>
+                                <p>Цена: {{$offer->price}} р. за переход</p>
+                                <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
+                            </article>
+                            @endif
+                        @endforeach
+                    </article>
+                </article>
+            </section>
 
-                <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
-            </div>
         </section>
     </section>
 </x-app-layout>

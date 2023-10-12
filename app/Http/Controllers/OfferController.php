@@ -83,15 +83,14 @@ class OfferController extends Controller
     /** установить статус */
     public function status(Request $request)
     {
-        $status = $request->all()['status'];
         $id = $request->all()['id'];
         $offer = Offer::find($id);
-        $offer->status = $status === 'true' ? 1 : 0;
+        $offer->status = $request->all()['status'];
         $isChanged = $offer->save();
         
         // сообщение вебсокету
         if ($isChanged) {
-            if ($offer->status === 1) {
+            if ($offer->status == 1) {
                 // список подписчиков оффера 
                 $subscriptions = $offer->links;
                 $webmasters = [];
