@@ -4,9 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
-use Database\Seeders\UserRoleSeed;
 use Database\Seeders\UserSeed;
-use Database\Seeders\OfferThemeSeed;
 use Database\Seeders\OfferSeed;
 use Database\Seeders\OfferSubscriptionSeed;
 use Database\Seeders\OfferClickSeeder;
@@ -14,16 +12,16 @@ use App\Models\SystemOption;
 use App\Models\Advertiser;
 use App\Models\Webmaster;
 use App\Models\UserRole;
+use App\Models\OfferTheme;
 
 class DatabaseSeeder extends Seeder
 {
     public function run()
     {
         DB::update('ALTER TABLE user_roles AUTO_INCREMENT = 1');
+        SystemOption::create(['name' => 'commission', 'value' => 10]);
 
         $userSeed = new UserSeed();
-        
-        $offerThemeSeed = new OfferThemeSeed();
         $offerSeed = new OfferSeed();
         $offerSubscriptionSeed = new OfferSubscriptionSeed();
         $offerClickSeeder = new OfferClickSeeder();
@@ -41,11 +39,13 @@ class DatabaseSeeder extends Seeder
         Webmaster::create(['user_id' => 6]);
         Webmaster::create(['user_id' => 7]);
 
-        $offerThemeSeed->run();
+        OfferTheme::create(['name' => 'IT']);
+        OfferTheme::create(['name' => 'образование']);
+        OfferTheme::create(['name' => 'игры']);
+        OfferTheme::create(['name' => 'спорт']);
+        OfferTheme::create(['name' => 'отдых']);
         $offerSeed->run();
         $offerSubscriptionSeed->run();
         $offerClickSeeder->run();
-
-        SystemOption::create(['name' => 'commission', 'value' => 10]);
     }
 }
