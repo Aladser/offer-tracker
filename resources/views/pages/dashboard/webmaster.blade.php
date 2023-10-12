@@ -9,6 +9,8 @@
     @endsection
 
     @section('js')
+        <script src="/js/Status.js" defer></script>
+        <script src="/js/SubscriptionStatus.js" defer></script>
         <script src="/js/SubscriptionCtl.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/WebmasterClientWebsocket.js" defer></script>
@@ -37,7 +39,7 @@
                         <article class='w-100 h-100 table-items subscriptions' id='list-subscriptions'>
                             @foreach ($subscriptions->get() as $subscription)
                                 @if ($subscription->offer->status == 1)
-                                    <article id="subscription-{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
+                                    <article id="{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer list-subscriptions__item' draggable='true'>
                                         <p class='fw-bolder'>{{$subscription->offer->name}}</p>
                                         <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                         <p>тема: {{$subscription->offer->theme->name}}</p>
@@ -53,7 +55,7 @@
                         <h4 class='h4 fw-bolder'>Доступные офферы</h4>
                         <article class='w-100 h-100 table-items offers'  id='list-active-offers'>
                             @foreach ($offers->get() as $offer)
-                                <article id="offer-{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
+                                <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light list-active-offers__item' draggable='true'>
                                     <p class='fw-bolder'>{{$offer->name}}</p>
                                     <p>цена: {{$offer->price * $incomePercent}} р. за переход</p>
                                     <p>тема: {{$offer->theme->name}}</p>

@@ -1,10 +1,13 @@
 /** активные офферы для рекламодателя */
 class WebmasterClientWebsocket extends ClientWebsocket
 {
-    constructor(url, username, subscriptionCtl) {
+    constructor(url, username, subscriptionsList, activeOfferList, subscriptionStatus, prgError) {
         super(url, username);
         /** контроллер подписок */
-        this.subscriptionCtl = subscriptionCtl;
+        this.subscriptionList = subscriptionsList;
+        this.activeOfferList = activeOfferList;
+        this.subscriptionStatus = subscriptionStatus; 
+        this.prgError = prgError;
     }
 
     onMessage(e) {
@@ -19,7 +22,7 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 let webmaster = data.webmasters.find(master => master.name == this.username);
                 if (webmaster !== undefined) {
                     // показывается подписка вебмастера
-                    this.subscriptionCtl.subscriptionsList.innerHTML += `
+                    this.subscriptionList.innerHTML += `
                         <article id="subscription-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
                             <p class='fw-bolder'>${data.offer_name}</p>
                             <p>цена: ${data.offer_income} р. за переход</p>
@@ -47,12 +50,12 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 row.remove();
             }
         } 
-        this.subscriptionCtl.setListeners();
+        this.subscriptionStatus.setListeners();
     }
 
     /** создать включенный оффер */
     #createOfferElement(data) {
-        this.subscriptionCtl.activeOffersList.innerHTML += `
+        this.activeOfferList.innerHTML += `
             <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
                 <p class='fw-bolder'>${data.offer_name}</p>
                 <p>цена: ${data.offer_income} р. за переход</p>

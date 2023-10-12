@@ -11,7 +11,7 @@ class SubscriptionService
     /** подписаться на оффер */
     public function subscribe(Request $request)
     {
-        $offerId = $request->all()['offerId'];
+        $offerId = $request->all()['id'];
         $webmasterId = $request->user()->webmaster->id;
 
         $offerSubscription = new OfferSubscription();
@@ -46,7 +46,7 @@ class SubscriptionService
     public function unsubscribe(Request $request)
     {
         $webmasterId = $request->user()->webmaster->id;
-        $offerId = $request->all()['offerId'];
+        $offerId = $request->all()['id'];
         $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->first();
 
         $advertiserName = $offerSubscription->offer->advertiser->user->name;
