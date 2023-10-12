@@ -33,7 +33,7 @@
                 <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center">
                     <!-- офферы-подписки пользователя -->
                     <article class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>
-                        <h4 class='h4 fw-bolder'>Ваши офферы-подписки</h4>
+                        <h4 class='h4 fw-bolder'>Подписки</h4>
                         <article class='w-100 h-100 table-items subscriptions' id='list-subscriptions'>
                             @foreach ($subscriptions->get() as $subscription)
                                 @if ($subscription->offer->status == 1)

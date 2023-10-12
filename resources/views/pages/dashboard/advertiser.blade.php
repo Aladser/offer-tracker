@@ -18,9 +18,16 @@
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>
-        
+
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
-            <h4 class='h4 text-center p-4 fw-bolder'>Офферы</h4>
+            <h4 class='h4 text-center p-3 fw-bolder'>Офферы</h4>
+
+            <div class='text-center border-dark pb-4'>
+                <a href="{{route('offer.create')}}" class='btn btn-outline-dark'>Добавить оффер</a>
+                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark' title='статистика офферов'>Статистика</a>
+            </div>
+
+
             <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
             <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>
             <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
