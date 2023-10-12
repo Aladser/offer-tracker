@@ -1,10 +1,10 @@
 class OfferStatus
 {
-    constructor(activeOfferClass, deactiveOfferClass, url) {
-        this.activeOfferClass = activeOfferClass;
-        this.deactiveOfferClass = deactiveOfferClass;
-        this.activeOfferList = document.querySelector(`#${activeOfferClass}`);
-        this.deactiveOfferList = document.querySelector(`#${deactiveOfferClass}`);
+    constructor(activeClass, deactiveClass, url) {
+        this.activeClass = activeClass;
+        this.deactiveClass = deactiveClass;
+        this.activeOfferList = document.querySelector(`#${activeClass}`);
+        this.deactiveOfferList = document.querySelector(`#${deactiveClass}`);
         this.url = url;
 
         this.activeOfferList.ondragover = e => this.onDragOver(e);
@@ -28,24 +28,24 @@ class OfferStatus
         let dropzone = event.target.closest('.table-items');
         
         // если перемещаемый элемент не покидает изначальный контейнер
-        if (dropzone.id === 'active-offers' && draggableElement.classList.contains('active-offers__item')) {
+        if (dropzone.id === this.activeClass && draggableElement.classList.contains(`${this.activeClass}__item`)) {
             return;
         }
-        if (dropzone.id == 'deactive-offers' && draggableElement.classList.contains('deactive-offers__item')) {
+        if (dropzone.id == this.deactiveClass && draggableElement.classList.contains(`${this.deactiveClass}__item`)) {
             return;
         }
 
         dropzone.append(draggableElement);
         // выключение
-        if (draggableElement.classList.contains('active-offers__item')) {
-            draggableElement.classList.remove('active-offers__item');
-            draggableElement.classList.add('deactive-offers__item');
+        if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
+            draggableElement.classList.remove(`${this.activeClass}__item`);
+            draggableElement.classList.add(`${this.deactiveClass}__item`);
             draggableElement.classList.add('bg-light');
             this.switchStatus(draggableElement.id, 0);
         // включение
         } else {
-            draggableElement.classList.remove('deactive-offers__item');
-            draggableElement.classList.add('active-offers__item');
+            draggableElement.classList.remove(`${this.deactiveClass}__item`);
+            draggableElement.classList.add(`${this.activeClass}__item`);
             draggableElement.classList.remove('bg-light');
             this.switchStatus(draggableElement.id, 1);
         }
@@ -77,8 +77,8 @@ class OfferStatus
     /** установить обработчики событий */
     setListeners() {
         // включенные офферы
-        this.activeOfferList.querySelectorAll('.active-offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.activeOfferList.querySelectorAll(`.${this.activeClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
         // выключенные офферы
-        this.deactiveOfferList.querySelectorAll('.deactive-offers__item').forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.deactiveOfferList.querySelectorAll(`.${this.deactiveClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
     }
 }
