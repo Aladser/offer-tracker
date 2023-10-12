@@ -1,8 +1,8 @@
 class OfferStatus
 {
-    constructor(activeOfferList, deactiveOffersList, url) {
-        this.activeOfferList = activeOfferList;
-        this.deactiveOfferList = deactiveOffersList;
+    constructor(activeOfferList, deactiveOfferList, url) {
+        this.activeOfferList = document.querySelector(`#${activeOfferList}`);
+        this.deactiveOfferList = document.querySelector(`#${deactiveOfferList}`);
         this.url = url;
 
         this.activeOfferList.ondragover = e => this.onDragOver(e);
