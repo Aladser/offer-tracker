@@ -1,11 +1,5 @@
 /** Фронт-контроллер таблицы пользователей */
 class UserTableClientController extends TableClientController{
-  constructor(URL, table, msgElement, form, csrfToken) {
-    super(URL, table, msgElement, form, csrfToken);
-    // примесь изменения статуса строки
-    Object.assign(UserTableClientController.prototype, statusFunc);
-  }
-
   /** добавить строку в таблицу
    * @param {*} form форма добавления
    * @param {*} data данные из БД
@@ -26,5 +20,32 @@ class UserTableClientController extends TableClientController{
     this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
       row.onclick = (e) => this.click(e.target.closest("tr"));
     })
+  }
+
+  /** включить/выключить строку в БД
+   * @param {*} row cрока
+   * @param {*} inputStatus - input статусы строки 
+   */
+  setStatus(row, inputStatus) {
+    let data = new URLSearchParams()
+    data.set("id", row.getAttribute("data-id"))
+    data.set("status", inputStatus.checked)
+    let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") }
+
+    let statusSwitch = row.querySelector("input[name='status']")
+    fetch(`${this.URL}/status`, {method: "post",headers: headers,body: data,})
+      .then((response) => response.text())
+      .then((rslt) => {
+        if (rslt == 1) {
+          statusSwitch.title = inputStatus.checked ? "выключить" : "включить";
+        } else {
+          if (rslt.includes("<title>Page Expired</title>")) {
+              window.open("/wrong-uri", "_self");
+          } else {
+            this.errorPrg.textContent = "серверная ошибка изменения статуса";
+            console.log(rslt);
+          }
+        }
+      })
   }
 }
