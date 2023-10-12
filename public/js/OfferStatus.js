@@ -3,14 +3,15 @@ class OfferStatus
     constructor(activeClass, deactiveClass, url) {
         this.activeClass = activeClass;
         this.deactiveClass = deactiveClass;
-        this.activeOfferList = document.querySelector(`#${activeClass}`);
-        this.deactiveOfferList = document.querySelector(`#${deactiveClass}`);
+
+        this.activeList = document.querySelector(`#${activeClass}`);
+        this.deactiveList = document.querySelector(`#${deactiveClass}`);
         this.url = url;
 
-        this.activeOfferList.ondragover = e => this.onDragOver(e);
-        this.activeOfferList.ondrop = e => this.onDrop(e);
-        this.deactiveOfferList.ondragover = e => this.onDragOver(e);
-        this.deactiveOfferList.ondrop = e => this.onDrop(e);
+        this.activeList.ondragover = e => this.onDragOver(e);
+        this.activeList.ondrop = e => this.onDrop(e);
+        this.deactiveList.ondragover = e => this.onDragOver(e);
+        this.deactiveList.ondrop = e => this.onDrop(e);
         this.setListeners();
     }
 
@@ -77,8 +78,8 @@ class OfferStatus
     /** установить обработчики событий */
     setListeners() {
         // включенные офферы
-        this.activeOfferList.querySelectorAll(`.${this.activeClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.activeList.querySelectorAll(`.${this.activeClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
         // выключенные офферы
-        this.deactiveOfferList.querySelectorAll(`.${this.deactiveClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
+        this.deactiveList.querySelectorAll(`.${this.deactiveClass}__item`).forEach(item => item.ondragstart = e => this.onDragStart(e));
     }
 }
