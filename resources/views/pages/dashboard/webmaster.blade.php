@@ -9,9 +9,8 @@
     @endsection
 
     @section('js')
-        <script src="/js/Status.js" defer></script>
-        <script src="/js/SubscriptionStatus.js" defer></script>
-        <script src="/js/SubscriptionCtl.js" defer></script>
+        <script src="/js/statuses/Status.js" defer></script>
+        <script src="/js/statuses/SubscriptionStatus.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/WebmasterClientWebsocket.js" defer></script>
         <script src="/js/pages/dashboard/webmaster.js" defer></script>
