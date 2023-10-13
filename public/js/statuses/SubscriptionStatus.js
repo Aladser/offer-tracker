@@ -1,6 +1,6 @@
 class SubscriptionStatus extends Status
 {
-    process(elem, data)
+    process(data, elem)
     {
         let result = data.result;
         // ошибка

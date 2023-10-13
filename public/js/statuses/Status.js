@@ -73,7 +73,7 @@ class Status
             .then(data => {
                 try {
                     data = JSON.parse(data);
-                    this.process(element, data);
+                    this.process(data, element);
                 } catch (err) {
                     if (data.includes('<title>Page Expired</title>')) {
                         window.open('/wrong-uri', '_self');
@@ -85,7 +85,7 @@ class Status
             });
     }
 
-    process(element, data) {
+    process(data, element) {
         throw('функция process класса Status не реализована');
     }
 
