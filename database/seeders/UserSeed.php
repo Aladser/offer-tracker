@@ -18,7 +18,7 @@ class UserSeed extends Seeder
             'role_id' => 1,
         ]);
 
-        for ($i=1;$i<4; $i++) {
+        for ($i=1; $i<4; $i++) {
             User::create([
                 'name' => "advertiser$i",
                 'email' => "advertiser$i@mail.ru",
@@ -27,7 +27,7 @@ class UserSeed extends Seeder
             ]);
         }
         
-        for ($i=1;$i<4; $i++) {
+        for ($i=1; $i<4; $i++) {
             User::create([
                 'name' => "webmaster$i",
                 'email' => "webmaster$i@mail.ru",

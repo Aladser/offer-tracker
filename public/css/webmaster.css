@@ -1,4 +1,4 @@
-.subscriptions__item:hover, 
+.subscriptions__item:hover,
 .offers__item:hover {
     background-color: #ccc;
 }

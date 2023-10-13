@@ -29,7 +29,7 @@ class SubscriptionService
         $offerSubscription->refcode = "$webmasterId@$offerId";
         $isSubscribed = $offerSubscription->save();
 
-        if($isSubscribed) {
+        if ($isSubscribed) {
             $advertiserName = $offerSubscription->offer->advertiser->user->name;
             $offer = $offerSubscription->offer;
 
@@ -54,11 +54,12 @@ class SubscriptionService
     /** отписаться от оффера */
     private function unsubscribe($offerId, $webmasterId)
     {
-        $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->first();
+        $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)
+            ->where('offer_id', $offerId)->first();
         $advertiserName = $offerSubscription->offer->advertiser->user->name;
         $offer = $offerSubscription->offer;
         $webmaster = $offerSubscription->follower;
-        
+
         $isUnsubscribed = $offerSubscription->delete();
 
         if ($isUnsubscribed) {

@@ -14,13 +14,15 @@ class UserController extends Controller
     public function index()
     {
         return view(
-            'pages/users', 
-            ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(), 'users' => User::where('name', '!=', 'admin')->get()],
+            'pages/users',
+            [ 'roles' => UserRole::orderBy('name', 'desc')->get()->toArray(),
+                'users' => User::where('name', '!=', 'admin')->get()
+            ],
         );
     }
 
     /** сохранить нового пользователя */
-    public function store(Request $request)
+    public function store(Request $request): array
     {
         $userData = $request->all();
 
@@ -41,17 +43,17 @@ class UserController extends Controller
         $userSaved = $user->save();
 
         if ($userSaved) {
-            return ['result' => 1, 
+            return ['result' => 1,
                     'row' => ['id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'role'=> $user->role->name]
                 ];
         } else {
-            return ['result' => 0, 
+            return ['result' => 0,
                     'description' => 'Серверная ошибка сохранения пользователя'
                 ];
         }
     }
 
-    public function destroy($id)
+    public function destroy($id): array
     {
         return ['result' => User::find($id)->delete() ? 1 : 0];
     }
@@ -60,14 +62,14 @@ class UserController extends Controller
     public function status(Request $request)
     {
         $requestData = $request->all();
-        $status = $requestData['status']; 
+        $status = $requestData['status'];
         $id = $requestData['id'];
 
         $user = User::find($id);
         $user->status = $status === 'true' ? 1 : 0;
         return $user->save();
     }
-    
+
     // вход в систему
     public function authenticate(Request $request)
     {
@@ -76,7 +78,7 @@ class UserController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        
+
         // проверка наличия записи в БД
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'status' => 1])) {
             $request->session()->regenerate();

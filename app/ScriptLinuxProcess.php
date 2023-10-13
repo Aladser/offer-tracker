@@ -32,7 +32,7 @@ class ScriptLinuxProcess
     public function isActive(): bool
     {
         file_put_contents($this->pidsParseFile, '');
-        exec("ps aux | grep {$this->processName} > $this->pidsParseFile"); // новая таблица pidов 
+        exec("ps aux | grep {$this->processName} > $this->pidsParseFile"); // новая таблица pidов
         return count(file($this->pidsParseFile)) > 2; // 2 строки будут всегда
     }
 

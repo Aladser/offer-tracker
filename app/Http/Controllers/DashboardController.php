@@ -27,8 +27,8 @@ class DashboardController extends Controller
                     ->sum('money');
                 
                 return view(
-                        'pages/dashboard/admin', 
-                        [
+                    'pages/dashboard/admin',
+                    [
                             'userId' => $user->id,
                             // темы офферов
                             'themes' => OfferTheme::all()->toArray(),
@@ -42,8 +42,8 @@ class DashboardController extends Controller
                             'commission' => $commission,
                             // число ошибочных реферальных ссылок
                             'failed_references' => FailedOfferClick::all()->count(),
-                        ] 
-                    );
+                        ]
+                );
             case 'веб-мастер':
                 $webmasterId = $user->webmaster->id;
                 // активные офферы без учета подписок
@@ -51,28 +51,28 @@ class DashboardController extends Controller
                 $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
                 
                 return view(
-                        'pages/dashboard/webmaster',
-                        [
+                    'pages/dashboard/webmaster',
+                    [
                             // подписки пользователя
                             'subscriptions' => OfferSubscription::where('webmaster_id', $webmasterId),
                             // все доступные офферы без подписок пользователя
                             'offers' => $activeOffers,
-                            // id пользователя-рекламщика (оптимизация) 
+                            // id пользователя-рекламщика (оптимизация)
                             'userId' => $user->id,
-                            // доля оплаты вебмастера 
+                            // доля оплаты вебмастера
                             'incomePercent' => round((100-$commission)/100, 2),
                         ]
-                    );
+                );
             case 'рекламодатель':
                 return view(
-                        'pages/dashboard/advertiser', 
-                        [
+                    'pages/dashboard/advertiser',
+                    [
                             // рекламодатель
                             'advertiser' => $user->advertiser,
-                            // id пользователя-рекламщика (для оптимизации) 
+                            // id пользователя-рекламщика (для оптимизации)
                             'userId' => $user->id
                         ]
-                    );
+                );
             default:
                 dd('ошибка роли пользователя: ' . $user->role->name);
         }
