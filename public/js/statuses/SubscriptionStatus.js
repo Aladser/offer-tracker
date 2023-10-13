@@ -4,12 +4,12 @@ class SubscriptionStatus extends Status
     switchStatus(elem, status) {
         let data = new URLSearchParams();
         data.set('id', elem.id);
+        data.set('status', status);
         let headers = {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
 
-        let url = this.url + (status == 1 ?  '/subscribe' : '/unsubscribe');
-        fetch(url, {method: 'post', headers: headers, body: data})
+        fetch(this.url, {method: 'post', headers: headers, body: data})
             .then(response => response.text())
             .then(data => {
                 try {
@@ -27,7 +27,6 @@ class SubscriptionStatus extends Status
                         elem.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
                     }
                 } catch (err) {
-                    console.log(data);
                     if (data.includes('<title>Page Expired</title>')) {
                         window.open('/wrong-uri', '_self');
                     } else {

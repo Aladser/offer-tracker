@@ -8,12 +8,20 @@ use App\Models\OfferSubscription;
 /** Управление подписками веб-мастеров на офферы */
 class SubscriptionService
 {
-    /** подписаться на оффер */
-    public function subscribe(Request $request)
+    public function index(Request $request)
     {
-        $offerId = $request->all()['id'];
-        $webmasterId = $request->user()->webmaster->id;
+        $offer = $request->all()['id'];
+        $webmaster = $request->user()->webmaster->id;
+        if ($request->all()['status'] == 1) {
+            return $this->subscribe($offer, $webmaster);
+        } else {
+            return $this->unsubscribe($offer, $webmaster);
+        }
+    }
 
+    /** подписаться на оффер */
+    private function subscribe($offerId, $webmasterId)
+    {
         $offerSubscription = new OfferSubscription();
         $offerSubscription->offer_id = $offerId;
         $offerSubscription->webmaster_id = $webmasterId;
@@ -43,12 +51,9 @@ class SubscriptionService
     }
 
     /** отписаться от оффера */
-    public function unsubscribe(Request $request)
+    private function unsubscribe($offerId, $webmasterId)
     {
-        $webmasterId = $request->user()->webmaster->id;
-        $offerId = $request->all()['id'];
         $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)->where('offer_id', $offerId)->first();
-
         $advertiserName = $offerSubscription->offer->advertiser->user->name;
         $offer = $offerSubscription->offer;
         $webmaster = $offerSubscription->follower;
