@@ -10,7 +10,7 @@ class SubscriptionStatus extends Status
         } else if (result == 1) {
             // отписка - убирание реф.ссылки из элемента оффера
             elem.querySelector('.subscriptions__ref').remove();
-        } else {1
+        } else {
             // подписка - добавление реферальной ссылки в элемент оффера
             elem.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
         }

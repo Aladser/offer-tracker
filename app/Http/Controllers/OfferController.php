@@ -105,7 +105,7 @@ class OfferController extends Controller
                 $offerData = [
                     'type' => 'VISIBLE_OFFER',
                     'offer_name' => $offer->name,
-                    'offer_income' => $offer->price*$commission,
+                    'offer_income' => round($offer->price*$commission, 2),
                     'offer_theme' => $offer->theme->name,
                     'offer_id' => $offer->id,
                     'offer_url' => $offer->url,

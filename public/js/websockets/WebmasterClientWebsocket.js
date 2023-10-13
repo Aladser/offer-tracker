@@ -23,7 +23,7 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 if (webmaster !== undefined) {
                     // показывается подписка вебмастера
                     this.subscriptionList.innerHTML += `
-                        <article id="subscription-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer subscriptions__item' draggable='true'>
+                        <article id="${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer list-subscriptions__item' draggable='true'>
                             <p class='fw-bolder'>${data.offer_name}</p>
                             <p>цена: ${data.offer_income} р. за переход</p>
                             <p>тема: ${data.offer_theme}</p>
@@ -39,13 +39,8 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 this.#createOfferElement(data);
             }
         } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
-            // ищется подписка
-            let row = document.querySelector(`#subscription-${data.id}`);
-            // или ищется включенный оффер
-            if (row === null) {
-                row = document.querySelector(`#offer-${data.id}`);
-            }
-            // скрывается подписка или включенный оффер
+            // ищется подписка или включенный оффер
+            let row = document.getElementById(data.id);
             if (row !== null) {
                 row.remove();
             }
@@ -56,7 +51,7 @@ class WebmasterClientWebsocket extends ClientWebsocket
     /** создать включенный оффер */
     #createOfferElement(data) {
         this.activeOfferList.innerHTML += `
-            <article id="offer-${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light offers__item' draggable='true'>
+            <article id="${data.offer_id}" class='border-666 mb-1 rounded cursor-pointer bg-light list-active-offers__item' draggable='true'>
                 <p class='fw-bolder'>${data.offer_name}</p>
                 <p>цена: ${data.offer_income} р. за переход</p>
                 <p>тема: ${data.offer_theme}</p>
