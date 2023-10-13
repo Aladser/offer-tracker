@@ -21,30 +21,30 @@ class TableClientController {
             (row.onclick = (e) => {
               // переключатель меняет статус стрки
               if (e.target.tagName === "INPUT") {
-                this.setStatus(e.target.closest("tr"), e.target)
+                this.setStatus(e.target.closest("tr"), e.target);
               } else {
-                this.click(e.target.closest("tr"))
+                this.click(e.target.closest("tr"));
               }
             })
-        )
+        );
       }
   
       // форма добавления нового элемента
       if (this.form !== null) {
-        this.form.onsubmit = (event) => this.add(form, event)
+        this.form.onsubmit = (event) => this.add(form, event);
       }
     }
   
     add(form, event) {
-      event.preventDefault()
-      let formData = new FormData(form)
-      let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") }
+      event.preventDefault();
+      let formData = new FormData(form);
+      let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") };
   
       fetch(this.URL, { method: "post", headers: headers, body: formData })
         .then((response) => response.text())
         .then((data) => {
           try {
-            data = JSON.parse(data)
+            data = JSON.parse(data);
             if (data.result == 1) {
               this.processData(form, data);
             } else {
@@ -52,18 +52,18 @@ class TableClientController {
             }
           } catch (e) {
             if (data.includes("<title>Page Expired</title>")) {
-              window.open("/wrong-uri", "_self")
+              window.open("/wrong-uri", "_self");
             } else {
               this.msgElement.textContent = data;
             }
           }
-        })
+        });
     }
 
     remove(button) {
-      let row = button.closest("tr")
-      let id = row.getAttribute("data-id")
-      let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") }
+      let row = button.closest("tr");
+      let id = row.getAttribute("data-id");
+      let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") };
   
       fetch(`${this.URL}/${id}`, { method: "delete", headers: headers })
         .then((response) => response.text())
@@ -78,32 +78,32 @@ class TableClientController {
             }
           } catch (err) {
             if (data.includes("<title>Page Expired</title>")) {
-              window.open("/wrong-uri", "_self")
+              window.open("/wrong-uri", "_self");
             } else {
               this.msgElement.textContent = err;
               console.log(data);
             }
           }
-        })
+        });
     }
   
     click(row) {
       // клик на активную строку
       if (row.classList.contains(`${this.table.id}__tr--active`)) {
-        row.classList.remove(`${this.table.id}__tr--active`)
-        row.querySelector("button").remove()
+        row.classList.remove(`${this.table.id}__tr--active`);
+        row.querySelector("button").remove();
       } else {
         // поиск активной строки
-        let activeRow = this.table.querySelector(`.${this.table.id}__tr--active`)
+        let activeRow = this.table.querySelector(`.${this.table.id}__tr--active`);
         if (activeRow) {
-          activeRow.querySelector("button").remove()
-          activeRow.classList.remove(`${this.table.id}__tr--active`)
+          activeRow.querySelector("button").remove();
+          activeRow.classList.remove(`${this.table.id}__tr--active`);
         }
         // выделение строки
         row.innerHTML +=
-          `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`
-        row.lastChild.onclick = (e) => this.remove(e.target)
-        row.classList.add(`${this.table.id}__tr--active`)
+          `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`;
+        row.lastChild.onclick = (e) => this.remove(e.target);
+        row.classList.add(`${this.table.id}__tr--active`);
       }
     }
   

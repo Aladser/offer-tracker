@@ -14,7 +14,7 @@ class MainClientWebsocket extends ClientWebsocket
         if (data.type == 'VISIBLE_OFFER') {
             // показ подписок включенного оффера
             let webmasters = data.webmasters;
-            webmasters.forEach(master => {
+            webmasters.forEach (master => {
                 data.offer_refcode = master.refcode;
                 data.offer_webmaster = master.name;
                 this.#createSubscription(data);

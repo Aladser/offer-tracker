@@ -44,7 +44,7 @@ class CommissionCtl
                 }
             } catch(err) {
                 if (data.includes("<title>Page Expired</title>")) {
-                    window.open("/wrong-uri", "_self")
+                    window.open("/wrong-uri", "_self");
                 } else {
                     this.msgPrg.textContent = err;
                     console.log(data);

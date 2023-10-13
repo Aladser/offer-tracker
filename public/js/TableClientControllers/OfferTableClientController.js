@@ -19,7 +19,7 @@ class OfferTableClientController extends TableClientController{
      * @param {*} event
      */
     add(event) {
-      event.preventDefault()
+      event.preventDefault();
       let formData = new FormData(this.form);
       formData.append("user", this.username);
   
@@ -30,19 +30,19 @@ class OfferTableClientController extends TableClientController{
             let offer = JSON.parse(data);
 
             if (offer.result == 1) {
-              event.target.reset()
+              event.target.reset();
               this.msgElement.textContent = `${offer.offerName} добавлен`;
             } else {
               this.msgElement.textContent = offer.error;
             }
           } catch (err) {
             if (data.includes("<title>Page Expired</title>")) {
-              window.open("/wrong-uri", "_self")
+              window.open("/wrong-uri", "_self");
             } else {
               this.msgElement.textContent = err;
             }
           }
-        })
+        });
     }
   }
   

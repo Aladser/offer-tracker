@@ -25,9 +25,9 @@ class AdvertiserClientWebsocket extends ClientWebsocket
             let followersCount = parseInt(counter.textContent.substring(13));
             
             if (data.type == 'SUBSCRIBE') {
-                counter.textContent =  'Подписчиков: ' + ++followersCount;
+                counter.textContent =  'Подписчиков: ' + (followersCount + 1);
             } else {
-                counter.textContent =  'Подписчиков: ' + --followersCount;
+                counter.textContent =  'Подписчиков: ' + (followersCount - 1);
             }
         }
     }

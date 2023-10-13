@@ -19,7 +19,7 @@ class UserTableClientController extends TableClientController{
     this.msgElement.textContent = "";
     this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
       row.onclick = (e) => this.click(e.target.closest("tr"));
-    })
+    });
   }
 
   /** включить/выключить строку в БД
@@ -27,12 +27,12 @@ class UserTableClientController extends TableClientController{
    * @param {*} inputStatus - input статусы строки 
    */
   setStatus(row, inputStatus) {
-    let data = new URLSearchParams()
-    data.set("id", row.getAttribute("data-id"))
-    data.set("status", inputStatus.checked)
-    let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") }
+    let data = new URLSearchParams();
+    data.set("id", row.getAttribute("data-id"));
+    data.set("status", inputStatus.checked);
+    let headers = { "X-CSRF-TOKEN": this.csrfToken.getAttribute("content") };
 
-    let statusSwitch = row.querySelector("input[name='status']")
+    let statusSwitch = row.querySelector("input[name='status']");
     fetch(`${this.URL}/status`, {method: "post",headers: headers,body: data,})
       .then((response) => response.text())
       .then((rslt) => {
@@ -46,6 +46,6 @@ class UserTableClientController extends TableClientController{
             console.log(rslt);
           }
         }
-      })
+      });
   }
 }

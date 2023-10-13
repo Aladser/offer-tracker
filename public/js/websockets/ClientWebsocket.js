@@ -28,5 +28,5 @@ class ClientWebsocket
 
     onOpen(e) {
         
-    }; 
+    }
 }
