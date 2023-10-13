@@ -40,10 +40,10 @@ class StatisticsClientWebsocket extends ClientWebsocket
             let money = role == 'рекламодатель' ? data.price : data.price * data.income_part;
      
             row.clickCell.textContent = parseInt(row.clickCell.textContent) + 1;
-            row.moneyCell.textContent = (parseFloat(row.moneyCell.textContent) + money).toFixed(2)  + ' р.';
+            row.moneyCell.textContent = parseFloat(row.moneyCell.textContent) + money  + ' р.';
     
             row.totalClicksElement.textContent = parseInt(row.totalClicksElement.textContent) + 1;
-            row.totalMoneyElement.textContent = (parseInt(row.totalMoneyElement.textContent) + money).toFixed(2) + ' р.';
+            row.totalMoneyElement.textContent = parseInt(row.totalMoneyElement.textContent) + money + ' р.';
         });
     }
 }

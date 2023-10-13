@@ -31,7 +31,7 @@ class MainClientWebsocket extends ClientWebsocket
         } else if (data.type == 'DELETE_OFFER' || data.type == 'UNVISIBLE_OFFER') {
             // удаление реф.ссылок на оффер
             document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
-        } 
+        }
     }
 
     /** добавление новой подписки на включенный оффер */

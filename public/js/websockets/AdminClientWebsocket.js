@@ -18,8 +18,8 @@ class AdminClientWebsocket extends ClientWebsocket
             this.clicks.textContent = parseInt(this.clicks.textContent) + 1;
             // доход системы
             let income = parseFloat(this.systemIncome.textContent);
-            let commission = ((1-data.income_part)*data.price).toFixed(2);
-            this.systemIncome.textContent = (parseFloat(income) + parseFloat(commission)).toFixed(2) + ' руб.';
+            let commission = (1-data.income_part) * data.price;
+            this.systemIncome.textContent = parseFloat(income) + parseFloat(commission) + ' руб.';
         } else if(data.type === 'SUBSCRIBE') {
             // увеличивается число подписок
             this.subscriptions.textContent = parseInt(this.subscriptions.textContent) + 1;

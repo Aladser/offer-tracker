@@ -21,6 +21,7 @@ class AdvertiserClientWebsocket extends ClientWebsocket
             let row = document.getElementById(data.offer_id);
             // ячейка числа подписчиков
             let counter = row.querySelector('.table-offers__td-link-count');
+            // выречает число подписчиков
             let followersCount = parseInt(counter.textContent.substring(13));
             
             if (data.type == 'SUBSCRIBE') {

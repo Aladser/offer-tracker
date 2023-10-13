@@ -1,6 +1,7 @@
 class SubscriptionStatus extends Status
 {
-    process(data, elem)
+    /** изменяет показ реферальной ссылки */
+    process(data, subscription)
     {
         let result = data.result;
         // ошибка
@@ -9,10 +10,10 @@ class SubscriptionStatus extends Status
             console.log(data);
         } else if (result == 1) {
             // отписка - убирание реф.ссылки из элемента оффера
-            elem.querySelector('.subscriptions__ref').remove();
+            subscription.querySelector('.subscriptions__ref').remove();
         } else {
             // подписка - добавление реферальной ссылки в элемент оффера
-            elem.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
+            subscription.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
         }
     }
 }

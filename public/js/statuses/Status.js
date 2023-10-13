@@ -86,7 +86,9 @@ class Status
     }
 
     process(data, element) {
-        throw('функция process класса Status не реализована');
+        let info = 'функция process класса Status не реализована';
+        alert(info);
+        throw(info);
     }
 
     /** установить обработчики событий */
