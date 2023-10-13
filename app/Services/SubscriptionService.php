@@ -8,6 +8,7 @@ use App\Models\OfferSubscription;
 /** Управление подписками веб-мастеров на офферы */
 class SubscriptionService
 {
+    /** принимает запросы от клиентов */
     public function index(Request $request)
     {
         $offer = $request->all()['id'];
