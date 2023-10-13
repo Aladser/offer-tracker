@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use App\Services\OfferStatistics;
+use Illuminate\Support\ServiceProvider;
 
 class OfferStatisticsProvider extends ServiceProvider
 {
@@ -16,6 +16,5 @@ class OfferStatisticsProvider extends ServiceProvider
 
     public function boot()
     {
-        //
     }
 }

@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Advertiser;
+use App\Models\User;
+use App\Models\UserRole;
+use App\Models\Webmaster;
 use App\Providers\RouteServiceProvider;
+use App\Services\WebsocketService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Services\WebsocketService;
-use App\Models\UserRole;
-use App\Models\User;
-use App\Models\Advertiser;
-use App\Models\Webmaster;
 
 class RegisteredUserController extends Controller
 {
@@ -20,6 +20,7 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $userRoles = UserRole::where('name', '!=', 'администратор')->orderBy('name', 'desc')->get()->toArray();
+
         return view('auth.register', ['roles' => $userRoles]);
     }
 
@@ -49,14 +50,14 @@ class RegisteredUserController extends Controller
         // запись в таблицу рекламодателей или вебмастеров. Если отправляется другая цифра - 404
         if ($request->role == 2) {
             Advertiser::create(['user_id' => $user->id]);
-        } else if ($request->role == 3){
+        } elseif ($request->role == 3) {
             Webmaster::create(['user_id' => $user->id]);
         }
         event(new Registered($user));
 
         Auth::login($user);
 
-        WebsocketService::send(['type'=>'REGISTER', 'id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'role'=>UserRole::find($request->role)->name]);
+        WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => UserRole::find($request->role)->name]);
 
         return redirect(RouteServiceProvider::HOME);
     }

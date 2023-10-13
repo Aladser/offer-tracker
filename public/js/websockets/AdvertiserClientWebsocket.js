@@ -1,9 +1,8 @@
 /**  статистика подписчиков рекламодателя*/
-class AdvertiserClientWebsocket extends ClientWebsocket
-{
+class AdvertiserClientWebsocket extends ClientWebsocket {
     constructor(url, username, offerTable, subscriptionStatus) {
         super(url, username);
-        this.offerTable = offerTable; 
+        this.offerTable = offerTable;
         this.subscriptionStatus = subscriptionStatus;
     }
 
@@ -11,7 +10,7 @@ class AdvertiserClientWebsocket extends ClientWebsocket
     onMessage(e) {
         let data = JSON.parse(e.data);
         //console.log(data);
-        if (data.type !== 'SUBSCRIBE' && data.type !== 'UNSUBSCRIBE') {
+        if (data.type !== "SUBSCRIBE" && data.type !== "UNSUBSCRIBE") {
             return;
         }
 
@@ -20,14 +19,14 @@ class AdvertiserClientWebsocket extends ClientWebsocket
             // оффер, данные которого обновляются
             let row = document.getElementById(data.offer_id);
             // ячейка числа подписчиков
-            let counter = row.querySelector('.table-offers__td-link-count');
+            let counter = row.querySelector(".table-offers__td-link-count");
             // выречает число подписчиков
             let followersCount = parseInt(counter.textContent.substring(13));
-            
-            if (data.type == 'SUBSCRIBE') {
-                counter.textContent =  'Подписчиков: ' + (followersCount + 1);
+
+            if (data.type == "SUBSCRIBE") {
+                counter.textContent = "Подписчиков: " + (followersCount + 1);
             } else {
-                counter.textContent =  'Подписчиков: ' + (followersCount - 1);
+                counter.textContent = "Подписчиков: " + (followersCount - 1);
             }
         }
     }

@@ -2,19 +2,18 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\OfferClickController;
 use App\Http\Controllers\FailedOfferClickController;
+use App\Http\Controllers\OfferClickController;
 use App\Http\Controllers\SystemOptionController;
 use App\Models\OfferSubscription;
 use App\Services\WebsocketService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /** отлавливает реферальную ссылку */
 class IsOfferReference
 {
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, \Closure $next)
     {
         $params = $request->all();
 
@@ -37,7 +36,7 @@ class IsOfferReference
                 // записать факт отказа реферальной ссылки в БД
                 FailedOfferClickController::add("{$request->path()}?ref=$refCode");
                 // сообщение вебсокету
-                WebsocketService::send(['type' => 'FAILED_OFFER',]);
+                WebsocketService::send(['type' => 'FAILED_OFFER']);
 
                 return redirect('page404');
             } else {
@@ -60,7 +59,7 @@ class IsOfferReference
                     'webmaster' => $webmaster,
                     'offer' => $offer,
                     'price' => $offerPrice,
-                    'income_part' => $income_part
+                    'income_part' => $income_part,
                 ]);
 
                 return redirect($subscription->offer->url);

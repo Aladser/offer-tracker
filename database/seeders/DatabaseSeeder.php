@@ -2,17 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Seeder;
-use Database\Seeders\UserSeed;
-use Database\Seeders\OfferSeed;
-use Database\Seeders\OfferSubscriptionSeed;
-use Database\Seeders\OfferClickSeeder;
-use App\Models\SystemOption;
 use App\Models\Advertiser;
-use App\Models\Webmaster;
-use App\Models\UserRole;
 use App\Models\OfferTheme;
+use App\Models\SystemOption;
+use App\Models\UserRole;
+use App\Models\Webmaster;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,11 +26,11 @@ class DatabaseSeeder extends Seeder
         UserRole::create(['name' => 'рекламодатель']);
         UserRole::create(['name' => 'веб-мастер']);
         $userSeed->run();
-        
+
         Advertiser::create(['user_id' => 2]);
         Advertiser::create(['user_id' => 3]);
         Advertiser::create(['user_id' => 4]);
-        
+
         Webmaster::create(['user_id' => 5]);
         Webmaster::create(['user_id' => 6]);
         Webmaster::create(['user_id' => 7]);

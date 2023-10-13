@@ -1,25 +1,33 @@
 /** активные офферы для рекламодателя */
-class WebmasterClientWebsocket extends ClientWebsocket
-{
-    constructor(url, username, subscriptionsList, activeOfferList, subscriptionStatus, prgError) {
+class WebmasterClientWebsocket extends ClientWebsocket {
+    constructor(
+        url,
+        username,
+        subscriptionsList,
+        activeOfferList,
+        subscriptionStatus,
+        prgError
+    ) {
         super(url, username);
         /** контроллер подписок */
         this.subscriptionList = subscriptionsList;
         this.activeOfferList = activeOfferList;
-        this.subscriptionStatus = subscriptionStatus; 
+        this.subscriptionStatus = subscriptionStatus;
         this.prgError = prgError;
     }
 
     onMessage(e) {
         let data = JSON.parse(e.data);
-        if (data.type === 'NEW_OFFER') {
+        if (data.type === "NEW_OFFER") {
             // добавляется новый оффер
             this.#createOfferElement(data);
-        } else if (data.type === 'VISIBLE_OFFER') {
+        } else if (data.type === "VISIBLE_OFFER") {
             // показывается оффер и подписка на него
             if (data.webmasters.length !== 0) {
                 // проверяется, есть ли подписка у вебмастера
-                let webmaster = data.webmasters.find(master => master.name == this.username);
+                let webmaster = data.webmasters.find(
+                    (master) => master.name == this.username
+                );
                 if (webmaster !== undefined) {
                     // показывается подписка вебмастера
                     this.subscriptionList.innerHTML += `
@@ -38,13 +46,16 @@ class WebmasterClientWebsocket extends ClientWebsocket
                 // если нет подписчиков
                 this.#createOfferElement(data);
             }
-        } else if (data.type === 'DELETE_OFFER' || data.type === 'UNVISIBLE_OFFER') {
+        } else if (
+            data.type === "DELETE_OFFER" ||
+            data.type === "UNVISIBLE_OFFER"
+        ) {
             // ищется подписка или включенный оффер
             let row = document.getElementById(data.id);
             if (row !== null) {
                 row.remove();
             }
-        } 
+        }
         this.subscriptionStatus.setListeners();
     }
 

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\OfferTheme;
+use App\Models\FailedOfferClick;
 use App\Models\Offer;
 use App\Models\OfferClick;
 use App\Models\OfferSubscription;
-use App\Models\FailedOfferClick;
+use App\Models\OfferTheme;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -25,7 +25,7 @@ class DashboardController extends Controller
                     ->select(DB::raw('(1-income_part) * price as money'))
                     ->get()
                     ->sum('money');
-                
+
                 return view(
                     'pages/dashboard/admin',
                     [
@@ -33,9 +33,9 @@ class DashboardController extends Controller
                             // темы офферов
                             'themes' => OfferTheme::all()->toArray(),
                             //  доход системы
-                            'income'=>$totalIncome,
+                            'income' => $totalIncome,
                             // общее число кликов
-                            'clicks'=>$clicks->count(),
+                            'clicks' => $clicks->count(),
                             // число подписчиков на офферы
                             'subscriptionCount' => OfferSubscription::all()->count(),
                             // комиссия
@@ -49,7 +49,7 @@ class DashboardController extends Controller
                 // активные офферы без учета подписок
                 $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
                 $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
-                
+
                 return view(
                     'pages/dashboard/webmaster',
                     [
@@ -60,7 +60,7 @@ class DashboardController extends Controller
                             // id пользователя-рекламщика (оптимизация)
                             'userId' => $user->id,
                             // доля оплаты вебмастера
-                            'incomePercent' => round((100-$commission)/100, 2),
+                            'incomePercent' => round((100 - $commission) / 100, 2),
                         ]
                 );
             case 'рекламодатель':
@@ -70,11 +70,11 @@ class DashboardController extends Controller
                             // рекламодатель
                             'advertiser' => $user->advertiser,
                             // id пользователя-рекламщика (для оптимизации)
-                            'userId' => $user->id
+                            'userId' => $user->id,
                         ]
                 );
             default:
-                dd('ошибка роли пользователя: ' . $user->role->name);
+                dd('ошибка роли пользователя: '.$user->role->name);
         }
     }
 }

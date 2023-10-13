@@ -1,6 +1,5 @@
 /** обновление статистики админа */
-class MainClientWebsocket extends ClientWebsocket
-{
+class MainClientWebsocket extends ClientWebsocket {
     constructor(url, refList) {
         super(url, null);
         // список активных офферов
@@ -11,26 +10,37 @@ class MainClientWebsocket extends ClientWebsocket
     onMessage(e) {
         let data = JSON.parse(e.data);
 
-        if (data.type == 'VISIBLE_OFFER') {
+        if (data.type == "VISIBLE_OFFER") {
             // показ подписок включенного оффера
             let webmasters = data.webmasters;
-            webmasters.forEach (master => {
+            webmasters.forEach((master) => {
                 data.offer_refcode = master.refcode;
                 data.offer_webmaster = master.name;
                 this.#createSubscription(data);
             });
-        } else if(data.type == 'SUBSCRIBE') {
+        } else if (data.type == "SUBSCRIBE") {
             this.#createSubscription(data);
-        } else if(data.type == 'UNSUBSCRIBE') {
+        } else if (data.type == "UNSUBSCRIBE") {
             // удаление подписки на оффер
-            let offerRefLinks = document.querySelectorAll(`article[data-id='${data.offer_id}']`);
+            let offerRefLinks = document.querySelectorAll(
+                `article[data-id='${data.offer_id}']`
+            );
             offerRefLinks = Array.from(offerRefLinks);
             // childNodes[3] - вебмастер
-            let reflink = offerRefLinks.find(link => link.childNodes[3].textContent == `веб-мастер: ${data.webmaster}`);
+            let reflink = offerRefLinks.find(
+                (link) =>
+                    link.childNodes[3].textContent ==
+                    `веб-мастер: ${data.webmaster}`
+            );
             reflink.remove();
-        } else if (data.type == 'DELETE_OFFER' || data.type == 'UNVISIBLE_OFFER') {
+        } else if (
+            data.type == "DELETE_OFFER" ||
+            data.type == "UNVISIBLE_OFFER"
+        ) {
             // удаление реф.ссылок на оффер
-            document.querySelectorAll(`article[data-id='${data.id}']`).forEach(ref => ref.remove());
+            document
+                .querySelectorAll(`article[data-id='${data.id}']`)
+                .forEach((ref) => ref.remove());
         }
     }
 

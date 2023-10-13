@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use App\Models\UserRole;
 use App\Models\User;
+use App\Models\UserRole;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -15,8 +15,8 @@ class UserController extends Controller
     {
         return view(
             'pages/users',
-            [ 'roles' => UserRole::orderBy('name', 'desc')->get()->toArray(),
-                'users' => User::where('name', '!=', 'admin')->get()
+            ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(),
+                'users' => User::where('name', '!=', 'admin')->get(),
             ],
         );
     }
@@ -44,11 +44,11 @@ class UserController extends Controller
 
         if ($userSaved) {
             return ['result' => 1,
-                    'row' => ['id'=>$user->id, 'name'=>$user->name, 'email'=>$user->email, 'role'=> $user->role->name]
+                    'row' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $user->role->name],
                 ];
         } else {
             return ['result' => 0,
-                    'description' => 'Серверная ошибка сохранения пользователя'
+                    'description' => 'Серверная ошибка сохранения пользователя',
                 ];
         }
     }
@@ -67,6 +67,7 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->status = $status === 'true' ? 1 : 0;
+
         return $user->save();
     }
 
@@ -82,6 +83,7 @@ class UserController extends Controller
         // проверка наличия записи в БД
         if (Auth::attempt(['email' => $credentials['email'], 'password' => $credentials['password'], 'status' => 1])) {
             $request->session()->regenerate();
+
             return redirect()->intended('dashboard');
         }
 

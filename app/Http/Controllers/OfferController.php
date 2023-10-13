@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Advertiser;
 use App\Models\Offer;
 use App\Models\OfferTheme;
 use App\Services\WebsocketService;
+use Illuminate\Http\Request;
 
 class OfferController extends Controller
 {
@@ -31,7 +31,7 @@ class OfferController extends Controller
                 // добавление оффера
                 return [
                     'result' => $this->add($data, $advertiserObj->first()->value('id')),
-                    'offerName' => $data['name']
+                    'offerName' => $data['name'],
                 ];
             } else {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
@@ -47,7 +47,7 @@ class OfferController extends Controller
         if (mb_stripos($url, '?')) {
             $url = mb_substr($url, 0, mb_stripos($url, '?'));
         }
-        $offer->URL =  $url;
+        $offer->URL = $url;
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
         $offer->advertiser_id = $advertiserId;
@@ -55,11 +55,11 @@ class OfferController extends Controller
         $iAdded = $offer->save();
         if ($iAdded) {
             // отправка в вебсокет информации о новом оффере
-            $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+            $commission = round((100 - SystemOptionController::commission()) / 100, 2);
             $offerData = [
                 'type' => 'NEW_OFFER',
                 'offer_name' => $offer->name,
-                'offer_income' => $offer->price*$commission,
+                'offer_income' => $offer->price * $commission,
                 'offer_theme' => $offer->theme->name,
                 'offer_id' => $offer->id,
             ];
@@ -75,7 +75,7 @@ class OfferController extends Controller
     {
         if (Offer::find($id)->delete()) {
             // отправка сообщения вебсокету об удаленном оффере
-            WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
+            WebsocketService::send(['type' => 'DELETE_OFFER', 'id' => $id]);
 
             return ['result' => 1];
         } else {
@@ -99,16 +99,16 @@ class OfferController extends Controller
                 $webmasters = [];
                 foreach ($subscriptions as $subscription) {
                     $webmasters[] = [
-                        'name'=>$subscription->follower->user->name,
-                        'refcode'=>$subscription->refcode
+                        'name' => $subscription->follower->user->name,
+                        'refcode' => $subscription->refcode,
                     ];
                 }
                 // отправка в вебсокет информации о новом оффере
-                $commission = round(((100 - SystemOptionController::commission()) / 100), 2);
+                $commission = round((100 - SystemOptionController::commission()) / 100, 2);
                 $offerData = [
                     'type' => 'VISIBLE_OFFER',
                     'offer_name' => $offer->name,
-                    'offer_income' => round($offer->price*$commission, 2),
+                    'offer_income' => round($offer->price * $commission, 2),
                     'offer_theme' => $offer->theme->name,
                     'offer_id' => $offer->id,
                     'offer_url' => $offer->url,
@@ -116,7 +116,7 @@ class OfferController extends Controller
                 ];
                 WebsocketService::send($offerData);
             } else {
-                WebsocketService::send(['type'=>'UNVISIBLE_OFFER', 'id' => $id]);
+                WebsocketService::send(['type' => 'UNVISIBLE_OFFER', 'id' => $id]);
             }
         }
 

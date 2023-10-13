@@ -21,7 +21,7 @@ class OfferStatistics
             'lastDay' => $lastDay,
             'lastMonth' => $lastMonth,
             'lastYear' => $lastYear,
-            'allTime' => $allTime
+            'allTime' => $allTime,
         ];
 
         // статистика офферов
@@ -29,6 +29,7 @@ class OfferStatistics
         $data['offersLastDay'] = $this->getOfferData($user, $lastDay);
         $data['offersLastMonth'] = $this->getOfferData($user, $lastMonth);
         $data['offersLastYear'] = $this->getOfferData($user, $lastYear);
+
         return $data;
     }
 
@@ -54,7 +55,7 @@ class OfferStatistics
 
                 $totalClicks += $clicks;
                 $totalMoney += $money;
-                $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
+                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clicks, 'money' => $money];
             }
             // веб-мастер
         } elseif ($user->role->name === 'веб-мастер') {
@@ -78,16 +79,16 @@ class OfferStatistics
 
                 $totalClicks += $clickCount;
                 $totalMoney += $income;
-                $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clickCount, 'money'=>$income];
+                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $income];
             }
         } else {
             return null;
         }
 
         return [
-            'offers'=>$advertiserOffers,
-            'totalClicks'=>$totalClicks,
-            'totalMoney'=>$totalMoney
+            'offers' => $advertiserOffers,
+            'totalClicks' => $totalClicks,
+            'totalMoney' => $totalMoney,
         ];
     }
 
@@ -100,6 +101,7 @@ class OfferStatistics
         if (!is_null($period)) {
             $date->modify($period);
         }
+
         return $date->format('Y-m-d H:i:s');
     }
 }

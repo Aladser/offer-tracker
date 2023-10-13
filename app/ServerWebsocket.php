@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Exception;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
@@ -13,7 +12,7 @@ class ServerWebsocket implements MessageComponentInterface
 
     public function __construct()
     {
-        $this->clients = new \SplObjectStorage;
+        $this->clients = new \SplObjectStorage();
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -41,7 +40,7 @@ class ServerWebsocket implements MessageComponentInterface
         echo "Получено сообщение: $msg\n";
     }
 
-    public function onError(ConnectionInterface $conn, Exception $e)
+    public function onError(ConnectionInterface $conn, \Exception $e)
     {
         echo "Ошибка: {$e->getMessage()}\n";
         $conn->close();

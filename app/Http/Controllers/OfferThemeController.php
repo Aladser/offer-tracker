@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\OfferTheme;
+use Illuminate\Http\Request;
 
 class OfferThemeController extends Controller
 {
@@ -24,11 +24,11 @@ class OfferThemeController extends Controller
 
             if ($themeSaved) {
                 return ['result' => 1,
-                        'row' => ['id'=>$theme->id, 'name'=>$theme->name]
+                        'row' => ['id' => $theme->id, 'name' => $theme->name],
                     ];
             } else {
                 return ['result' => 0,
-                        'description' => 'Серверная ошибка сохранения пользователя'
+                        'description' => 'Серверная ошибка сохранения пользователя',
                     ];
             }
         }

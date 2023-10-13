@@ -1,10 +1,16 @@
 /** таблица тем */
-const offerThemeTable = document.querySelector('#table-themes');
+const offerThemeTable = document.querySelector("#table-themes");
 /** поле результата добавления */
-const msgPrg = document.querySelector('#form-add-error');
+const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
-const addThemeForm = document.querySelector('#form-add-theme');
+const addThemeForm = document.querySelector("#form-add-theme");
 /** CSRF */
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** фрон-контроллер таблицы тем */
-const offerThemeTableController = new OfferThemeTableClientController('/offer-theme', offerThemeTable, msgPrg, addThemeForm, csrfToken);
+const offerThemeTableController = new OfferThemeTableClientController(
+    "/offer-theme",
+    offerThemeTable,
+    msgPrg,
+    addThemeForm,
+    csrfToken
+);

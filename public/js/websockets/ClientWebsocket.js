@@ -1,16 +1,15 @@
 /** базовый класс клиентского вебсокета */
-class ClientWebsocket
-{
+class ClientWebsocket {
     constructor(url, username) {
         this.websocket = new WebSocket(url);
-        this.websocket.onerror = e => this.onError(e);
-        this.websocket.onmessage = e => this.onMessage(e);
-        this.websocket.onopen = e => this.onOpen(e);
+        this.websocket.onerror = (e) => this.onError(e);
+        this.websocket.onmessage = (e) => this.onMessage(e);
+        this.websocket.onopen = (e) => this.onOpen(e);
         this.username = username;
     }
 
     // получение ошибок вебсокета
-    onError (e) {
+    onError(e) {
         alert(`ошибка вебсокета ${e}`);
     }
 
@@ -26,7 +25,5 @@ class ClientWebsocket
         this.websocket.send(JSON.stringify(data));
     }
 
-    onOpen(e) {
-        
-    }
+    onOpen(e) {}
 }

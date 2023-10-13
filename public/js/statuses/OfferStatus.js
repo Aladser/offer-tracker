@@ -1,5 +1,4 @@
-class OfferStatus extends Status
-{
+class OfferStatus extends Status {
     process(data, element) {
         if (!data.result) {
             this.errorPrg.textContent = "серверная ошибка изменения статуса";

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\SystemOption;
+use Illuminate\Http\Request;
 
 class SystemOptionController extends Controller
 {
@@ -11,6 +11,7 @@ class SystemOptionController extends Controller
     {
         $commission = $request->all()['commission'];
         $isStored = SystemOption::where('name', 'commission')->update(['value' => $commission]);
+
         return ['result' => $isStored];
     }
 

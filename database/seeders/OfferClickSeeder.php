@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Services\OfferStatistics;
 use App\Models\OfferClick;
+use App\Services\OfferStatistics;
+use Illuminate\Database\Seeder;
 
 class OfferClickSeeder extends Seeder
 {

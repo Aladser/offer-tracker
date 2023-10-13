@@ -9,7 +9,7 @@
 .table-users__tr:hover,
 .table-users__tr--active {
     background-color: #ddd;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #table-users__btn-remove {

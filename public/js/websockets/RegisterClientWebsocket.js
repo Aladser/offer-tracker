@@ -1,15 +1,14 @@
 /** обновление статистики админа */
-class RegisterClientWebsocket extends ClientWebsocket
-{
+class RegisterClientWebsocket extends ClientWebsocket {
     constructor(url, username) {
         super(url, username);
 
-        this.userTable = document.querySelector('#table-users');
+        this.userTable = document.querySelector("#table-users");
     }
 
     onMessage(e) {
         let data = JSON.parse(e.data);
-        if (data.type === 'REGISTER') {
+        if (data.type === "REGISTER") {
             // добавление в tbody таблицы нового пользователя
             this.userTable.childNodes[1].innerHTML += `<tr class="table-users__tr position-relative" data-id="${data.id}"> 
                 <td>${data.name}</td>

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\FailedOfferClick;
 
 /** контроллер по отказанным реферальным ссылкам */

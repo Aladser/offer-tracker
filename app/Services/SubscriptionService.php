@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use App\Models\OfferSubscription;
+use Illuminate\Http\Request;
 
 /** Управление подписками веб-мастеров на офферы */
 class SubscriptionService
@@ -70,6 +70,7 @@ class SubscriptionService
                 'offer_id' => $offer->id,
             ];
             WebsocketService::send($data);
+
             return ['result' => 1, 'advertiser' => $advertiserName, 'offer' => $offer->id];
         } else {
             return ['result' => 0];
