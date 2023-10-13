@@ -14,7 +14,6 @@ class SubscriptionStatus extends Status
             .then(data => {
                 try {
                     data = JSON.parse(data);
-                    //console.log(data);
                     let result = data.result;
                     // ошибка
                     if (result == 0) {

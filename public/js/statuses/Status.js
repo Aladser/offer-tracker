@@ -1,12 +1,20 @@
 class Status
 {
-    constructor(activeClass, deactiveClass, url) {
+    /** Статус строки 
+     * 
+     * @param {*} activeClass id списка активных элементов
+     * @param {*} deactiveClass id списка неактивных элементов
+     * @param {*} url куда отправлять запрос
+     */
+    constructor(activeClass, deactiveClass, url, prgError) {
         this.activeClass = activeClass;
         this.deactiveClass = deactiveClass;
 
         this.activeList = document.querySelector(`#${activeClass}`);
         this.deactiveList = document.querySelector(`#${deactiveClass}`);
         this.url = url;
+        /** поле ошибок */
+        this.prgError = prgError;
 
         this.activeList.ondragover = e => this.onDragOver(e);
         this.activeList.ondrop = e => this.onDrop(e);
@@ -71,7 +79,7 @@ class Status
                     if (data.includes('<title>Page Expired</title>')) {
                         window.open('/wrong-uri', '_self');
                     } else {
-                        prgError.textContent = err;
+                        this.prgError.textContent = err;
                         console.log(data);
                     }
                 }
