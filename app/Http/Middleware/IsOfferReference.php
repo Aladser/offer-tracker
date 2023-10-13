@@ -26,13 +26,14 @@ class IsOfferReference
               ]);
 
             $refCode = $params['ref'];
-            
+
             // поиск записи с данным реф.кодом
             $subscription = OfferSubscription::where('refcode', $refCode)->first();
-            
+
             if (is_null($subscription)) {
                 // лог
-                Log::stack(['slack', $logChannel])->info("переход по ссылке {$request->path()}?ref=$refCode завершился с ошибкой");
+                Log::stack(['slack', $logChannel])
+                    ->info("переход по ссылке {$request->path()}?ref=$refCode завершился с ошибкой");
                 // записать факт отказа реферальной ссылки в БД
                 FailedOfferClickController::add("{$request->path()}?ref=$refCode");
                 // сообщение вебсокету
@@ -42,7 +43,7 @@ class IsOfferReference
             } else {
                 $webmasterId = $subscription->follower->id;
                 $webmaster = $subscription->follower->user->name;
-                $advertiser = $subscription->offer->advertiser->user->name; 
+                $advertiser = $subscription->offer->advertiser->user->name;
                 $offer = $subscription->offer->id;
                 $offerPrice = $subscription->offer->price;
                 $commission = SystemOptionController::commission();
@@ -65,7 +66,7 @@ class IsOfferReference
                 return redirect($subscription->offer->url);
             }
         }
-        
+
         return $next($request);
     }
 }

@@ -17,7 +17,12 @@ class OfferStatistics
         $lastMonth = OfferStatistics::getDate('-1 month');
         $lastYear = OfferStatistics::getDate('-1 year');
         $allTime = OfferStatistics::getDate();
-        $data['times'] = ['lastDay' => $lastDay, 'lastMonth' => $lastMonth, 'lastYear' => $lastYear, 'allTime' => $allTime];
+        $data['times'] = [
+            'lastDay' => $lastDay,
+            'lastMonth' => $lastMonth,
+            'lastYear' => $lastYear,
+            'allTime' => $allTime
+        ];
 
         // статистика офферов
         $data['offersAllTime'] = $this->getOfferData($user);
@@ -28,7 +33,7 @@ class OfferStatistics
     }
 
     /** получить данные офферов рекламодателя или веб-мастера */
-    public function getOfferData(User $user, $date = null) 
+    public function getOfferData(User $user, $date = null)
     {
         $totalClicks = 0;
         $totalMoney = 0;
@@ -51,8 +56,8 @@ class OfferStatistics
                 $totalMoney += $money;
                 $advertiserOffers[] = ['id'=>$offer->id, 'name'=>$offer->name, 'clicks'=>$clicks, 'money'=>$money];
             }
-        // веб-мастер
-        } else if ($user->role->name === 'веб-мастер'){
+            // веб-мастер
+        } elseif ($user->role->name === 'веб-мастер') {
             $subscriptions = $user->webmaster->subscriptions;
             foreach ($subscriptions as $subscription) {
                 $offer = $subscription->offer;
@@ -60,14 +65,16 @@ class OfferStatistics
                 if (is_null($date)) {
                     $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id);
                 } else {
-                    $clicks = $offer->clicks->where('webmaster_id', $user->webmaster->id)->where('created_at', '>', $date);
+                    $clicks = $offer->clicks
+                        ->where('webmaster_id', $user->webmaster->id)
+                        ->where('created_at', '>', $date);
                 }
                 $clickCount = $clicks->count();
 
                 $income = 0;
                 foreach ($clicks as $click) {
                     $income += $click->income_part * $offer->price;
-                } 
+                }
 
                 $totalClicks += $clickCount;
                 $totalMoney += $income;
@@ -78,8 +85,8 @@ class OfferStatistics
         }
 
         return [
-            'offers'=>$advertiserOffers, 
-            'totalClicks'=>$totalClicks, 
+            'offers'=>$advertiserOffers,
+            'totalClicks'=>$totalClicks,
             'totalMoney'=>$totalMoney
         ];
     }

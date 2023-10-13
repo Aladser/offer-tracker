@@ -25,11 +25,14 @@ class OfferController extends Controller
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
             // поиск рекламодателя
-            $extendedAdvertisers = Advertiser::join('users', 'users.id','=','advertisers.user_id');
+            $extendedAdvertisers = Advertiser::join('users', 'users.id', '=', 'advertisers.user_id');
             $advertiserObj = $extendedAdvertisers->where('name', $data['user']);
             if ($advertiserObj->exists()) {
                 // добавление оффера
-                return ['result' => $this->add($data, $advertiserObj->first()->value('id')), 'offerName' => $data['name']];
+                return [
+                    'result' => $this->add($data, $advertiserObj->first()->value('id')),
+                    'offerName' => $data['name']
+                ];
             } else {
                 return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
             }
@@ -63,15 +66,15 @@ class OfferController extends Controller
             WebsocketService::send($offerData);
 
             return 1;
-        }  else {
+        } else {
             return 0;
         }
     }
-    
+
     public function destroy($id)
     {
         if (Offer::find($id)->delete()) {
-            // отправка сообщения вебсокету об удаленном оффере 
+            // отправка сообщения вебсокету об удаленном оффере
             WebsocketService::send(['type'=>'DELETE_OFFER', 'id' => $id]);
 
             return ['result' => 1];
@@ -87,16 +90,16 @@ class OfferController extends Controller
         $offer = Offer::find($id);
         $offer->status = $request->all()['status'];
         $isChanged = $offer->save();
-        
+
         // сообщение вебсокету
         if ($isChanged) {
             if ($offer->status == 1) {
-                // список подписчиков оффера 
+                // список подписчиков оффера
                 $subscriptions = $offer->links;
                 $webmasters = [];
                 foreach ($subscriptions as $subscription) {
                     $webmasters[] = [
-                        'name'=>$subscription->follower->user->name, 
+                        'name'=>$subscription->follower->user->name,
                         'refcode'=>$subscription->refcode
                     ];
                 }

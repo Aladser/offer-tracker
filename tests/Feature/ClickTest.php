@@ -57,7 +57,7 @@ class ClickTest extends TestCase
             foreach ($clicks as $click) {
                 $income += $click->income_part * $offer->price;
             }
-            
+
             $totalClicks += $clickCount;
             $totalMoney += $income;
             echo " name:{$offer->name} clicks:{$clickCount} money:{$income}\n";
@@ -69,11 +69,11 @@ class ClickTest extends TestCase
 
     public function testCommissions()
     {
-        //select name, income_part, price, (1-income_part) * price as commission from offer_clicks join offers on offers.id = offer_clicks.offer_id ;
         $this->seedTest();
 
-        $extendedClicks = OfferClick::join('offers','offers.id','=','offer_clicks.offer_id');
-        $table = $extendedClicks->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'));
+        $extendedClicks = OfferClick::join('offers', 'offers.id', '=', 'offer_clicks.offer_id');
+        $table = $extendedClicks
+            ->select('price', DB::raw('1-income_part as commission'), DB::raw('(1-income_part) * price as money'));
 
         echo "\nКомиссии\n";
         foreach ($table->get()->toArray() as $click) {

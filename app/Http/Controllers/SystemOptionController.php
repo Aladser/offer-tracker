@@ -7,13 +7,13 @@ use App\Models\SystemOption;
 
 class SystemOptionController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): array
     {
         $commission = $request->all()['commission'];
-        $rslt = SystemOption::where('name', 'commission')->update(['value' => $commission]);
-        return ['result' => $rslt];
+        $isStored = SystemOption::where('name', 'commission')->update(['value' => $commission]);
+        return ['result' => $isStored];
     }
-    
+
     public static function commission()
     {
         return SystemOption::where('name', 'commission')->value('value');

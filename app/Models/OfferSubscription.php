@@ -13,7 +13,7 @@ class OfferSubscription extends Model
     protected $fillable = [
         'follower_id',
     ];
-    
+
     public function offer()
     {
         return $this->belongsTo(Offer::class, 'offer_id', 'id');

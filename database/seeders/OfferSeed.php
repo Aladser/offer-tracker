@@ -32,43 +32,43 @@ class OfferSeed extends Seeder
             'price' => random_int(10, 50)
         ]);
         Offer::create([
-            'name'=>'Laravel 10', 
+            'name'=>'Laravel 10',
             'url' => 'https://laravel.com/docs/10.x',
-            'theme_id'=>1, 
-            'advertiser_id' => 1, 
-            'price' => random_int(10, 50), 
+            'theme_id'=>1,
+            'advertiser_id' => 1,
+            'price' => random_int(10, 50),
             'status' => 1
         ]);
         Offer::create([
-            'name'=>'БЭМ', 
+            'name'=>'БЭМ',
             'url' => 'https://ru.bem.info/methodology/quick-start/',
-            'theme_id'=>2, 
-            'advertiser_id' => 1, 
+            'theme_id'=>2,
+            'advertiser_id' => 1,
             'price' => random_int(10, 50),
             'status' => 0
         ]);
         Offer::create([
             'name'=>'Boostrap',
             'url' => 'https://bootstrap-4.ru/docs/5.3/getting-started/introduction/',
-            'theme_id'=>2, 
-            'advertiser_id' => 2, 
-            'price' => random_int(10, 50), 
+            'theme_id'=>2,
+            'advertiser_id' => 2,
+            'price' => random_int(10, 50),
             'status' => 1
         ]);
         Offer::create([
-            'name'=>'Яндекс', 
+            'name'=>'Яндекс',
             'url' => 'https://ya.ru/',
-            'theme_id'=>1, 
-            'advertiser_id' => 2, 
-            'price' => random_int(10, 50), 
+            'theme_id'=>1,
+            'advertiser_id' => 2,
+            'price' => random_int(10, 50),
             'status' => 0
         ]);
         Offer::create([
-            'name'=>'Google', 
+            'name'=>'Google',
             'url' => 'https://www.google.com/?hl=RU',
-            'theme_id'=>1, 
-            'advertiser_id' => 3, 
-            'price' => random_int(10, 50), 
+            'theme_id'=>1,
+            'advertiser_id' => 3,
+            'price' => random_int(10, 50),
             'status' => 1
         ]);
     }

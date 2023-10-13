@@ -16,14 +16,14 @@ require __DIR__.'/auth.php';
 
 
 // страница реферальных ссылок
-Route::get('/', function() {
-        $subscriptions = OfferSubscription::join('offers','offer_subscriptions.offer_id', '=', 'offers.id')
-            ->where('status','1')->get();
-        return view(
-            'welcome', 
-            ['subscriptions' => $subscriptions, 'user' => Auth::user()]
-        );
-    })->name('main');
+Route::get('/', function () {
+    $subscriptions = OfferSubscription::join('offers', 'offer_subscriptions.offer_id', '=', 'offers.id')
+        ->where('status', '1')->get();
+    return view(
+        'welcome',
+        ['subscriptions' => $subscriptions, 'user' => Auth::user()]
+    );
+})->name('main');
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth'])->name('dashboard');
@@ -31,9 +31,9 @@ Route::get('/dashboard', DashboardController::class)
 Route::get('/offer/statistics', [StatisticController::class, 'index'])
     ->middleware(['auth', 'statistics'])->name('offer.statistics');
 // подмена csrf
-Route::get('/wrong-uri', fn() => view('wrongcsrf'));
+Route::get('/wrong-uri', fn () => view('wrongcsrf'));
 // выключен JS
-Route::get('/noscript', fn() => view('noscript'));
+Route::get('/noscript', fn () => view('noscript'));
 
 
 // пользователи

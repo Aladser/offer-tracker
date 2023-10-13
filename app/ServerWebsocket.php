@@ -11,7 +11,8 @@ class ServerWebsocket implements MessageComponentInterface
 {
     private \SplObjectStorage $clients;           // хранение всех подключенных пользователей
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->clients = new \SplObjectStorage;
     }
 
