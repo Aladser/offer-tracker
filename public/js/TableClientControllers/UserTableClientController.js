@@ -1,6 +1,6 @@
 /** Фронт-контроллер таблицы пользователей */
 class UserTableClientController extends TableClientController {
-    /** добавить строку в таблицу
+    /** создвть строку пользователя в таблице
      * @param {*} form форма добавления
      * @param {*} data данные из БД
      */

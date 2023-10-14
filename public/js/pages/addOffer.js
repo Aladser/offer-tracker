@@ -1,5 +1,3 @@
-/** URL */
-const offerURL = "/offer";
 /** поле результата добавления */
 const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
@@ -10,10 +8,9 @@ const csrfToken = document.querySelector('meta[name="csrf-token"]');
 const username = document.querySelector("#navpanel-username").textContent;
 /** фронт-контроллер офферов */
 const offerTableController = new OfferTableClientController(
-    offerURL,
+    "/offer",
     null,
     msgPrg,
     addOfferForm,
-    csrfToken,
     username
 );

@@ -10,6 +10,7 @@
     @section('js')
         <script src="/js/statuses/Status.js" defer></script>
         <script src="/js/statuses/OfferStatus.js" defer></script>
+        <script src="/js/TableClientControllers/TableClientController.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/AdvertiserClientWebsocket.js" defer></script>
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
@@ -40,26 +41,27 @@
                     <article class='w-100 h-100 table-items' id='active-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 1)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer active-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer position-relative active-offers__item' draggable='true'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
+                                <button class='position-absolute bottom-0 right-0 m-1 active-offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach
                     </article>
                 </article>
-
                 <!-- выключенные офферы -->
                 <article class='w-50 d-inline-block m-0 p-3'>
                     <h4 class='h4 fw-bolder'>Выключены</h4>
                     <article class='w-100 h-100 table-items'  id='deactive-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 0)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light deactive-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light position-relative deactive-offers__item' draggable='true'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
+                                <button class='position-absolute bottom-0 right-0 m-1 deactive-offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach

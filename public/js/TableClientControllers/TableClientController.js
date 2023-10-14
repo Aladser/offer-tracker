@@ -7,12 +7,12 @@ class TableClientController {
      * @param {*} form форма добавления элемента
      * @param {*} csrfToken csrf-токен
      */
-    constructor(URL, table, msgElement, form, csrfToken) {
+    constructor(URL, table, msgElement, form) {
         this.URL = URL;
         this.table = table;
         this.msgElement = msgElement;
         this.form = form;
-        this.csrfToken = csrfToken;
+        this.csrfToken = document.querySelector('meta[name="csrf-token"]');
 
         // таблица
         if (this.table !== null) {

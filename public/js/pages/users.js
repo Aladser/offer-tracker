@@ -12,7 +12,6 @@ const userService = new UserTableClientController(
     userTable,
     msgPrg,
     addUserForm,
-    csrfToken
 );
 /** кнопка отправки формы добавления пользователя */
 const addUserButton = document.querySelector("#form-add-user__btn-submit");

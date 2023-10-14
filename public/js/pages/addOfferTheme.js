@@ -12,5 +12,4 @@ const offerThemeTableController = new OfferThemeTableClientController(
     offerThemeTable,
     msgPrg,
     addThemeForm,
-    csrfToken
 );

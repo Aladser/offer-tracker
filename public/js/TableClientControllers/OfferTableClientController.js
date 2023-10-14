@@ -1,7 +1,16 @@
-/** контроллер офферов */
+/** Контроллер офферов */
 class OfferTableClientController extends TableClientController {
-    constructor(URL, offerTable, msgPrg, addOfferForm, csrfToken, username) {
-        super(URL, offerTable, msgPrg, addOfferForm, csrfToken);
+    /**
+     * 
+     * @param {*} URL адрес запросов к серверу
+     * @param {*} offerTable таблица офферов
+     * @param {*} msgPrg информационное поле
+     * @param {*} addOfferForm форма добавления нового элемента
+     * @param {*} csrfToken csrf-токен
+     * @param {*} username имя пользователя
+     */
+    constructor(URL, offerTable, msgPrg, addOfferForm, username) {
+        super(URL, offerTable, msgPrg, addOfferForm);
         this.username = username;
 
         if (this.form !== null) {
