@@ -3,11 +3,3 @@
     background-color: #ddd;
     cursor: default;
 }
-
-/* показ кнопки Удалить при наведении */
-.offers__btn-remove {
-    display: none;
-}
-.offers__item:hover .offers__btn-remove {
-    display: block;
-}
