@@ -11,6 +11,7 @@
         <script src="/js/statuses/Status.js" defer></script>
         <script src="/js/statuses/OfferStatus.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>
+        <script src="/js/TableClientControllers/OfferTableClientController.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/AdvertiserClientWebsocket.js" defer></script>
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
@@ -34,18 +35,18 @@
             <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>
             <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
 
-            <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center">
+            <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center offers">
                 <!-- включенные офферы -->
                 <article class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>
                     <h4 class='h4 fw-bolder'>Включены</h4>
                     <article class='w-100 h-100 table-items' id='active-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 1)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer position-relative offer active-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer position-relative offers__item active-offers__item' draggable='true'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 offer__btn-remove' title='Удалить'>🗑</button>
+                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach
@@ -57,11 +58,11 @@
                     <article class='w-100 h-100 table-items'  id='deactive-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 0)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light position-relative offer deactive-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light position-relative offers__item deactive-offers__item' draggable='true'>
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 offer__btn-remove' title='Удалить'>🗑</button>
+                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach

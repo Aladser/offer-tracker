@@ -61,7 +61,7 @@
                     <th>Роль</th> 
                 </tr>
                 @foreach ($users as $user)
-                <tr class='table-users__tr position-relative' data-id="{{$user->id}}"> 
+                <tr class='table-users__tr position-relative' id="{{$user->id}}"> 
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td class='p-0'>

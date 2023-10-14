@@ -8,7 +8,7 @@ class UserTableClientController extends TableClientController {
         form.reset();
         this.table.querySelector(
             "tbody"
-        ).innerHTML += `<tr data-id="${data.row.id}" class='table-users__tr position-relative'>
+        ).innerHTML += `<tr id="${data.row.id}" class='table-users__tr position-relative'>
           <td>${data.row.name}</td>
           <td>${data.row.email}</td>
           <td class="p-0">

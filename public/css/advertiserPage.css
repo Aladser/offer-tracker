@@ -4,10 +4,10 @@
     cursor: default;
 }
 
-/* показ кнопки удалить при наведении */
-.offer__btn-remove {
+/* показ кнопки Удалить при наведении */
+.offers__btn-remove {
     display: none;
 }
-.offer:hover .offer__btn-remove {
+.offers__item:hover .offers__btn-remove {
     display: block;
 }

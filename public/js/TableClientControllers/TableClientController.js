@@ -62,14 +62,12 @@ class TableClientController {
             });
     }
 
-    remove(button) {
-        let row = button.closest("tr");
-        let id = row.getAttribute("data-id");
+    remove(row) {
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
 
-        fetch(`${this.URL}/${id}`, { method: "delete", headers: headers })
+        fetch(`${this.URL}/${row.id}`, { method: "delete", headers: headers })
             .then((response) => response.text())
             .then((data) => {
                 try {
@@ -107,7 +105,7 @@ class TableClientController {
             }
             // выделение строки
             row.innerHTML += `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`;
-            row.lastChild.onclick = (e) => this.remove(e.target);
+            row.lastChild.onclick = (e) => this.remove(e.target.closest("tr"));
             row.classList.add(`${this.table.id}__tr--active`);
         }
     }
