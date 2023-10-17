@@ -11,14 +11,6 @@ const subscriptionStatus = new OfferStatus(
     "/offer/status"
 );
 
-/** вебсокет страницы рекламодателя */
-const advertiserClientWebsocket = new AdvertiserClientWebsocket(
-    "ws://localhost:8888",
-    user,
-    document.querySelector("#active-offers"),
-    subscriptionStatus
-);
-
 /** клиентский контроллер таблицы */
 const offerTableController = new OfferTableClientController(
     "/offer",
@@ -43,7 +35,6 @@ offersItems.forEach((item) => {
     };
     /** нажатие мыши на оффер */
     item.onmousedown = () => {
-        let btn = item.querySelector(".offers__btn-remove");
-        setTimeout(() => btn.classList.remove("d-none"), 400);
+        item.querySelector(".offers__btn-remove").classList.add("d-none");
     };
 });

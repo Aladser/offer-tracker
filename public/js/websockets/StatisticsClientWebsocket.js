@@ -27,8 +27,7 @@ class StatisticsClientWebsocket extends ClientWebsocket {
                 `tr[data-id="${data.offer}"] td`
             );
             // таблица => (последняя-2) строка - строка итогов => ячейки строки
-            let lastRow =
-                table.childNodes[1].childNodes[rowCount - 2].childNodes;
+            let lastRow = table.childNodes[1].childNodes[rowCount - 2].childNodes;
             rows.push({
                 clickCell: cells[1], // ячейка числа переходов оффера
                 moneyCell: cells[2], // ячейка денежной суммы оффера
