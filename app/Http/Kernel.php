@@ -21,7 +21,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \App\Http\Middleware\IsOfferReference::class,
         \App\Http\Middleware\IsActiveWebsocket::class,
     ];
 
@@ -68,5 +67,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Roles\IsAdmin::class,
         'advertiser' => \App\Http\Middleware\Roles\IsAdvertiser::class,
         'statistics' => \App\Http\Middleware\Roles\IsStatisticsPage::class,
+        'ref' => \App\Http\Middleware\IsOfferReference::class,
     ];
 }

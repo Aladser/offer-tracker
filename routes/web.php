@@ -23,7 +23,8 @@ Route::get('/', function () {
         'welcome',
         ['subscriptions' => $subscriptions, 'user' => Auth::user()]
     );
-})->name('main');
+})->middleware(['ref'])->name('main');
+
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth'])->name('dashboard');
