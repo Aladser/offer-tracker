@@ -17,3 +17,20 @@
     top: 0;
     right: 0;
 }
+
+@media(max-width:1430px) {
+    #table-users {
+        font-size: 1rem;
+    }
+    #form-add-user {
+        font-size: 1rem;
+    }
+    .header-new-user {
+        font-size: 1.5rem;
+    }
+}
+@media(max-width:580px) {
+    #table-users {
+        font-size: 0.8rem;
+    }
+}
