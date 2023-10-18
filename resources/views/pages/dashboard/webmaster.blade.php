@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title>Профиль вебмастера</x-title>
+        <x-title>Панель вебмастера</x-title>
     @endsection
 
 
@@ -18,7 +18,7 @@
 
     <section class='mx-auto section-content'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Профиль вебмастера</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель вебмастера</h2>
         </x-slot>
 
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">

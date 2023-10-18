@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        <x-title>Профиль администратора</x-title>
+        <x-title>Панель администратора</x-title>
     @endsection
 
     @section('css')
@@ -16,7 +16,7 @@
 
     <section class='mx-auto section-content'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Профиль администратора</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель администратора</h2>
         </x-slot>
         
         <section class="p-6 bg-white border-b border-gray-200 text-center mt-4">
