@@ -17,7 +17,7 @@
         <script src="/js/pages/dashboard/advertiser.js" defer></script>
     @endsection
 
-    <section class='w-50 mx-auto'>
+    <section class='mx-auto section-content'>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>

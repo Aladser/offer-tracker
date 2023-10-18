@@ -11,6 +11,15 @@
     border: 1px solid #666;
 }
 
+.section-content {
+    width: 50%;
+}
+@media(max-width: 1100px) {
+    .section-content {
+        width: 90%;
+    }
+}
+
 /*
 ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com
 */ /*
