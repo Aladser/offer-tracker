@@ -25,8 +25,8 @@
             <h3 class='fw-bold w-50 mx-auto'>Добавить новую тему</h3>
             <form action='/' method='post' id='form-add-theme' class='text-center mt-4 w-75 mx-auto'>
                 @csrf
-                <label for="offer-new__name" class='fw-bolder w-50 text-start ps-2'>Название:</label><br>
-                <input type="text" name="name" class='w-50 mb-2 border' id="offer-new__name" required><br>
+                <label for="offer-new__name" class='fw-bolder w-75 text-center ps-2'>Название:</label><br>
+                <input type="text" name="name" class='w-75 mb-4 border' id="offer-new__name" required><br>
                 <input type="submit" class='btn btn-outline-dark' value='Добавить'>
             </form>
             <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
