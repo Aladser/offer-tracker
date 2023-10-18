@@ -4,15 +4,18 @@ namespace App;
 
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
+use App\Http\Controllers\OfferController;
 
 /** Чат - серверная часть */
 class ServerWebsocket implements MessageComponentInterface
 {
     private \SplObjectStorage $clients;           // хранение всех подключенных пользователей
+    private OfferController $offerCtl;
 
     public function __construct()
     {
         $this->clients = new \SplObjectStorage();
+        $this->offerCtl = new OfferController();
     }
 
     public function onOpen(ConnectionInterface $conn)
@@ -31,13 +34,17 @@ class ServerWebsocket implements MessageComponentInterface
     {
         $data = json_decode($msg);
 
+        if ($data->type === 'ADD_NEW_OFFER') {
+            var_dump($this->offerCtl->store($data));
+        } else {
+            echo "Получено сообщение: $msg\n";
+        }
+
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 $client->send($msg);
             }
         }
-
-        echo "Получено сообщение: $msg\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e)

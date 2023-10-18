@@ -43,6 +43,15 @@ class OfferTableClientController extends TableClientController {
         let formData = new FormData(this.form);
         formData.append("user", this.username);
 
+        this.websocket.sendData({
+            type:'ADD_NEW_OFFER',
+            name: this.form.name.value,
+            price: this.form.price.value,
+            url: this.form.url.value,
+            theme: this.form.theme.value,
+        });
+
+        /*
         fetch(this.URL, { method: "post", body: formData })
             .then((response) => response.text())
             .then((data) => {
@@ -63,5 +72,6 @@ class OfferTableClientController extends TableClientController {
                     }
                 }
             });
+        */
     }
 }

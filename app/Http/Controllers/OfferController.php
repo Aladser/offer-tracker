@@ -7,34 +7,52 @@ use App\Models\Offer;
 use App\Models\OfferTheme;
 use App\Services\WebsocketService;
 use Illuminate\Http\Request;
+use App\DBQueryClass;
 
 class OfferController extends Controller
 {
+    private $dbQuery;
+
+    public function __construct(Type $var = null) {
+        $this->dbQuery = new DBQueryClass(env('DB_HOST'), env('DB_DATABASE'), env('DB_USERNAME'), env('DB_PASSWORD'));
+    }
+
     /** Показать форму создания нового оффера */
     public function create()
     {
         return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
-    /** Сохраните оффер в БД */
-    public function store(Request $request)
+    /** Сохраните оффер в БД 
+     * Для простоты реалзиации кода реализую через собственный класс запросов в БД, так как через бродкаст нужно много настраивать
+    */
+    public function store($data)
     {
-        $data = $request->all();
+        $isOffer = $this->dbQuery->queryPrepared('select * from offers where name = :name', ['name' => $data->name]);
         // поиск имени оффера
-        if (Offer::where('name', $data['name'])->exists()) {
+        if ($isOffer) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
-            // поиск рекламодателя
-            $extendedAdvertisers = Advertiser::join('users', 'users.id', '=', 'advertisers.user_id');
-            $advertiserObj = $extendedAdvertisers->where('name', $data['user']);
-            if ($advertiserObj->exists()) {
-                // добавление оффера
+            $advertiser = $this->dbQuery->queryPrepared(
+                'select advertisers.id as id from advertisers join users on advertisers.user_id = users.id where name = :name',
+                ['name' => $data->user]
+            );
+            // добавление оффера, если существует рекламодатель
+            if ($advertiser) {
+                $url = $data['url'];
+                if (mb_stripos($url, '?')) {
+                    $url = mb_substr($url, 0, mb_stripos($url, '?'));
+                }
+                $advertiserId = 
+
                 return [
-                    'result' => $this->add($data, $advertiserObj->first()->value('id')),
-                    'offerName' => $data['name'],
+                    'result' => 
+                        $this->dbQuery->executeProcedure("insert into offers(name, URL, price, theme_id, advertiser_id) ".
+                        "values($data->name, $url, $data->price, $theme_id)"),
+                    'offerName' => $data->name,
                 ];
             } else {
-                return ['result' => 0, 'error' => "Пользователь {$data['user']} не существует"];
+                return ['result' => 0, 'error' => "Рекламодатель $data->user не существует"];
             }
         }
     }
