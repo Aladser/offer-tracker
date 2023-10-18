@@ -33,8 +33,4 @@ offersItems.forEach((item) => {
         let btn = item.querySelector(".offers__btn-remove");
         setTimeout(() => btn.classList.add("d-none"), 400);
     };
-    /** нажатие мыши на оффер */
-    item.onmousedown = () => {
-        item.querySelector(".offers__btn-remove").classList.add("d-none");
-    };
 });

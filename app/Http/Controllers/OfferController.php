@@ -31,13 +31,12 @@ class OfferController extends Controller
         $isOffer = $this->dbQuery->query("select * from offers where name = '$data->name'");
         // поиск имени оффера
         if ($isOffer) {
-            $description = "$data->name: название оффера уже занято";
             WebsocketService::send([
                 'type' => 'ADDED_NEW_OFFER', 
                 'result' => 0, 
-                'description' => $description
+                'description' => "$data->name: название оффера уже занято"
             ]);
-            return $description;
+            return "$data->name: already exists";
         } else {
             $advertiser = $this->dbQuery->query(
                 "select advertisers.id as id from advertisers join users on advertisers.user_id = users.id where name = '$data->advertiser'"
@@ -75,22 +74,20 @@ class OfferController extends Controller
                     ]);
                     return "оффер $data->name добавлен";
                 } else {
-                    $description = "Серверная ошибка добавления оффера";
                     WebsocketService::send([
                         'type'=>'ADDED_NEW_OFFER', 
                         'result'=>0, 
-                        'description'=>$description
+                        'description'=>"Серверная ошибка добавления оффера"
                     ]);
-                    return $description;
+                    return "Server error of offer addition";
                 }
             } else {
-                $description = "Рекламодатель $data->advertiser не существует";
                 WebsocketService::send([
                     'type' => 'ADDED_NEW_OFFER', 
                     'result' => 0, 
-                    'description' => $description
+                    'description' => "Рекламодатель $data->advertiser не существует"
                 ]);
-                return $description;
+                return "advertiser $data->advertiser no exists";
             }
         }
     }
