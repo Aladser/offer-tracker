@@ -52,15 +52,20 @@ class StatisticsClientWebsocket extends ClientWebsocket {
                 role == "рекламодатель"
                     ? data.price
                     : data.price * data.income_part;
+            console.log(money);
 
+            // число переходов подписки вебмастера/оффера рекламодателя
             row.clickCell.textContent = parseInt(row.clickCell.textContent) + 1;
-            row.moneyCell.textContent =
-                parseFloat(row.moneyCell.textContent) + money + " р.";
+            // денежный доход подписки вебмастера/расход оффера рекламодателя
+            let cellMoney = (parseFloat(row.moneyCell.textContent)+ parseFloat(money)).toFixed(2);
+            row.moneyCell.textContent = `${cellMoney} р.`;
 
+            // итоговое число переходов офферов рекламодателя/подписок вебмастера
             row.totalClicksElement.textContent =
                 parseInt(row.totalClicksElement.textContent) + 1;
-            row.totalMoneyElement.textContent =
-                parseInt(row.totalMoneyElement.textContent) + money + " р.";
+            // итоговые доходы вебмастера / итоговые расходы рекламодателя
+            let totalMoney = (parseFloat(row.totalMoneyElement.textContent) + parseFloat(money)).toFixed(2);
+            row.totalMoneyElement.textContent = `${totalMoney} р.`;
         });
     }
 }
