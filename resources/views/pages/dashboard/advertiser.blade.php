@@ -1,6 +1,6 @@
 <x-app-layout class='position-relative'>
     @section('title')
-        <x-title>Панель рекламодателя</x-title>
+        <x-title>Профиль рекламодателя</x-title>
     @endsection
 
     @section('css')
@@ -19,7 +19,7 @@
 
     <section class='mx-auto section-content'>
         <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Профиль рекламодателя</h2>
         </x-slot>
 
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
