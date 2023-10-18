@@ -1,4 +1,4 @@
-/** обновление статистики админа */
+/** обновление реферальных ссылок на главной странице */
 class MainClientWebsocket extends ClientWebsocket {
     constructor(url, refList) {
         super(url, null);
@@ -6,7 +6,6 @@ class MainClientWebsocket extends ClientWebsocket {
         this.refList = refList;
     }
 
-    /** получение типов сообщений: NEW_OFFER*/
     onMessage(e) {
         let data = JSON.parse(e.data);
 

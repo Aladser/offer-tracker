@@ -20,8 +20,9 @@ class OfferTableClientController extends TableClientController {
         /** вебсокет */
         this.websocket = new AdvertiserClientWebsocket(
             "ws://localhost:8888",
-            this.username,
-            this.table
+            username,
+            table,
+            msgPrg
         );
 
         if (this.table !== null) {
@@ -40,38 +41,13 @@ class OfferTableClientController extends TableClientController {
      */
     add(event) {
         event.preventDefault();
-        let formData = new FormData(this.form);
-        formData.append("user", this.username);
-
         this.websocket.sendData({
-            type:'ADD_NEW_OFFER',
+            type:'ADDING_NEW_OFFER',
             name: this.form.name.value,
             price: this.form.price.value,
             url: this.form.url.value,
             theme: this.form.theme.value,
+            advertiser: this.username
         });
-
-        /*
-        fetch(this.URL, { method: "post", body: formData })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    let offer = JSON.parse(data);
-
-                    if (offer.result == 1) {
-                        event.target.reset();
-                        this.msgElement.textContent = `${offer.offerName} добавлен`;
-                    } else {
-                        this.msgElement.textContent = offer.error;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = err;
-                    }
-                }
-            });
-        */
     }
 }

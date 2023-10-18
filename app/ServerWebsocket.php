@@ -34,8 +34,8 @@ class ServerWebsocket implements MessageComponentInterface
     {
         $data = json_decode($msg);
 
-        if ($data->type === 'ADD_NEW_OFFER') {
-            var_dump($this->offerCtl->store($data));
+        if ($data->type === 'ADDING_NEW_OFFER') {
+            echo 'добавление оффера:' . json_encode($this->offerCtl->store($data)) . "\n";
         } else {
             echo "Получено сообщение: $msg\n";
         }

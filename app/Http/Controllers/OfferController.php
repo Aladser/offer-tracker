@@ -23,69 +23,75 @@ class OfferController extends Controller
         return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
-    /** Сохраните оффер в БД 
+    /** Сохранить оффер в БД 
      * Для простоты реалзиации кода реализую через собственный класс запросов в БД, так как через бродкаст нужно много настраивать
     */
     public function store($data)
     {
-        $isOffer = $this->dbQuery->queryPrepared('select * from offers where name = :name', ['name' => $data->name]);
+        $isOffer = $this->dbQuery->query("select * from offers where name = '$data->name'");
         // поиск имени оффера
         if ($isOffer) {
-            return ['result' => 0, 'error' => 'Название оффера уже занято'];
+            $description = "$data->name: название оффера уже занято";
+            WebsocketService::send([
+                'type' => 'ADDED_NEW_OFFER', 
+                'result' => 0, 
+                'description' => $description
+            ]);
+            return $description;
         } else {
-            $advertiser = $this->dbQuery->queryPrepared(
-                'select advertisers.id as id from advertisers join users on advertisers.user_id = users.id where name = :name',
-                ['name' => $data->user]
+            $advertiser = $this->dbQuery->query(
+                "select advertisers.id as id from advertisers join users on advertisers.user_id = users.id where name = '$data->advertiser'"
             );
             // добавление оффера, если существует рекламодатель
             if ($advertiser) {
-                $url = $data['url'];
+                $url = $data->url;
                 if (mb_stripos($url, '?')) {
                     $url = mb_substr($url, 0, mb_stripos($url, '?'));
                 }
-                $advertiserId = 
+                $advertiserId = $advertiser['id'];
+                $theme = $this->dbQuery->queryPrepared('select id from offer_themes where name = :name', ['name' => $data->theme]);
+                $themeId = $theme['id']; 
+                $sql = "insert into offers(name, URL, price, theme_id, advertiser_id) values('$data->name', '$url', $data->price, $themeId, $advertiserId)";
+                $isAdded = $this->dbQuery->exec($sql) == 1;
 
-                return [
-                    'result' => 
-                        $this->dbQuery->executeProcedure("insert into offers(name, URL, price, theme_id, advertiser_id) ".
-                        "values($data->name, $url, $data->price, $theme_id)"),
-                    'offerName' => $data->name,
-                ];
+                if ($isAdded) {
+                    // отправка в вебсокет информации о новом оффере
+                    $commission = intval($this->dbQuery->query('select value from system_options where name=\'commission\'')['value']);
+                    $commission = round((100 - $commission) / 100, 2);
+                    $offerId = $this->dbQuery->query("select id from offers where name = '$data->name'")['id'];
+
+                    $offerData = [
+                        'type' => 'NEW_OFFER',
+                        'offer_name' => $data->name,
+                        'offer_income' => $data->price * $commission,
+                        'offer_theme' => $data->theme,
+                        'offer_id' => $offerId,
+                    ];
+                    WebsocketService::send($offerData);
+                    WebsocketService::send([
+                        'type'=>'ADDED_NEW_OFFER', 
+                        'result'=>1, 
+                        'offer_name'=>$data->name
+                    ]);
+                    return "оффер $data->name добавлен";
+                } else {
+                    $description = "Серверная ошибка добавления оффера";
+                    WebsocketService::send([
+                        'type'=>'ADDED_NEW_OFFER', 
+                        'result'=>0, 
+                        'description'=>$description
+                    ]);
+                    return $description;
+                }
             } else {
-                return ['result' => 0, 'error' => "Рекламодатель $data->user не существует"];
+                $description = "Рекламодатель $data->advertiser не существует";
+                WebsocketService::send([
+                    'type' => 'ADDED_NEW_OFFER', 
+                    'result' => 0, 
+                    'description' => $description
+                ]);
+                return $description;
             }
-        }
-    }
-
-    private function add($data, $advertiserId)
-    {
-        $offer = new Offer();
-        $offer->name = $data['name'];
-        $url = $data['url'];
-        if (mb_stripos($url, '?')) {
-            $url = mb_substr($url, 0, mb_stripos($url, '?'));
-        }
-        $offer->URL = $url;
-        $offer->price = $data['price'];
-        $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
-        $offer->advertiser_id = $advertiserId;
-
-        $iAdded = $offer->save();
-        if ($iAdded) {
-            // отправка в вебсокет информации о новом оффере
-            $commission = round((100 - SystemOptionController::commission()) / 100, 2);
-            $offerData = [
-                'type' => 'NEW_OFFER',
-                'offer_name' => $offer->name,
-                'offer_income' => $offer->price * $commission,
-                'offer_theme' => $offer->theme->name,
-                'offer_id' => $offer->id,
-            ];
-            WebsocketService::send($offerData);
-
-            return 1;
-        } else {
-            return 0;
         }
     }
 
