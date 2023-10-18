@@ -33,7 +33,7 @@
     <body class="antialiased">
         <main class="min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                <div class="fixed top-0 right-0 px-6 py-4 sm:block">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{__('app.profile')}}</a>
                     @else
@@ -49,16 +49,6 @@
             <section class="w-75 p-4 mx-auto">
                 <h3 class='h1 text-center pb-4'>Реферальные ссылки</h3>
                 <p class='text-center fs-5 mb-4'>Все активные реферальные ссылки с указанием, какой оффер и вебмастер-подписчик</p>
-
-                @auth
-                    @if ($user->role->name === 'администратор')
-                        <p class='text-center'>Для управления сайтом перейдите в профиль</p>
-                    @elseif ($user->role->name === 'рекламодатель')
-                        <p class='text-center'>Для просмотра ваших офферов перейдите в профиль</p>
-                    @else
-                        <p class='text-center'>Для просмотра ваших реферальных ссылок перейдите в профиль</p>
-                    @endif
-                @endauth
 
                 <section class="d-flex flex-wrap justify-content-around w-100" id='section-ref-list'>
                     <!-- тестовая нерабочая ссылка -->
