@@ -5,3 +5,9 @@
 .color-333 {
     color: #333;
 }
+
+@media (max-width: 840px) {
+    .section-ref-list__nowork-item {
+        width: 300px;
+    }
+}
