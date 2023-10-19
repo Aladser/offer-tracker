@@ -46,7 +46,7 @@
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 d-none offers__btn-remove' title='Удалить'>🗑</button>
+                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach
@@ -62,7 +62,7 @@
                                 <p class='fw-bolder'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 d-none offers__btn-remove' title='Удалить'>🗑</button>
+                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach

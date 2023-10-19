@@ -3,3 +3,10 @@
     background-color: #ddd;
     cursor: default;
 }
+
+.offers__btn-remove {
+    opacity: 0.3;
+}
+.offers__btn-remove--mouseon {
+    opacity: 1;
+}

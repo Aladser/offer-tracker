@@ -20,21 +20,22 @@ const offerTableController = new OfferTableClientController(
     user
 );
 
-/** список видимых офферов */
+
+// список видимых офферов
 let offersItems = offersSection.querySelectorAll(".offers__item");
 offersItems.forEach((item) => {
-    /** наведение мыши на оффер */
+    // наведение мыши на оффер
     item.onmouseover = () => {
         let btn = item.querySelector(".offers__btn-remove");
-        setTimeout(() => btn.classList.remove("d-none"), 400);
+        setTimeout(() => btn.classList.add("offers__btn-remove--mouseon"), 400);
     };
-    /** уведение мыши c оффера */
+    // уведение мыши c оффера
     item.onmouseout = () => {
         let btn = item.querySelector(".offers__btn-remove");
-        setTimeout(() => btn.classList.add("d-none"), 400);
+        setTimeout(() => btn.classList.remove("offers__btn-remove--mouseon"), 400);
     };
-    /** нажатие мыши на оффер */
+    // нажатие мыши на оффер
     item.onmousedown = () => {
-        item.querySelector(".offers__btn-remove").classList.add("d-none");
+        item.querySelector(".offers__btn-remove").classList.remove("offers__btn-remove--mouseon");
     };
 });
