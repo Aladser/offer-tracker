@@ -12,7 +12,7 @@ class SystemOptionController extends Controller
         $commission = $request->all()['commission'];
         $isStored = SystemOption::where('name', 'commission')->update(['value' => $commission]);
 
-        return ['result' => $isStored];
+        return ['result' => $isStored, 'commission' => $commission];
     }
 
     public static function commission()
