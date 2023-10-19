@@ -7,7 +7,7 @@ class OfferThemeTableClientController extends TableClientController {
     processData(form, data) {
         form.reset();
         this.table.querySelector("tbody").innerHTML += `
-      <tr data-id="${data.row.id}" class='table-themes__tr position-relative'> 
+      <tr id="${data.row.id}" class='table-themes__tr position-relative'> 
         <td>${data.row.name}</td>
       </tr>
     `;

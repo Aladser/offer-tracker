@@ -36,7 +36,7 @@
             <h3 class='h3 fw-bold'>Список тем офферов</h3>
             <table class='table w-50 mx-auto' id='table-themes'>
                 @foreach ($themes as $theme)
-                <tr data-id="{{$theme['id']}}" class='table-themes__tr position-relative'>
+                <tr id="{{$theme['id']}}" class='table-themes__tr position-relative'>
                     <td class='cursor-pointer'>{{$theme['name']}}</td>
                 </tr>
                 @endforeach
