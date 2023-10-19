@@ -20,12 +20,12 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Пользователи</h2>
         </x-slot>
 
-        <section class="p-4 bg-white text-center fs-4 mt-4">
+        <section class="p-4 bg-white fs-4 mt-4">
             
             <a href="{{route('dashboard')}}" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
 
-            <article class='mb-4 w-75 mx-auto'>
-                <h3 class='fw-bold mx-auto'>Добавить нового пользователя</h3>
+            <article class='mb-4 mx-auto'>
+                <h3 class='fw-bold d-flex justify-center w-100'>Добавить нового пользователя</h3>
                 <form method='post' id='form-add-user' class='text-center mt-4 w-75 mx-auto'>
                     @csrf
                     <label for="form-add-user__name" class='fw-bolder text-start ps-2 w-40'>Имя:</label>
@@ -53,7 +53,7 @@
             </article>
 
             <article>
-                <h3 class='h3 fw-bold'>Список пользователей</h3>
+                <h3 class='fw-bold d-flex justify-center'>Список пользователей</h3>
                 <table class='table-users table mx-auto' id='table-users'>
                     <tr> 
                         <th>Имя</th>
