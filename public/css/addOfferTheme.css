@@ -8,7 +8,7 @@
     cursor: default;
 }
 
-#table-themes__btn-remove {
+.table-themes__btn-remove {
     position: absolute;
     top: 0;
     right: 0;

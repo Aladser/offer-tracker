@@ -6,10 +6,3 @@
 .bg-ddd {
     background-color: #ddd;
 }
-
-#article-new-subscription {
-    position: absolute;
-    top: 35%;
-    left: 25%;
-    z-index: 100;
-}
