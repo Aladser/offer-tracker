@@ -29,13 +29,14 @@ class UserTableClientController extends TableClientController {
      */
     setStatus(row, inputStatus) {
         let data = new URLSearchParams();
-        data.set("id", row.getAttribute("data-id"));
+        data.set("id", row.id);
         data.set("status", inputStatus.checked);
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
 
         let statusSwitch = row.querySelector("input[name='status']");
+
         fetch(`${this.URL}/status`, {
             method: "post",
             headers: headers,
@@ -51,7 +52,7 @@ class UserTableClientController extends TableClientController {
                     if (rslt.includes("<title>Page Expired</title>")) {
                         window.open("/wrong-uri", "_self");
                     } else {
-                        this.errorPrg.textContent =
+                        this.msgElement.textContent =
                             "серверная ошибка изменения статуса";
                         console.log(rslt);
                     }

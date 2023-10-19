@@ -25,7 +25,7 @@
             <a href="{{route('dashboard')}}" class='btn btn-outline-dark float-end mb-4'>Вернуться в профиль</a><br>
 
             <article class='mb-4 w-75 mx-auto'>
-                <h3 class='fw-bold mx-auto w-100 header-new-user'>Добавить нового пользователя</h3>
+                <h3 class='header-new-user fw-bold d-flex justify-center w-100'>Добавить нового пользователя</h3>
                 <form method='post' id='form-add-user' class='text-center mt-4 mx-auto'>
                     @csrf
                     <label for="form-add-user__name" class='fw-bolder text-start ps-2 w-40'>Имя:</label>
