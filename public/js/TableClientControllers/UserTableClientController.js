@@ -16,11 +16,11 @@ class UserTableClientController extends TableClientController {
             <input type="checkbox" name="status" class="table-offers__input-status form-check-input mx-auto" title="деактивировать" checked></td>
           </td>
           <td>${data.row.role}</td>
-      </tr>`;
+        </tr>`;
         this.msgElement.textContent = "";
-        this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-            row.onclick = (e) => this.click(e.target.closest("tr"));
-        });
+        // назначаются заново события клика строки
+        let tableRows = this.table.querySelectorAll(".table-users__tr");
+        tableRows.forEach(row => (row.onclick = e => this.clickRow(e)));
     }
 
     /** включить/выключить строку в БД

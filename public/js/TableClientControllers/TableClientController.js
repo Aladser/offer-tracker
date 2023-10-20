@@ -17,15 +17,7 @@ class TableClientController {
         // таблица
         if (this.table !== null) {
             this.table.querySelectorAll(`.${this.table.id}__tr`).forEach(
-                (row) =>
-                    (row.onclick = (e) => {
-                        // переключатель меняет статус стрки
-                        if (e.target.tagName === "INPUT") {
-                            this.setStatus(e.target.closest("tr"), e.target);
-                        } else {
-                            this.click(e.target.closest("tr"));
-                        }
-                    })
+                row => row.onclick = e => this.clickRow(e)
             );
         }
 
@@ -52,11 +44,12 @@ class TableClientController {
                     } else {
                         this.msgElement.textContent = data.description;
                     }
-                } catch (e) {
+                } catch (err) {
                     if (data.includes("<title>Page Expired</title>")) {
                         window.open("/wrong-uri", "_self");
                     } else {
                         this.msgElement.textContent = data;
+                        console.log(err);
                     }
                 }
             });
@@ -89,6 +82,7 @@ class TableClientController {
             });
     }
 
+    /** обработчик клика */
     click(row) {
         // клик на активную строку
         if (row.classList.contains(`${this.table.id}__tr--active`)) {
@@ -107,6 +101,16 @@ class TableClientController {
             row.innerHTML += `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`;
             row.lastChild.onclick = (e) => this.remove(e.target.closest("tr"));
             row.classList.add(`${this.table.id}__tr--active`);
+        }
+    }
+
+    /** клик строки */
+    clickRow(e) {
+        // переключатель меняет статус стрки
+        if (e.target.tagName === "INPUT") {
+            this.setStatus(e.target.closest("tr"), e.target);
+        } else {
+            this.click(e.target.closest("tr"));
         }
     }
 
