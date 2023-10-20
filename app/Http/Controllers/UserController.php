@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\UserRole;
+use App\Models\Advertiser;
+use App\Models\Webmaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -43,6 +45,13 @@ class UserController extends Controller
         $userSaved = $user->save();
 
         if ($userSaved) {
+            // добавляется в соотвествующую таблицу рекламодатель или веб-мастер
+            if ($userData['role'] === 'рекламодатель') {
+                Advertiser::create(['user_id' => $user->id]);
+            } elseif ($userData['role'] === 'веб-мастер') {
+                Webmaster::create(['user_id' => $user->id]);
+            }
+
             return ['result' => 1,
                     'row' => ['id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $user->role->name],
                 ];
