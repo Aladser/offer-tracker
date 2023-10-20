@@ -33,15 +33,12 @@ class OfferStatistics
         return $data;
     }
 
-    /** получить данные офферов рекламодателя или веб-мастера за период времени
-     * $user пользователь
-     * $date данные отсчитываются от этой даты до текущего времени.
-     */
+    /** получить данные офферов рекламодателя или веб-мастера */
     public function getOfferData(User $user, $date = null)
     {
         $totalClicks = 0;
         $totalMoney = 0;
-        $offers = [];
+        $advertiserOffers = [];
         // рекламодатель
         if ($user->role->name === 'рекламодатель') {
             $offers = $user->advertiser->offers;
@@ -52,20 +49,20 @@ class OfferStatistics
                 } else {
                     $clicks = $offer->clicks->where('created_at', '>', $date)->count();
                 }
-                // расходы за переходы
+                // доход за переходы
                 $price = $offer->price;
                 $money = $clicks * $price;
 
                 $totalClicks += $clicks;
                 $totalMoney += $money;
-                $offers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clicks, 'money' => $money];
+                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clicks, 'money' => $money];
             }
             // веб-мастер
         } elseif ($user->role->name === 'веб-мастер') {
             $subscriptions = $user->webmaster->subscriptions;
             foreach ($subscriptions as $subscription) {
                 $offer = $subscription->offer;
-                // число переходов
+                // число посещений
                 if (is_null($date)) {
                     $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id);
                 } else {
@@ -75,7 +72,6 @@ class OfferStatistics
                 }
                 $clickCount = $clicks->count();
 
-                // доходы за переходы
                 $income = 0;
                 foreach ($clicks as $click) {
                     $income += $click->income_part * $offer->price;
@@ -83,20 +79,20 @@ class OfferStatistics
 
                 $totalClicks += $clickCount;
                 $totalMoney += $income;
-                $offers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $income];
+                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $income];
             }
         } else {
             return null;
         }
 
         return [
-            'offers' => $offers,
+            'offers' => $advertiserOffers,
             'totalClicks' => $totalClicks,
             'totalMoney' => $totalMoney,
         ];
     }
 
-    /** получить текущее время с учетом часового пояса и сдвигом $period по времени*/
+    /** получить текущее время с учетом часового пояса и сдвигом */
     public static function getDate($period = null)
     {
         $date = new \DateTime();
