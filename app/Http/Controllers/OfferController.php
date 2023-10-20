@@ -8,16 +8,15 @@ use App\Models\OfferTheme;
 use App\Services\WebsocketService;
 use Illuminate\Http\Request;
 
-/** контроллер офферов */
 class OfferController extends Controller
 {
-    // Показывает форму создания нового оффера
+    /** Показать форму создания нового оффера */
     public function create()
     {
         return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
-    // Сохраняет оффер в БД (post-запрос)
+    /** Сохраните оффер в БД */
     public function store(Request $request)
     {
         $data = $request->all();
@@ -40,23 +39,21 @@ class OfferController extends Controller
         }
     }
 
-    // добавляет оффер в БД
     private function add($data, $advertiserId)
     {
         $offer = new Offer();
         $offer->name = $data['name'];
-
         $url = $data['url'];
         if (mb_stripos($url, '?')) {
             $url = mb_substr($url, 0, mb_stripos($url, '?'));
         }
         $offer->URL = $url;
-
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
         $offer->advertiser_id = $advertiserId;
 
-        if ($offer->save()) {
+        $iAdded = $offer->save();
+        if ($iAdded) {
             // отправка в вебсокет информации о новом оффере
             $commission = round((100 - SystemOptionController::commission()) / 100, 2);
             $offerData = [
@@ -74,7 +71,6 @@ class OfferController extends Controller
         }
     }
 
-    // удаляет оффер из БД
     public function destroy($id)
     {
         if (Offer::find($id)->delete()) {
@@ -87,7 +83,7 @@ class OfferController extends Controller
         }
     }
 
-    // установить статус
+    /** установить статус */
     public function status(Request $request)
     {
         $id = $request->all()['id'];
@@ -97,9 +93,8 @@ class OfferController extends Controller
 
         // сообщение вебсокету
         if ($isChanged) {
-            // включается оффер. Он видим вебмастерами
             if ($offer->status == 1) {
-                // список подписчиков оффера. Среди них клиент будет искать себя
+                // список подписчиков оффера
                 $subscriptions = $offer->links;
                 $webmasters = [];
                 foreach ($subscriptions as $subscription) {
@@ -108,7 +103,7 @@ class OfferController extends Controller
                         'refcode' => $subscription->refcode,
                     ];
                 }
-                // отправка в вебсокет нового видимого оффера
+                // отправка в вебсокет информации о новом оффере
                 $commission = round((100 - SystemOptionController::commission()) / 100, 2);
                 $offerData = [
                     'type' => 'VISIBLE_OFFER',
@@ -121,7 +116,6 @@ class OfferController extends Controller
                 ];
                 WebsocketService::send($offerData);
             } else {
-                // отправка в вебсокет информации о скрытии оффера
                 WebsocketService::send(['type' => 'UNVISIBLE_OFFER', 'id' => $id]);
             }
         }
