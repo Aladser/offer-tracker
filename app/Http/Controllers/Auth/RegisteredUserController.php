@@ -33,9 +33,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        // проверка, если подмена роли
-        $roleId = UserRole::where('name', $request->role)->first()->id;
-        if ($roleId != 2 && $roleId != 3) {
+        // проверка, если подмена роли. Может быть подмена отправляемых данных на клиенте
+        if ($request->role != 'рекламодатель' && $request->role != 'веб-мастер') {
             return redirect('/404');
         }
 
@@ -44,20 +43,23 @@ class RegisteredUserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $roleId = UserRole::where('name', $request->role)->first()->id;
         $user->role_id = $roleId;
         $user->save();
 
         // запись в таблицу рекламодателей или вебмастеров. Если отправляется другая цифра - 404
-        if ($request->role == 2) {
+        if ($request->role == 'рекламодатель') {
             Advertiser::create(['user_id' => $user->id]);
-        } elseif ($request->role == 3) {
+        } elseif ($request->role == 'веб-мастер') {
             Webmaster::create(['user_id' => $user->id]);
         }
+
+        // отправка в вебсокет соощения о новом пользователе администратору
+        WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $roleId]);
+        // событие регистрации пользователя
         event(new Registered($user));
-
+        // автовоход пользователя
         Auth::login($user);
-
-        WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => UserRole::find($request->role)->name]);
 
         return redirect(RouteServiceProvider::HOME);
     }
