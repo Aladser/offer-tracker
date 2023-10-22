@@ -40,7 +40,7 @@ class TableClientController {
                 try {
                     data = JSON.parse(data);
                     if (data.result == 1) {
-                        this.processData(form, data.row);
+                        this.processData(data.row, form);
                     } else {
                         this.msgElement.textContent = data.description;
                     }
@@ -115,7 +115,7 @@ class TableClientController {
     }
 
     /** действия после добавления данных БД */
-    processData(data) {
+    processData(data, form) {
         alert("нет реализации метода processData класса TableFrontController");
     }
 }

@@ -4,7 +4,7 @@ class UserTableClientController extends TableClientController {
      * @param {*} form форма добавления
      * @param {*} data данные из БД
      */
-    processData(form, row) {
+    processData(row, form = null) {
         // очистка формы, если добавляются данные из формы
         if (form !== null) {
             form.reset();

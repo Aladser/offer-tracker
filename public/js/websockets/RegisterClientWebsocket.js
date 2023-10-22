@@ -9,7 +9,7 @@ class RegisterClientWebsocket extends ClientWebsocket {
         let data = JSON.parse(e.data);
         if (data.type === "NEW_REGISTRATION") {
             console.log(data);
-            this.userTableClientController.processData(null, data);
+            this.userTableClientController.processData(data);
         }
     }
 }
