@@ -61,7 +61,7 @@ class RegisteredUserController extends Controller
         }
 
         // отправка в вебсокет соощения о новом пользователе администратору
-        WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $roleId]);
+        WebsocketService::send(['type' => 'NEW_REGISTRATION', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $request->role]);
         // событие регистрации пользователя
         event(new Registered($user));
         // автовход пользователя

@@ -8,9 +8,10 @@ class RegisterClientWebsocket extends ClientWebsocket {
 
     onMessage(e) {
         let data = JSON.parse(e.data);
-        if (data.type === "REGISTER") {
+        console.log(data);
+        if (data.type === "NEW_REGISTRATION") {
             // добавление в tbody таблицы нового пользователя
-            this.userTable.childNodes[1].innerHTML += `<tr class="table-users__tr position-relative" data-id="${data.id}"> 
+            this.userTable.querySelector('tbody').innerHTML += `<tr class="table-users__tr position-relative" data-id="${data.id}"> 
                 <td>${data.name}</td>
                 <td>${data.email}</td>
                 <td class="p-0">
