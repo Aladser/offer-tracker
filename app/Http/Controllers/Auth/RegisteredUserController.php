@@ -27,6 +27,7 @@ class RegisteredUserController extends Controller
     /** Создание пользователя */
     public function store(Request $request)
     {
+        // валидация полей
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -40,14 +41,19 @@ class RegisteredUserController extends Controller
 
         // создание пользователя
         $user = new User();
+        // имя
         $user->name = $request->name;
+        // почта
         $user->email = $request->email;
+        // пароль
         $user->password = Hash::make($request->password);
+        // роль
         $roleId = UserRole::where('name', $request->role)->first()->id;
         $user->role_id = $roleId;
+        // сохранение пользователя
         $user->save();
 
-        // запись в таблицу рекламодателей или вебмастеров. Если отправляется другая цифра - 404
+        // запись в таблицу рекламодателей или вебмастеров
         if ($request->role == 'рекламодатель') {
             Advertiser::create(['user_id' => $user->id]);
         } elseif ($request->role == 'веб-мастер') {
@@ -58,9 +64,10 @@ class RegisteredUserController extends Controller
         WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $roleId]);
         // событие регистрации пользователя
         event(new Registered($user));
-        // автовоход пользователя
+        // автовход пользователя
         Auth::login($user);
 
+        // редирект в dashboard
         return redirect(RouteServiceProvider::HOME);
     }
 }
