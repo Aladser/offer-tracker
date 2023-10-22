@@ -4,18 +4,22 @@ class UserTableClientController extends TableClientController {
      * @param {*} form форма добавления
      * @param {*} data данные из БД
      */
-    processData(form, data) {
-        form.reset();
+    processData(form, row) {
+        // очистка формы, если добавляются данные из формы
+        if (form !== null) {
+            form.reset();
+        }
+
         this.table.querySelector(
             "tbody"
-        ).innerHTML += `<tr id="${data.row.id}" class='table-users__tr position-relative'>
-          <td>${data.row.name}</td>
-          <td>${data.row.email}</td>
+        ).innerHTML += `<tr id="${row.id}" class='table-users__tr position-relative'>
+          <td>${row.name}</td>
+          <td>${row.email}</td>
           <td class="p-0">
             <div class='form-switch p-0 h-100'>
             <input type="checkbox" name="status" class="table-offers__input-status form-check-input mx-auto" title="деактивировать" checked></td>
           </td>
-          <td>${data.row.role}</td>
+          <td>${row.role}</td>
         </tr>`;
         this.msgElement.textContent = "";
         // назначаются заново события клика строки

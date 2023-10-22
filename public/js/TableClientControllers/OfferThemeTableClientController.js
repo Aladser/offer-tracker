@@ -4,14 +4,15 @@ class OfferThemeTableClientController extends TableClientController {
      *
      * @param {*} data данные из БД
      */
-    processData(form, data) {
+    processData(form, row) {
         form.reset();
         this.table.querySelector("tbody").innerHTML += `
-      <tr id="${data.row.id}" class='table-themes__tr position-relative'> 
-        <td>${data.row.name}</td>
-      </tr>
-    `;
+          <tr id="${row.id}" class='table-themes__tr position-relative'> 
+            <td>${row.name}</td>
+          </tr>
+        `;
         this.msgElement.textContent = "";
+        // вешаются события клика строки
         this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
             row.onclick = (e) => this.click(e.target.closest("tr"));
         });

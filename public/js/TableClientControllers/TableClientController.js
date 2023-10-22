@@ -40,7 +40,7 @@ class TableClientController {
                 try {
                     data = JSON.parse(data);
                     if (data.result == 1) {
-                        this.processData(form, data);
+                        this.processData(form, data.row);
                     } else {
                         this.msgElement.textContent = data.description;
                     }
