@@ -36,12 +36,17 @@ class UserController extends Controller
             return ['result' => 0, 'description' => 'Почта занята'];
         }
 
-        $roleId = UserRole::where('name', $userData['role'])->first()['id'];
         $user = new User();
+        // имя
         $user->name = $userData['name'];
+        // почта
         $user->email = $userData['email'];
+        // пароль
         $user->password = Hash::make($userData['password1']);
+        // роль
+        $roleId = UserRole::where('name', $userData['role'])->first()['id'];
         $user->role_id = $roleId;
+
         $userSaved = $user->save();
 
         if ($userSaved) {
@@ -62,12 +67,13 @@ class UserController extends Controller
         }
     }
 
+    /** удалить пользователя */
     public function destroy($id): array
     {
         return ['result' => User::find($id)->delete() ? 1 : 0];
     }
 
-    /** установить статус */
+    /** установить активность учетной записи */
     public function status(Request $request)
     {
         $requestData = $request->all();
@@ -97,21 +103,21 @@ class UserController extends Controller
         }
 
         $userData = $request->all();
-        $isEmail = User::where('email', $userData['email'])->count() == 1;
-        if (!$isEmail) {
+        // проверка почты
+        $user = User::where('email', $userData['email']);
+        if (!$user->exists()) {
             return back()->withErrors([
                 'email' => 'Учетная запись с указанной почтой не существует',
             ]);
         } else {
-            $isStatus = User::where('email', $userData['email'])->first()->status == 0;
-            if ($isStatus) {
+            // проверка активности учетной записи
+            $isActive = $user->first()->status == 1;
+            if (!$isActive) {
                 return back()->withErrors([
                     'status' => 'Данная учетная запись выключена администратором',
                 ]);
             } else {
-                return back()->withErrors([
-                    'password' => 'Неверный пароль',
-                ]);
+                return back()->withErrors(['password' => 'Неверный пароль']);
             }
         }
     }
