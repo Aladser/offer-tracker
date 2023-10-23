@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 // аутентификация
 require __DIR__.'/auth.php';
 
-// страница реферальных ссылок
+// главная страница и страница реферальных ссылок
 Route::get('/', function () {
     $subscriptions = OfferSubscription::join('offers', 'offer_subscriptions.offer_id', '=', 'offers.id')
         ->where('status', '1')->get();
