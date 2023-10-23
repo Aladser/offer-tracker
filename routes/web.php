@@ -27,10 +27,11 @@ Route::get('/', function () {
 
 // страница пользователя
 Route::get('/dashboard', DashboardController::class)
-    ->middleware(['auth'])->name('dashboard');
+    ->middleware(['auth', 'user.exists'])->name('dashboard');
 // статистика офферов по переходам и деньгам
 Route::get('/offer/statistics', [StatisticController::class, 'index'])
-    ->middleware(['auth', 'statistics'])->name('offer.statistics');
+    ->middleware(['auth', 'user.exists', 'statistics'])->name('offer.statistics');
+
 // подмена csrf
 Route::get('/wrong-uri', fn () => view('wrongcsrf'));
 // выключен JS
@@ -39,18 +40,18 @@ Route::get('/noscript', fn () => view('noscript'));
 // пользователи
 Route::resource('/users', UserController::class)
     ->except(['show', 'create', 'edit', 'update'])
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth', 'user.exists', 'admin']);
 
 // контроллер офферов
 Route::post('/offer', [OfferController::class, 'store']);
 Route::delete('/offer/{id}', [OfferController::class, 'destroy']);
 Route::get('/offer/create', [OfferController::class, 'create'])
-    ->middleware(['auth', 'advertiser'])->name('offer.create');
+    ->middleware(['auth', 'user.exists', 'advertiser'])->name('offer.create');
 
 // контроллер тем офферов
 Route::resource('/offer-theme', OfferThemeController::class)
     ->except(['show', 'create', 'edit', 'update'])
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth', 'user.exists', 'admin']);
 
 // установить статус пользователя (активен-неактивен)
 Route::post('/users/status', [UserController::class, 'status']);

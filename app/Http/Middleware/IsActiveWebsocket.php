@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\ScriptLinuxProcess;
 use Illuminate\Http\Request;
 
+/** класс запуска вебсокета */
 class IsActiveWebsocket
 {
     public function handle(Request $request, \Closure $next)
