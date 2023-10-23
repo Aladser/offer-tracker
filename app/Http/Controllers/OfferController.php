@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Advertiser;
 use App\Models\Offer;
 use App\Models\OfferTheme;
+use App\Models\User;
 use App\Services\WebsocketService;
 use Illuminate\Http\Request;
 
@@ -24,13 +25,15 @@ class OfferController extends Controller
         if (Offer::where('name', $data['name'])->exists()) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
-            // поиск рекламодателя
-            $extendedAdvertisers = Advertiser::join('users', 'users.id', '=', 'advertisers.user_id');
-            $advertiserObj = $extendedAdvertisers->where('name', $data['user']);
-            if ($advertiserObj->exists()) {
+            $user = User::where('name', $data['user'])->first();
+            $advertiser = Advertiser::where('user_id', $user->id);
+
+            if ($advertiser->exists()) {
+                $advertiserId = $advertiser->first()->id;
+
                 // добавление оффера
                 return [
-                    'result' => $this->add($data, $advertiserObj->first()->value('id')),
+                    'result' => $this->add($data, $advertiserId),
                     'offerName' => $data['name'],
                 ];
             } else {

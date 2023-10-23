@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertiser;
 use App\Models\User;
 use App\Models\UserRole;
-use App\Models\Advertiser;
 use App\Models\Webmaster;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,12 +15,12 @@ class UserController extends Controller
     /** показ страницы пользователей */
     public function index()
     {
-        return view(
-            'pages/users',
-            ['roles' => UserRole::orderBy('name', 'desc')->get()->toArray(),
-                'users' => User::where('name', '!=', 'admin')->get(),
-            ],
-        );
+        // роли пользователей
+        $roles = UserRole::orderBy('name', 'desc')->get()->toArray();
+        // пользователи кроме админа
+        $users = User::where('name', '!=', 'admin')->get();
+
+        return view('pages/users', ['roles' => $roles, 'users' => $users]);
     }
 
     /** сохранить нового пользователя */
