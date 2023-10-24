@@ -37,33 +37,32 @@ class CommissionCtl {
     }
 
     // отправка нового значения комиссии на сервер
-    set(e) {
+    async set(e) {
         e.preventDefault();
-
-        fetch(this.url, { method: "post", body: new FormData(e.target) })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.result == 1) {
-                        // скрытие кнопки установки коммиссии
-                        this.commissionBtn.classList.add("d-none");
-                        // установка новой комиссии
-                        this.commission = data.commission;
-                        this.commissionInput.oninput = this.input(
-                            data.commission
-                        );
-                    } else {
-                        this.msgPrg.textContent = data;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgPrg.textContent = err;
-                        console.log(data);
-                    }
+        let response = await fetch(this.url, {
+            method: "post",
+            body: new FormData(e.target),
+        });
+        switch (response.status) {
+            case 200:
+                let data = await response.json();
+                if (data.result == 1) {
+                    // скрытие кнопки установки коммиссии
+                    this.commissionBtn.classList.add("d-none");
+                    // установка новой комиссии
+                    this.commission = data.commission;
+                    this.commissionInput.oninput = this.input(data.commission);
+                } else {
+                    this.msgPrg.textContent = data;
                 }
-            });
+                break;
+            case 419:
+                window.open("/wrong-uri", "_self");
+                break;
+            default:
+                this.msgPrg.textContent =
+                    "Серверная ошибка. Подробности в консоли браузера";
+                console.log(response);
+        }
     }
 }
