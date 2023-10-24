@@ -16,9 +16,9 @@ class TableClientController {
 
         // таблица
         if (this.table !== null) {
-            this.table.querySelectorAll(`.${this.table.id}__tr`).forEach(
-                row => (row.onclick = e => this.clickRow(e))
-            );
+            this.table
+                .querySelectorAll(`.${this.table.id}__tr`)
+                .forEach((row) => (row.onclick = (e) => this.clickRow(e)));
         }
 
         // форма добавления нового элемента
@@ -33,8 +33,12 @@ class TableClientController {
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
-        let response = await fetch(this.URL, { method: "post", headers: headers, body: formData });
-        switch(response.status) {
+        let response = await fetch(this.URL, {
+            method: "post",
+            headers: headers,
+            body: formData,
+        });
+        switch (response.status) {
             case 200:
                 let data = await response.json();
                 if (data.result == 1) {
@@ -47,7 +51,8 @@ class TableClientController {
                 window.open("/wrong-uri", "_self");
                 break;
             default:
-                this.msgElement.textContent = 'Серверная ошибка. Подробности в консоли браузера';
+                this.msgElement.textContent =
+                    "Серверная ошибка. Подробности в консоли браузера";
                 console.log(response);
         }
     }
@@ -57,8 +62,11 @@ class TableClientController {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
 
-        let response = await fetch(`${this.URL}/${row.id}`, { method: "delete", headers: headers });
-        switch(response.status) {
+        let response = await fetch(`${this.URL}/${row.id}`, {
+            method: "delete",
+            headers: headers,
+        });
+        switch (response.status) {
             case 200:
                 let data = await response.json();
                 if (data.result == 1) {
@@ -72,7 +80,8 @@ class TableClientController {
                 window.open("/wrong-uri", "_self");
                 break;
             default:
-                this.msgElement.textContent = 'Серверная ошибка. Подробности в консоли браузера';
+                this.msgElement.textContent =
+                    "Серверная ошибка. Подробности в консоли браузера";
                 console.log(response);
         }
     }

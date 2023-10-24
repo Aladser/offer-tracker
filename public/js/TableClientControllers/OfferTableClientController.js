@@ -43,8 +43,11 @@ class OfferTableClientController extends TableClientController {
         let formData = new FormData(this.form);
         formData.append("user", this.username);
 
-        let response = await fetch(this.URL, { method: "post", body: formData });
-        switch(response.status) {
+        let response = await fetch(this.URL, {
+            method: "post",
+            body: formData,
+        });
+        switch (response.status) {
             case 200:
                 let offer = await response.json();
                 if (offer.result == 1) {
@@ -58,7 +61,8 @@ class OfferTableClientController extends TableClientController {
                 window.open("/wrong-uri", "_self");
                 break;
             default:
-                this.msgElement.textContent = 'Серверная ошибка. Подробности в консоли браузера';
+                this.msgElement.textContent =
+                    "Серверная ошибка. Подробности в консоли браузера";
                 console.log(response);
         }
     }

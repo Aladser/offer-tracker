@@ -34,7 +34,7 @@ class UserTableClientController extends TableClientController {
         this.msgElement.textContent = "";
         // назначаются заново события клика строки
         let tableRows = this.table.querySelectorAll(".table-users__tr");
-        tableRows.forEach(row => (row.onclick = e => this.clickRow(e)));
+        tableRows.forEach((row) => (row.onclick = (e) => this.clickRow(e)));
     }
 
     /** включить/выключить строку в БД
