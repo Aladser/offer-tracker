@@ -23,10 +23,11 @@ class SubscriptionService
     /** подписаться на оффер */
     private function subscribe($offerId, $webmasterId)
     {
+        // создание новой записи подписки
         $offerSubscription = new OfferSubscription();
         $offerSubscription->offer_id = $offerId;
         $offerSubscription->webmaster_id = $webmasterId;
-        $offerSubscription->refcode = "$webmasterId@$offerId";
+        $offerSubscription->refcode = "{$webmasterId}@{$offerId}";
         $isSubscribed = $offerSubscription->save();
 
         if ($isSubscribed) {
@@ -54,14 +55,15 @@ class SubscriptionService
     /** отписаться от оффера */
     private function unsubscribe($offerId, $webmasterId)
     {
+        // поиск подписки
         $offerSubscription = OfferSubscription::where('webmaster_id', $webmasterId)
             ->where('offer_id', $offerId)->first();
+        // записываются данные до удаления подписки
         $advertiserName = $offerSubscription->offer->advertiser->user->name;
         $offer = $offerSubscription->offer;
         $webmaster = $offerSubscription->follower;
 
         $isUnsubscribed = $offerSubscription->delete();
-
         if ($isUnsubscribed) {
             $data = [
                 'type' => 'UNSUBSCRIBE',
