@@ -6,8 +6,8 @@ class Status {
      * @param {*} url куда отправлять запрос
      */
     constructor(activeClass, deactiveClass, url, prgError) {
-        this.activeClass = activeClass;
-        this.deactiveClass = deactiveClass;
+        this.activeClass = activeClass; // колонка активных элементов
+        this.deactiveClass = deactiveClass; // колонка выключенных элементов
 
         this.activeList = document.querySelector(`#${activeClass}`);
         this.deactiveList = document.querySelector(`#${deactiveClass}`);
@@ -50,13 +50,13 @@ class Status {
         }
 
         dropzone.append(draggableElement);
-        // выключение
+        // выключение элемента
         if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
             draggableElement.classList.remove(`${this.activeClass}__item`);
             draggableElement.classList.add(`${this.deactiveClass}__item`);
             draggableElement.classList.add("bg-light");
             this.switchStatus(draggableElement, 0);
-            // включение
+        // включение элемента
         } else {
             draggableElement.classList.remove(`${this.deactiveClass}__item`);
             draggableElement.classList.add(`${this.activeClass}__item`);
@@ -66,7 +66,7 @@ class Status {
     }
 
     /** отправка статуса оффера на сервер */
-    switchStatus(element, status) {
+    async switchStatus(element, status) {
         let data = new URLSearchParams();
         data.set("id", element.id);
         data.set("status", status);
@@ -75,21 +75,25 @@ class Status {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
         };
-        fetch(this.url, { method: "post", headers: headers, body: data })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    this.process(data, element);
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.prgError.textContent = err;
-                        console.log(data);
-                    }
-                }
-            });
+
+        let response = await fetch(this.url, {
+            method: "post",
+            headers: headers,
+            body: data,
+        });
+        switch (response.status) {
+            case 200:
+                data = await response.json();
+                this.process(data, element);
+                break;
+            case 419:
+                window.open("/wrong-uri", "_self");
+                break;
+            default:
+                this.msgElement.textContent =
+                    "Серверная ошибка. Подробности в консоли браузера";
+                console.log(response);
+        }
     }
 
     process(data, element) {
