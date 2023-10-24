@@ -8,6 +8,7 @@ tables.set("last-day", document.querySelector("#table-offers-last-day"));
 tables.set("last-month", document.querySelector("#table-offers-last-month"));
 tables.set("last-year", document.querySelector("#table-offers-last-year"));
 tables.set("all-time", document.querySelector("#table-offers"));
+
 /** вебсокет */
 const websocket = new StatisticsClientWebsocket(
     "ws://localhost:8888",

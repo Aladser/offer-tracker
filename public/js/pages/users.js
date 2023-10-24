@@ -4,6 +4,7 @@ const userTable = document.querySelector("#table-users");
 const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
 const addUserForm = document.querySelector("#form-add-user");
+
 /** фронт-контроллер таблицы тем */
 const userTableClientController = new UserTableClientController(
     "/users",
