@@ -1,5 +1,15 @@
 /** Фронт-контроллер таблицы пользователей */
 class UserTableClientController extends TableClientController {
+    /** клик строки */
+    clickRow(e) {
+        // переключатель меняет статус стрки
+        if (e.target.tagName === "INPUT") {
+            this.setStatus(e.target.closest("tr"), e.target);
+        } else {
+            this.click(e.target.closest("tr"));
+        }
+    }
+
     /** создвть строку пользователя в таблице
      * @param {*} form форма добавления
      * @param {*} data данные из БД

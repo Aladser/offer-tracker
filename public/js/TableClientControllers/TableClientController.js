@@ -17,7 +17,7 @@ class TableClientController {
         // таблица
         if (this.table !== null) {
             this.table.querySelectorAll(`.${this.table.id}__tr`).forEach(
-                row => row.onclick = e => this.clickRow(e)
+                row => (row.onclick = e => this.clickRow(e))
             );
         }
 
@@ -27,60 +27,58 @@ class TableClientController {
         }
     }
 
-    add(form, event) {
+    async add(form, event) {
         event.preventDefault();
         let formData = new FormData(form);
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
-
-        fetch(this.URL, { method: "post", headers: headers, body: formData })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.result == 1) {
-                        this.processData(data.row, form);
-                    } else {
-                        this.msgElement.textContent = data.description;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = data;
-                        console.log(err);
-                    }
+        let response = await fetch(this.URL, { method: "post", headers: headers, body: formData });
+        switch(response.status) {
+            case 200:
+                let data = await response.json();
+                if (data.result == 1) {
+                    this.processData(data.row, form);
+                } else {
+                    this.msgElement.textContent = data.description;
                 }
-            });
+                break;
+            case 419:
+                window.open("/wrong-uri", "_self");
+                break;
+            default:
+                this.msgElement.textContent = 'Серверная ошибка. Подробности в консоли браузера';
+                console.log(response);
+        }
     }
 
-    remove(row) {
+    async remove(row) {
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
 
-        fetch(`${this.URL}/${row.id}`, { method: "delete", headers: headers })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.result == 1) {
-                        row.remove();
-                        this.msgElement.textContent = "";
-                    } else {
-                        this.msgElement.textContent = data;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = err;
-                        console.log(data);
-                    }
+        let response = await fetch(`${this.URL}/${row.id}`, { method: "delete", headers: headers });
+        switch(response.status) {
+            case 200:
+                let data = await response.json();
+                if (data.result == 1) {
+                    row.remove();
+                    this.msgElement.textContent = "";
+                } else {
+                    this.msgElement.textContent = data;
                 }
-            });
+                break;
+            case 419:
+                window.open("/wrong-uri", "_self");
+                break;
+            default:
+                this.msgElement.textContent = 'Серверная ошибка. Подробности в консоли браузера';
+                console.log(response);
+        }
     }
+
+    /** клик строки */
+    clickRow = (e) => this.click(e.target.closest("tr"));
 
     /** обработчик клика */
     click(row) {
@@ -101,16 +99,6 @@ class TableClientController {
             row.innerHTML += `<button id='${this.table.id}__btn-remove' title='Удалить'>🗑</button>`;
             row.lastChild.onclick = (e) => this.remove(e.target.closest("tr"));
             row.classList.add(`${this.table.id}__tr--active`);
-        }
-    }
-
-    /** клик строки */
-    clickRow(e) {
-        // переключатель меняет статус стрки
-        if (e.target.tagName === "INPUT") {
-            this.setStatus(e.target.closest("tr"), e.target);
-        } else {
-            this.click(e.target.closest("tr"));
         }
     }
 
