@@ -28,10 +28,11 @@ class UserController extends Controller
     {
         $userData = $request->all();
 
-        // проверка существования почты и имени пользователя
+        // проверка существования почты
         if (User::where('name', $userData['name'])->exists()) {
             return ['result' => 0, 'description' => 'Имя занято'];
         }
+        // проверка существования имени пользователя
         if (User::where('email', $userData['email'])->exists()) {
             return ['result' => 0, 'description' => 'Почта занята'];
         }
@@ -48,7 +49,6 @@ class UserController extends Controller
         $user->role_id = $roleId;
 
         $userSaved = $user->save();
-
         if ($userSaved) {
             // добавляется в соотвествующую таблицу рекламодатель или веб-мастер
             if ($userData['role'] === 'рекламодатель') {

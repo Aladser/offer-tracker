@@ -17,7 +17,7 @@ class OfferController extends Controller
         return view('pages/add-offer', ['themes' => OfferTheme::all()]);
     }
 
-    /** Сохраните оффер в БД */
+    /** Сохранить оффер в БД (обработка POST-запроса)*/
     public function store(Request $request)
     {
         $data = $request->all();
@@ -25,6 +25,7 @@ class OfferController extends Controller
         if (Offer::where('name', $data['name'])->exists()) {
             return ['result' => 0, 'error' => 'Название оффера уже занято'];
         } else {
+            // поиск рекламодателя
             $user = User::where('name', $data['user'])->first();
             $advertiser = Advertiser::where('user_id', $user->id);
 
@@ -42,14 +43,18 @@ class OfferController extends Controller
         }
     }
 
+    /** Сохранить оффер в БД  */
     private function add($data, $advertiserId)
     {
         $offer = new Offer();
         $offer->name = $data['name'];
+
+        // из url вырезаются get-параметры
         $url = $data['url'];
         if (mb_stripos($url, '?')) {
             $url = mb_substr($url, 0, mb_stripos($url, '?'));
         }
+
         $offer->URL = $url;
         $offer->price = $data['price'];
         $offer->theme_id = OfferTheme::where('name', $data['theme'])->first()->id;
@@ -97,7 +102,7 @@ class OfferController extends Controller
         // сообщение вебсокету
         if ($isChanged) {
             if ($offer->status == 1) {
-                // список подписчиков оффера
+                // список подписчиков оффера. Браузер ищет себя среди них
                 $subscriptions = $offer->links;
                 $webmasters = [];
                 foreach ($subscriptions as $subscription) {

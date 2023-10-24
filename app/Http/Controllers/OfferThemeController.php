@@ -15,6 +15,7 @@ class OfferThemeController extends Controller
     public function store(Request $request): array
     {
         $name = $request->all()['name'];
+        // поиска темы в БД
         if (OfferTheme::where('name', $name)->exists()) {
             return ['result' => 0, 'description' => 'тема уже существует'];
         } else {

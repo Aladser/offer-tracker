@@ -62,4 +62,4 @@ Route::post('/offer/subscribe', [SubscriptionService::class, 'subscribe']);
 Route::post('/offer/unsubscribe', [SubscriptionService::class, 'unsubscribe']);
 Route::post('/offer/subscription', [SubscriptionService::class, 'index']);
 // установка комиссии
-Route::post('/commission', [SystemOptionController::class, 'store']);
+Route::post('/commission', [SystemOptionController::class, 'set_commission']);
