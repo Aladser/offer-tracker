@@ -34,6 +34,10 @@ class Status {
         let itemId = event.dataTransfer.getData("text");
         let draggableElement = document.getElementById(itemId);
         let dropzone = event.target.closest(".table-items");
+        // если переносится нецелевой элемент
+        if (draggableElement === null) {
+            return;
+        }
 
         // если перемещаемый элемент не покидает изначальный контейнер
         if (
@@ -41,8 +45,7 @@ class Status {
             draggableElement.classList.contains(`${this.activeClass}__item`)
         ) {
             return;
-        }
-        if (
+        } else if (
             dropzone.id == this.deactiveClass &&
             draggableElement.classList.contains(`${this.deactiveClass}__item`)
         ) {
@@ -50,13 +53,13 @@ class Status {
         }
 
         dropzone.append(draggableElement);
-        // выключение элемента
+        // выключение элемента (правая колонка)
         if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
             draggableElement.classList.remove(`${this.activeClass}__item`);
             draggableElement.classList.add(`${this.deactiveClass}__item`);
             draggableElement.classList.add("bg-light");
             this.switchStatus(draggableElement, 0);
-        // включение элемента
+        // включение элемента (левая колонка)
         } else {
             draggableElement.classList.remove(`${this.deactiveClass}__item`);
             draggableElement.classList.add(`${this.activeClass}__item`);
@@ -66,7 +69,7 @@ class Status {
     }
 
     /** отправка статуса оффера на сервер */
-    async switchStatus(element, status) {
+    switchStatus(element, status) {
         let data = new URLSearchParams();
         data.set("id", element.id);
         data.set("status", status);
@@ -75,28 +78,17 @@ class Status {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
         };
-
-        let response = await fetch(this.url, {
-            method: "post",
-            headers: headers,
-            body: data,
-        });
-        switch (response.status) {
-            case 200:
-                data = await response.json();
-                this.process(data, element);
-                break;
-            case 419:
-                window.open("/wrong-uri", "_self");
-                break;
-            default:
-                this.msgElement.textContent =
-                    "Серверная ошибка. Подробности в консоли браузера";
-                console.log(response);
-        }
+        ServerRequest.execute(
+            this.url,
+            this.process,
+            "post",
+            this.prgError,
+            data,
+            headers
+        );
     }
 
-    process(data, element) {
+    process(data) {
         let info = "функция process класса Status не реализована";
         alert(info);
         throw info;

@@ -46,9 +46,13 @@ class SubscriptionService
             ];
             WebsocketService::send($data);
 
-            return ['result' => $offerSubscription->refcode, 'advertiser' => $advertiserName, 'offer' => $offer];
+            return [
+                'result' => 'SUBSCRIBE',
+                'refcode' => $offerSubscription->refcode,
+                'offer_id' => $offer->id,
+            ];
         } else {
-            return ['result' => 0];
+            return ['result' => 'FAILURE'];
         }
     }
 
@@ -73,9 +77,12 @@ class SubscriptionService
             ];
             WebsocketService::send($data);
 
-            return ['result' => 1, 'advertiser' => $advertiserName, 'offer' => $offer->id];
+            return [
+                'result' => 'UNSUBSCRIBE',
+                'offer_id' => $offer->id,
+            ];
         } else {
-            return ['result' => 0];
+            return ['result' => 'FAILURE'];
         }
     }
 }

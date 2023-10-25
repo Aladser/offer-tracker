@@ -5,7 +5,7 @@
  * @param {*} url куда отправлять запрос
  */
 class OfferStatus extends Status {
-    process(data, element) {
+    process(data) {
         if (!data.result) {
             this.errorPrg.textContent = "серверная ошибка изменения статуса";
             console.log(rslt);
