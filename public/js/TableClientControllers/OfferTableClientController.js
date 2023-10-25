@@ -40,30 +40,26 @@ class OfferTableClientController extends TableClientController {
      */
     async add(event) {
         event.preventDefault();
+        // данные формы
         let formData = new FormData(this.form);
         formData.append("user", this.username);
+        // csrf отправляется в данных формы
+        // действия после успешного добавления оффера в БД
+        let process = (offer) => {
+            if (offer.result == 1) {
+                event.target.reset();
+                this.msgElement.textContent = `${offer.offerName} добавлен`;
+            } else {
+                this.msgElement.textContent = offer.error;
+            }
+        };
 
-        let response = await fetch(this.URL, {
-            method: "post",
-            body: formData,
-        });
-        switch (response.status) {
-            case 200:
-                let offer = await response.json();
-                if (offer.result == 1) {
-                    event.target.reset();
-                    this.msgElement.textContent = `${offer.offerName} добавлен`;
-                } else {
-                    this.msgElement.textContent = offer.error;
-                }
-                break;
-            case 419:
-                window.open("/wrong-uri", "_self");
-                break;
-            default:
-                this.msgElement.textContent =
-                    "Серверная ошибка. Подробности в консоли браузера";
-                console.log(response);
-        }
+        ServerRequest.execute(
+            this.URL,
+            process,
+            "post",
+            this.msgElement,
+            formData
+        );
     }
 }

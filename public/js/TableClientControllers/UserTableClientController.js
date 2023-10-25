@@ -10,7 +10,7 @@ class UserTableClientController extends TableClientController {
         }
     }
 
-    /** создвть строку пользователя в таблице
+    /** создать строку пользователя в таблице страницы
      * @param {*} form форма добавления
      * @param {*} data данные из БД
      */

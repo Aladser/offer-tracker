@@ -4,6 +4,7 @@
     @endsection
 
     @section('js')
+        <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/RegisterClientWebsocket.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>

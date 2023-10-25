@@ -39,6 +39,8 @@ class CommissionCtl {
     // отправка нового значения комиссии на сервер
     async set(e) {
         e.preventDefault();
+        ServerRequest.execute();
+        
         let response = await fetch(this.url, {
             method: "post",
             body: new FormData(e.target),
