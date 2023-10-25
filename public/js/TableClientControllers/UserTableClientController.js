@@ -1,26 +1,40 @@
 /** Фронт-контроллер таблицы пользователей */
 class UserTableClientController extends TableClientController {
-    /** создвть строку пользователя в таблице
+    /** клик строки */
+    clickRow(e) {
+        // переключатель меняет статус стрки
+        if (e.target.tagName === "INPUT") {
+            this.setStatus(e.target.closest("tr"), e.target);
+        } else {
+            this.click(e.target.closest("tr"));
+        }
+    }
+
+    /** создать строку пользователя в таблице страницы
      * @param {*} form форма добавления
      * @param {*} data данные из БД
      */
-    processData(form, data) {
-        form.reset();
+    processData(row, form = null) {
+        // очистка формы, если добавляются данные из формы
+        if (form !== null) {
+            form.reset();
+        }
+
         this.table.querySelector(
             "tbody"
-        ).innerHTML += `<tr id="${data.row.id}" class='table-users__tr position-relative'>
-          <td>${data.row.name}</td>
-          <td>${data.row.email}</td>
+        ).innerHTML += `<tr id="${row.id}" class='table-users__tr position-relative'>
+          <td>${row.name}</td>
+          <td>${row.email}</td>
           <td class="p-0">
             <div class='form-switch p-0 h-100'>
             <input type="checkbox" name="status" class="table-offers__input-status form-check-input mx-auto" title="деактивировать" checked></td>
           </td>
-          <td>${data.row.role}</td>
-      </tr>`;
+          <td>${row.role}</td>
+        </tr>`;
         this.msgElement.textContent = "";
-        this.table.querySelectorAll(`.${this.table.id}__tr`).forEach((row) => {
-            row.onclick = (e) => this.click(e.target.closest("tr"));
-        });
+        // назначаются заново события клика строки
+        let tableRows = this.table.querySelectorAll(".table-users__tr");
+        tableRows.forEach((row) => (row.onclick = (e) => this.clickRow(e)));
     }
 
     /** включить/выключить строку в БД

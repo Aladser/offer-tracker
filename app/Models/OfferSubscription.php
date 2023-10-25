@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// подписчик
 class OfferSubscription extends Model
 {
     use HasFactory;
@@ -14,11 +15,13 @@ class OfferSubscription extends Model
         'follower_id',
     ];
 
+    // оффер
     public function offer()
     {
         return $this->belongsTo(Offer::class, 'offer_id', 'id');
     }
 
+    // вебмастер
     public function follower()
     {
         return $this->belongsTo(Webmaster::class, 'webmaster_id', 'id');

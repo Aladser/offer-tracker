@@ -6,18 +6,21 @@
  */
 class SubscriptionStatus extends Status {
     /** изменяет показ реферальной ссылки */
-    process(data, subscription) {
-        let result = data.result;
-        // ошибка
-        if (result == 0) {
-            prgError.textContent = "Ошибка сервера. Подробности в консоли";
-            console.log(data);
-        } else if (result == 1) {
+    process(data) {
+        let subscription = document.getElementById(data.offer_id);
+        if (data.result == 'SUBSCRIBE'){
+            // подписка - добавление реферальной ссылки в элемент оффера
+            subscription.innerHTML += `
+                <a href="dashboard?ref=${data.refcode}" title="?ref=${data.refcode}" class="fw-bolder fs-5 text-primary subscriptions__ref">
+                Реферальная ссылка
+                </a>
+            `;
+        } else if (data.result == 'UNSUBSCRIBE') {
             // отписка - убирание реф.ссылки из элемента оффера
             subscription.querySelector(".subscriptions__ref").remove();
         } else {
-            // подписка - добавление реферальной ссылки в элемент оффера
-            subscription.innerHTML += `<a href="dashboard?ref=${result}" title="?ref=${result}" class="fw-bolder fs-5 text-primary subscriptions__ref">Реферальная ссылка</a>`;
+            prgError.textContent = "Ошибка сервера";
+            console.log(data);
         }
     }
 }

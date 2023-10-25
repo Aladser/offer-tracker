@@ -46,8 +46,9 @@ class DashboardController extends Controller
                 );
             case 'веб-мастер':
                 $webmasterId = $user->webmaster->id;
-                // активные офферы без учета подписок
+                // офферы, на которые подписался оффер
                 $subscrOffers = OfferSubscription::where('webmaster_id', $webmasterId)->select('offer_id');
+                // активные офферы без учета подписок
                 $activeOffers = Offer::where('status', 1)->whereNotIn('id', $subscrOffers);
 
                 return view(

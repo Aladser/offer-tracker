@@ -4,21 +4,24 @@ const userTable = document.querySelector("#table-users");
 const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
 const addUserForm = document.querySelector("#form-add-user");
-/** CSRF */
-const csrfToken = document.querySelector('meta[name="csrf-token"]');
+
 /** фронт-контроллер таблицы тем */
-const userService = new UserTableClientController(
+const userTableClientController = new UserTableClientController(
     "/users",
     userTable,
     msgPrg,
     addUserForm,
 );
-/** кнопка отправки формы добавления пользователя */
-const addUserButton = document.querySelector("#form-add-user__btn-submit");
+
 /** пользователь*/
 const user = document.querySelector("#element-username").textContent;
 /** вебсокет */
-const websocket = new RegisterClientWebsocket("ws://localhost:8888", user);
+const websocket = new RegisterClientWebsocket("ws://localhost:8888", user, userTableClientController);
+
+/** CSRF */
+const csrfToken = document.querySelector('meta[name="csrf-token"]');
+/** кнопка отправки формы добавления пользователя */
+const addUserButton = document.querySelector("#form-add-user__btn-submit");
 
 const nameInput = addUserForm.querySelector('input[name="name"]');
 const emailInput = addUserForm.querySelector('input[name="email"]');

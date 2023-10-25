@@ -6,8 +6,8 @@ class Status {
      * @param {*} url куда отправлять запрос
      */
     constructor(activeClass, deactiveClass, url, prgError) {
-        this.activeClass = activeClass;
-        this.deactiveClass = deactiveClass;
+        this.activeClass = activeClass; // колонка активных элементов
+        this.deactiveClass = deactiveClass; // колонка выключенных элементов
 
         this.activeList = document.querySelector(`#${activeClass}`);
         this.deactiveList = document.querySelector(`#${deactiveClass}`);
@@ -34,6 +34,10 @@ class Status {
         let itemId = event.dataTransfer.getData("text");
         let draggableElement = document.getElementById(itemId);
         let dropzone = event.target.closest(".table-items");
+        // если переносится нецелевой элемент
+        if (draggableElement === null) {
+            return;
+        }
 
         // если перемещаемый элемент не покидает изначальный контейнер
         if (
@@ -41,8 +45,7 @@ class Status {
             draggableElement.classList.contains(`${this.activeClass}__item`)
         ) {
             return;
-        }
-        if (
+        } else if (
             dropzone.id == this.deactiveClass &&
             draggableElement.classList.contains(`${this.deactiveClass}__item`)
         ) {
@@ -50,13 +53,13 @@ class Status {
         }
 
         dropzone.append(draggableElement);
-        // выключение
+        // выключение элемента (правая колонка)
         if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
             draggableElement.classList.remove(`${this.activeClass}__item`);
             draggableElement.classList.add(`${this.deactiveClass}__item`);
             draggableElement.classList.add("bg-light");
             this.switchStatus(draggableElement, 0);
-            // включение
+        // включение элемента (левая колонка)
         } else {
             draggableElement.classList.remove(`${this.deactiveClass}__item`);
             draggableElement.classList.add(`${this.activeClass}__item`);
@@ -75,24 +78,17 @@ class Status {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
         };
-        fetch(this.url, { method: "post", headers: headers, body: data })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    this.process(data, element);
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.prgError.textContent = err;
-                        console.log(data);
-                    }
-                }
-            });
+        ServerRequest.execute(
+            this.url,
+            this.process,
+            "post",
+            this.prgError,
+            data,
+            headers
+        );
     }
 
-    process(data, element) {
+    process(data) {
         let info = "функция process класса Status не реализована";
         alert(info);
         throw info;

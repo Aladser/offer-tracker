@@ -9,7 +9,7 @@
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500 mx-auto" />
             </a>
         </x-slot>
-        <p class='fw-bold cursor-default pb-3'>{{__('auth.title')}}</p>
+        <p class='fw-bold cursor-default pb-3'>Вход в систему</p>
 
         <!-- Session Status -->
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -38,23 +38,24 @@
             </div>
 
             <!-- Remember Me -->
+            <!--
             <div class="block mt-4">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
                     <span class="ml-2 text-sm text-gray-600">{{ __('Запомнить меня') }}</span>
                 </label>
             </div>
+            -->
 
             <div class="flex items-center justify-end mt-4">
+                <!--
                 @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Забыли пароль?') }}
-                    </a>
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">Забыли пароль?</a>
                 @endif
+                -->
 
-                <x-button class="ml-3">
-                    {{ __('Войти') }}
-                </x-button>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900  m-2 ms-4" href="{{ route('register') }}">Регистрация</a>
+                <x-button class="btn btn-dark">Войти</x-button>
             </div>
         </form>
     </x-auth-card>

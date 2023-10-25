@@ -27,38 +27,47 @@ class RegisteredUserController extends Controller
     /** Создание пользователя */
     public function store(Request $request)
     {
+        // валидация полей
         $request->validate([
             'name' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        // проверка, если подмена роли
-        $roleId = UserRole::where('name', $request->role)->first()->id;
-        if ($roleId != 2 && $roleId != 3) {
+        // проверка, если подмена роли. Может быть подмена отправляемых данных на клиенте
+        if ($request->role != 'рекламодатель' && $request->role != 'веб-мастер') {
             return redirect('/404');
         }
 
         // создание пользователя
         $user = new User();
+        // имя
         $user->name = $request->name;
+        // почта
         $user->email = $request->email;
+        // пароль
         $user->password = Hash::make($request->password);
+        // роль
+        $roleId = UserRole::where('name', $request->role)->first()->id;
         $user->role_id = $roleId;
+        // сохранение пользователя
         $user->save();
 
-        // запись в таблицу рекламодателей или вебмастеров. Если отправляется другая цифра - 404
-        if ($request->role == 2) {
+        // запись в таблицу рекламодателей или вебмастеров
+        if ($request->role == 'рекламодатель') {
             Advertiser::create(['user_id' => $user->id]);
-        } elseif ($request->role == 3) {
+        } elseif ($request->role == 'веб-мастер') {
             Webmaster::create(['user_id' => $user->id]);
         }
-        event(new Registered($user));
 
+        // отправка в вебсокет соощения о новом пользователе администратору
+        WebsocketService::send(['type' => 'NEW_REGISTRATION', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => $request->role]);
+        // событие регистрации пользователя
+        event(new Registered($user));
+        // автовход пользователя
         Auth::login($user);
 
-        WebsocketService::send(['type' => 'REGISTER', 'id' => $user->id, 'name' => $user->name, 'email' => $user->email, 'role' => UserRole::find($request->role)->name]);
-
+        // редирект в dashboard
         return redirect(RouteServiceProvider::HOME);
     }
 }

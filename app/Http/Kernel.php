@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'advertiser' => \App\Http\Middleware\Roles\IsAdvertiser::class,
         'statistics' => \App\Http\Middleware\Roles\IsStatisticsPage::class,
         'ref' => \App\Http\Middleware\IsOfferReference::class,
+        'user.exists' => \App\Http\Middleware\IsUserExists::class,
     ];
 }

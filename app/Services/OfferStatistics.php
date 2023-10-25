@@ -38,40 +38,40 @@ class OfferStatistics
     {
         $totalClicks = 0;
         $totalMoney = 0;
-        $advertiserOffers = [];
+        $offers = [];
         // рекламодатель
         if ($user->role->name === 'рекламодатель') {
-            $offers = $user->advertiser->offers;
-            foreach ($offers as $offer) {
-                // число подписок вебмастеров
+            $advertiserOffers = $user->advertiser->offers;
+            foreach ($advertiserOffers as $offer) {
+                // число переходов по ссылкам на оффер
                 if (is_null($date)) {
-                    $clicks = $offer->clicks->count();
+                    $clickCount = $offer->clicks->count();
                 } else {
-                    $clicks = $offer->clicks->where('created_at', '>', $date)->count();
+                    $clickCount = $offer->clicks->where('created_at', '>', $date)->count();
                 }
-                // доход за переходы
+                // расходы за переходы
                 $price = $offer->price;
-                $money = $clicks * $price;
+                $money = $clickCount * $price;
 
-                $totalClicks += $clicks;
+                $totalClicks += $clickCount;
                 $totalMoney += $money;
-                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clicks, 'money' => $money];
+                $offers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $money];
             }
             // веб-мастер
         } elseif ($user->role->name === 'веб-мастер') {
             $subscriptions = $user->webmaster->subscriptions;
             foreach ($subscriptions as $subscription) {
                 $offer = $subscription->offer;
-                // число посещений
+                // число переходов по ссылкам на оффер
                 if (is_null($date)) {
-                    $clicks = $subscription->clicks->where('webmaster_id', $user->webmaster->id);
+                    $clicks = $offer->clicks->where('webmaster_id', $user->webmaster->id);
                 } else {
                     $clicks = $offer->clicks
                         ->where('webmaster_id', $user->webmaster->id)
                         ->where('created_at', '>', $date);
                 }
                 $clickCount = $clicks->count();
-
+                // доходы за переходы
                 $income = 0;
                 foreach ($clicks as $click) {
                     $income += $click->income_part * $offer->price;
@@ -79,14 +79,14 @@ class OfferStatistics
 
                 $totalClicks += $clickCount;
                 $totalMoney += $income;
-                $advertiserOffers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $income];
+                $offers[] = ['id' => $offer->id, 'name' => $offer->name, 'clicks' => $clickCount, 'money' => $income];
             }
         } else {
             return null;
         }
 
         return [
-            'offers' => $advertiserOffers,
+            'offers' => $offers,
             'totalClicks' => $totalClicks,
             'totalMoney' => $totalMoney,
         ];

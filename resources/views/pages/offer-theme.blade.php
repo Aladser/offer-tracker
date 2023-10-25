@@ -4,6 +4,7 @@
     @endsection
 
     @section('js')
+        <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>
         <script src="/js/TableClientControllers/OfferThemeTableClientController.js" defer></script>
         <script src="/js/pages/addOfferTheme.js" defer></script>

@@ -1,6 +1,6 @@
 /** Клиентский табличный контроллер */
 class TableClientController {
-    /**
+    /** Клиентский табличный контроллер
      * @param {*} URL URL бэк-контроллера
      * @param {*} table  таблица тем
      * @param {*} msgElement инфоэлемент
@@ -16,17 +16,9 @@ class TableClientController {
 
         // таблица
         if (this.table !== null) {
-            this.table.querySelectorAll(`.${this.table.id}__tr`).forEach(
-                (row) =>
-                    (row.onclick = (e) => {
-                        // переключатель меняет статус стрки
-                        if (e.target.tagName === "INPUT") {
-                            this.setStatus(e.target.closest("tr"), e.target);
-                        } else {
-                            this.click(e.target.closest("tr"));
-                        }
-                    })
-            );
+            this.table
+                .querySelectorAll(`.${this.table.id}__tr`)
+                .forEach((row) => (row.onclick = (e) => this.clickRow(e)));
         }
 
         // форма добавления нового элемента
@@ -35,60 +27,63 @@ class TableClientController {
         }
     }
 
+    // добавить запись в БД
     add(form, event) {
         event.preventDefault();
+        // действия после успешного добавления данных в БД
+        let process = (data) => {
+            if (data.result == 1) {
+                this.processData(data.row, form);
+            } else {
+                this.msgElement.textContent = data.description;
+            }
+        };
+        // данные формы
         let formData = new FormData(form);
+        // заголовки
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
 
-        fetch(this.URL, { method: "post", headers: headers, body: formData })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.result == 1) {
-                        this.processData(form, data);
-                    } else {
-                        this.msgElement.textContent = data.description;
-                    }
-                } catch (e) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = data;
-                    }
-                }
-            });
+        ServerRequest.execute(
+            this.URL,
+            process,
+            "post",
+            this.msgElement,
+            formData,
+            headers
+        );
     }
 
     remove(row) {
+        // заголовки
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
-
-        fetch(`${this.URL}/${row.id}`, { method: "delete", headers: headers })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    data = JSON.parse(data);
-                    if (data.result == 1) {
-                        row.remove();
-                        this.msgElement.textContent = "";
-                    } else {
-                        this.msgElement.textContent = data;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = err;
-                        console.log(data);
-                    }
-                }
-            });
+        // действия после успешного удаления данных в БД
+        let process = (data) => {
+            if (data.result == 1) {
+                // удаление данных из клиента
+                row.remove();
+                this.msgElement.textContent = "";
+            } else {
+                this.msgElement.textContent = data;
+            }
+        };
+        ServerRequest.execute(
+            `${this.URL}/${row.id}`,
+            process,
+            "delete",
+            this.msgElement,
+            null,
+            headers
+        );
     }
 
+    /** клик строки */
+    clickRow = (e) => this.click(e.target.closest("tr"));
+
+    /** обработчик клика */
     click(row) {
         // клик на активную строку
         if (row.classList.contains(`${this.table.id}__tr--active`)) {
@@ -111,7 +106,7 @@ class TableClientController {
     }
 
     /** действия после добавления данных БД */
-    processData(data) {
+    processData(data, form) {
         alert("нет реализации метода processData класса TableFrontController");
     }
 }

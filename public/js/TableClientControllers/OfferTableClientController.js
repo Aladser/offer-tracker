@@ -38,30 +38,28 @@ class OfferTableClientController extends TableClientController {
      * @param {*} username HTML-элемент имени пользователя
      * @param {*} event
      */
-    add(event) {
+    async add(event) {
         event.preventDefault();
+        // данные формы
         let formData = new FormData(this.form);
         formData.append("user", this.username);
+        // csrf отправляется в данных формы
+        // действия после успешного добавления оффера в БД
+        let process = (offer) => {
+            if (offer.result == 1) {
+                event.target.reset();
+                this.msgElement.textContent = `${offer.offerName} добавлен`;
+            } else {
+                this.msgElement.textContent = offer.error;
+            }
+        };
 
-        fetch(this.URL, { method: "post", body: formData })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    let offer = JSON.parse(data);
-
-                    if (offer.result == 1) {
-                        event.target.reset();
-                        this.msgElement.textContent = `${offer.offerName} добавлен`;
-                    } else {
-                        this.msgElement.textContent = offer.error;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgElement.textContent = err;
-                    }
-                }
-            });
+        ServerRequest.execute(
+            this.URL,
+            process,
+            "post",
+            this.msgElement,
+            formData
+        );
     }
 }

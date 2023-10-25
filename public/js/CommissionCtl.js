@@ -1,23 +1,26 @@
 class CommissionCtl {
     constructor(url, commissionForm, msgPrg) {
-        this.url = url;
-        // форма комиссиии
-        this.commissionForm = commissionForm;
         this.commissionInput = commissionForm.querySelector(
             "#input-change-commission"
         );
         this.commissionBtn = commissionForm.querySelector(
             "#btn-change-commission"
         );
-        this.commissionInput.oninput = this.input();
-        this.commissionForm.onsubmit = (e) => this.set(e);
-        /** поле результата добавления */
+        // url запроса на сервер
+        this.url = url;
+        // величина текущей комиссии
+        this.commission = this.commissionInput.value;
+        // обработчик ввода значения коммиссии
+        this.commissionInput.oninput = this.input(this.commission);
+        // событие отправки формы
+        commissionForm.onsubmit = (e) => this.set(e);
+        // поле результата добавления
         this.msgPrg = msgPrg;
     }
 
     // изменение комиссии
-    input() {
-        let originalCommission = this.commissionInput.value;
+    input(commission) {
+        let originalCommission = commission;
         let commissionBtn = this.commissionBtn;
         return function (e) {
             // введен минус
@@ -34,27 +37,30 @@ class CommissionCtl {
     }
 
     // отправка нового значения комиссии на сервер
-    set(e) {
+    async set(e) {
         e.preventDefault();
-        this.commissionBtn.classList.add("d-none");
+        
+        // действия после успешной записи комиссии в БД
+        let process = (data) => {
+            if (data.result == 1) {
+                // скрытие кнопки установки коммиссии
+                this.commissionBtn.classList.add("d-none");
+                // установка новой комиссии
+                this.commission = data.commission;
+                this.commissionInput.oninput = this.input(data.commission);
+            } else {
+                this.msgPrg.textContent = data;
+            }
+        };
+        // данные формы
+        let formData = new FormData(e.target);
 
-        let formData = new FormData(this.commissionForm);
-        fetch(this.url, { method: "post", body: formData })
-            .then((response) => response.text())
-            .then((data) => {
-                try {
-                    let result = JSON.parse(data).result;
-                    if (result != 1) {
-                        this.msgPrg.textContent = data;
-                    }
-                } catch (err) {
-                    if (data.includes("<title>Page Expired</title>")) {
-                        window.open("/wrong-uri", "_self");
-                    } else {
-                        this.msgPrg.textContent = err;
-                        console.log(data);
-                    }
-                }
-            });
+        ServerRequest.execute(
+            this.url,
+            process,
+            "post",
+            this.msgPrg,
+            formData
+        );
     }
 }

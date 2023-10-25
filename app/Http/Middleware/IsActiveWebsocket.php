@@ -5,8 +5,10 @@ namespace App\Http\Middleware;
 use App\ScriptLinuxProcess;
 use Illuminate\Http\Request;
 
+/** класс запуска вебсокета */
 class IsActiveWebsocket
 {
+    // проверяет активность вебсокета
     public function handle(Request $request, \Closure $next)
     {
         $os = explode(' ', php_uname())[0];
