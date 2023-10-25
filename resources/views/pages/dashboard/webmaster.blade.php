@@ -23,8 +23,9 @@
         </x-slot>
 
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
+            <h4 class='h4 text-center p-3 fw-bolder'>Подписки и доступные офферы</h4>
 
-            <p class='text-center p-3'>
+            <p class='text-center pt-1 p-3'>
                 <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark'>Статистика офферов</a>
             </p>
             <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
