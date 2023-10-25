@@ -8,6 +8,7 @@
     @endsection
 
     @section('js')
+        <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/AdminClientWebsocket.js" defer></script>
         <script src="/js/CommissionCtl.js" defer></script>

@@ -39,32 +39,28 @@ class CommissionCtl {
     // отправка нового значения комиссии на сервер
     async set(e) {
         e.preventDefault();
-        ServerRequest.execute();
         
-        let response = await fetch(this.url, {
-            method: "post",
-            body: new FormData(e.target),
-        });
-        switch (response.status) {
-            case 200:
-                let data = await response.json();
-                if (data.result == 1) {
-                    // скрытие кнопки установки коммиссии
-                    this.commissionBtn.classList.add("d-none");
-                    // установка новой комиссии
-                    this.commission = data.commission;
-                    this.commissionInput.oninput = this.input(data.commission);
-                } else {
-                    this.msgPrg.textContent = data;
-                }
-                break;
-            case 419:
-                window.open("/wrong-uri", "_self");
-                break;
-            default:
-                this.msgPrg.textContent =
-                    "Серверная ошибка. Подробности в консоли браузера";
-                console.log(response);
-        }
+        // действия после успешной записи комиссии в БД
+        let process = (data) => {
+            if (data.result == 1) {
+                // скрытие кнопки установки коммиссии
+                this.commissionBtn.classList.add("d-none");
+                // установка новой комиссии
+                this.commission = data.commission;
+                this.commissionInput.oninput = this.input(data.commission);
+            } else {
+                this.msgPrg.textContent = data;
+            }
+        };
+        // данные формы
+        let formData = new FormData(e.target);
+
+        ServerRequest.execute(
+            this.url,
+            process,
+            "post",
+            this.msgPrg,
+            formData
+        );
     }
 }
