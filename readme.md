@@ -133,7 +133,7 @@
 
 Имеются по умолчанию 7 пользователей:
 + **admin@mail.ru** - админ
-+ **advetiser1@mail.ru**, advetiser2@mail.ru, advetiser3@mail.ru - рекламодатели
++ **advertiser1@mail.ru**, advertiser2@mail.ru, advertiser3@mail.ru - рекламодатели
 + **webmaster1@mail.ru**, webmaster2@mail.ru, webmaster3@mail.ru - вебмастеры
 
 Пароль у всех пользователей: **AAAAaaaa1111**
