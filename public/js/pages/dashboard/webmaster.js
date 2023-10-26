@@ -4,8 +4,6 @@ const prgError = document.querySelector("#prg-error");
 const subscriptionsList = document.querySelector("#list-subscriptions");
 /** спиоск доступных активных офферов */
 const activeOfferList = document.querySelector("#list-active-offers");
-/** пользователь*/
-const user = document.querySelector("#element-username").textContent;
 /** контроллер статуса подписки (включен-выключен) */
 const subscriptionStatus = new SubscriptionStatus(
     "list-subscriptions",
@@ -15,7 +13,6 @@ const subscriptionStatus = new SubscriptionStatus(
 
 /** вебсокет */
 const websocket = new WebmasterClientWebsocket(
-    user,
     subscriptionsList,
     activeOfferList,
     subscriptionStatus,

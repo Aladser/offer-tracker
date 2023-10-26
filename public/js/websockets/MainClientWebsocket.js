@@ -1,7 +1,7 @@
 /** обновление статистики админа */
 class MainClientWebsocket extends ClientWebsocket {
     constructor(refList) {
-        super(null);
+        super();
         // список активных офферов
         this.refList = refList;
     }

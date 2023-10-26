@@ -6,8 +6,8 @@
 
 + Установка зависимостей:
     * распаковать архивы в корень сайта:
-        + <span style="color:blue">*vendor.zip*</span>
-        + <span style="color:blue">*node_modules.zip*</span>
+        + <span style="color:blue">*/storage/vendor.zip*</span>
+        + <span style="color:blue">*/storage/node_modules.zip*</span>
     * или скачать соответствующие зависимости:
         + ``composer install``
         + ``npm install``

@@ -45,7 +45,4 @@ const offerTableController = new OfferTableClientController(
 );
 
 /** вебсокет */
-this.websocket = new AdvertiserClientWebsocket(
-    user,
-    offersSection
-);
+this.websocket = new AdvertiserClientWebsocket(offersSection);

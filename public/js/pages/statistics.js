@@ -1,7 +1,5 @@
 /** форма переключателей временного периода */
 const timeSwitcher = document.querySelector("#time-period-article__switcher");
-/** пользователь*/
-const user = document.querySelector("#element-username").textContent;
 /** таблиц переключателей времени */
 const tables = new Map();
 tables.set("last-day", document.querySelector("#table-offers-last-day"));
@@ -10,10 +8,7 @@ tables.set("last-year", document.querySelector("#table-offers-last-year"));
 tables.set("all-time", document.querySelector("#table-offers"));
 
 /** вебсокет */
-const websocket = new StatisticsClientWebsocket(
-    user,
-    tables
-);
+const websocket = new StatisticsClientWebsocket(tables);
 
 // единая функция переключения таблицы для всех радиокнопок времени
 const setTimePeriod = setStatisticTime();

@@ -1,7 +1,7 @@
 /** обновление статистики страницы админа */
 class AdminClientWebsocket extends ClientWebsocket {
-    constructor(username) {
-        super(username);
+    constructor() {
+        super();
 
         this.subscriptions = document.querySelector(
             "#table-admin-statistics__subscriptions"

@@ -5,19 +5,6 @@ const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
 const addUserForm = document.querySelector("#form-add-user");
 
-/** фронт-контроллер таблицы тем */
-const userTableClientController = new UserTableClientController(
-    "/users",
-    userTable,
-    msgPrg,
-    addUserForm,
-);
-
-/** пользователь*/
-const user = document.querySelector("#element-username").textContent;
-
-/** CSRF */
-const csrfToken = document.querySelector('meta[name="csrf-token"]');
 /** кнопка отправки формы добавления пользователя */
 const addUserButton = document.querySelector("#form-add-user__btn-submit");
 
@@ -54,5 +41,13 @@ function input() {
     }
 }
 
+/** фронт-контроллер таблицы тем */
+const userTableClientController = new UserTableClientController(
+    "/users",
+    userTable,
+    msgPrg,
+    addUserForm,
+);
+
 /** вебсокет */
-const websocket = new RegisterClientWebsocket(user, userTableClientController);
+const websocket = new RegisterClientWebsocket(userTableClientController);
