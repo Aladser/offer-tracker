@@ -4,23 +4,31 @@
 
 ### Запуск проекта
 
-Для работы через апач требуется:
++ Установка зависимостей:
+    * распаковать архивы в корень сайта:
+        + <span style="color:blue">*vendor.zip*</span>
+        + <span style="color:blue">*node_modules.zip*</span>
+    * или скачать соответствующие зависимости:
+        + ``composer install``
+        + ``npm install``
 
-+ распаковать архивы *vendor.zip*, *node_modules.zip* в корень сайта, либо скачать соответствующие зависимости.
-
-+ включить модуль rewrite:
++ Включить модуль apache rewrite:
 
 ``sudo a2enmod rewrite``
 
-+ модули php:
++ Установить модули php:
 
 ``sudo apt install php libapache2-mod-php php-curl php-mysql php-mbstring``
 
-+ mysql:
++ Установить mysql:
 
 ``sudo apt install mysql-server mysql-client``
 
-+ Создать в СУБД MySQL базу ``offer-tracker``, либо использовать дамп БД <span style="color:blue">*/storage/dump.sql*</span>. Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
++ Создание БД 
+    * Дамп <span style="color:blue">*/storage/dump.sql*</span>
+    * или создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
+
+Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
 
     ```
     DB_CONNECTION=mysql
@@ -31,13 +39,11 @@
     DB_PASSWORD=@admin@
     ```
 
-+ сделать миграцию таблиц, если не использовался дамп:  ``php artisan migrate --seed``
-
 + В файле <span style="color:blue">*.env*</span> в параметре ``TIMEZONE`` прописать номер часового пояса сервера, где запускается проект. В противном случае дата в БД и серверной части кода будет различаться, не будет корректно отображаться статистика офферов и подписок.
 
 + Запуск проекта 
     * через консоль: ``php artisan serve``.
-    * через apache: файл виртуального хоста: <span style="color:blue">*/storage/offer-tracker.local.conf*</span>. Предполагается, что сайт лежит в <span style="color:blue">*/var/www*</span>
+    * через Apache: файл виртуального хоста: <span style="color:blue">*/storage/offer-tracker.local.conf*</span>. Предполагается, что сайт лежит в <span style="color:blue">*/var/www*</span>
 
 + для полной остановки сайта выполнить ``pkill -f offer-service`` для остановки вебсокета.
 
