@@ -2,11 +2,7 @@
     @section('title')
         <x-title>Панель вебмастера</x-title>
     @endsection
-
-    @section('meta')
-        <meta name='app_url' content="{{env('APP_URL')}}">
-    @endsection
-
+    
     @section('css')
         <link href="/css/webmaster.css" rel="stylesheet" />
     @endsection

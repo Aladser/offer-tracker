@@ -11,7 +11,7 @@ class SubscriptionStatus extends Status {
         if (data.result == 'SUBSCRIBE'){
             // подписка - добавление реферальной ссылки в элемент оффера
             subscription.innerHTML += `
-                <a href="dashboard?ref=${data.refcode}" title="?ref=${data.refcode}" class="fw-bolder fs-5 text-primary subscriptions__ref">
+                <a href="?ref=${data.refcode}" title="${data.app_url}?ref=${data.refcode}" class="fw-bolder fs-5 text-primary subscriptions__ref">
                 Реферальная ссылка
                 </a>
             `;
