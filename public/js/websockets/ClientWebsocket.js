@@ -17,7 +17,7 @@ class ClientWebsocket {
 
     // получение ошибок вебсокета
     onError(e) {
-        alert(`ошибка вебсокета ${e}`);
+        alert('WebSocket connection failed');
     }
 
     // получение сообщений
