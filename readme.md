@@ -93,12 +93,12 @@
 
 Вебсокет применяется для обновления данных на страницах при добавлении данных в БД в режиме реального времени. Используются библиотеки: для cервера веб-сокета ``cboden/ratchet``, серверного клиента ``ratchet/pawl``, JS-клиента стандартный ``Websocket``. Для отправки сообщений в вебсокет сервером используется класс ``App\Services\WebsocketService``, метод ``send``. Серверный вебсокет использует класс ``App\ServerWebsocket``, для принятий сообщений клиентами от сервера используются клиентские вебсокет классы из папки <span style="color:blue">*/public/js/websockets*</span>. Клиентские вебсокеты расширяют базовый класс ``ClientWebsocket``. Название соответствует странице, на которой он применяется:
 
-``AdminClientWebsocket`` - dashboard администратора, 
-``AdvertiserClientWebsocket`` - dashboard рекламодателя,
-``WebmasterClientWebsocket`` - dashboard вебмастера,
-``RegisterClientWebsocket`` - страница пользователей администратора
-``MainClientWebsocket`` - главная страница,
-``StatisticsClientWebsocket`` - страница статистики
++ ``AdminClientWebsocket`` - dashboard администратора, 
++ ``AdvertiserClientWebsocket`` - dashboard рекламодателя,
++ ``WebmasterClientWebsocket`` - dashboard вебмастера,
++ ``RegisterClientWebsocket`` - страница пользователей администратора
++ ``MainClientWebsocket`` - главная страница,
++ ``StatisticsClientWebsocket`` - страница статистики
 
 Посредник ``App\Http\Middleware\IsActiveWebsocket`` проверяет активность вебсокета и запускает, если выключен.
 
