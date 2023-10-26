@@ -15,14 +15,14 @@ class TableClientController {
         this.csrfToken = document.querySelector('meta[name="csrf-token"]');
 
         // таблица
-        if (this.table !== null) {
+        if (this.table) {
             this.table
                 .querySelectorAll(`.${this.table.id}__tr`)
                 .forEach((row) => (row.onclick = (e) => this.clickRow(e)));
         }
 
         // форма добавления нового элемента
-        if (this.form !== null) {
+        if (this.form) {
             this.form.onsubmit = (event) => this.add(form, event);
         }
     }
