@@ -5,6 +5,7 @@
 
     @section('meta')
         <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     @endsection
     
     @section('js')

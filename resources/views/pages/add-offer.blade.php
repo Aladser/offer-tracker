@@ -5,10 +5,6 @@
 
     @section('js')
         <script src="/js/ServerRequest.js" defer></script>
-        <script src="/js/statuses/Status.js" defer></script>
-        <script src="/js/statuses/OfferStatus.js" defer></script>
-        <script src="/js/websockets/ClientWebsocket.js" defer></script>
-        <script src="/js/websockets/AdvertiserClientWebsocket.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>
         <script src="/js/TableClientControllers/OfferTableClientController.js" defer></script>
         <script src="/js/pages/addOffer.js" defer></script>
