@@ -5,7 +5,10 @@ class StatisticsClientWebsocket extends ClientWebsocket {
         this.offerTables = offerTables;
     }
 
-    /** обновляет строку таблицы статистики рекламодателя или вебмастера */
+    /**Обновляет строку таблицы статистики рекламодателя или вебмастера.
+     * 
+     * Так на странице четыре таблицы на каждый временной промежуток, нужно в каждой обновить соответствующую строку
+    */
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (

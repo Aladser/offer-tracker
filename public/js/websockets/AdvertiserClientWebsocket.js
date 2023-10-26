@@ -1,12 +1,6 @@
 /**  статистика подписчиков рекламодателя*/
 class AdvertiserClientWebsocket extends ClientWebsocket {
-    constructor(url, username, offerTable, subscriptionStatus) {
-        super(url, username);
-        this.offerTable = offerTable;
-        this.subscriptionStatus = subscriptionStatus;
-    }
-
-    // получение сообщений: SUBSCRIBE, UNSUBSCRIBE. Изменение числа подписчиков
+   // получение сообщений: SUBSCRIBE, UNSUBSCRIBE - изменение числа подписчиков
     onMessage(e) {
         let data = JSON.parse(e.data);
         //console.log(data);
