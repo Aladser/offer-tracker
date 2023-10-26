@@ -15,7 +15,7 @@ class AdminClientWebsocket extends ClientWebsocket {
         );
     }
 
-    /** получение типов сообщений: CLICK, SUBSCRIBE, UNSUBSCRIBE, FAILED_OFFER*/
+    /** получение сообщений: CLICK, SUBSCRIBE, UNSUBSCRIBE, FAILED_OFFER */
     onMessage(e) {
         let data = JSON.parse(e.data);
         if (data.type === "CLICK") {

@@ -44,7 +44,7 @@ class TableClientController {
         let headers = {
             "X-CSRF-TOKEN": this.csrfToken.getAttribute("content"),
         };
-
+        // запрос на сервер
         ServerRequest.execute(
             this.URL,
             process,
@@ -70,6 +70,7 @@ class TableClientController {
                 this.msgElement.textContent = data;
             }
         };
+        // запрос на сервер
         ServerRequest.execute(
             `${this.URL}/${row.id}`,
             process,

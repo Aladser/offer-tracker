@@ -46,7 +46,7 @@ class OfferTableClientController extends TableClientController {
                 this.msgElement.textContent = offer.error;
             }
         };
-
+        // запрос на сервер
         ServerRequest.execute(
             this.URL,
             process,

@@ -4,13 +4,18 @@ class Status {
      * @param {*} activeClass id списка активных элементов
      * @param {*} deactiveClass id списка неактивных элементов
      * @param {*} url куда отправлять запрос
+     * @param {*} prgError поле ошибок
      */
     constructor(activeClass, deactiveClass, url, prgError) {
-        this.activeClass = activeClass; // колонка активных элементов
-        this.deactiveClass = deactiveClass; // колонка выключенных элементов
-
+        // класс списка активных элементов
+        this.activeClass = activeClass;
+        // класс списка выключенных элементов
+        this.deactiveClass = deactiveClass;
+        // элемент-список активных элементов
         this.activeList = document.querySelector(`#${activeClass}`);
+        // элемент-список неактивных элементов
         this.deactiveList = document.querySelector(`#${deactiveClass}`);
+        // url запроса
         this.url = url;
         /** поле ошибок */
         this.prgError = prgError;
@@ -19,9 +24,11 @@ class Status {
         this.activeList.ondrop = (e) => this.onDrop(e);
         this.deactiveList.ondragover = (e) => this.onDragOver(e);
         this.deactiveList.ondrop = (e) => this.onDrop(e);
+        // установить обработчики событий. После перемещения элемента события сбрасываются
         this.setListeners();
     }
 
+    // начало переноса
     onDragStart(event) {
         event.dataTransfer.setData("text/plain", event.target.id);
     }
@@ -52,6 +59,7 @@ class Status {
             return;
         }
 
+        // перемещаемый элемент добавляется в новый контейнер
         dropzone.append(draggableElement);
         // выключение элемента (правая колонка)
         if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
@@ -78,6 +86,7 @@ class Status {
                 .querySelector('meta[name="csrf-token"]')
                 .getAttribute("content"),
         };
+        // запрос на сервер
         ServerRequest.execute(
             this.url,
             this.process,
