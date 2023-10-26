@@ -1,1 +1,3 @@
-
+www-data    4265  0.0  0.2  92696  5632 ?        S    16:17   0:00 php /var/www/offer-tracker/app/offer-service.php
+www-data    6292  0.0  0.0   2888  1408 ?        S    16:28   0:00 sh -c ps aux | grep offer-service > /var/www/offer-tracker/storage/logs/pids.log
+www-data    6294  0.0  0.1   9056  2176 ?        S    16:28   0:00 grep offer-service

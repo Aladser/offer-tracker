@@ -48,9 +48,9 @@ class SubscriptionService
 
             return [
                 'result' => 'SUBSCRIBE',
-                'app_url' => env('APP_URL'),
                 'refcode' => $offerSubscription->refcode,
                 'offer_id' => $offer->id,
+                'url' => $offer->url,
             ];
         } else {
             return ['result' => 'FAILURE'];

@@ -46,7 +46,7 @@
                                     <p class='fw-bolder'>{{$subscription->offer->name}}</p>
                                     <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                     <p>тема: {{$subscription->offer->theme->name}}</p>
-                                    <a href="/?ref={{$subscription->refcode}}" title="{{env('APP_URL')}}?ref={{$subscription->refcode}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
+                                    <a href="/?ref={{$subscription->refcode}}" title="{{$subscription->offer->url}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
                                 </article>
                             @endif
                         @endforeach
