@@ -11,5 +11,4 @@ const offerTableController = new OfferTableClientController(
     null,
     msgPrg,
     addOfferForm,
-    username
 );

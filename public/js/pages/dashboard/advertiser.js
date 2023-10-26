@@ -35,8 +35,7 @@ offersItems.forEach((item) => {
 const offerTableController = new OfferTableClientController(
     "/offer",
     offersSection,
-    document.querySelector("#prg-error"),
-    null
+    document.querySelector("#prg-error")
 );
 
 /** вебсокет */
