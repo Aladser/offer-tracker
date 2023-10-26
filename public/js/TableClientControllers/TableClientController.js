@@ -81,7 +81,9 @@ class TableClientController {
     }
 
     /** клик строки */
-    clickRow = (e) => this.click(e.target.closest("tr"));
+    clickRow(e) {
+        this.click(e.target.closest("tr"));
+    };
 
     /** обработчик клика */
     click(row) {

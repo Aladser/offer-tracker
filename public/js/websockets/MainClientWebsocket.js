@@ -19,19 +19,23 @@ class MainClientWebsocket extends ClientWebsocket {
                 this.#createSubscription(data);
             });
         } else if (data.type == "SUBSCRIBE") {
+            // если кто-то из вебмастеров подписался от оффера
             this.#createSubscription(data);
         } else if (data.type == "UNSUBSCRIBE") {
-            // удаление подписки на оффер
+            // если кто-то из вебмастеров отписался от оффера
+            // удаление подписки на оффер со страницы
             let offerRefLinks = document.querySelectorAll(
                 `article[data-id='${data.offer_id}']`
             );
             offerRefLinks = Array.from(offerRefLinks);
             // childNodes[3] - вебмастер
+            // поиск подписки текущего вебмастера на оффер сообщения
             let reflink = offerRefLinks.find(
                 (link) =>
                     link.childNodes[3].textContent ==
                     `веб-мастер: ${data.webmaster}`
             );
+            // удаление рефссылки с главной страницы
             reflink.remove();
         } else if (
             data.type == "DELETE_OFFER" ||
