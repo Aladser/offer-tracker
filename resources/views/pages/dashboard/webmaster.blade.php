@@ -3,6 +3,9 @@
         <x-title>Панель вебмастера</x-title>
     @endsection
 
+    @section('meta')
+        <meta name='app_url' content="{{env('APP_URL')}}">
+    @endsection
 
     @section('css')
         <link href="/css/webmaster.css" rel="stylesheet" />
@@ -43,7 +46,7 @@
                                     <p class='fw-bolder'>{{$subscription->offer->name}}</p>
                                     <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                     <p>тема: {{$subscription->offer->theme->name}}</p>
-                                    <a href="?ref={{$subscription->refcode}}" title="?ref={{$subscription->refcode}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
+                                    <a href="/?ref={{$subscription->refcode}}" title="{{env('APP_URL')}}?ref={{$subscription->refcode}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
                                 </article>
                             @endif
                         @endforeach
