@@ -32,5 +32,7 @@ class ClientWebsocket {
         this.websocket.send(JSON.stringify(data));
     }
 
-    onOpen(e) {}
+    onOpen(e) {
+        console.log(`Соединение с вебсокетом ${document.querySelector('meta[name="websocket"]').content} установлено.`);
+    }
 }
