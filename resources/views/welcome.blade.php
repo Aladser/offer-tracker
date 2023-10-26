@@ -4,13 +4,12 @@
         <noscript>
             <meta http-equiv="refresh" content="0; url=/noscript">
         </noscript>
+        <title>{{env('APP_NAME')}}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link href="/css/welcome.css" rel="stylesheet" />
-
-        <title>{{env('APP_NAME')}}</title>
+        <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -27,6 +26,7 @@
             }
         </style>
 
+        <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/MainClientWebsocket.js" defer></script>
         <script src="/js/pages/main.js" defer></script>
