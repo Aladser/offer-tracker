@@ -9,9 +9,9 @@ class OfferTableClientController extends TableClientController {
      * @param {*} csrfToken csrf-токен
      * @param {*} username имя пользователя
      */
-    constructor(URL, table, msgPrg, form, username) {
+    constructor(URL, table, msgPrg, form) {
         super(URL, table, msgPrg, form);
-        this.username = username;
+        this.username = document.querySelector('meta[name="username"]').content;
 
         if (this.form !== null) {
             this.form.onsubmit = (event) => this.add(event);

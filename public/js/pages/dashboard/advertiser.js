@@ -1,7 +1,3 @@
-document.oncontextmenu = () => false;
-
-/** пользователь*/
-const user = document.querySelector("#element-username").textContent;
 /** секция офферов */
 const offersSection = document.querySelector(".offers");
 /** контроллер статуса оффера (включен-выключен) */
@@ -40,8 +36,7 @@ const offerTableController = new OfferTableClientController(
     "/offer",
     offersSection,
     document.querySelector("#prg-error"),
-    null,
-    user
+    null
 );
 
 /** вебсокет */
