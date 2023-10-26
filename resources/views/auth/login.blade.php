@@ -5,7 +5,7 @@
 
     <x-auth-card>
         <x-slot name="logo">
-            <a href="/">
+            <a href="/" title='На главную страницу'>
                 <x-application-logo class="w-20 h-20 fill-current text-gray-500 mx-auto" />
             </a>
         </x-slot>
