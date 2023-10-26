@@ -1,7 +1,7 @@
 /** Статистика рекламодателей и вебмастеров */
 class StatisticsClientWebsocket extends ClientWebsocket {
-    constructor(url, username, offerTables) {
-        super(url, username);
+    constructor(username, offerTables) {
+        super(username);
         this.offerTables = offerTables;
     }
 

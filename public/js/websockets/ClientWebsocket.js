@@ -1,7 +1,8 @@
 /** базовый класс клиентского вебсокета */
 class ClientWebsocket {
-    constructor(url, username) {
-        this.websocket = new WebSocket(url);
+    constructor(username) {
+        let appUrl = document.querySelector('meta[name="websocket"]').content;
+        this.websocket = new WebSocket(appUrl);
         this.websocket.onerror = (e) => this.onError(e);
         this.websocket.onmessage = (e) => this.onMessage(e);
         this.websocket.onopen = (e) => this.onOpen(e);

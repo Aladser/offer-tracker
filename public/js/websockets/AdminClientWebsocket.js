@@ -1,7 +1,7 @@
 /** обновление статистики страницы админа */
 class AdminClientWebsocket extends ClientWebsocket {
-    constructor(url, username) {
-        super(url, username);
+    constructor(username) {
+        super(username);
 
         this.subscriptions = document.querySelector(
             "#table-admin-statistics__subscriptions"
@@ -25,7 +25,7 @@ class AdminClientWebsocket extends ClientWebsocket {
             let income = parseFloat(this.systemIncome.textContent);
             let commission = (1 - data.income_part) * data.price;
             this.systemIncome.textContent =
-                parseFloat(income) + parseFloat(commission) + " руб.";
+                (parseFloat(income) + parseFloat(commission)).toFixed(2) + " руб.";
         } else if (data.type === "SUBSCRIBE") {
             // увеличивается число подписок
             this.subscriptions.textContent =

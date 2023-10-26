@@ -15,8 +15,6 @@ const userTableClientController = new UserTableClientController(
 
 /** пользователь*/
 const user = document.querySelector("#element-username").textContent;
-/** вебсокет */
-const websocket = new RegisterClientWebsocket("ws://localhost:8888", user, userTableClientController);
 
 /** CSRF */
 const csrfToken = document.querySelector('meta[name="csrf-token"]');
@@ -55,3 +53,6 @@ function input() {
         msgPrg.textContent = "";
     }
 }
+
+/** вебсокет */
+const websocket = new RegisterClientWebsocket(user, userTableClientController);

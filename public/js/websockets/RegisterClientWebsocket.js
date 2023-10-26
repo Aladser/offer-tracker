@@ -1,7 +1,7 @@
 /** обновление статистики админа */
 class RegisterClientWebsocket extends ClientWebsocket {
-    constructor(url, username, userTableClientController) {
-        super(url, username);
+    constructor(username, userTableClientController) {
+        super(username);
         this.userTableClientController = userTableClientController;
     }
 

@@ -3,6 +3,10 @@
         <x-title>Пользователи</x-title>
     @endsection
 
+    @section('meta')
+        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
+    @endsection
+    
     @section('js')
         <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>

@@ -3,6 +3,10 @@
         <x-title>Статистика</x-title>
     @endsection
 
+    @section('meta')
+        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
+    @endsection
+    
     @section('js')
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/StatisticsClientWebsocket.js" defer></script>

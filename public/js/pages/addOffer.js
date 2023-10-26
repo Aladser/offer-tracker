@@ -4,6 +4,7 @@ const msgPrg = document.querySelector("#form-add-error");
 const addOfferForm = document.querySelector("#form-add-new-product");
 /** имя текущего пользователя*/
 const username = document.querySelector("#navpanel-username").textContent;
+
 /** фронт-контроллер офферов */
 const offerTableController = new OfferTableClientController(
     "/offer",

@@ -1,16 +1,15 @@
 /** активные офферы для рекламодателя */
 class WebmasterClientWebsocket extends ClientWebsocket {
     constructor(
-        url,
         username,
         subscriptionsList,
         activeOfferList,
         subscriptionStatus,
         prgError
     ) {
-        super(url, username);
+        super(username);
         /** контроллер подписок */
-        this.subscriptionList = subscriptionsList;
+        this.subscriptionList
         this.activeOfferList = activeOfferList;
         this.subscriptionStatus = subscriptionStatus;
         this.prgError = prgError;

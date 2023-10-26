@@ -11,7 +11,6 @@ tables.set("all-time", document.querySelector("#table-offers"));
 
 /** вебсокет */
 const websocket = new StatisticsClientWebsocket(
-    "ws://localhost:8888",
     user,
     tables
 );

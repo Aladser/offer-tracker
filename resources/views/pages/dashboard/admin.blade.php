@@ -3,6 +3,10 @@
         <x-title>Панель администратора</x-title>
     @endsection
 
+    @section('meta')
+        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
+    @endsection
+
     @section('css')
         <link href="/css/admin.css" rel="stylesheet" />
     @endsection

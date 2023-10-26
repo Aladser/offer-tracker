@@ -11,16 +11,6 @@ const subscriptionStatus = new OfferStatus(
     "/offer/status"
 );
 
-/** клиентский контроллер таблицы */
-const offerTableController = new OfferTableClientController(
-    "/offer",
-    offersSection,
-    document.querySelector("#prg-error"),
-    null,
-    user
-);
-
-
 // список видимых офферов
 let offersItems = offersSection.querySelectorAll(".offers__item");
 offersItems.forEach((item) => {
@@ -32,10 +22,30 @@ offersItems.forEach((item) => {
     // уведение мыши c оффера
     item.onmouseout = () => {
         let btn = item.querySelector(".offers__btn-remove");
-        setTimeout(() => btn.classList.remove("offers__btn-remove--mouseon"), 400);
+        setTimeout(
+            () => btn.classList.remove("offers__btn-remove--mouseon"),
+            400
+        );
     };
     // нажатие мыши на оффер
     item.onmousedown = () => {
-        item.querySelector(".offers__btn-remove").classList.remove("offers__btn-remove--mouseon");
+        item.querySelector(".offers__btn-remove").classList.remove(
+            "offers__btn-remove--mouseon"
+        );
     };
 });
+
+/** клиентский контроллер таблицы */
+const offerTableController = new OfferTableClientController(
+    "/offer",
+    offersSection,
+    document.querySelector("#prg-error"),
+    null,
+    user
+);
+
+/** вебсокет */
+this.websocket = new AdvertiserClientWebsocket(
+    user,
+    offersSection
+);

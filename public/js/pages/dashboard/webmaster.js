@@ -12,9 +12,9 @@ const subscriptionStatus = new SubscriptionStatus(
     "list-active-offers",
     "/offer/subscription"
 );
+
 /** вебсокет */
 const websocket = new WebmasterClientWebsocket(
-    "ws://localhost:8888",
     user,
     subscriptionsList,
     activeOfferList,

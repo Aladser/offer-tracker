@@ -17,13 +17,6 @@ class OfferTableClientController extends TableClientController {
             this.form.onsubmit = (event) => this.add(event);
         }
 
-        /** вебсокет */
-        this.websocket = new AdvertiserClientWebsocket(
-            "ws://localhost:8888",
-            this.username,
-            this.table
-        );
-
         if (this.table !== null) {
             this.table.querySelectorAll(".offers__item").forEach((offer) => {
                 let btn = offer.querySelector(".offers__btn-remove");

@@ -3,6 +3,10 @@
         <x-title>Панель вебмастера</x-title>
     @endsection
     
+    @section('meta')
+        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
+    @endsection
+    
     @section('css')
         <link href="/css/webmaster.css" rel="stylesheet" />
     @endsection

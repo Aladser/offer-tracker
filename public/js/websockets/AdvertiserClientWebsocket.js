@@ -3,7 +3,6 @@ class AdvertiserClientWebsocket extends ClientWebsocket {
    // получение сообщений: SUBSCRIBE, UNSUBSCRIBE - изменение числа подписчиков
     onMessage(e) {
         let data = JSON.parse(e.data);
-        //console.log(data);
         if (data.type !== "SUBSCRIBE" && data.type !== "UNSUBSCRIBE") {
             return;
         }

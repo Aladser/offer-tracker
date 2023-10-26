@@ -4,6 +4,7 @@ const offerThemeTable = document.querySelector("#table-themes");
 const msgPrg = document.querySelector("#form-add-error");
 /** форма создания оффера */
 const addThemeForm = document.querySelector("#form-add-theme");
+
 /** фронт-контроллер таблицы тем */
 const offerThemeTableController = new OfferThemeTableClientController(
     "/offer-theme",
