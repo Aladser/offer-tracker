@@ -21,13 +21,11 @@
     </head>
 
     <body>
-        <main class="p-2">
+        <header class="p-2">
             @if (Route::has('login'))
                 <p class="position-relative text-end m-0">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="btn btn-outline-dark">
-                            Профиль
-                        </a>
+                        <a href="{{ route('dashboard') }}" class="btn btn-outline-dark">Профиль</a>
                     @else
                         <div class="text-end mt-2 me-2">
                             <a href="{{ route('login') }}" class="btn btn-outline-dark">Войти</a>
@@ -39,10 +37,12 @@
                     @endauth
                 </p>
             @endif
+        </header>
 
-            <section class="w-75 mx-auto">
+        <main class="p-2">
+            <section class="mx-auto section-content">
                 <h3 class='h1 text-center pb-4'>Реферальные ссылки</h3>
-                <p class='text-center fs-5 mb-4'>Все активные реферальные ссылки с указанием, какой оффер и вебмастер-подписчик</p>
+                <p class='text-center fs-5 mb-4 w-100'>Все активные реферальные ссылки с указанием, какой оффер и вебмастер-подписчик</p>
 
                 <section class="d-flex flex-wrap justify-content-around w-100" id='section-ref-list'>
                     <!-- тестовая нерабочая ссылка -->
