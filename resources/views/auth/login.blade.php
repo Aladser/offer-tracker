@@ -55,7 +55,7 @@
                 -->
 
                 <a class="underline text-sm text-gray-600 hover:text-gray-900  m-2 ms-4" href="{{ route('register') }}">Регистрация</a>
-                <x-button class="btn btn-dark">Войти</x-button>
+                <x-button class="btn btn-outline-dark ps-4 pe-4">Войти</x-button>
             </div>
         </form>
     </x-auth-card>

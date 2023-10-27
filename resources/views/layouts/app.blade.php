@@ -7,13 +7,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='username' content="{{ Auth::user()->name }}">
         @yield('meta')
-        
-        <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="/css/welcome.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <link href="/css/welcome.css" rel="stylesheet" />
         @yield('css')
 
         <!-- Scripts -->

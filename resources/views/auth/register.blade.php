@@ -61,9 +61,7 @@
                     {{ __('register.already_registered') }}
                 </a>
 
-                <x-button class="ml-4">
-                    {{ __('register.register') }}
-                </x-button>
+                <x-button class="btn btn-outline-dark ps-4 pe-4 ms-4">Регистрация</x-button>
             </div>
         </form>
     </x-auth-card>
