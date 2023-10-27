@@ -17,7 +17,11 @@ class ClientWebsocket {
 
     // получение ошибок вебсокета
     onError(e) {
-        alert('WebSocket connection failed');
+        alert(
+            `WebSocket connection ${
+                document.querySelector('meta[name="websocket"]').content
+            } failed`
+        );
     }
 
     // получение сообщений
@@ -33,6 +37,10 @@ class ClientWebsocket {
     }
 
     onOpen(e) {
-        console.log(`Соединение с вебсокетом ${document.querySelector('meta[name="websocket"]').content} установлено.`);
+        console.log(
+            `Соединение с вебсокетом ${
+                document.querySelector('meta[name="websocket"]').content
+            } установлено.`
+        );
     }
 }

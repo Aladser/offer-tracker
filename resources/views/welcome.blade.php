@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
         <link href="/css/welcome.css" rel="stylesheet" />
-        <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
             }
         </style>
 
-        <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/MainClientWebsocket.js" defer></script>
         <script src="/js/pages/main.js" defer></script>
