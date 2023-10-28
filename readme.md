@@ -4,13 +4,9 @@
 
 ### Запуск проекта
 
-+ Установка зависимостей:
-    * распаковать архивы в корень сайта:
-        + <span style="color:blue">*/storage/vendor.zip*</span>
-        + <span style="color:blue">*/storage/node_modules.zip*</span>
-    * или скачать соответствующие зависимости:
-        + ``composer install``
-        + ``npm install``
++ Cкачать соответствующие зависимости:
+    + ``composer install``
+    + ``npm install``
 
 + Включить модуль apache rewrite:
 

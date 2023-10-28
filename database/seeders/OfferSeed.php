@@ -48,7 +48,7 @@ class OfferSeed extends Seeder
             'status' => 0,
         ]);
         Offer::create([
-            'name' => 'Boostrap',
+            'name' => 'Bootstrap',
             'url' => 'https://bootstrap-4.ru/docs/5.3/getting-started/introduction/',
             'theme_id' => 2,
             'advertiser_id' => 2,
