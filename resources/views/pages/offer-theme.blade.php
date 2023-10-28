@@ -3,6 +3,10 @@
         <x-title>Темы офферов</x-title>
     @endsection
 
+    @section('meta')
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    @endsection
+
     @section('js')
         <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>
