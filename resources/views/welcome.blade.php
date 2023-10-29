@@ -11,10 +11,10 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- стили -->
-        <script src="https://cdn.tailwindcss.com"></script>
         <link href="/css/welcome.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
         <!-- скрипты -->
+        <script src="https://cdn.tailwindcss.com"></script>
         <script src="/js/websockets/ClientWebsocket.js" defer></script>
         <script src="/js/websockets/MainClientWebsocket.js" defer></script>
         <script src="/js/pages/main.js" defer></script>
@@ -61,14 +61,14 @@
 
                 <section class="flex flex-wrap justify-around" id='section-ref-list'>
                     <!-- тестовая нерабочая ссылка -->
-                    <article class='p-3 m-2 text-center bg-ddd color-333 shadow rounded text-xl w-60'>
+                    <article class='p-3 m-2 text-center bg-ddd color-333 shadow rounded text-xl w-80'>
                         <a href="?ref=1" class='font-semibold'>
                             <p title="{{env('APP_URL')}}?ref=1@1"> Тестовая<br> неработающая<br> ссылка </p>
                         </a>
                     </article>
                     
                     @for ($i = 0; $i < count($subscriptions); $i++)
-                        <article class='p-3 m-2 text-center bg-ddd color-333 shadow rounded text-xl w-60' data-id='{{$subscriptions[$i]->id}}'>
+                        <article class='p-4 m-2 text-center bg-ddd color-333 shadow rounded text-xl w-80 space-y-2' data-id='{{$subscriptions[$i]->id}}'>
                             <a href="?ref={{$subscriptions[$i]->refcode}}" class='font-semibold'>
                                 <p title="{{$subscriptions[$i]->offer->url}}">{{$subscriptions[$i]->offer->name}}</p>
                             </a>
