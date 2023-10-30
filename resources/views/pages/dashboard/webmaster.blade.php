@@ -42,16 +42,16 @@
 
             <section class="bg-white m-0 flex justify-between text-center">
                 <!-- офферы-подписки пользователя -->
-                <article class='w-1/2 inline-block m-0 p-3 '>
+                <article class='w-1/2 inline-block m-0 p-3'>
                     <h4 class='font-semibold text-xl text-center mb-2'>Подписки</h4>
                     <article class='table-items subscriptions w-full h-full' id='list-subscriptions'>
                         @foreach ($subscriptions->get() as $subscription)
                             @if ($subscription->offer->status == 1)
-                                <article id="{{$subscription->offer->id}}" class='list-subscriptions__item border-666 mb-1 rounded cursor-pointer' draggable='true'>
+                                <article id="{{$subscription->offer->id}}" class='list-subscriptions__item border-666 mb-1 rounded cursor-pointer p-2' draggable='true'>
                                     <p class='font-semibold'>{{$subscription->offer->name}}</p>
                                     <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                     <p>тема: {{$subscription->offer->theme->name}}</p>
-                                    <a href="/?ref={{$subscription->refcode}}" title="{{$subscription->offer->url}}" class='font-semibold text-xl text-sky-500 subscriptions__ref'>Реферальная ссылка</a>
+                                    <a href="/?ref={{$subscription->refcode}}" title="{{$subscription->offer->url}}" class='font-semibold text-xl text-sky-600 subscriptions__ref'>Реферальная ссылка</a>
                                 </article>
                             @endif
                         @endforeach
@@ -63,7 +63,7 @@
                     <h4 class='font-semibold text-xl text-center mb-2'>Доступные офферы</h4>
                     <article class='w-full h-full table-items offers'  id='list-active-offers'>
                         @foreach ($offers->get() as $offer)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light list-active-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light p-2 list-active-offers__item' draggable='true'>
                                 <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>цена: {{$offer->price * $incomePercent}} р. за переход</p>
                                 <p>тема: {{$offer->theme->name}}</p>

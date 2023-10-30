@@ -34,7 +34,7 @@
                         dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
                         dark:active:text-neutral-900 w-52 mb-3'>Вернуться в профиль</a><br>
 
-            <article class='time-period-article mb-2 flex justify-center w-full'>
+            <article class='time-period-article mb-2 flex justify-center w-full p-4'>
                     <p class='inline-block font-semibold'>Отчетный период: </p>&nbsp;&nbsp;
                     <form id='time-period-article__switcher'>
                         <input type="hidden" value='{{$user->id}}' id='time-period-article__input-id'>
@@ -50,22 +50,22 @@
             <table class='section-content__table table-auto mx-auto text-2xl text-left dark:text-gray-400 border w-full' id='table-offers'>
                 <thead class='text-xl uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                        <th scope="col" class='p-3'>Оффер</th>
-                        <th scope="col">Число переходов</th>
-                        <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
+                        <th scope="col" class='p-2'>Оффер</th>
+                        <th scope="col" class='text-center'>Число переходов</th>
+                        <th scope="col" class='text-right p-2'>{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                     </tr>
                 </thead>
                 @foreach ($offersAllTime['offers'] as $offer)
                     <tr data-id="{{$offer['id']}}" class='table-offers__tr position-relative'>
                         <td class='p-3 fw-bolder'>{{$offer['name']}}</td>
-                        <td class='table-offers__clicks'>{{$offer['clicks']}} </td>
-                        <td class='table-offers__money'>{{$offer['money']}} р.</td>
+                        <td class='table-offers__clicks text-center'>{{$offer['clicks']}} </td>
+                        <td class='table-offers__money text-right'>{{$offer['money']}} р.</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td class="p-3 font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">Всего</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersAllTime['totalClicks']}}</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money">{{$offersAllTime['totalMoney']}} р.</td>
+                    <td class="table-offers__total-clicks font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">{{$offersAllTime['totalClicks']}}</td>
+                    <td class="table-offers__total-money font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-right">{{$offersAllTime['totalMoney']}} р.</td>
                 </tr>
             </table>
 
@@ -73,22 +73,22 @@
             <table class='section-content__table table-auto mx-auto text-2xl text-left dark:text-gray-400 border w-full hidden' id='table-offers-last-day'>
                 <thead class='text-xl uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                        <th scope="col" class='p-3'>Оффер</th>
-                        <th scope="col">Число переходов</th>
-                        <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
+                        <th scope="col" class='p-2'>Оффер</th>
+                        <th scope="col" class='text-center'>Число переходов</th>
+                        <th scope="col" class='text-right p-2'>{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                     </tr>
                 </thead>
                 @foreach ($offersLastDay['offers'] as $offer)
                     <tr data-id="{{$offer['id']}}" class='table-offers__tr position-relative'>
                         <td class='p-3 fw-bolder'>{{$offer['name']}}</td>
-                        <td class='table-offers__clicks'>{{$offer['clicks']}} </td>
-                        <td class='table-offers__money'>{{$offer['money']}} р.</td>
+                        <td class='table-offers__clicks text-center'>{{$offer['clicks']}} </td>
+                        <td class='table-offers__money text-right'>{{$offer['money']}} р.</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td class="p-3 font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">Всего</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastDay['totalClicks']}}</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money">{{$offersLastDay['totalMoney']}} р.</td>
+                    <td class="text-center font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastDay['totalClicks']}}</td>
+                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money text-right">{{$offersLastDay['totalMoney']}} р.</td>
                 </tr>
             </table>
 
@@ -97,22 +97,22 @@
             <table class='section-content__table table-auto mx-auto text-2xl text-left dark:text-gray-400 border w-full hidden' id='table-offers-last-month'>
                 <thead class='text-xl uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                        <th scope="col" class='p-3'>Оффер</th>
-                        <th scope="col">Число переходов</th>
-                        <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
+                        <th scope="col" class='p-2'>Оффер</th>
+                        <th scope="col" class='text-center'>Число переходов</th>
+                        <th scope="col" class='text-right p-2'>{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                     </tr>
                 </thead>
                 @foreach ($offersLastMonth['offers'] as $offer)
                     <tr data-id="{{$offer['id']}}" class='table-offers__tr position-relative'>
                         <td class='p-3 fw-bolder'>{{$offer['name']}}</td>
-                        <td class='table-offers__clicks'>{{$offer['clicks']}} </td>
-                        <td class='table-offers__money'>{{$offer['money']}} р.</td>
+                        <td class='table-offers__clicks text-center'>{{$offer['clicks']}} </td>
+                        <td class='table-offers__money text-right'>{{$offer['money']}} р.</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td class="p-3 font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">Всего</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastMonth['totalClicks']}}</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money">{{$offersLastMonth['totalMoney']}} р.</td>
+                    <td class="text-center font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastMonth['totalClicks']}}</td>
+                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money text-right">{{$offersLastMonth['totalMoney']}} р.</td>
                 </tr>
             </table>
             
@@ -120,22 +120,22 @@
             <table class='section-content__table table-auto mx-auto text-2xl text-left dark:text-gray-400 border w-full hidden' id='table-offers-last-year'>
                 <thead class='text-xl uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400'>
                     <tr>
-                        <th scope="col" class='p-3'>Оффер</th>
-                        <th scope="col">Число переходов</th>
-                        <th scope="col">{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
+                        <th scope="col" class='p-2'>Оффер</th>
+                        <th scope="col" class='text-center'>Число переходов</th>
+                        <th scope="col" class='text-right p-2'>{{$user->role->name === 'рекламодатель' ? 'Расходы' : 'Доходы'}}</th>
                     </tr>
                 </thead>
                 @foreach ($offersLastYear['offers'] as $offer)
                     <tr data-id="{{$offer['id']}}" class='table-offers__tr position-relative'>
                         <td class='p-3 fw-bolder'>{{$offer['name']}}</td>
-                        <td class='table-offers__clicks'>{{$offer['clicks']}} </td>
-                        <td class='table-offers__money'>{{$offer['money']}} р.</td>
+                        <td class='table-offers__clicks text-center'>{{$offer['clicks']}} </td>
+                        <td class='table-offers__money text-right'>{{$offer['money']}} р.</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td class="p-3 font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">Всего</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastYear['totalClicks']}}</td>
-                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money">{{$offersLastYear['totalMoney']}} р.</td>
+                    <td class="text-center font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-clicks">{{$offersLastYear['totalClicks']}}</td>
+                    <td class="font-semibold uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 table-offers__total-money text-right">{{$offersLastYear['totalMoney']}} р.</td>
                 </tr>
             </table>
         </section>

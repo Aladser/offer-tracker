@@ -57,7 +57,7 @@
                     <article class='table-items h-full' id='active-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 1)
-                            <article id="{{$offer->id}}" class='relative mb-1 rounded cursor-pointer offers__item border-666 active-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='p-2 relative mb-1 rounded cursor-pointer offers__item border-666 active-offers__item' draggable='true'>
                                 <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
@@ -74,7 +74,7 @@
                     <article class='table-items h-full'  id='deactive-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 0)
-                            <article id="{{$offer->id}}" class='relative mb-1 rounded cursor-pointer bg-slate-100 offers__item border-666 deactive-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='p-2 relative mb-1 rounded cursor-pointer bg-slate-100 offers__item border-666 deactive-offers__item' draggable='true'>
                                 <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
