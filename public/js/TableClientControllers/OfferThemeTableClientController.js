@@ -5,10 +5,12 @@ class OfferThemeTableClientController extends TableClientController {
      * @param {*} data данные из БД
      */
     processData(row, form) {
+
+
         form.reset();
         this.table.querySelector("tbody").innerHTML += `
-          <tr id="${row.id}" class='table-themes__tr position-relative'> 
-            <td>${row.name}</td>
+          <tr id="${row.id}" class='table-themes__tr position-relative relative'> 
+            <td class='cursor-pointer p-2'>${row.name}</td>
           </tr>
         `;
         this.msgElement.textContent = "";
