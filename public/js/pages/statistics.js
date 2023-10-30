@@ -19,8 +19,8 @@ timeSwitcher.times.forEach((input) =>
 function setStatisticTime() {
     let activeTable = document.querySelector("#table-offers");
     return function (e) {
-        activeTable.classList.add("d-none");
+        activeTable.classList.add("hidden");
         activeTable = tables.get(e.target.value);
-        activeTable.classList.remove("d-none");
+        activeTable.classList.remove("hidden");
     };
 }

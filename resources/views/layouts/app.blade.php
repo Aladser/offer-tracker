@@ -11,9 +11,9 @@
 
         <!-- Styles -->
         <!--<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">-->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="stylesheet" href="css/common.css">
+        <link href="/css/common.css" rel="stylesheet" />
         <link href="/css/welcome.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
         @yield('css')
 
         <!-- Scripts -->

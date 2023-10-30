@@ -1,0 +1,9 @@
+.section-content__stat-content {
+    width: 75%;
+}
+
+@media (max-width:1000px) {
+    .section-content__stat-content {
+        width: 95%;
+    }
+}
