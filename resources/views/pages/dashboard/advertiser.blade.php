@@ -38,14 +38,14 @@
                         focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
                         active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
                         dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
-                        dark:active:text-neutral-900 w-52 disabled:opacity-50'>Добавить оффер</a>
+                        dark:active:text-neutral-900 w-52'>Добавить оффер</a>
                 <a href="{{route('offer.statistics')}}" class='inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
                         leading-normal text-neutral-800 transition duration-150 ease-in-out 
                         hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 
                         focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
                         active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
                         dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
-                        dark:active:text-neutral-900 w-52 disabled:opacity-50' title='статистика офферов'>Статистика</a>
+                        dark:active:text-neutral-900 w-52' title='статистика офферов'>Статистика</a>
             </div>
 
             <p id='prg-error' class='font-semibold pt-4 fs-4 text-center text-danger'></p>
