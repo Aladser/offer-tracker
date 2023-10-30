@@ -19,9 +19,7 @@
     @endsection
 
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Темы офферов
-        </h2>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Темы офферов</h2>
     </x-slot>
 
     <section class="p-10 text-center mx-auto mt-4 bg-white border-b border-gray-200 section-content">

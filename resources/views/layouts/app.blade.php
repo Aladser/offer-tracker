@@ -13,11 +13,10 @@
         <!--<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">-->
         <link href="/css/common.css" rel="stylesheet" />
         <link href="/css/welcome.css" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
         @yield('css')
 
         <!-- Scripts -->
-        <script src="{{asset('bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
         <script src="{{ asset('js/app.js') }}" defer></script>
         @yield('js')
     </head>
