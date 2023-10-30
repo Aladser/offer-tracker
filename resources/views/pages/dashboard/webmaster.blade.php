@@ -27,27 +27,31 @@
         </x-slot>
 
         <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
-            <h4 class='h4 text-center p-3 fw-bolder'>Подписки и доступные офферы</h4>
+            <h4 class='font-semibold text-2xl text-center mt-4 mb-4'>Подписки и доступные офферы</h4>
 
             <p class='text-center pt-1 p-3'>
-                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark'>Статистика офферов</a>
+                <a href="{{route('offer.statistics')}}" class='section-content__btn inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                        leading-normal text-neutral-800 transition duration-150 ease-in-out 
+                        hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 
+                        focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
+                        active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
+                        dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
+                        dark:active:text-neutral-900 w-52'>Статистика офферов</a>
             </p>
-            <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
-            <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>
-            <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
+            <p id='prg-error' class='font-semibold pt-4 text-xl text-center text-red-500'></p>
 
-            <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center">
+            <section class="bg-white m-0 flex justify-between text-center">
                 <!-- офферы-подписки пользователя -->
-                <article class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>
-                    <h4 class='h4 fw-bolder'>Подписки</h4>
-                    <article class='w-100 h-100 table-items subscriptions' id='list-subscriptions'>
+                <article class='w-1/2 inline-block m-0 p-3 '>
+                    <h4 class='font-semibold text-xl text-center mb-2'>Подписки</h4>
+                    <article class='table-items subscriptions w-full h-full' id='list-subscriptions'>
                         @foreach ($subscriptions->get() as $subscription)
                             @if ($subscription->offer->status == 1)
-                                <article id="{{$subscription->offer->id}}" class='border-666 mb-1 rounded cursor-pointer list-subscriptions__item' draggable='true'>
-                                    <p class='fw-bolder'>{{$subscription->offer->name}}</p>
+                                <article id="{{$subscription->offer->id}}" class='list-subscriptions__item border-666 mb-1 rounded cursor-pointer' draggable='true'>
+                                    <p class='font-semibold'>{{$subscription->offer->name}}</p>
                                     <p>цена: {{$subscription->offer->price * $incomePercent}} р. за переход</p>
                                     <p>тема: {{$subscription->offer->theme->name}}</p>
-                                    <a href="/?ref={{$subscription->refcode}}" title="{{$subscription->offer->url}}" class='fw-bolder fs-5 text-primary subscriptions__ref'>Реферальная ссылка</a>
+                                    <a href="/?ref={{$subscription->refcode}}" title="{{$subscription->offer->url}}" class='font-semibold text-xl text-sky-500 subscriptions__ref'>Реферальная ссылка</a>
                                 </article>
                             @endif
                         @endforeach
@@ -55,12 +59,12 @@
                 </article>
 
                 <!-- доступные активные офферы -->
-                <article class='w-50 d-inline-block m-0 p-3'>
-                    <h4 class='h4 fw-bolder'>Доступные офферы</h4>
-                    <article class='w-100 h-100 table-items offers'  id='list-active-offers'>
+                <article class='w-1/2 d-inline-block m-0 p-3'>
+                    <h4 class='font-semibold text-xl text-center mb-2'>Доступные офферы</h4>
+                    <article class='w-full h-full table-items offers'  id='list-active-offers'>
                         @foreach ($offers->get() as $offer)
                             <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light list-active-offers__item' draggable='true'>
-                                <p class='fw-bolder'>{{$offer->name}}</p>
+                                <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>цена: {{$offer->price * $incomePercent}} р. за переход</p>
                                 <p>тема: {{$offer->theme->name}}</p>
                             </article>

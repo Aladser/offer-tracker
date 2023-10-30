@@ -56,8 +56,7 @@
         <!-- контент -->
         <main class="p-2">
             <section class="mx-auto section-content">
-                <h3 class='text-center pb-4 text-3xl font-semibold'>Реферальные ссылки</h3>
-                <p class='text-center text-xl mb-4'>Все активные реферальные ссылки с указанием, какой оффер и вебмастер-подписчик</p>
+                <h3 class='text-center pb-8 text-3xl font-semibold'>Реферальные ссылки</h3>
 
                 <section class="flex flex-wrap justify-around" id='section-ref-list'>
                     <!-- тестовая нерабочая ссылка -->
