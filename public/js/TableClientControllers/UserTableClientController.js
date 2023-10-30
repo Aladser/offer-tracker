@@ -22,15 +22,20 @@ class UserTableClientController extends TableClientController {
 
         this.table.querySelector(
             "tbody"
-        ).innerHTML += `<tr id="${row.id}" class='table-users__tr position-relative'>
-          <td>${row.name}</td>
-          <td>${row.email}</td>
-          <td class="p-0">
-            <div class='form-switch p-0 h-100'>
-            <input type="checkbox" name="status" class="table-offers__input-status form-check-input mx-auto" title="деактивировать" checked></td>
-          </td>
-          <td>${row.role}</td>
-        </tr>`;
+        ).innerHTML += `
+            <tr id="${row.id}" class='table-users__tr relative'> 
+                <td class='p-2'>${row.name}</td>
+                <td class='p-2'>${row.email}</td>
+                
+                <td class='p-2'>
+                    <label class='switch'>
+                        <input type="checkbox" name="status" class='table-offers__input-status mx-auto' title='выключить' checked> 
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+                <td class='p-2'>${row.role}</td>
+            </tr>
+        `;
         this.msgElement.textContent = "";
         // назначаются заново события клика строки
         let tableRows = this.table.querySelectorAll(".table-users__tr");

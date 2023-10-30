@@ -102,7 +102,7 @@ class TableClientController {
                 activeRow.classList.remove(`${this.table.id}__tr--active`);
             }
             // выделение строки
-            row.innerHTML += `<button id='${this.table.id}__btn-remove' class='h-full' title='Удалить'>🗑</button>`;
+            row.innerHTML += `<button id='${this.table.id}__btn-remove' class='h-full pe-2' title='Удалить'>🗑</button>`;
             row.lastChild.onclick = (e) => this.remove(e.target.closest("tr"));
             row.classList.add(`${this.table.id}__tr--active`);
         }
