@@ -52,7 +52,7 @@
             <table class='table-auto mx-auto w-1/2' id='table-themes'>
                 @foreach ($themes as $theme)
                 <tr id="{{$theme['id']}}" class='table-themes__tr relative'>
-                    <td class='cursor-pointer p-2'>{{$theme['name']}}</td>
+                    <td class='cursor-pointer p-2 border-b-2'>{{$theme['name']}}</td>
                 </tr>
                 @endforeach
             </table>

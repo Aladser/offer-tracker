@@ -10,7 +10,7 @@ class OfferThemeTableClientController extends TableClientController {
         form.reset();
         this.table.querySelector("tbody").innerHTML += `
           <tr id="${row.id}" class='table-themes__tr position-relative relative'> 
-            <td class='cursor-pointer p-2'>${row.name}</td>
+            <td class='cursor-pointer p-2 border-b-2'>${row.name}</td>
           </tr>
         `;
         this.msgElement.textContent = "";
