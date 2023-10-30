@@ -5,13 +5,13 @@
         @yield('title')
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name='username' content="{{ Auth::user()->name }}">
         @yield('meta')
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <!-- Styles -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="/css/common.css" rel="stylesheet" />
         <link href="/css/welcome.css" rel="stylesheet" />
         @yield('css')

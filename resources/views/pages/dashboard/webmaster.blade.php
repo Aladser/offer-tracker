@@ -63,7 +63,7 @@
                     <h4 class='font-semibold text-xl text-center mb-2'>Доступные офферы</h4>
                     <article class='w-full h-full table-items offers'  id='list-active-offers'>
                         @foreach ($offers->get() as $offer)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light p-2 list-active-offers__item' draggable='true'>
+                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-gray-100 p-2 list-active-offers__item' draggable='true'>
                                 <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>цена: {{$offer->price * $incomePercent}} р. за переход</p>
                                 <p>тема: {{$offer->theme->name}}</p>

@@ -7,11 +7,11 @@
         <title>{{env('APP_NAME')}}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 
         <!-- стили -->
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="/css/welcome.css" rel="stylesheet" />
         <link href="/css/common.css" rel="stylesheet" />
         <!-- скрипты -->

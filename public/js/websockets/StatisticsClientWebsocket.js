@@ -24,18 +24,15 @@ class StatisticsClientWebsocket extends ClientWebsocket {
         let rows = [];
         // обновляется строка в каждой таблице
         this.offerTables.forEach((table) => {
-            let rowCount = table.childNodes[1].childNodes.length;
             // ячейки изменяемой строки
             let cells = table.querySelectorAll(
                 `tr[data-id="${data.offer}"] td`
             );
-            // таблица => (последняя-2) строка - строка итогов => ячейки строки
-            let lastRow = table.childNodes[1].childNodes[rowCount - 2].childNodes;
             rows.push({
                 clickCell: cells[1], // ячейка числа переходов оффера
                 moneyCell: cells[2], // ячейка денежной суммы оффера
-                totalClicksElement: lastRow[3], // ячейка общего числа переходов
-                totalMoneyElement: lastRow[5], // ячейка общей денежной суммы
+                totalClicksElement: table.querySelector('.table-offers__total-clicks'), // ячейка общего числа переходов
+                totalMoneyElement: table.querySelector('.table-offers__total-money'), // ячейка общей денежной суммы
             });
         });
 
