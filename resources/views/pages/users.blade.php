@@ -39,30 +39,20 @@
                 <h3 class='header-new-user font-semibold mx-auto p-2 text-2xl'>Добавить нового пользователя</h3>
                 <form method='post' id='form-add-user' class='w-1/2 mx-auto'>
                     @csrf
-                    <label for="form-add-user__name" class='block mb-2 font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Имя:</label>
-                    <input type="text" name="name" class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500' id="form-add-user__name" required>
+                    <label for="form-add-user__name" class='block font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Имя:</label>
+                    <input type="text" name="name" class='mb-2 border p-2 w-full' id="form-add-user__name" required>
 
-                    <label for="form-add-user__email" class='block mb-2 font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Почта:</label>
-                    <input type="email" name="email" class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500' id="form-add-user__email" required>
+                    <label for="form-add-user__email" class='block font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Почта:</label>
+                    <input type="email" name="email" class='mb-2 border p-2 w-full' id="form-add-user__email" required>
 
-                    <label for="form-add-user__password1" class='block mb-2 font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Пароль:</label>
-                    <input type="password" name="password1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500" id="form-add-user__password1" required autocomplete="new-password" required>
+                    <label for="form-add-user__password1" class='block font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Пароль:</label>
+                    <input type="password" name="password1" class="mb-2 border p-2 w-full" id="form-add-user__password1" required autocomplete="new-password" required>
 
-                    <label for="form-add-user__password2" class="block mb-2 font-medium text-gray-900 dark:text-white p-1 ps-2 text-left">Подтвердите пароль:</label>
-                    <input type="password" name="password2" class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 
-                        focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white 
-                        dark:focus:ring-blue-500 dark:focus:border-blue-500' id="form-add-user__password2" required autocomplete="new-password" required>
+                    <label for="form-add-user__password2" class="block font-medium text-gray-900 dark:text-white p-1 ps-2 text-left">Подтвердите пароль:</label>
+                    <input type="password" name="password2" class='mb-2 border p-2 w-full' id="form-add-user__password2" required autocomplete="new-password" required>
 
-                    <label for="form-add-user__role" class='block mb-2 font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Почта:</label>
-                    <select name="role" class='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 
-                        block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 
-                        dark:focus:border-blue-500' id="form-add-user__role">
+                    <label for="form-add-user__role" class='block font-medium text-gray-900 dark:text-white p-1 ps-2 text-left'>Роль:</label>
+                    <select name="role" class='mb-4 border p-2 w-full bg-white' id="form-add-user__role">
                     @foreach ($roles as $role)
                         <option value="{{$role['name']}}">{{$role['name']}}</option>
                     @endforeach
