@@ -4,7 +4,7 @@
     <div {{ $attributes }}>
 
     @foreach ($errors->all() as $error)
-        <p class='fw-bolder text-danger'>{{ $error }}</p>
+        <p class='font-semibold'>{{ $error }}</p>
     @endforeach
     </div>
 @endif
