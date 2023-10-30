@@ -29,9 +29,9 @@ class CommissionCtl {
             }
             // сравнение с изначальным значением
             if (e.target.value == originalCommission) {
-                commissionBtn.classList.add("d-none");
+                commissionBtn.classList.add("hidden");
             } else {
-                commissionBtn.classList.remove("d-none");
+                commissionBtn.classList.remove("hidden");
             }
         };
     }
@@ -44,7 +44,7 @@ class CommissionCtl {
         let process = (data) => {
             if (data.result == 1) {
                 // скрытие кнопки установки коммиссии
-                this.commissionBtn.classList.add("d-none");
+                this.commissionBtn.classList.add("hidden");
                 // установка новой комиссии
                 this.commission = data.commission;
                 this.commissionInput.oninput = this.input(data.commission);

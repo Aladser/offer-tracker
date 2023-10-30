@@ -10,9 +10,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <link rel="stylesheet" href="{{ asset('css/common.css') }}">
+        <!--<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">-->
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="css/common.css">
         <link href="/css/welcome.css" rel="stylesheet" />
         @yield('css')
 

@@ -25,28 +25,36 @@
         </x-slot>
         
         <section class="p-6 bg-white border-b border-gray-200 text-center mt-4">
-            <a href="{{route('users.index')}}" class='btn btn-outline-dark'>Пользователи</a>
-            <a href="{{route('offer-theme.index')}}" class='btn btn-outline-dark'>Темы офферов</a>
+            <a href="{{route('users.index')}}" class="inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                        leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 
+                        hover:text-neutral-800 focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
+                        active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
+                        dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
+                        dark:active:text-neutral-900">Пользователи</a>
+            <a href="{{route('offer-theme.index')}}" class="inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                        leading-normal text-neutral-800 transition duration-150 ease-in-out hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 
+                        hover:text-neutral-800 focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
+                        active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
+                        dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
+                        dark:active:text-neutral-900">Темы офферов</a>
 
-            <article class='mt-4'>
-                <h3 class='fw-bold w-75 mx-auto mb-2'>Доход системы за все время</h3>
-                <table class='table-admin-statistics table mx-auto fs-5'>
-                    <tr> <td class='w-50 fw-bolder' id=''>Реферальных ссылок</td><td id='table-admin-statistics__subscriptions'>{{$subscriptionCount}}</td> </tr>
-                    <tr> <td class='w-50 fw-bolder'>Число переходов</td><td id='table-admin-statistics__clicks'>{{$clicks}}</td> </tr>
-                    <tr> <td class='w-50 fw-bolder'>Доход системы</td><td id='table-admin-statistics__system-income'>{{$income}} руб.</td> </tr>
-                    <tr> <td class='w-50 fw-bolder'>Отказы реферальных ссылок</td><td id='table-admin-statistics__failed_clicks'>{{$failed_references}}</td> </tr>
+            <article class='pt-5 pb-5'>
+                <h3 class='font-semibold text-2xl mx-auto mb-2'>Доход системы за все время</h3>
+                <table class='mx-auto text-xl'>
+                    <tr> <td class='border-b-2 p-2' id=''>Реферальных ссылок</td><td  class='border-b-2 px-6' id='table-admin-statistics__subscriptions'>{{$subscriptionCount}}</td> </tr>
+                    <tr> <td class='border-b-2 p-2'>Число переходов</td><td  class='border-b-2 px-6' id='table-admin-statistics__clicks'>{{$clicks}}</td> </tr>
+                    <tr> <td class='border-b-2 p-2'>Доход системы</td><td  class='border-b-2 px-6' id='table-admin-statistics__system-income'>{{$income}} руб.</td> </tr>
+                    <tr> <td class='border-b-2 p-2'>Отказы реферальных ссылок</td><td  class='border-b-2 px-6' id='table-admin-statistics__failed_clicks'>{{$failed_references}}</td> </tr>
                 </table>
             </article>
 
-            <article class="mt-4 w-75 mx-auto d-flex flex-column align-items-center article-commission">
-                <h3 class='fw-bold w-50 pb-4'>Комиссия системы (%)</h3>
-                <form id='form-change-commission' class='input-group w-50'>
+            <article class="mt-4 mx-auto article-commission">
+                <h3 class='pb-4 font-semibold text-2xl'>Комиссия системы (%)</h3>
+                <form id='form-change-commission'>
                     @csrf
-                    <div class='position-relative w-75 mx-auto'>
-                        <input type="number" name='commission' id='input-change-commission' class='form-control text-center' value="{{$commission}}" size='100' required>
-                        <p class='article-commission__prg-submit'>
-                            <input type="submit" value="✓"  class='article-commission__btn-submit d-none' id='btn-change-commission' title='сохранить'>
-                        </p>
+                    <div class='mx-auto text-6xl relative'>
+                        <input type="number" name='commission' id='input-change-commission' class='text-center border border-solid w-36' value="{{$commission}}" size='100' required>
+                        <p class='inline absolute'><input type="submit" value="✓" class='hidden' id='btn-change-commission' title='сохранить'></p>
                     </div>
                 </form>
                 <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
