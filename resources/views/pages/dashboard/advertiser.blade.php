@@ -52,7 +52,7 @@
 
             <section class="bg-white border-b border-gray-200 m-0 flex justify-between text-center offers">
                 <!-- включенные офферы -->
-                <article class='w-1/2 inline-block m-0 p-3'>
+                <section class='w-1/2 inline-block m-0 p-3'>
                     <h4 class='font-semibold text-xl mx-auto'>Включены</h4>
                     <article class='table-items h-full' id='active-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
@@ -66,9 +66,10 @@
                             @endif
                         @endforeach
                     </article>
-                </article>
+                </section>
+
                 <!-- выключенные офферы -->
-                <article class='w-1/2 inline-block m-0 p-3'>
+                <section class='w-1/2 inline-block m-0 p-3'>
                     <h4 class='font-semibold text-xl mx-auto'>Выключены</h4>
                     <article class='table-items h-full'  id='deactive-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
@@ -82,7 +83,7 @@
                             @endif
                         @endforeach
                     </article>
-                </article>
+                </section>
             </section>
 
         </section>
