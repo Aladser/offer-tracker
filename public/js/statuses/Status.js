@@ -65,13 +65,13 @@ class Status {
         if (draggableElement.classList.contains(`${this.activeClass}__item`)) {
             draggableElement.classList.remove(`${this.activeClass}__item`);
             draggableElement.classList.add(`${this.deactiveClass}__item`);
-            draggableElement.classList.add("bg-light");
+            draggableElement.classList.add("bg-slate-100");
             this.switchStatus(draggableElement, 0);
         // включение элемента (левая колонка)
         } else {
             draggableElement.classList.remove(`${this.deactiveClass}__item`);
             draggableElement.classList.add(`${this.activeClass}__item`);
-            draggableElement.classList.remove("bg-light");
+            draggableElement.classList.remove("bg-slate-100");
             this.switchStatus(draggableElement, 1);
         }
     }

@@ -28,47 +28,56 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Панель рекламодателя</h2>
         </x-slot>
 
-        <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4">
-            <h4 class='h4 text-center p-3 fw-bolder'>Офферы</h4>
+        <section class="bg-white overflow-hidden shadow-sm sm:rounded-lg position-relative mt-4 text-center">
+            <h4 class='font-semibold text-2xl mx-auto mb-2 pt-2'>Офферы</h4>
 
-            <div class='text-center border-dark pb-4'>
-                <a href="{{route('offer.create')}}" class='btn btn-outline-dark'>Добавить оффер</a>
-                <a href="{{route('offer.statistics')}}" class='btn btn-outline-dark' title='статистика офферов'>Статистика</a>
+            <div class='text-center border-dark'>
+                <a href="{{route('offer.create')}}" class='inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                        leading-normal text-neutral-800 transition duration-150 ease-in-out 
+                        hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 
+                        focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
+                        active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
+                        dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
+                        dark:active:text-neutral-900 w-52 disabled:opacity-50'>Добавить оффер</a>
+                <a href="{{route('offer.statistics')}}" class='inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                        leading-normal text-neutral-800 transition duration-150 ease-in-out 
+                        hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 
+                        focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
+                        active:text-neutral-900 dark:border-neutral-900 dark:text-neutral-900 dark:hover:border-neutral-900 dark:hover:bg-neutral-100 
+                        dark:hover:bg-opacity-10 dark:hover:text-neutral-900 dark:focus:border-neutral-900 dark:focus:text-neutral-900 dark:active:border-neutral-900 
+                        dark:active:text-neutral-900 w-52 disabled:opacity-50' title='статистика офферов'>Статистика</a>
             </div>
 
+            <p id='prg-error' class='font-semibold pt-4 fs-4 text-center text-danger'></p>
 
-            <p class='h3 text-center fs-5'>Для деактивации оффера перетащите его в правую колонку</p>
-            <p class='h3 text-center fs-5'>Для активации оффера переташите его в левую колонку</p>
-            <p id='prg-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
-
-            <section class="bg-white border-b border-gray-200 m-0 d-flex justify-content-between text-center offers">
+            <section class="bg-white border-b border-gray-200 m-0 flex justify-between text-center offers">
                 <!-- включенные офферы -->
-                <article class='w-50 d-inline-block m-0 p-3 border-2 border-top-0 border-start-0 border-bottom-0'>
-                    <h4 class='h4 fw-bolder'>Включены</h4>
-                    <article class='w-100 h-100 table-items' id='active-offers'>
+                <article class='w-1/2 inline-block m-0 p-3'>
+                    <h4 class='font-semibold text-xl mx-auto'>Включены</h4>
+                    <article class='table-items h-full' id='active-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 1)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer position-relative offers__item active-offers__item' draggable='true'>
-                                <p class='fw-bolder'>{{$offer->name}}</p>
+                            <article id="{{$offer->id}}" class='relative mb-1 rounded cursor-pointer offers__item border-666 active-offers__item' draggable='true'>
+                                <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
+                                <button class='absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach
                     </article>
                 </article>
                 <!-- выключенные офферы -->
-                <article class='w-50 d-inline-block m-0 p-3'>
-                    <h4 class='h4 fw-bolder'>Выключены</h4>
-                    <article class='w-100 h-100 table-items'  id='deactive-offers'>
+                <article class='w-1/2 inline-block m-0 p-3'>
+                    <h4 class='font-semibold text-xl mx-auto'>Выключены</h4>
+                    <article class='table-items h-full'  id='deactive-offers'>
                         @foreach ($advertiser->offers->all() as $offer)
                             @if ($offer->status == 0)
-                            <article id="{{$offer->id}}" class='border-666 mb-1 rounded cursor-pointer bg-light position-relative offers__item deactive-offers__item' draggable='true'>
-                                <p class='fw-bolder'>{{$offer->name}}</p>
+                            <article id="{{$offer->id}}" class='relative mb-1 rounded cursor-pointer bg-slate-100 offers__item border-666 deactive-offers__item' draggable='true'>
+                                <p class='font-semibold'>{{$offer->name}}</p>
                                 <p>Цена: {{$offer->price}} р. за переход</p>
                                 <p class='table-offers__td-link-count'>Подписчиков: {{$offer->links->count()}} </p>
-                                <button class='position-absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
+                                <button class='absolute bottom-0 right-0 m-1 offers__btn-remove' title='Удалить'>🗑</button>
                             </article>
                             @endif
                         @endforeach
