@@ -3,6 +3,10 @@
         <x-title>Добавить новый оффер</x-title>
     @endsection
 
+    @section('css')
+        <link href="/css/addOffer.css" rel="stylesheet" />
+    @endsection
+
     @section('js')
         <script src="/js/ServerRequest.js" defer></script>
         <script src="/js/TableClientControllers/TableClientController.js" defer></script>
@@ -10,12 +14,12 @@
         <script src="/js/pages/addOffer.js" defer></script>
     @endsection
 
-    <section class='mx-auto section-content'>
+    <section class='mx-auto section-content bg-white my-2 p-2'>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Добавить новый оффер</h2>
         </x-slot>
 
-        <form action='/' method='post' id='form-add-new-product' class='mt-4 w-2/6 mx-auto p-4'>
+        <form action='/' method='post' id='form-add-new-product' class='section-content__form mt-3 mx-auto p-4'>
             @csrf
             
             <label for="offer-new__name" class='font-medium text-gray-900 dark:text-white p-2'>Имя:</label><br>
@@ -34,7 +38,7 @@
                 @endforeach
             </select><br>
             <div class='mt-3 w-full text-center'>
-                <input type="submit" class='inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
+                <input type="submit" class='section-content__btn inline-block rounded border border-neutral-800 px-6 pb-[6px] pt-2 text-xs font-medium uppercase 
                         leading-normal text-neutral-800 transition duration-150 ease-in-out 
                         hover:border-neutral-800 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-800 
                         focus:border-neutral-800 focus:text-neutral-800 focus:outline-none focus:ring-0 active:border-neutral-900 
@@ -50,6 +54,6 @@
                         dark:active:text-neutral-900 w-52'>Назад</a>
             </div>
         </form>
-        <p id='form-add-error' class='fw-bolder pt-4 fs-4 text-center text-danger'></p>
+        <p id='form-add-error' class='font-semibold pt-2 pb-2 fs-4 text-center text-red-500 text-xl'></p>
     </section>
 </x-app-layout>

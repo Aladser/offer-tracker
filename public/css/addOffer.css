@@ -1,0 +1,21 @@
+.section-content__form {
+    width: 75%;
+}
+
+.section-content__btn {
+    margin-bottom: 0;       
+}
+
+@media (min-width: 1500px) {
+    .section-content__form {
+        width: 50%;
+    }
+}
+@media (max-width: 800px) {
+    .section-content__form {
+        width: 95%;
+    }
+    .section-content__btn {
+        margin-bottom: 0.25rem;  
+    }
+}
