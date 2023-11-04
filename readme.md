@@ -20,9 +20,7 @@
 
 ``sudo apt install mysql-server mysql-client``
 
-+ Создание БД 
-    * Дамп <span style="color:blue">*/storage/dump.sql*</span>
-    * или создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
++ Создание БД: создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
 
 Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
 

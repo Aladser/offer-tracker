@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <noscript>
-            <meta http-equiv="refresh" content="0; url=/noscript">
-        </noscript>
+        <noscript><meta http-equiv="refresh" content="0; url=/noscript"></noscript>
         <title>{{env('APP_NAME')}}</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+        <meta name='websocket' content="{{env('WEBSOCKET_ADDR')}}">       
 
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
         <!-- стили -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="/css/welcome.css" rel="stylesheet" />
