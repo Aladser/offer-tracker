@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Aladser;
 
 /** PHP-скрипт как Linux PID-процесс */
 class ScriptLinuxProcess

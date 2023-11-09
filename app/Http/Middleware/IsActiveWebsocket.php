@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\ScriptLinuxProcess;
+use Aladser\ScriptLinuxProcess;
 use Illuminate\Http\Request;
 
 /** класс запуска вебсокета */
