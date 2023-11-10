@@ -2,7 +2,7 @@
 
 namespace Aladser;
 
-/** PHP-скрипт как Linux PID-процесс */
+/** PHP-скрипт как Linux процесс */
 class ScriptLinuxProcess
 {
     /** имя процесса */
@@ -31,7 +31,7 @@ class ScriptLinuxProcess
     /** проверить наличие процесса */
     public function isActive(): bool
     {
-        file_put_contents($this->pidsParseFile, '');
+        $this->clearLogs(false);
         exec("ps aux | grep {$this->processName} > $this->pidsParseFile"); // новая таблица pidов
 
         return count(file($this->pidsParseFile)) > 2; // 2 строки будут всегда
@@ -47,13 +47,18 @@ class ScriptLinuxProcess
     /** убивает процесс */
     public function kill()
     {
+        $this->clearLogs();
         exec("pkill -f {$this->processName}");
     }
 
-    /** очистить логи вебсокета */
-    public function clearLogs()
+    /** очистить логи вебсокета
+     * $isAll true - все логи.
+     */
+    public function clearLogs($isAll = true)
     {
-        file_put_contents($this->processLogFile, '');
         file_put_contents($this->pidsParseFile, '');
+        if ($isAll) {
+            file_put_contents($this->processLogFile, '');
+        }
     }
 }
