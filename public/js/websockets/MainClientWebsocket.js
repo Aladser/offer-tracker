@@ -51,8 +51,8 @@ class MainClientWebsocket extends ClientWebsocket {
     /** добавление новой подписки на включенный оффер */
     #createSubscription(data) {
         this.refList.innerHTML += `
-            <article class='p-3 m-2 text-center bg-ddd color-333 fs-3 shadow rounded' data-id='${data.offer_id}'>
-                <a href="?ref=${data.offer_refcode}"><p title="${data.offer_url}">${data.offer_name}</p></a>
+            <article class='p-4 m-2 text-center bg-ddd color-333 shadow rounded text-xl w-80 space-y-2' data-id='${data.offer_id}'>
+                <a href="?ref=${data.offer_refcode}" class="font-semibold"><p title="${data.offer_url}">${data.offer_name}</p></a>
                 <p>веб-мастер: ${data.offer_webmaster}</p>
                 <p>тема: ${data.offer_theme}</p>
             </article>

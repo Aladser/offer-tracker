@@ -49,6 +49,7 @@ class ScriptLinuxProcess
         exec("pkill -f {$this->processName}");
     }
 
+<<<<<<< HEAD
     /** очистить файлы логов.
      *
      * @param mixed $bothFiles true - оба файла
@@ -57,6 +58,15 @@ class ScriptLinuxProcess
     {
         file_put_contents($this->pidsParseFile, '');
         if ($bothFiles) {
+=======
+    /** очистить логи вебсокета
+     * $isAll true - все логи.
+     */
+    public function clearLogs($isAll = true)
+    {
+        file_put_contents($this->pidsParseFile, '');
+        if ($isAll) {
+>>>>>>> 17969649fc85ab2a2681fc6ec88c3a295f40d008
             file_put_contents($this->processLogFile, '');
         }
     }

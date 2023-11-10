@@ -1,14 +1,15 @@
 <?php
 
-namespace App;
+namespace Aladser;
 
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
 
-/** Чат - серверная часть */
+/** Cерверная часть вебсокета */
 class ServerWebsocket implements MessageComponentInterface
 {
-    private \SplObjectStorage $clients;           // хранение всех подключенных пользователей
+    // хранение всех подключенных пользователей
+    private \SplObjectStorage $clients;
 
     public function __construct()
     {
@@ -17,32 +18,31 @@ class ServerWebsocket implements MessageComponentInterface
 
     public function onOpen(ConnectionInterface $conn)
     {
-        $this->clients->attach($conn); // добавление клиента
+        // добавление клиента
+        $this->clients->attach($conn);
         echo "cоединение установлено\n";
     }
 
     public function onClose(ConnectionInterface $conn)
     {
+        // удаление клиента
         $this->clients->detach($conn);
         echo "cоединение закрыто\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
     {
-        $data = json_decode($msg);
-
         foreach ($this->clients as $client) {
             if ($from !== $client) {
                 $client->send($msg);
             }
         }
-
         echo "Получено сообщение: $msg\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e)
     {
-        echo "Ошибка: {$e->getMessage()}\n";
         $conn->close();
+        echo "Ошибка: {$e->getMessage()}\n";
     }
 }
