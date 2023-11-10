@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="/css/common.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
