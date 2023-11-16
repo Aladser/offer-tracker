@@ -10,7 +10,7 @@ class IsAdvertiser
     public function handle(Request $request, \Closure $next)
     {
         if ($request->user()->role->name !== 'рекламодатель') {
-            return redirect(route('dashboard'));
+            return redirect('/dashboard');
         }
 
         return $next($request);

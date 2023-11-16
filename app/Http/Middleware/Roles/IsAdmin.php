@@ -10,7 +10,7 @@ class IsAdmin
     public function handle(Request $request, \Closure $next)
     {
         if ($request->user()->role->name !== 'администратор') {
-            return redirect(route('dashboard'));
+            return redirect('/dashboard');
         }
 
         return $next($request);

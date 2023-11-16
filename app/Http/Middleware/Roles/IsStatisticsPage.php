@@ -10,7 +10,7 @@ class IsStatisticsPage
     public function handle(Request $request, \Closure $next)
     {
         if ($request->user()->role->name !== 'рекламодатель' && $request->user()->role->name !== 'веб-мастер') {
-            return redirect(route('dashboard'));
+            return redirect('/dashboard');
         }
 
         return $next($request);
