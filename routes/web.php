@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::get('/dashboard', DashboardController::class)
     ->middleware(['auth', 'user.exists'])->name('dashboard');
 // статистика офферов по переходам и деньгам
-Route::get('/offer/statistics', [StatisticController::class, 'index'])
+Route::get('/statistics', [StatisticController::class, 'index'])
     ->middleware(['auth', 'user.exists', 'statistics'])->name('offer.statistics');
 
 // подмена csrf
@@ -45,7 +45,7 @@ Route::resource('/users', UserController::class)
 // контроллер офферов
 Route::post('/offer', [OfferController::class, 'store']);
 Route::delete('/offer/{id}', [OfferController::class, 'destroy']);
-Route::get('/offer/create', [OfferController::class, 'create'])
+Route::get('/offer.create', [OfferController::class, 'create'])
     ->middleware(['auth', 'user.exists', 'advertiser'])->name('offer.create');
 
 // контроллер тем офферов
