@@ -10,7 +10,7 @@ use App\Services\WebsocketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-/** ищет реферальную ссылку у URL главной страницы */
+/** ищет реферальную ссылку в URL главной страницы */
 class IsOfferReference
 {
     public function handle(Request $request, \Closure $next)
