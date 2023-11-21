@@ -2,45 +2,6 @@
 
 **Проект построен на основе laravel 8. Вебсокет работает на linux**
 
-### Запуск проекта
-
-+ Cкачать соответствующие зависимости:
-    + ``composer install``
-    + ``npm install``
-
-+ Включить модуль apache rewrite:
-
-``sudo a2enmod rewrite``
-
-+ Установить модули php:
-
-``sudo apt install php libapache2-mod-php php-curl php-mysql php-mbstring``
-
-+ Установить mysql:
-
-``sudo apt install mysql-server mysql-client``
-
-+ Создание БД: создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
-
-Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
-
-    ```
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=offer-tracker
-    DB_USERNAME=admin
-    DB_PASSWORD=@admin@
-    ```
-
-+ В файле <span style="color:blue">*.env*</span> в параметре ``TIMEZONE`` прописать номер часового пояса сервера, где запускается проект. В противном случае дата в БД и серверной части кода будет различаться, не будет корректно отображаться статистика офферов и подписок.
-
-+ Запуск проекта 
-    * через консоль: ``php artisan serve``.
-    * через Apache: файл виртуального хоста: <span style="color:blue">*/storage/offer-tracker.local.conf*</span>. Предполагается, что сайт лежит в <span style="color:blue">*/var/www*</span>
-
-+ для полной остановки сайта выполнить ``pkill -f offer-service`` для остановки вебсокета.
-
 ### Структура сайта
 
 + Главная **/**
@@ -189,3 +150,42 @@
     * в обращениях к БД через Eloquent не используются SQL-запросы в чистом виде.
 
 + Защита от XSS-атак: Laravеl декодирует все вводимые данные.
+
+### Запуск проекта
+
++ Cкачать соответствующие зависимости:
+    + ``composer install``
+    + ``npm install``
+
++ Включить модуль apache rewrite:
+
+``sudo a2enmod rewrite``
+
++ Установить модули php:
+
+``sudo apt install php libapache2-mod-php php-curl php-mysql php-mbstring``
+
++ Установить mysql:
+
+``sudo apt install mysql-server mysql-client``
+
++ Создание БД: создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
+
+Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
+
+    ```
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=offer-tracker
+    DB_USERNAME=admin
+    DB_PASSWORD=@admin@
+    ```
+
++ В файле <span style="color:blue">*.env*</span> в параметре ``TIMEZONE`` прописать номер часового пояса сервера, где запускается проект. В противном случае дата в БД и серверной части кода будет различаться, не будет корректно отображаться статистика офферов и подписок.
+
++ Запуск проекта 
+    * через консоль: ``php artisan serve``.
+    * через Apache: файл виртуального хоста: <span style="color:blue">*/storage/offer-tracker.local.conf*</span>. Предполагается, что сайт лежит в <span style="color:blue">*/var/www*</span>
+
++ для полной остановки сайта выполнить ``pkill -f offer-service`` для остановки вебсокета.
