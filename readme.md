@@ -58,6 +58,7 @@
     ![dashboard](storage/images/dashboard%20admin.png)
 
         - Пользователи **/users**
+        ![users](storage/images/admin%20add%20new%20user.png)
         ![users](storage/images/admin%20users.png)
 
         - Темы офферов **/offer-theme**
