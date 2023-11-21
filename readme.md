@@ -49,7 +49,8 @@
     * Страница регистрации **/register** 
     ![register](storage/images/register.png)
 
-    * Страница входа **/login** 
+    * Страница входа **/login**
+      
     ![login](storage/images/login.png)
 
     * Профиль **/dashboard** 
