@@ -43,7 +43,8 @@
 
 ### Структура сайта
 
-+ Главная **/** 
++ Главная **/**
+  
 ![main](storage/images/main.png)
 
     * Страница регистрации **/register**
@@ -57,27 +58,35 @@
     * Профиль **/dashboard** 
 
     * Администратор
+    
     ![dashboard](storage/images/dashboard%20admin.png)
 
         - Пользователи **/users**
+        
         ![users](storage/images/admin%20users.png)
 
         - Темы офферов **/offer-theme**
+        
         ![offer-theme](storage/images/admin%20offer%20themes.png)
 
     * Рекламодатель 
+    
     ![dashboard](storage/images/dashboard%20advertiser.png)
 
         - Добавить оффер **/offer/create**
+        
         ![offer.create](storage/images/advertiser%20add%20offer.png)
 
         - Статистика **/offer/statistics**
+        
         ![offer.statistics](storage/images/advertiser%20statistics.png)
 
     * Веб-мастер
+    
     ![dashboard](storage/images/dashboard%20webmaster.png)
 
         - Статистика **/offer/statistics**
+        
         ![offer.statistics](storage/images/webmaster%20statistics.png)
 
 Посредники ``App\Http\Middleware\Roles\IsAdmin``, ``App\Http\Middleware\Roles\IsAdvertiser``, ``App\Http\Middleware\Roles\IsStatisticsPage`` ограничивают доступ к страницам ролей.
