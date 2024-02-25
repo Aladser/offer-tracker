@@ -11,9 +11,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/storage/access.log
-/storage/error.log
-/storage/laravel.log
-/storage/offer_click.log
-/storage/pids.log
-/storage/websocket.log
