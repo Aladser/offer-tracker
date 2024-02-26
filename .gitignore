@@ -11,5 +11,4 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/storage/logs/*
-!/storage/logs/.flag
+storage/logs/
