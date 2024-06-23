@@ -20,14 +20,14 @@ class ServerWebsocket implements MessageComponentInterface
     {
         // добавление клиента
         $this->clients->attach($conn);
-        echo "cоединение установлено\n";
+        echo "ID {$conn->resourceId}: соединение установлено\n";
     }
 
     public function onClose(ConnectionInterface $conn)
     {
         // удаление клиента
         $this->clients->detach($conn);
-        echo "cоединение закрыто\n";
+        echo "ID {$conn->resourceId}: cоединение закрыто\n";
     }
 
     public function onMessage(ConnectionInterface $from, $msg)
