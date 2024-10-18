@@ -15,7 +15,7 @@
 + Главная **/**
   ![main](storage/images/main.png)
 
-    * Страница регистрации **/register**
+    * Страница регистрации **/register**<br>
     ![register](storage/images/register.png)
 
     * Страница входа **/login**<br>
