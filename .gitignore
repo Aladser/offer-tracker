@@ -13,3 +13,4 @@ yarn-error.log
 /.vscode
 storage/logs/
 .env
+error_log
