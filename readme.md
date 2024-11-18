@@ -147,53 +147,13 @@
 
 В рамках работы все доступные реферальные ссылки отображаются на главной странице *offer-tracker.local*. Реферальная ссылка имеет вид *offer-tracker.local?A@B*, где A - id вебмастера, B - id оффера. Посредник ``App\Http\Middleware\IsOfferReference`` проверяет реферальную ссылку на корректность данных. Если такой реферальной ссылки не существует, то редирект на 404 страницу. В противном случае сервер делает запись в таблицу БД ``offer_clicks`` о переходе с указанием времени перехода и переходит на страницу рекламодателя. Факт перехода или ошибочной реферальной ссылки записывается в лог <span style="color:blue">*/storage/logs/offer_clicks.log*</span> и отправляет в вебсокет сообщение *CLICK* или *FAILED_OFFER*.
 
-### Защита от уязвимостей
-
-Общая защита: данные не передаются на сервер через GET-запросы.
-
-+ Защита от CSRF-атак: при несовпадении csrf-токена редирект на страницу */wrongcsf*. Токен отправляется на сервер через скрытый токен формы или заголовок ``X-CSRF-TOKEN``.
-
-+ Защита от SQL-инъекций:
-    * используется библиотека Laravel ``Illuminate\Database\Eloquent``;
-    * в обращениях к БД через Eloquent не используются SQL-запросы в чистом виде.
-
-+ Защита от XSS-атак: Laravеl декодирует все вводимые данные.
-
 ### Запуск проекта
 
-+ Cкачать соответствующие зависимости:
-    + ``composer install``
-    + ``npm install``
-
-+ Включить модуль apache rewrite:
-
-``sudo a2enmod rewrite``
-
-+ Установить модули php:
-
-``sudo apt install php libapache2-mod-php php-curl php-mysql php-mbstring``
-
-+ Установить mysql:
-
-``sudo apt install mysql-server mysql-client``
-
-+ Создание БД: создать базу ``offer-tracker``, использовать миграции и сидирование ``php artisan migrate --seed``
-
-Учетные данные для подключения к БД в файле <span style="color:blue">*.env*<span>
-
-    ```
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=offer-tracker
-    DB_USERNAME=admin
-    DB_PASSWORD=@admin@
-    ```
-
-+ В файле <span style="color:blue">*.env*</span> в параметре ``TIMEZONE`` прописать номер часового пояса сервера, где запускается проект. В противном случае дата в БД и серверной части кода будет различаться, не будет корректно отображаться статистика офферов и подписок.
-
-+ Запуск проекта 
-    * через консоль: ``php artisan serve``.
-    * через Apache: файл виртуального хоста: <span style="color:blue">*/storage/offer-tracker.local.conf*</span>. Предполагается, что сайт лежит в <span style="color:blue">*/var/www*</span>
-
++ создать файл *.env* по аналогии *.env.example*
++ ``composer install``
++ ``npm install``
++ создать базу ``offer-tracker``
++ ``php artisan migrate --seed``
 + для полной остановки сайта выполнить ``pkill -f offer-service`` для остановки вебсокета.
++ В файле <span style="color:blue">*.env*</span> в параметре ``TIMEZONE`` прописать номер часового пояса сервера, где запускается проект. В противном случае дата в БД и серверной части кода будет различаться, не будет корректно отображаться статистика офферов и подписок.
++ ``php artisan serve``
